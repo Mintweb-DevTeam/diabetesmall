@@ -1,0 +1,365 @@
+{*** 주문완료 | order/order_end.php ***}
+{ # header }
+
+<div class="order_end">
+	<!--{ ? gd_isset(orderInfo.orderStatus) == 'o' }-->
+	<!-- 주문 접수 완료 -->
+	<div class="order_end_box">
+		<h2>{=__('주문번호')} <strong>{orderInfo.orderNo}</strong></h2>
+	
+		<p style="font-size:15px;line-height:1.6">
+			 주문이 정상적으로 접수 되었습니다<br>
+			<!--2024.02.05웹앤모바일 start_goods조건추가-->
+			{? start_goods != 1}
+			 프리스타일 리브레를 효과적으로 사용하기 위하여,<br>
+			 아래 "교육 신청 하기"를 클릭해주세요.
+			 {/}
+		</p>
+		<!--2024.02.05웹앤모바일 start_goods조건추가-->
+		{? start_goods != 1}
+		<div style="margin:20px 0; padding:0 20px;">
+			<a href='http://crm.medi-planner.com/_pop/adela_pop.asp?ad_name={codata.memNm}&ad_tel={codata.cellPhone}&ad_email={codata.email}' target="_blank" class="btn_order_end_edu" style="background:#cf4520; border:1px solid #cf4520">교육 신청 하기</a>
+		</div>
+		{/}
+
+		<div class="order_end_more">
+			<a href="https://m.diabetesmall.co.kr/board/view.php?&bdId=notice&sno=26"></a>
+			<img src="../img/order/order_end_more.jpg" alt="">
+		</div>
+
+		<div class="tx">
+			<ul>
+				<!--li>{=gd_isset(orderInfo.bankAccount[0])} : {=gd_isset(orderInfo.bankAccount[1])}
+				</li-->
+				<!--li>예금주 : {=gd_isset(orderInfo.bankAccount[2])}</li-->
+				<li>{=__('금액')} :
+					<span class="prc">{=gd_currency_display(gd_isset(orderInfo.settlePrice))}</span>
+				</li>
+				<li>
+					{=__('결제수단')} : {=gd_isset(orderInfo.settleName)}</strong><br />
+					<!--{ ? gd_isset(orderInfo.settleGateway) == 'f' }-->
+					<!--작업자는 간편결제 내용을 작성해주세요.-->
+					<!--{ : }-->
+					<!--{ ? gd_isset(orderInfo.settleKind) == 'gb' }-->
+					{=__('입금은행')} : {=gd_isset(orderInfo.bankAccount[0])} <br/>
+					{=__('입금계좌')} : {=gd_isset(orderInfo.bankAccount[1])} <br/>
+					{=__('예금주명')} : {=gd_isset(orderInfo.bankAccount[2])} <br/>
+					{=__('입금금액')} : <strong class="c_red">{=gd_currency_display(gd_isset(orderInfo.settlePrice))}</strong> <br/>
+					{=__('입금자명')} : {=gd_isset(orderInfo.bankSender)}<br/>
+					<!--{ : }-->
+					<!--{ ? gd_isset(orderInfo.settleMethod) == 'c' }-->
+					{=gd_isset(orderInfo.pgSettleNm[0])}
+					{=__('결제금액')} : <strong class="c_red">{=gd_currency_display(gd_isset(orderInfo.settlePrice))}</strong>
+					<!--{ : gd_isset(orderInfo.settleMethod) == 'b' }-->
+					{=__('이체은행')} : {=gd_isset(orderInfo.pgSettleNm[0])} <br/>
+					{=__('결제금액')} : <strong class="c_red">{=gd_currency_display(gd_isset(orderInfo.settlePrice))}</strong>
+					<!--{ : gd_isset(orderInfo.settleMethod) == 'v' }-->
+					{=__('입금은행')} : {=gd_isset(orderInfo.pgSettleNm[0])} <br/>
+					{=__('가상계좌')} : {=gd_isset(orderInfo.pgSettleNm[1])} <br/>
+					<!--{ ? gd_isset(orderInfo.pgSettleNm[2]) != '' }--> {=__('예금자명')} : {=gd_isset(orderInfo.pgSettleNm[2])} <br/><!--{ / }-->
+					<!--{ ? gd_isset(orderInfo.pgSettleCd[0]) != '' }--> {=__('송금일자')} : {=gd_date_format('Y-m-d', gd_isset(orderInfo.pgSettleCd[0]))} {=__('까지')} <br/><!--{ / }-->
+					{=__('입금금액')} : <strong class="c_red">{=gd_currency_display(gd_isset(orderInfo.settlePrice))}</strong>
+					<!--{ : gd_isset(orderInfo.settleMethod) == 'h' }-->
+					{=__('통신사')} : {=gd_isset(orderInfo.pgSettleNm[0])} <br/>
+					<!--{ ? gd_isset(orderInfo.pgSettleCd[0]) != '' }--> {=__('결제 휴대폰 번호')} : {=gd_isset(orderInfo.pgSettleCd[0])} <br/><!--{ / }-->
+					{=__('결제금액')} : <strong class="c_red">{=gd_currency_display(gd_isset(orderInfo.settlePrice))}</strong>
+					<!--{ / }-->
+					<!--{ / }-->
+					<!--{ / }-->
+				</li>
+			</ul>
+		</div>
+
+
+	</div>
+	<p class="tx2">
+		<span>
+			<strong>{=__('입금 후 구매가 확정됩니다.')}</strong>
+			<br>{=__('입금이 늦어질 경우%s해당 상품이 품절될 수 있습니다.', '<br>')}
+		</span>
+	</p>
+	<!--{ : }-->
+	<div class="order_end_box">
+		<h2>{=__('주문번호')} <strong>{orderInfo.orderNo}</strong></h2>
+		<!--{ ? orderInfo.orderStatus == 'p' }-->
+		<script language='JavaScript1.1' async src='//pixel.mathtag.com/event/js?mt_id=1475434&mt_adid=237044&v1={=gd_global_currency_display(gd_isset(orderInfo.settlePrice))}&s1={orderInfo.orderNo}&s2=1000000000&s3={orderInfo.orderGoodsCnt}'></script>
+		<!-- 결제 완료 -->
+		<p class="tx">{=__('결제가 완료 되었습니다.')}<br>{=__('감사합니다.')}</p>
+		
+		<!--2024.02.05웹앤모바일 start_goods조건추가-->
+		{? start_goods != 1}
+		{?!codata.msg}
+		<p style="font-size:15px;line-height:1.6">
+			 신청 고객 대상으로
+			<br />온라인 교육을 진행합니다.
+			<br />
+			<br />교육을 원하실 경우
+			<br />아래 교육 신청 버튼을 클릭하여 신청서를 작성해주시기 바랍니다.
+		</p>
+
+		<div style="margin-top:20px;">
+			<a href='http://crm.medi-planner.com/_pop/adela_pop.asp?ad_name={codata.memNm}&ad_tel={codata.cellPhone}&ad_email={codata.email}' target="_blank" class="btn_order_end_edu" style="background:#cf4520; border:1px solid #cf4520">교육 신청</a>
+		</div>
+		{/}
+		{/}
+
+
+
+		<!--{ : orderInfo.orderStatus == 'f' }-->
+		<!-- 결제 실패 -->
+
+		<p class="tx">
+			<!--{ ? gd_pg_result_recheck(orderInfo.pgName) === true }-->
+			{=__('결제가 정상적으로 이루어지지 않았습니다. [결제확인] 버튼을 클릭하여 정상여부를 다시 확인해주시기 바랍니다.')}<br>
+			{=__('지속적으로 문제가 발생될 경우 관리자에게 문의 하시기 바랍니다.')}<br>
+			<a href="../payment/{=orderInfo.pgName}/pg_result_recheck.php?orderNo={orderInfo.orderNo}"><em>{=__('결제확인')}</em></a><br>\
+			<!--{ : }-->
+			{=__('결제가 정상적으로 이루어지지 않았습니다. 다시 결제 진행을 해주시기 바랍니다.')}<br>
+			{=__('지속적으로 문제가 발생될 경우 관리자에게 문의 하시기 바랍니다.')}<br>
+			<!--{ / }-->
+		</p>
+		<!--{ : empty(orderInfo.orderStatus) === false }-->
+		<!-- 재접속 등에 의한 기주문 완료 건으로 접속시 -->
+		<p class="tx">{=__('이미 결제가 완료된 주문입니다.')}<br>{=__('감사합니다.')}</p>
+		<div class="order_end_more">
+			<a href="https://m.diabetesmall.co.kr/board/view.php?&bdId=notice&sno=26"></a>
+			<img src="../img/order/order_end_more.jpg" alt="">
+		</div>
+		<!--{ : }-->
+		<!-- 재접속 등에 의한 기주문 완료 건으로 접속시 -->
+		<p class="tx">{=__('주문 정보가 없습니다. 다시 확인 바랍니다.')}<br>{=__('지속적으로 문제가 발생될 경우 관리자에게 문의 하시기 바랍니다.')}</p>
+		<!--{ / }-->
+	</div>
+	<!--{ / }-->
+
+	<!-- <p class="fs12" style="text-align:left;color:#5e5e5e;display:block;padding-left:20px;">
+"스타트 패키지를 구매하신 고객님들께서는<br> 제품관련 온라인 교육을 신청하실 수 있습니다."
+	</p> -->
+
+	<ul class="btn_pay_wrap">
+		<!--{ ? orderInfo.orderStatus == 'p' }-->
+		<li><a href="../mypage/order_list.php" class="order_my_btn">{=__('나의 주문 확인하기')}</a></li>
+		<!--{ / }-->
+
+		<li><a href="/" class="order_home_btn">{=__('홈으로 가기')}</a></li>
+		
+		
+	</ul>
+</div>
+{=fbOrderEndScript}
+{=naverCommonInflowScript}
+
+
+
+
+
+
+
+
+
+<script>
+    $(function(){
+		localStorage.removeItem("agree_subscription");
+		localStorage.removeItem("deliverydate");
+		localStorage.removeItem("shipping");
+		localStorage.removeItem("orderName");
+		localStorage.removeItem("orderPhone");
+		localStorage.removeItem("orderCellPhone");
+		localStorage.removeItem("orderEmail");
+		localStorage.removeItem("receiverName");
+		localStorage.removeItem("receiverZonecode");
+		localStorage.removeItem("receiverAddress");
+		localStorage.removeItem("receiverAddressSub");
+		localStorage.removeItem("receiverPhone");
+		localStorage.removeItem("receiverCellPhone");
+		localStorage.removeItem("orderMemo");
+		localStorage.removeItem("reflectApplyMember");
+		
+		
+		{?start_goods==1}
+			//2024.02.15 웹앤모바일 스타트상품인경우 api전송
+			var dataToSend = {
+				name: "{name}",
+				hp: "{hp}", 
+				hpCipher: "{hpCipher}",
+				email: "{email}",
+			};
+
+			$.ajax({	
+				type : 'POST',
+				url : 'https://www.medi-planner.com/ajax/addPatient.asp',
+				dataType : 'json',
+				data :JSON.stringify(dataToSend),
+				beforeSend : function(xhr){
+					xhr.setRequestHeader("apiKey", "Q20fVMza4MncMgHA9Wjm");
+					xhr.setRequestHeader("content-type","application/json");
+				},
+				error: function(xhr, status, error){
+					console.log(error);
+				},
+				success : function(response){				
+					console.log("success");		
+				}
+			});	
+		{/}
+		
+		{?other_start_goods==1}
+			//2024.10.21 웹앤모바일 스타트상품인경우 api전송
+			var dataToSend = {
+				name: "{other_name}",
+				hp: "{other_hp}", 
+				hpCipher: "{other_hpCipher}",
+				email: "{other_email}",
+			};
+
+			$.ajax({	
+				type : 'POST',
+				url : 'https://www.medi-planner.com/ajax/addPatient.asp',
+				dataType : 'json',
+				data :JSON.stringify(dataToSend),
+				beforeSend : function(xhr){
+					xhr.setRequestHeader("apiKey", "Q20fVMza4MncMgHA9Wjm");
+					xhr.setRequestHeader("content-type","application/json");
+				},
+				error: function(xhr, status, error){
+					console.log(error);
+				},
+				success : function(response){				
+					console.log("success");		
+				}
+			});	
+		{/}		
+		{?event_goods==1}
+			//2024.10.21 웹앤모바일 스타트상품인경우 api전송
+			var dataToSend = {
+				name: "{name}",
+				hp: "{hp}", 
+				hpCipher: "{hpCipher}",
+				email: "{email}",
+			};
+
+			$.ajax({	
+				type : 'POST',
+				url : 'https://www.medi-planner.com/ajax/addPatient.asp',
+				dataType : 'json',
+				data :JSON.stringify(dataToSend),
+				beforeSend : function(xhr){
+					xhr.setRequestHeader("apiKey", "Q20fVMza4MncMgHA9Wjm");
+					xhr.setRequestHeader("content-type","application/json");
+				},
+				error: function(xhr, status, error){
+					console.log(error);
+				},
+				success : function(response){				
+					console.log("success");		
+				}
+			});	
+		{/}		
+		
+		{?adobe == 1}
+			//2024.06.24 웹앤모바일 어도비 전송시작
+			setTimeout(function(){
+			if (!localStorage.getItem('purchaseTracked')) {
+			let products = [];
+			
+			{?orderInfo['goods']}
+			
+				{@orderInfo['goods']}
+					
+					let product = {
+						'id': "{.value_['goodsNo']}",
+						'name': "{.value_['goodsNm']}",
+						'category': "{=goodsInfoArr[.value_['goodsNo']]['cateNm']}", 
+						'variant': "{=goodsInfoArr[.value_['goodsNo']]['variant']}", 
+						'brand': "{=goodsInfoArr[.value_['goodsNo']]['brandNm']}", 
+						'price': parseFloat("{.value_['goodsPrice']}"),
+						'quantity': "{.value_['goodsCnt']}",
+					};
+
+					products.push(product);		
+				
+				{/}
+			{/}
+			
+			let counpons = [];
+			
+			{?couponData}
+				{@couponData}
+				
+					let coupon={
+						'code':"{=.value_['couponNo']}",
+						'amount':"{=.value_['couponPrice']}"
+					}
+					counpons.push(coupon);		
+				{/}
+				
+			{/}
+			
+			_satellite.track('purchase',{
+				'cartId': "{=adobeCartId}",
+				'currency': 'KRW',
+				'total':parseFloat("{=orderInfo['settlePrice']}"),
+				'transactionId':"{=transactionId}",
+				'shipping':parseFloat("{=orderInfo['totalDeliveryCharge']}"),
+				'tax':parseFloat("{=orderInfo['taxVatPrice']}"),
+				'coupons':counpons,
+				'products': products
+			});
+			}
+			
+			localStorage.setItem('purchaseTracked', 'true');
+			//2024.06.24 웹앤모바일 어도비 전송종료
+			
+			},1500);
+		{/}				
+		
+	});
+</script>
+<script language='JavaScript1.1' async src='//pixel.mathtag.com/event/js?mt_id=1553086&mt_adid=237044&mt_exem=&mt_excl=&v1={=gd_global_currency_display(gd_isset(orderInfo.settlePrice))}&v2=&v3=&s1={orderInfo.orderNo}&s2={=.goodsNo}&s3={orderInfo.orderGoodsCnt}'></script>
+
+
+
+
+
+<!-- Enhanced eCommerce Code for purchase event -->
+<script type="text/javascript">
+    <!--{ @ orderInfo.goods }-->
+gtag('event', 'purchase', {
+  "transaction_id": '{orderInfo.orderNo}',
+  "value": {=orderInfo.settlePrice},
+  "currency": "KRW",
+  "shipping": {=gd_isset(orderInfo.totalDeliveryCharge)},
+  "items": [
+      {
+      'id': '{=.goodsNo}',
+      'name': '{=.goodsNm}',
+	  "list_name": '{=.goodsNm}',
+      'quantity': {=.goodsCnt},
+      'price': {=.goodsPrice}
+	  }
+  ]
+
+});
+<!--{ / }-->
+</script>
+<!-- End Enhanced eCommerce Code for purchase event -->
+
+
+
+
+
+
+
+
+
+<!--
+Start of Floodlight Tag: Please do not remove
+Activity name of this tag: Order Complete Mo
+URL of the webpage where the tag is expected to be placed: 
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 07/27/2021
+-->
+<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=sales;cat=order00;qty={orderInfo.orderGoodsCnt};cost={=gd_global_currency_display(gd_isset(orderInfo.settlePrice))};u1={orderInfo.orderNo};u2={=.goodsNo};u3={orderInfo.orderGoodsCnt};u4={=gd_global_currency_display(gd_isset(orderInfo.settlePrice))};dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord={orderInfo.orderNo}?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+<!-- End of Floodlight Tag: Please do not remove -->
+	
+{ # footer }

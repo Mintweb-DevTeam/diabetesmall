@@ -1,0 +1,151 @@
+{*** 완료페이지 | qrcode/complete.html ***}
+{ # header }
+<!-- header -->
+
+<script>
+$(function(){
+	$.cookie('memNm', '{data.memNm}', {expires:20*365});
+	$.cookie('memId', '{data.email}', {expires:20*365});
+	$.cookie('cellPhone', '{data.cellPhone}', {expires:20*365});
+})
+</script>
+    <section>
+        <div class="container pr20 pl20 pt20 mb60">
+			
+			<div class="intro pb10 mb20 clearfix" style="border-bottom:2px solid #ffc600; ">
+				<h1 class="fcBlue fs20 pull-left mt20">리브레케어 멤버십</h1>
+				<!-- <p class="pull-right"><img src="../img/qrcode/test-img_01.jpg" alt="test-img_01" width="60px"></p> -->
+			</div>
+			
+			
+			
+
+
+            <div class="form-wrap">
+                <p class="welcome fcOrange fs18 fw600 mb30">리브레케어 멤버십 등록이 {text}되었습니다!</p>
+                <!-- <h3 class="fcGray6 fw600 fs15 mb20">You have agreed to the Terms &#38; Conditions.</h3> -->
+                <ul class="complete-ul fs16 fcGray6">
+                    <li>이름 : {data.memNm}</li>
+                    <li>이메일 : {data.email}</li>
+                    <li>휴대폰 번호 : {data.cellPhone}</li>
+					<!-- <li>regDt : {data.regDt}</li>
+					<li>openDt : {=date('Y-m-d')}</li> -->
+                </ul>
+            </div>
+			
+			{?gd_session('join_view')=='1'}
+			<p class="fs16 fcGray6 mt20 mb30">아래 쇼핑몰 회원가입 후 프리스타일리브레 무료체험 행사에 참여 신청을 할 수 있습니다.</p>
+			<center>
+			<!--
+			<a href="../member/co_join_stepe.php?sno={data.sno}&name={data.memNm}" type="button" class="btn btn-orange btn-sm w120 fs14">쇼핑몰 회원가입 바로가기</a>
+			
+			-->
+			<!--2024.08.16웹앤모바일 변경-->
+			<a href="../member/co_join_stepe.php?sno={data.sno}&name={encMemNm}" type="button" class="btn btn-orange btn-sm w120 fs14">쇼핑몰 회원가입 바로가기</a>
+			
+			</center>
+			{:}
+			<div class="mail_form_new">
+				<p class="welcome fcBlue fs18 fw600">리브레케어 멤버십에 등록하시면</p>
+				<div class="formImg">
+					<img src="../img/common/Logo_FreeStyle_LibreCare_Final_OL.png" style="max-width:100%;width:100px"
+					alt="프리스타일 리브레 연속 당 측정시스템" title="프리스타일 리브레 연속 당 측정시스템">
+				</div>
+				<ul class="list-unstyled blue-list fs16 fcGray6 lineH16">
+					<li>
+						<p><span class="">1</span></p>
+						<p>공식 지정 약국, 의료기기 판매점 및 온라인 샵에서 프리스타일 리브레 센서를 구매할 수 있습니다.</p>
+					</li>
+					<li>
+						<p><span class="">2</span></p>
+						<p>품질 보증 서비스를 비롯한 다양한 고객 서비스를 받을 수 있습니다.</p>
+					</li>
+					<li>
+						<p><span class="">3</span></p>
+						<p>다양한 혈당관리 관련 정보를 받아볼 수 있습니다.</p>
+					</li>
+				</ul>
+			</div>
+			<div class="mb50">
+				<p class="welcome fcBlue fs18 fw600 mb15">카카오톡 “채널 추가” 하고<br />혈당 관리를 위한 다양한 정보를 확인해보세요 </p>
+				<p><a href="javascript:coKakaoChannel_()" ><img src="../img/kakao_chat_btn.jpg" width="288px"alt=""></a></p>
+			</div>
+			<div class="cta-box text-center">
+				<h4 class="fcOrange  fcBlue fs14 fw600">프리스타일 리브레링크 앱 무료 다운로드</h4>
+				<img src="../img/qrcode/cta_01.jpg" class="mt20 mb20" alt="" />
+				<div>
+					<a href="https://play.google.com/store/apps/details?id=com.freestylelibre.app.kr" target="_blank"><img src="../img/sub/app01.jpg" class="" alt="" /></a>
+					<a href="https://itunes.apple.com/app/freestyle-librelink-kr/id1354596227?ls=1&mt=8" target="_blank"><img src="../img/sub/app02.jpg" class="" alt="" /></a>
+				</div>
+			</div>
+			<p class="fcGray6 fs12 fw300 mt20 mb40">* 리브레케어 멤버십 등록 관련 문의와 탈퇴는 (02)6451-0040 로 문의하십시오.  /  월요일~금요일 9.00am-6.00pm  (토,일 ,공휴일 휴무)</p>
+			{/}
+        </div>
+    </section>
+
+	<style>
+		.mail_form_new .formImg,.mail_form_new ul{
+			display:inline-block;
+			vertical-align:middle;
+		}
+		.mail_form_new .formImg{
+			width:40%;
+		}
+		.mail_form_new ul{
+			display:inline-block;
+			vertical-align:middle;
+			width:58%;
+		}
+		.mail_form_new ul p{
+			width:11%;
+			display:inline-block;
+			vertical-align:top;
+			font-size:12px;
+		}
+		.mail_form_new ul p:last-child{
+			width:85%;
+		}
+		.mail_form_new img{
+			width:120px;
+		}
+		.blue-list li span {
+			margin-right: 0;
+		}
+		.cta-box img {
+			width: 100px;
+		}
+		.btn-sm{
+			width:auto;
+			min-width:230px;
+		}
+	</style>
+<script language='JavaScript1.1' async src='//pixel.mathtag.com/event/js?mt_id=1476287&mt_adid=237044&mt_exem=&mt_excl=&v1=&v2=&v3=&s1=&s2=&s3='></script>
+
+<script>
+function coKakaoChannel_(){
+	let type="qr",
+		memNo = "",
+		memNm = "{data.memNm}",
+		email = "{data.email}",
+		cellPhone = "{data.cellPhone}";
+	if( memNm != '' ){
+		$.ajax({
+			url:'/service/co_kakao_channel.php',
+			type:'POST',
+			data:{'type':type,'memNo':memNo,'memNm':memNm,'email':email,'cellPhone':cellPhone},
+			dataType : "json",
+			success: function(x){
+				window.open('https://pf.kakao.com/_FmxhxeK', '_blank');
+			},
+			error:function(request,status,error){
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	} else {
+		window.open('https://pf.kakao.com/_FmxhxeK', '_blank');
+	}
+	
+}
+</script>	
+
+{ # footer }

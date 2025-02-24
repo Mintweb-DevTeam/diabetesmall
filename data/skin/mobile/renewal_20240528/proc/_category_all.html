@@ -1,0 +1,61 @@
+{*** [위젯] 레이어형 측면 카테고리 | proc/category_side.htm ***}
+<ul class="category_side">
+	<!--{ @ data }-->
+	<li>
+		<!--{ ? .children }-->
+		<a href="#;">{.cateNm}<span class="icon_plus">ICON</span></a>
+		<ul>
+			<li><a href="../goods/goods_list.php?{=cateCd}={.cateCd}" class="icon_arrow">{=__('전체보기')}</a></li>
+			<!--{ @ .children }-->
+			<li>
+				<!--{ ? ..children }-->
+				<a href="#;">{..cateNm}<span class="icon_plus">ICON</span> </a>
+				<ul>
+					<li><a href="../goods/goods_list.php?{=cateCd}={..cateCd}" class="icon_arrow">{=__('전체보기')}</a></li>
+					<!--{ @ ..children }-->
+					<li>
+						<!--{ ? ...children }-->
+						<a href="#;">{...cateNm}<span class="icon_plus">ICON</span> </a>
+						<ul>
+							<li><a href="../goods/goods_list.php?{=cateCd}={...cateCd}" class="icon_arrow"> - {=__('전체보기')}</a></li>
+							<!--{ @ ...children }-->
+							<li>
+								<!--{ ? ..divisionFl =='n' }-->
+								<a href="../goods/goods_list.php?{=cateCd}={....cateCd}" class="icon_arrow"> - {....cateNm}</a>
+								<!--{ : }-->
+								<a href="#;"> - {....cateNm}<span class="icon_plus">ICON</span> </a>
+								<!--{ / }-->
+							</li>
+							<!--{ / }-->
+						</ul>
+						<!--{ : }-->
+							<!--{ ? ...divisionFl =='n' }-->
+							<a href="../goods/goods_list.php?{=cateCd}={...cateCd}" class="icon_arrow">{...cateNm}</a>
+							<!--{ : }-->
+							<a href="#;">{...cateNm}<span class="icon_plus">ICON</span> </a>
+							<!--{ / }-->
+						<!--{ / }-->
+					</li>
+					<!--{ / }-->
+				</ul>
+				<!--{ : }-->
+					<!--{ ? ..divisionFl =='n' }-->
+					<a href="../goods/goods_list.php?{=cateCd}={..cateCd}" class="icon_arrow">{..cateNm}</a>
+					<!--{ : }-->
+					<a href="#;">{..cateNm}</a>
+					<!--{ / }-->
+				<!--{ / }-->
+			</li>
+			<!--{ / }-->
+		</ul>
+		<!--{ : }-->
+		<!--{ ? .divisionFl =='n' }-->
+		<a href="../goods/goods_list.php?{=cateCd}={.cateCd}" class="icon_arrow">{.cateNm}</a>
+		<!--{ : }-->
+		<a href="#;">{.cateNm}</a>
+		<!--{ / }-->
+
+		<!--{ / }-->
+	</li>
+	<!--{ / }-->
+</ul>

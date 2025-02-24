@@ -1,0 +1,321 @@
+{*** 상품 리스트 | goods/goods_list.php ***}
+{ # header }
+
+<style>
+.youcan{display:none;}
+.wm_margin{margin-top:117px;}
+.wm_margin2{margin-top:57px;}
+</style>
+
+<div class="content pl80 pr80">
+
+    <!-- //location_wrap -->
+
+    <div class="goods_list_item">
+
+        <div class="goods_list_item_tit  mb0 pb0">
+			<!--{ ? cateCd =='002' }-->
+			<h2 class="fs30 fcOrange fw600 mb20">대리청구 서비스 구매페이지</h2>
+			<p class="fs20 fcGray6 mb40">대리청구 서비스를 신청하신 분에 한해서 구매가 가능합니다</p>
+			<!--{ : }-->
+			
+			<div><img src="../img/sensor_new1.jpg" alt=""></div>
+			<h2 class="fs24 fcOrange fw600 mb20 mt40">개인용 체내 연속 혈당 측정 시스템 프리스타일 리브레 특징 </h2>
+			<div class="mb50"><img src="../img/sensor_new2.jpg" alt=""></div>
+
+            <h2 class="fs24 fcOrange fw600 mb30">프리스타일 리브레 센서 제품</h2>
+			<!--{ / }-->
+        </div>
+        <!--{ ? naviDisplay.naviUse =='y' }-->
+        <!--{ ? themeInfo.cateHtml1 }-->
+        <!-- 상단 꾸미기 영역 -->
+        <div class="addition_zone">
+            {=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml1))}
+        </div>
+        <!--{ / }-->
+        <!--{ ? dataSubCategory( cateCd,cateType ) }-->
+        <div class="list_item_category">
+            <ul>
+                <!--{ @ dataSubCategory( cateCd,cateType ) }-->
+                <li class="<!--{ ? cateCd == .cateCd }-->on<!--{ / }-->">
+                    <a href="?{cateType}Cd={.cateCd}"><span>{.cateNm} <!--{ ? naviDisplay.naviCount =='y' }--><em>({.goodsCnt+0})</em><!--{ / }--></span></a>
+                </li>
+                <!--{ / }--> 
+            </ul>
+        </div>
+        <!--{ / }-->
+        <!--{ / }-->
+
+        <!-- 설문조사 배너 -->{=pollViewBanner()}<!-- 설문조사 배너 -->
+
+        <!--{ ? themeInfo.recomDisplayFl == 'y'  && widgetGoodsList}-->
+        <!--{ ? themeInfo.cateHtml2 }-->
+        <!-- 추천상품 상단 꾸미기 영역 -->
+        <div class="addition_zone">
+            {=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml2))}
+        </div>
+        <!-- //추천상품 상단 꾸미기 영역 -->
+        <!--{ / }-->
+
+        <!-- 추천 상품 나오는영역 -->
+        <div class="best_item_view">
+            <div class="best_item_view_tit">
+                <h3>{=__('추천상품')}</h3>
+            </div>
+            <div class="goods_list">
+                <div class="goods_list_cont">
+                    <p>{=includeWidget('goods/_goods_display.html')}</p>
+                </div>
+            </div>
+        </div>
+        <!-- //추천 상품 나오는영역 -->
+        <!--{ / }-->
+
+        <!--{ ? themeInfo.cateHtml3 }-->
+        <div class="addition_zone">
+            {=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml3))}
+        </div>
+        <!--{ / }-->
+        <div class="goods_pick_list" style="display:none !important;">
+            <span class="pick_list_num">{=__('상품')} <strong>{=number_format(gd_isset(page->recode['total']))}</strong> {=__('개')}</span>
+            <form name="frmList" action="">
+                <input type="hidden" name="{cateType}Cd" value="{cateCd}"/>
+                <div class="pick_list_box">
+                    <ul class="pick_list">
+                        <li>
+                            <input type="radio" id="sort1" class="radio" name="sort" value="">
+                            <label for="sort1">{=__('추천순')}</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="sort2" class="radio" name="sort" value="orderCnt desc,g.regDt desc">
+                            <label for="sort2">{=__('판매인기순')}</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="sort3" class="radio" name="sort" value="goodsPrice asc,g.regDt desc">
+                            <label for="sort3">{=__('낮은가격순')}</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="sort4" class="radio" name="sort" value="goodsPrice desc,g.regDt desc">
+                            <label for="sort4">{=__('높은가격순')}</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="sort5" class="radio" name="sort" value="reviewCnt desc,g.regDt desc">
+                            <label for="sort5">{=__('상품평순')}</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="sort6" class="radio" name="sort" value="g.regDt desc">
+                            <label for="sort6">{=__('등록일순')}</label>
+                        </li>
+                    </ul>
+                    <div class="choice_num_view">
+                        <select class="chosen-select" name="pageNum">
+                            <!--{ @ goodsData.multiple }-->
+                            <option value="{=.value_}"  <!--{ ? pageNum == .value_ }-->selected='selected'<!--{ / }-->>{=.value_}{=__('개씩보기')}</option>
+                            <!--{ / }-->
+                        </select>
+                    </div>
+                    <!-- //choice_num_view -->
+                </div>
+                <!-- //pick_list_box -->
+            </form>
+        </div>
+        <!-- //goods_pick_list -->
+
+        <div class="goods_list">
+            <div class="goods_list_cont">
+                <!-- 상품 리스트 -->
+                { # goodsTemplate }
+                <!-- //상품 리스트 -->
+            </div>
+
+        </div>
+		{?chk==1}
+		{?goods_data}
+		<div class="goods_list_item_tit  mb0 pb0 mt60">
+			<h2 class="fs24 fcOrange fw600 mb30">정기 배송 혜택</h2>
+			<p class="fs17 mb40" style="color:#666666;letter-spacing:-0.04em">
+				프리스타일 리브레의 효과적인 사용 및 편의를 위해서 원하시는 주기에 맞춰 자동결제, 자동 배송하는 정기배송  서비스를 시작합니다. 
+				<br /><strong class="fcBlue2">보다 경제적인 가격</strong>으로 정기 배송 신청하고, 맞춤 교육 서비스도 받아보세요.
+			</p>
+			<div class="mb50"><img src="../img/sensor_new3.jpg" alt=""></div>
+        </div>
+		<div class="goods_list wm_margin2">
+            <div class="goods_list_cont">
+
+				<div class="item_gallery_type item_gallery_type_new">
+					<ul>
+						{@goods_data}
+						<li style="width:{100/.size_}%">
+							<div class="item_cont">
+								<div class="item_photo_box">
+									<a href="../goods/goods_view.php?goodsNo={.value_['goodsNo']}"><img src="{.value_['goodsImage']}"/></a>
+								</div>
+								<div class="item_info_cont">
+									<div class="item_tit_box">
+										<strong class="item_name" style="font-size:22px;">{.value_['subscription_shortDescription']}</strong>
+									</div>
+									<div class="item_money_box">
+										<strong class="item_price"  style="font-size:20px;"><span>1개당 {=number_format(.value_['goodsPrice'])}원</span></strong>
+									</div>
+									<div>
+										<strong style="color:#666666;font-size:18px;">{=deliveryEa}회 정기배송</strong>
+									</div>
+									<div class="buy_now">
+										<a href="../goods/goods_view.php?goodsNo={.value_['goodsNo']}" style="width:auto;">정기배송 신청하기</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						{/}
+					</ul>
+				</div>
+            </div>
+
+        </div>
+		{/}
+		{/}
+        <div class="pagination" style="display:none;">
+            {page->getPage()}
+        </div>
+
+    </div>
+    <!-- //goods_list_item -->
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$('form[name=frmList] select[name=pageNum]').change(function() {
+				$('form[name=frmList]').get(0).submit();
+			});
+
+			$('form[name=frmList] input[name=sort]').click(function() {
+				$('form[name=frmList]').get(0).submit();
+			});
+
+			$(':radio[name="sort"][value="{sort}"]').prop("checked","checked")
+			$(':radio[name="sort"][value="{sort}"]').next().addClass('on');
+
+		});
+	</script>
+</div>
+<!-- //content -->
+
+<script type="text/javascript">
+gtag('event', 'view_item_list', {
+  "items": [
+    {
+      'id': '1000000011',
+      'name': '프리스타일 리브레<br />  싱글 패키지 (1개)',
+      'list_name': '프리스타일 리브레<br />  싱글 패키지 (1개)',
+      'quantity': '1',
+      'price': '95000.00'
+    },
+	{
+      'id': '1000000013',
+      'name': '프리스타일 리브레<br /> 스타트 패키지 (2개)',
+      'list_name': '프리스타일 리브레<br /> 스타트 패키지 (2개)',
+      'quantity': '1',
+      'price': '184000.00'
+    },
+	{
+      'id': '1000000012',
+      'name': '프리스타일 리브레<br /> 스페셜 패키지 (7개)',
+      'list_name': '프리스타일 리브레<br /> 스페셜 패키지 (7개)',
+      'quantity': '1',
+      'price': '588000.00'
+    },	  
+  ]
+});
+</script>
+	
+<!-- footer -->
+<div id="footer_wrap">
+<!-- footer_con01 -->
+<div class="footer_con01">
+	<h3>고객지원</h3>
+<!-- 	<p class="stt">프리스타일 리브레 시스템을 최대한 활용하실 수 있도록 프리스타일 패밀리가 도와드립니다.</p> -->
+	<ul class="clearfix">
+		<li>
+			<div class="item">
+				<p><img src="../img/main/main_sec06_img01.gif" alt="" /></p>
+				<h4>FAQ</h4>
+				<p class="tx1">자주하는 질문으로 프리스타일<br /> 시스템에 대해 더 알아보십시오</p>
+				<p class="more"><a href="/main/html.php?htmid=service/faq_new.html">더 알아보기</a></p>
+			</div>
+		</li>
+		<li>
+			<div class="item">
+				<p><img src="../img/main/main_sec06_img02.gif" alt="" /></p>
+				<h4>고객 서비스</h4>
+				<p class="tx1">도움이 필요하시다면 <br />
+					프리스타일 리브레 고객서비스 <br />
+					팀에게 문의하십시오 
+				</p>
+				<div class="tx2">
+					<strong>배송관련 문의</strong>
+					<br /><a href="tel:{=gMall.phone}" style="color:#777">{=gMall.phone}</a>
+					<br />contact@adelaltd.co.kr
+					<br />월요일-금요일, 오전 09:00-오후 06:00
+					<br /> (토요일·일요일·공휴일 휴무)
+				</div>
+				<div class="tx2">
+					<strong>제품관련 문의</strong>
+					<br /><a href="tel:080-014-5757" style="color:#777">080-014-5757</a>
+					<br />ADC-CS.KR@abbott.com
+					<br />월요일-금요일, 오전 9:00-오후6:00<br /> (토요일·일요일·공휴일 휴무)
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="item">
+				<p><img src="../img/main/main_sec06_img03.gif" alt="" /></p>
+				<h4>리브레케어 멤버십</h4>
+				<p class="tx1">리브레 멤버십에 등록 후 <br />
+					프리스타일 리브레 센서를 구매하세요!</p>
+				<p class="more"><a href="/member/co_join_stepa.php">등록하기</a></p>
+			</div>
+		</li>
+	</ul>
+</div>
+
+
+<!-- footer_con02 -->
+
+
+
+<div class="footer_con02">
+	<ul>
+		<li>이미지와 설명은 이해를 돕기 위한 목적으로 사용되었습니다.</li>
+		<li><sup>1</sup>Evans M, Welsh Z, Ells S, Seibold A.</li>
+		<li>The impact of flash glucose monitoring on glycaemic control as measured by HbA1c: a meta-analysis of clinical trials and real-world observational studies.</li>
+		<li>Diabetes Ther. 2020;11(1):83-95</li>
+		<li style="padding-top:20px;">이 제품은 '의료기기(개인용체내연속혈당측정시스템 / 혈당관리)'이며, '사용상의 주의사항'과 '사용방법'을 잘 읽고 사용하십시오.</li>
+		<li>광고심의필 :12021-I10-12-1145 (유효기간 24.09.17) </li>
+		<!--li>†이미지와 설명은 이해를 돕기 위한 목적으로 사용되었습니다.</li>
+		<li>**프리스타일 리브레 링크 앱은 NFC 기능을 가지고 있는 스마트폰 중에 Android OS7.1이상 및 iOS13.2이상의 스마트폰 기종에서 다운로드할 수 있습니다.</li-->
+	</ul>
+</div>
+
+</div>
+<!-- //footer -->
+
+<style>
+	
+</style>
+<!--
+Start of Floodlight Tag: Please do not remove
+Activity name of this tag: Goods list PC
+URL of the webpage where the tag is expected to be placed: 
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 07/21/2021
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=goods0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+</script>
+<noscript>
+<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=goods0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+</noscript>
+<!-- End of Floodlight Tag: Please do not remove -->
+
+{ # footer }

@@ -1,0 +1,162 @@
+{*** 추천인선택 | qrcode/medical_select.html ***}
+
+{=includeFile("outline/_share_header.html")}
+<style>
+	.content{margin:5px;}
+	.content .content_top{margin:15px;text-align:center;}
+	.content .content_top h2{display:inline-block;}
+	.content .content_top .close{display:inline-block;position: absolute;right:25px;cursor:pointer;}
+	
+	.content .content_title{margin:30px 0px;display:inline-block;width: 100%;}
+	.content .content_title div{display:inline-block;}
+	.content .content_title .tab1{line-height: 30px;padding: 0px 0px;border:2px solid #bbb;width: 82%;}
+	.content .content_title .tab1 div:nth-child(1){width: 34%;background: #bbbbbb8a;color: #fff;padding: 0px 2px;}
+	.content .content_title .tab1 div:nth-child(2){width: 65%;text-align:center;}
+	.content .content_title .tab1 div:nth-child(2) input{border:1px solid #bbbbbb8a;width:90%;}
+	.content .content_title .tab1 span{font-size:12px;font-weight:600;}
+	.content .content_title .tab2{background:#695f5f;line-height: 34px;width: 17%;text-align:center;}
+	.content .content_title .tab2 span{font-weight:14px;font-weight:600;color:#fff;display:inline-block;cursor:pointer;}
+	
+	.page{margin:20px auto 0px auto;}
+	.page{text-align:center;}
+	.pagination ul li{display:inline-block;padding:3px 3px;border:1px solid #000;margin-right:2px;}
+	.pagination ul .on{background:#000;color:#fff;}
+	
+	.content_list table{border-spacing:0px;width:100%;}
+	.content_list table th{background:#695f5f;color:#fff;height:35px;}
+	.content_list table td{height:35px;border-bottom:1px solid #bbb;border-right:1px solid #bbb;padding:0px 2px;}
+	.content_list .inp_rdo{display:table-cell !important;padding:0px !important;border-left:1px solid #bbb;}
+	.btn-list{text-align:center;margin-top:20px;}
+	.btn-list .btn_confirm{cursor:pointer;background:#bbb;color:#fff;display:inline-block;padding:7px 30px;width:100px;}
+	.btn_more{display:block;cursor:pointer;background:#bbb;color:#fff;padding:7px 30px;text-align:center;width:100px;margin:20px auto;}
+</style>
+{*2023.07.04 웹앤모바일 추천인 검색*}
+<div class="content">
+
+	<div class="content_top">
+		<h2>메디컬 추천인검색</h2>
+		<div class="close">X</div>
+	</div>
+	<form name="sform" method="post">
+	<div class="content_title">
+		<div class="tab1">
+			<div>
+				<span>메디컬샵명 or ID</span>
+			</div>
+			<div style="">
+				<input type="text" name="name" required placeholder="메디컬샵명 or ID" value="{=name}">
+			</div>
+		</div>
+		<div class="tab2">
+			<span onclick="submit_();">검색</span>
+		</div>
+		
+	</div>
+	</form>
+	<form name="cform" method="post">
+	<div class="content_list">
+		<table id="medical">
+			<colgroup>
+				<col width="10%"/>
+				<col width="25%"/>
+				<col width="25%"/>
+				<col width="40%"/>
+			</colgroup>
+			<tr>
+				<th>선택</th>
+				<th>ID</th>
+				<th>메디컬샵명</th>
+				<th>주소</th>
+			</tr>
+			{?data}
+				{@data}
+					<tr>
+						<td class="inp_rdo" align="center"><input type="radio" name="chk[]" value="{=.value_['sno']}" data-code="{=.value_['code']}"/></td>
+						<td>{=.value_['code']}</td>
+						<td>{=.value_['name']}</td>
+						<td>{=.value_['address1']}</br>{=.value_['address2']}</td>
+					</tr>
+				{/}
+			{:}
+			<tr>
+				
+				<td colspan="4" align="center">등록된 메이컬샵이 없습니다.</td>
+			</tr>	
+			{/}
+		</table>
+	
+	</div>
+	<div class="btn-list">
+		<span class="btn_confirm">확인</span>
+	</div>
+	</form>
+	
+	<span class="btn_more">더보기</span>
+		
+</div>
+
+{=includeFile("outline/_share_footer.html")}
+<script type="text/javascript">
+	$(function(){
+		
+		
+		$(".close").click(function(){
+			
+			self.close();
+		});
+		
+		$(".btn_confirm").click(function(){
+			
+			if($("input:radio[name='chk[]']:checked").length<=0){
+				alert("메디컬샵을 선택해주세요.");
+				return false;
+			}
+			
+			let medical_code = $("input:radio[name='chk[]']:checked").data("code");
+			
+			$('input[name="pharmacy_code"]',opener.document).val(medical_code);
+			self.close();
+		});
+		
+		var page=1;
+		$(".btn_more").click(function(){
+			
+			page++;
+			
+			$.ajax({
+				url:"medical_select_more.php",
+				method:"POST",
+				data:{page:page,name:"{=name}"}
+				
+			})
+			.done(function(data){
+				let html="";
+				for(let i=0;i<data.length;i++){				
+					html+='<tr>';
+					html+='<td class="inp_rdo" align="center"><input type="radio" name="chk[]" value="'+data[i]['sno']+'" data-code="'+data[i]['code']+'"/></td>';
+					html+='<td>'+data[i]['code']+'</td>';
+					html+='<td>'+data[i]['name']+'</td>';
+					html+='<td>'+data[i]['address1']+'</br>'+data[i]['address2']+'</td>';
+					html+='</tr>';					
+				}
+				
+				if(html)
+					$("#medical").append(html);
+				else
+					alert("더이상 메디컬 리스트가 없습니다.");
+				
+			});
+			
+		});
+	});
+	
+	function submit_(){
+	
+		if(!$("input[name='name']").val()){
+			//alert("메디컬샵명 또는 코드를 입력하세요.");
+			//return false;
+		}
+		
+		document.sform.submit();
+	}
+</script>

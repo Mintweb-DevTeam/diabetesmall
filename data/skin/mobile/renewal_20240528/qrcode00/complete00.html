@@ -1,0 +1,19 @@
+{*** 완료페이지 | qrcode/complete.html ***}
+{ # header }
+<script>
+$(function(){
+	$.cookie('memNm', '{memNm}', {expires:20*365});
+	$.cookie('memId', '{memId}', {expires:20*365});
+	$.cookie('cellPhone', '{cellPhone}', {expires:20*365});
+})
+</script>
+<section>
+	<h2>Congratulations!</h2>
+	<p>You can now purchase FreeStyle Libre products at Medical shop & Pharmacy<br>Also, you have registered for Libre Care membership.</p>
+	<p>You have agreed to all required consents.</p>
+	<p>Name : {memNm}</p>
+	<p>Email : {memId}</p>
+	<p>Phone number : {cellPhone}</p>
+	<!--p>One-time password : {memPw}</p-->
+</section>
+{ # footer }

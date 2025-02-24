@@ -1,0 +1,155 @@
+{*** 회원가입 > 애보트 본인인증 | main/html.php?htmid=member/join_is_abbott.html ***}
+{ # header }
+<div class="content_box">
+	<div class="join_agreement_wrap">
+
+
+		<div class="adela_member_cont">
+			<div class="container">
+				
+				<h3 class="mem_title mb50 pb40" style="border-bottom:3px solid #ffc600">
+					리브레케어 멤버십
+					<p class="pull-right" style="margin-top:-50px;"><img src="../img/common/freestyle_libre_logo.jpg" alt="" /></p>
+				</h3>
+				
+				<!-- <h4 class="mem_stitle fcBlue fs30">프리스타일 리브레 제품의 온라인 구매를 위한 리브레케어 멤버이십니까?</h4> -->
+				<h4 class="fcBlue fs30 fw600 mb20">아직 리브레케어 멤버가 아니신가요?</h4>
+				<p class="fs20 mb30">‘리브레케어’는 프리스타일 리브레 사용자께 제공되는 포괄적인 교육 및 지원 서비스로, 센서 사용 및 수치 이해에 관련한 교육 서비스를 비롯해 제품 교환을 포함한 품질 보증 서비스를 받으실 수 있습니다. </p>
+
+
+				<div class="text-center  ">
+					<div style="position:relative;">
+						<a href="javascript:fn_joinstepb();" style="position:absolute;width:50%;padding-top:80px; z-index:1; bottom:60px;left:25%;"></a>
+						<img src="../img/join_stapa_app_v2.jpg" alt="" />
+					</div>
+				</div>
+
+				<h3 class="fcBlue fs30 fw600 mb20 mt60">리브레케어 멤버십에 이미 등록을 완료하셨다면 인증해주세요.</h3>
+
+				<div class="join_box_orange ">
+
+				<p class="fs20 mb30"><span class="fcOrange">*</span> 표시는 반드시 입력하셔야 하는 항목입니다</p>
+
+				<!-- <div class="mb50">
+						<p class="radio_style01 mr60">
+							<input type="radio" name="member_name" value="" id="member01" checked />
+							<label for="member01">Yes, I am</label>
+						</p>
+						<p class="radio_style01">
+							<input type="radio" name="member_name" value="" id="member02" />
+							<label for="member02">Not yet, but I want to join</label>
+						</p>
+				</div> -->
+
+
+				<div>
+					<form id="frm" action="./old_mem_agree_ps.php" method="post" target="ifrmProcess">
+						<div class="mb30">
+							<h5 class="fs26 fcGray6 mb10">휴대폰 번호<span class="fcOrange">*</span></h5>	
+							<input name="cellPhone" class="form-control w380" type="tel" style="display:inline-block;">
+							<button type="button" onClick="getPassNum(this)" data-undi="injung" class="btn btn-orange w150">인증번호요청</button>
+						</div>
+						<div>
+							<h5 class="fs26 fcGray6 mb10">인증번호 <span class="fcOrange">*</span></h5>	
+							<input name="passNum" class="form-control w380" type="text" style="display:inline-block;">
+							<button type="button" id="injung" onClick="checkPass()" disabled class="btn btn-orange w150" disabled>인증</button>
+						</div>
+						<div class="mt40">
+							<input type="button" onClick="submit_this(this)" data-form="frm" value="완료" class="btn btn-orange fs20 w200  fw600" style="border:0;" />
+						</div>
+					</form>
+				</div>
+
+				</div>
+				<div class="mt20">ADC-21804 v2.0</div>
+
+			</div>
+		</div>
+
+
+		<!-- //member_cont -->
+	</div>
+	<!-- //join_agreement_wrap -->
+</div>
+<!-- //content_box -->
+<script type="text/javascript">
+$(function(){
+	$('#member02').change(function() {
+		if( $(this).is(':checked') ){
+			window.location.href = './co_join_stepb.php?device={device}';
+		}
+	});
+});
+/*
+* 인증 관련 js gd_common.js 로 이동 2020-02-24 Cossia
+*/
+</script>
+
+<script language='JavaScript1.1' async src='//pixel.mathtag.com/event/js?mt_id=1480096&mt_adid=237044&mt_exem=&mt_excl=&v1=&v2=&v3=&s1=&s2=&s3='></script>
+<!--
+Start of Floodlight Tag: Please do not remove
+Activity name of this tag: Join PC
+URL of the webpage where the tag is expected to be placed: 
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 07/21/2021
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=joinp0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+</script>
+<noscript>
+<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=joinp0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+</noscript>
+<!-- End of Floodlight Tag: Please do not remove -->
+
+<!--
+Start of Floodlight Tag: Please do not remove
+Activity name of this tag: Libre Care Membership PC
+URL of the webpage where the tag is expected to be placed: 
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 05/09/2022
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+</script>
+<noscript>
+<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+</noscript>
+<!-- End of Floodlight Tag: Please do not remove -->
+
+<script>
+function fn_joinstepb() {
+	var axel = Math.random() + "";
+	var a = axel * 10000000000000;
+	var img = document.createElement("iframe");
+	img.setAttribute('src','https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre00;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=' + a + '?');
+	img.setAttribute('width',1);
+	img.setAttribute('height',1);
+	img.setAttribute('frameborder',0);
+	img.setAttribute('style','display:none');
+	document.body.appendChild(img);
+
+	var img1 = document.createElement("iframe");
+	img1.setAttribute('src','https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre00;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?');
+	img1.setAttribute('width',1);
+	img1.setAttribute('height',1);
+	img1.setAttribute('frameborder',0);
+	img1.setAttribute('style','display:none');
+	document.body.appendChild(img1);
+	
+	{?adobe_member==1}
+	//2024.06.26웹앤모바일 회원가입 전송시작
+	_satellite.track('formStart',{
+		'formName': 'registrationForm',
+		'formType':'signup'
+	});
+	//2024.06.26웹앤모바일 회원가입 전송종료
+	{/}
+	document.location.href = './co_join_stepb.php?device={device}';	
+}
+</script>
+
+{ # footer }

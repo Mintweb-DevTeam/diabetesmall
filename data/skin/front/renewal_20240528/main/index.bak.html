@@ -1,0 +1,181 @@
+{*** 쇼핑몰 메인본문 | main/index.php ***}
+{ # header }
+{=includeWidget('proc/_populate.html', 'sno', '100')}
+<div class="main_visual">
+    <div class="visual_inner">{=includeWidget('proc/_slider_banner.html', 'bannerCode', '511517418')}</div>
+</div>
+<!-- //main_visual -->
+<div class="main_content">
+
+	<!-- sec01 -->
+	<div class="main_sec01">
+		<h3 class="main_title mb0 fwBold">프리스타일 리브레를 만나보세요</h3>
+		<h4 class="fcOrange text-center fs24 mb30 fwBold">스마트폰으로 간단하게 연속으로 당 측정이 가능한 프리스타일 리브레 시스템을 소개합니다.</h4>	
+		<div class="box">
+			<ul class="clearfix">
+				
+				
+				<li class="product">
+					<div class="item clearfix">
+						<!--<p class="reim">
+							<img src="../img/main/main_sec01_img11.png" alt="reimbursed" />
+						</p>-->	
+						<div class="thum pl10">
+							<p class="pt10"><img src="../img/main/main_sec01_img12_new.jpg" width="130px" alt="" /></p>
+							<p class="fs11 fcBlue fwBold pt15">각 센서는 최대 14일 동안<br /> 사용이 가능합니다.</p>
+						</div>
+						<div class="spec">
+							<p class="fs15 fcBlue lineH12 mt15"><strong>프리스타일 리브레 센서<br /> 스타트 패키지(2개입)</strong></p>
+							<p class="fcGray6 fs16"><strong>184,000</strong><span class="fs16">원</span></p>
+ 							<p class="fcGray6 fs12">무료배송<br />온라인 교육 제공</p>
+ 							<p class="buynow"><a href="/goods/goods_view.php?goodsNo=1000000013"><img src="../img/main/main_sec01_img13.png" alt="buy now" /></a></p>
+<!-- 							<p class="buynow"><a href="../member/login.php"><img src="../img/main/main_sec01_img13.png" alt="buy now" /></a></p> -->
+						</div>
+					</div>
+				</li>
+				
+
+
+
+				<li class="product">
+					<div class="item clearfix">
+						<div class="thum pl20" style="width:42%;">
+							<p class="pt10"><img src="../img/main/main-img01.jpg" alt="app" width="90px" /></p>
+						</div>
+						<div class="spec" style="width:58%;">
+							<p class="fs16 fcBlue lineH12 mt15"><strong>프리스타일 리브레링크 앱</strong></p>
+							<p class="mt15"><a target="_blank" class="mr05" href="https://play.google.com/store/apps/details?id=com.freestylelibre.app.kr"><img src="../img/main/main-img02.jpg" class="mr05" alt="googleplaystore" /></a></a></p>
+							<p style="margin-top:5px;"><a target="_blank" class="mr05_2" href="https://apps.apple.com/app/freestyle-librelink-kr/id1354596227?ls=1"><img src="../img/main/main-img03.jpg" class="mr05_2" alt="appstore" /></a></a></p>
+							<p class="buynow"><a href="/main/html.php?htmid=product/pro02.html"><img src="../img/main/btn-down.jpg" alt="buy now" /></a></p>
+						</div>
+					</div>
+				</li>
+				<li class="product">
+					<div class="item clearfix">	
+						<div class="thum" style="width:48%;">
+							<p class="pt40"><img src="../img/main/main-img04.jpg" alt="pc" width="130px" /></p>
+						</div>
+						<div class="spec" style="width:52%;">
+							<p class="fs16 fcBlue lineH12 mt15"><strong>리브레뷰</strong></p>
+							<p class="fcGray4 fs12 mt20">안전한 클라우드 베이스 <br> 혈당 관리 시스템</p>
+							<p class="buynow" style="right:30px"><a href="/main/html.php?htmid=product/pro03.html"><img src="../img/main/btn-more.jpg" alt="buy now" /></a></p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- sec02 -->
+	<div class="main_sec02">
+
+
+		<div class="inner clearfix">
+
+
+			<div class="v-Img">
+			  <!-- Trigger the modal with a button -->
+			  <img src="../img/main/modal-img.jpg" alt="video" data-toggle="modal" data-target="#myModal" style="cursor:pointer;max-width:100%"/>
+
+			  <!-- Modal -->
+			  <div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+				  <!-- Modal content-->
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<iframe src="https://www.youtube.com/embed/-036ZKIh85M?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
+				  </div>
+					<script>
+					$(document).ready(function(){
+					  $("#myBtn").click(function(){
+						$("#myModal").modal();
+					  });
+					});
+					</script>
+				  <!-- //Modal content-->
+				</div>
+			  </div> 
+			</div>
+			 
+			<div class="you_can" style="transform:translateY(-10px);">
+				<p>YOU CAN<br />DO IT</p>
+				<p class="fs26 mt30">스마트폰으로 간편하게 혈당 관리 하세요</p>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- sec03 -->
+	<div class="main_sec03">
+		<ul class="clearfix">
+			<li><!--{ @dataBanner('3274502508') }-->{.tag}<!--{ / }--></li>
+			<li><!--{ @dataBanner('3813312996') }-->{.tag}<!--{ / }--></li>
+			<li><!--{ @dataBanner('3037904583') }-->{.tag}<!--{ / }--></li>
+			<li><!--{ @dataBanner('4234682728') }-->{.tag}<!--{ / }--></li>
+		</ul>
+	</div>
+	
+	<!-- sec04 -->
+	<!--<div class="main_sec04">
+		<!--{ @dataBanner('1477962797') }-->{.tag}<!--{ / }-->
+	</div> -->
+
+	<!-- sec05 -->
+	<div class="main_sec05">
+		<h3 class="main_title">3단계로 사용이 간편한 프리스타일 리브레</h3>
+		<ul class="clearfix">
+			<li>
+				<p><img src="../img/main/main_sec05_img01.png" alt="" /></p>
+				<p>1단계</p>
+				<p>부착하기</p>
+				<p>
+					센서 삽입기구(어플리케이터)를 <br />
+					이용하여 프리스타일 리브레 센서를 <br />
+					팔 위쪽(상박) 뒷부분에 부착합니다.
+				</p>
+			</li>
+			<li>
+				<p><img src="../img/main/main_sec05_img02.png" alt="" /></p>
+				<p>2단계</p>
+				<p>스캔하기</p>
+				<p>
+					간단한 스캔으로 당 수치를 <br /> 확인합니다
+
+				</p>
+			</li>
+			<li>
+				<p><img src="../img/main/main_sec05_img03.png" alt="" /></p>
+				<p>3단계</p>
+				<p>확인하기</p>
+				<p>
+					현재 당 수치와 지난 8시간 동안의 <br />
+					당 수치 확인이 가능하며, 추세 화살표로 <br />
+					당 변화 추이를 확인할 수 있습니다.
+
+				</p>
+			</li>
+		</ul>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<!-- //main_content -->
+
+
+
+{ # footer }

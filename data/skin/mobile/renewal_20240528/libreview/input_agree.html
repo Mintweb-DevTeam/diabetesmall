@@ -1,0 +1,114 @@
+{#header}
+<style>
+.agree-box {width: 100%; max-height:150px; overflow-x:hidden; border: 1px #ccc solid;}
+h3 {margin-top: 20px; margin-bottom: 5px;}
+</style>
+
+
+
+<div id="contents_wrap" class="pb30">
+
+
+	<div class="pl20 pr20 pt20 mb60">
+
+			<div class="intro pb10 mb20 clearfix" style="border-bottom:2px solid #ffc600; ">
+				<h1 class="fcBlue fs20 pull-left mt20">개인정보 처리에 관한 동의서</h1>
+				<!-- <p class="pull-right"><img src="../img/qrcode/test-img_01.jpg" alt="test-img_01" width="60px"></p> -->
+			</div>
+			<p class="fs16 fcGray7 lineH14 mb20">Abbott Diabetes Care, Inc.(이하 “회사”)는 귀하의 LibreView(이하 “리브레뷰”) 사용과 관련하여 다음과 같이 귀하의 개인정보를 처리합니다</p>
+
+
+
+<form id="frm" method="post" action="./input_end.php" target="ifrmProcess">
+{@post}
+	<input name="{.key_}" type="hidden" value="{.value_}">
+{/}
+	
+
+
+<section>
+	<p class="agree-title fcOrange fs16 fw600 mb10">개인정보 수집 및 이용(필수)</p>
+	<div class="scroll-info-content mb10">{#agree1}</div>
+	<p class="check_style01">
+		<input name="agree1" type="checkbox" value="Y" id="agree1"><!-- 개인정보 수집 및 이용(필수) -->
+		<label for="agree1" class="fs15">동의합니다.</label>
+	</p>
+</section>
+
+
+<section class="mt20">
+	<p class="agree-title fcOrange fs16 fw600 mb10">마케팅 목적을 위한 개인정보 수집 및 이용(선택)</p>
+	<div class="scroll-info-content mb10">{#agree2}</div>
+	<p class="check_style01">
+		<input name="agree2" type="checkbox" value="Y" id="agree2">
+		<label for="agree2" class="fs15">동의합니다.</label>
+	</p>
+</section>
+
+<section class="mt20">
+	<p class="agree-title fcOrange fs16 fw600 mb10">마케팅 및 광고 정보 수신(선택)</p>
+	<div class="scroll-info-content mb10" style="height:100px">{#agree3}</div>
+	<p class="check_style01">
+		<input name="agree3" type="checkbox" value="Y" id="agree3">
+		<label for="agree3" class="fs15">동의합니다.</label>
+	</p>
+</section>
+
+<section class="mt20">
+	<p class="agree-title fcOrange fs16 fw600 mb10">개인정보 제공(필수)</p>
+	<div class="scroll-info-content mb10">{#agree4}</div>
+	<p class="check_style01">
+		<input name="agree4" type="checkbox" value="Y" id="agree4">
+		<label for="agree4" class="fs15">동의합니다.</label>
+	</p>
+</section>
+
+<section class="mt20">
+	<p class="agree-title fcOrange fs16 fw600 mb10">개인정보 제공(선택)</p>
+	<div class="scroll-info-content mb10">{#agree5}</div>
+	<p class="check_style01">
+		<input name="agree5" type="checkbox" value="Y" id="agree5">
+		<label for="agree5" class="fs15">동의합니다.</label>
+	</p>
+</section>
+	
+	
+	
+
+
+
+
+<div class="mt20" style="background:#eee;padding:15px;text-align:center;">
+	<p class="check_style01">
+		<input type="checkbox" id="all" onChange="all_check()">
+		<label for="all" class="fs15">전체동의</label>
+	</p>
+</div>
+<div class="text-center mt20">
+	<button type="button" onClick="submit_()" class="btn btn-orange btn-sm  w200  fw600">전송</button>
+</div>
+
+
+</div>
+</div>
+	</form>
+
+
+<script>
+const submit_ = () => {
+	if( !$(`input[name="agree1"]`).is(':checked') ){
+		alert('개인정보 수집 및 이용은 필수 입니다.');
+		return;
+	}
+	if( !$(`input[name="agree4"]`).is(':checked') ){
+		alert('개인정보 제공 필수 입니다.');
+		return;
+	}
+	$(`#frm`).submit();
+},
+all_check = () => {
+	if( $(`#all`).is(':checked') ) $(`input[type="checkbox"]`).prop('checked', true);
+	else $(`input[type="checkbox"]`).prop('checked', false);
+};
+</script>
+{#footer}

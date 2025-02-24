@@ -1,0 +1,111 @@
+{*** index | qrcode/index.html ***}
+{ # header }
+<!-- header -->
+<header>
+    <div class="full-container">
+         <a href="/Qrcode/"><img src="../img/qrcode/test-logo.jpg" alt="test-logo" class="test-logo"></a>
+<!--         <div class="navbar-header clearfix">
+            <button type="button" class="navbar-toggle collapsed">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="search hide">
+            <form>
+                <input tpye="search" name="search" value="" />
+                <img src="../img/qrcode/search-icon.png" alt="search-icon" class="search-icon">
+            </form>
+        </div> -->
+    </div>
+</header>
+<!-- header -->
+<!-- <section class="container clearfix">
+	<ul class="register-wrap">
+        <li><a href="./new_member.php" target="_self">register</a></li>
+        <li><a href="./member.php" target="_self">sign in</a></li>
+    </ul>
+</section>
+ -->
+
+<section>
+<div class="container">
+	<div class="intro">
+		<h1>freestyle librecare<br />membership</h1>
+		<img src="../img/qrcode/test-img_01.jpg" alt="test-img_01" class="test-img_01">
+	</div>
+	<div class="member-item form-wrap">
+		<h2>Are you a FreeStyle LibreCare member?</h2>
+		<span class="inp_rdo"><input type="radio" name="member_name" value="" checked="checked" id="member01"><label for="member01">Yes, I am</label></span>
+		<span class="inp_rdo"><input type="radio" name="member_name" value="" id="member02"><label for="member02">Not yet, but I want to join</label></span>
+
+<!-- 		<button type="button" class="next">
+			<a href="/Qrcode/new_member.php"><span class="button-txt">join</span></a>
+		</button> -->
+
+	</div>
+	<div class="form-wrap">
+		<iframe name="frm_" style="display: none"></iframe>
+		<form id="frm" action="./old_mem_agree_ps.php" method="post" target="frm_">
+		<ul>
+			<li>
+				<h2>mobile phone<span class="red">&#42;</span></h2>
+				<input name="cellPhone" type="tel" >
+				<button type="button" id="request" onClick="getPassNum()">
+					<span class="button-txt">send a code</span>
+				</button>
+			</li>
+		</ul>
+		</form>
+	</div>
+</div>
+</section>
+<section>
+<div class="container">
+	<div class="form-wrap">
+		<ul>
+			<li>
+				<h2>verification code<span class="red">&#42;</span></h2>
+				<input name="passNum" type="text" >
+				<button type="button" onClick="checkPass()" id="submit" disabled>
+					<span class="button-txt">verify account</span>
+				</button>
+			</li>
+		</ul>
+	</div>
+</div>
+</section>
+
+
+<script>
+$(function(){
+	$('#member02').change(function() {
+		if( $(this).is(':checked') ){
+			window.location.href = '/Qrcode/new_member.php?pharmacy_code={get.pharmacy_code}&code={get.pharmacy_code}';
+		}
+	});
+})
+var pass_num = null;
+function getPassNum(){
+	if( !$('input[name="cellPhone"]').val() ){
+		alert('전화번호는 필수 입니다.');
+		return;
+	}
+	pass_num = get_pass_num( $('input[name="cellPhone"]').val() );
+	// console.log(pass_num);
+	$('#submit').prop('disabled', false);
+}
+function checkPass(){
+	if(!pass_num){
+		alert('인증번호를 요청해 주세요');
+		return;
+	}
+	if( pass_num != $('input[name="passNum"]').val() ){
+		alert('인증번호가 다릅니다.');
+		return;
+	}
+	$('#frm').submit();
+}
+</script>
+
+{ # footer }

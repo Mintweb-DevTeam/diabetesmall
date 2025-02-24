@@ -1,0 +1,97 @@
+{*** 하단 레이아웃 | main/index.php ***}
+	<!--{ ? tpls.footer_inc }-->
+	{ # footer_inc // 하단디자인 }
+	<!--{ / }-->
+	</div>
+	<!-- //st-container -->
+</div>
+<!-- //wrap -->
+
+
+
+
+<!-- //개발용 코드 st-pusher,st-container,st-content,st-content-inner -->
+<!-- 절대! 지우지마세요 : Start -->
+<iframe name="ifrmProcess" frameborder="0" src='/blank.php' style="display:none<!--{ ? !isProduction }-->block<!--{ / }-->" width="100%" height="<!--{ ? !isProduction }-->50<!--{ / }-->0" bgcolor="#000"></iframe>
+<!-- 절대! 지우지마세요 : End -->
+<div id="background"></div>
+<script type="text/javascript" src="{=setBrowserCache('../js/plugins/jquery.hashchange.min.js')}"></script>
+<script type="text/javascript" src="{=setBrowserCache('../js/lib/storage.js')}"></script>
+<script type="text/javascript" src="{=setBrowserCache('../js/lib/network.js')}" charset="euc-kr"></script>
+<!--<script type="text/javascript" src="{=setBrowserCache('../js/plugins/sidebarEffects.js')}"></script>-->
+<script type="text/javascript" src="{=setBrowserCache('../js/plugins/modalEffects.js')}"></script>
+<!--<script type="text/javascript" src="{=setBrowserCache('../js/plugins/idangerous.swiper.js')}"></script>-->
+<!--<script type="text/javascript" src="{=setBrowserCache('../js/plugins/jquery.touchSwipe.js')}"></script>-->
+<!--<script type="text/javascript" src="{=setBrowserCache('../js/plugins/numeral.js')}"></script>-->
+
+<!--{ ? is_array(gd_isset(headerScript)) }-->
+<!-- Add script : start -->
+<!--{ @ headerScript }-->
+<script type="text/javascript" src="{.value_}"></script>
+<!--{ / }-->
+<!-- Add script : end -->
+<!--{ / }-->
+
+<!--{ ? is_array(gd_isset(footerScript)) }-->
+<!-- Add footer script : start -->
+<!--{ @ footerScript }-->
+<script type="text/javascript" src="{.value_}"></script>
+<!--{ / }-->
+<!-- Add footer script : end -->
+<!--{ / }-->
+
+{=pgScript}
+<!-- 외부 스크립트 -->
+{=customFooter}
+<script>
+function coKakaoChannel(){
+	//DV360
+	var axel = Math.random() + "";
+	var a = axel * 10000000000000;
+	var img = document.createElement("iframe");
+	img.setAttribute('src','https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre003;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=' + a + '?');
+	img.setAttribute('width',1);
+	img.setAttribute('height',1);
+	img.setAttribute('frameborder',0);
+	img.setAttribute('style','display:none');
+	document.body.appendChild(img);
+
+	var img1 = document.createElement("iframe");
+	img1.setAttribute('src','https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre003;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?');
+	img1.setAttribute('width',1);
+	img1.setAttribute('height',1);
+	img1.setAttribute('frameborder',0);
+	img1.setAttribute('style','display:none');
+	document.body.appendChild(img1);
+	//DV360 --//
+	
+	let type="shop",
+		memNo = "{=gSess.memNo}",
+		memNm = "{=gSess.memNm}",
+		email = "",
+		cellPhone = "";
+	if( memNo != '' ){
+		$.ajax({
+			url:'/service/co_kakao_channel.php',
+			type:'POST',
+			data:{'type':type,'memNo':memNo,'memNm':memNm,'email':email,'cellPhone':cellPhone},
+			dataType : "json",
+			success: function(x){
+				window.open('https://pf.kakao.com/_FmxhxeK', '_blank');
+			},
+			error:function(request,status,error){
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	} else {
+		window.open('https://pf.kakao.com/_FmxhxeK', '_blank');
+	}
+}
+</script>
+
+</body>
+
+
+
+
+</html>

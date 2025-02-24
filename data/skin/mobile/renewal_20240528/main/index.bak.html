@@ -1,0 +1,66 @@
+{*** 쇼핑몰 메인본문 | main/index.php ***}
+{ # header }
+<div class="main">
+	<!-- 슬라이더 -->
+	<div class="main_slide">
+		 {=includeWidget('proc/_slider_banner.html', 'bannerCode', '3606671697')}
+	</div>
+	<!-- 최근게시물 -->
+	<div class="main_notice">
+		<div class="tit">NOTICE</div>
+		<ul>
+			<!--{ @getArticles( 'notice' , 3 , 25 ) }-->
+			<li><a href="../board/view.php?bdId={.bdId}&sno={.sno}">{.subject}</a></li>
+			<!--{ / }-->
+		</ul>
+	</div>
+	<!-- 메인배너 -->
+	<div class="main_banner_box">
+		<!--{ @dataBanner('2505697183') }-->{.tag}<!--{ / }-->
+	</div>
+	<ul class="main_banner_box1">
+		<!--{ @dataBanner('81393231', true) }-->
+		<li><a href="{.bannerLink}" target="{.bannerTarget}"><img src="{.bannerImageUrl}" alt="{.bannerImageAlt}" /></a></li>
+		<!--{ / }-->
+	</ul>
+	<div class="pollview"><!-- 설문조사 배너 -->{=pollViewBanner()}<!-- 설문조사 배너 --></div>
+	<div class="best_prd">
+		<!-- 메인 상품 노출 -->{=includeWidget('goods/_goods_display_main.html','sno','4')}<!-- 메인 상품 노출 -->
+	</div>
+	<div class="main_banner_box2">
+		<!--{ @dataBanner('1772932566') }-->{.tag}<!--{ / }-->
+	</div>
+	<div class="best_prd">
+		<!-- 메인 상품 노출 -->{=includeWidget('goods/_goods_display_main.html','sno','5')}<!-- 메인 상품 노출 -->
+	</div>
+	<div class="main_info_box">
+		<div class="main_info">
+			<dl>
+				<dt><span>CS CENTER</span></dt>
+				<dd>
+					<p class="phone"><a href="tel:{=gMall.centerPhone}">{gMall.centerPhone}</a></p>
+					<p class="business_hours">
+						{=nl2br(gMall.centerHours)}
+					</p>
+				</dd>
+			</dl>
+			<!--{ ? !gGlobal.isFront }-->
+			<dl>
+				<dt><span>BANK INFO</span></dt>
+				<dd>
+					<p class="account_holder">{=__('예금주')}: <strong>{gBank.depositor}</strong></p>
+					<ul class="main_bank">
+						<li><span>{gBank.bankName}</span> {gBank.accountNumber}</li>
+					</ul>
+					<!-- //main_bank -->
+				</dd>
+			</dl>
+			<!--{/}-->
+		</div>
+		<!-- //main_info -->
+	</div>
+	<!-- //main_info_box -->
+</div>
+{=includeWidget('proc/_populate.html', 'sno', '1')}
+<!-- //main -->
+{ # footer }

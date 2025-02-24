@@ -1,0 +1,196 @@
+{*** 처방전 이미지 업로드 | member/prescription_img_up.php ***}
+{ # header }
+	<div class="sub_content">
+	<h2 class="page_title">처방전 이미지 업로드 페이지</h2>
+	
+	<form name="pForm" method="post" action="prescription_in_db.php" enctype="multipart/form-data" target="ifrmProcess">
+		<div class="page_sub_title">
+			의료기관에서 발급 받은 처방전의 스캔본 혹은 촬영 이미지를 제출 해 주세요.
+		</div>
+		
+		<div class="file_div">
+				<span class="file_add">파일추가</span>
+				<input type="file" name="up_file" accept="image/*">	
+			
+		</div>
+		<div class="info_mation">
+			<strong>개인정보 수집 및 이용 안내</strong>
+			<ul>
+				<li>· 수집 항목 : 처방전 및 처방전 기입 정보</li>
+				<li>· 수집 목적 : 처방전 제출을 통한 건강보험공단 요양비 지급 대리 청구</li>
+				<li>· 보유 및 이용 기간 : 건강보험공단의 요양비 지급 승인 완료일 당월 말일 까지</li>
+			</ul>
+		</div>
+	</form>
+	
+
+	
+	</div>
+	
+<div id="footer">
+	<div class="footer_cs text-center">
+		<h3 class="fs30 fcWhite fw600 mb10">고객지원</h3>
+
+		<div class="box">
+			<p><img src="../img/common/foot_cs_img01.jpg" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">FAQ</p>
+			<p class="fs16 fcGray6 fw400">FAQ를 통해 프리스타일 리브레 시스템에 <br />대해 더 알아보십시오</p>
+			<p class="mt20"><a href="/main/html.php?htmid=service/faq_new.html" class="btn btn-orange fw600 wp100">알아보기</a></p>
+		</div>
+
+		<div class="box mt20">
+			<p><img src="../img/common/foot_cs_img02.jpg" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">고객서비스</p>
+			<p class="fs16 fcGray6 fw400 mb20">도움이 필요하시다면 프리스타일 리브레 <br />고객서비스 팀에게 문의하십시오</p>
+			<p class="fs18 fcOrange fw600">AS 및 제품관련 문의</p>
+			<div class="mb20 fcGray6 fs14 fw400">
+				<a href="tel:080-014-5757" style="color:#666">080-014-5757</a>
+				<br />ADC-CS.KR@abbott.com
+				<br />월요일-금요일, 오전 09:00-오후 06:00</span>
+				<br /> (토요일·일요일·공휴일 휴무)
+			</div>
+			<p class="fs18 fcOrange fw600">제품 구매 및 배송관련 문의</p>
+			<div class=" fcGray6 fs14 fw400">
+				<a href="tel:02-6451-0040" style="color:#666">02-6451-0040</a>
+				<br />contact@adelaltd.co.kr
+				<br />월요일-금요일, 오전 09:00-오후5:30
+				<br />점심시간 12:00~13:00
+				<br /> (토요일·일요일·공휴일 휴무)
+			</div>
+		</div>
+
+		<div class="box mt20">
+			<p><img src="../img/common/foot_cs_img03.jpg" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">리브레케어 멤버십</p>
+			<p class="fs16 fcGray6 fw400">리브레 멤버십에 등록 후 프리스타일 <br />리브레  센서를 구매하세요!</p>
+			<p class="mt20"><a href="/member/co_join_stepa.php" class="btn btn-orange fw600 wp100">등록하기</a></p>
+		</div>
+
+		<div class="box mt20">
+			<p><img src="../img/common/foot_cs_img_kakao_chat.png" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">카카오톡채널추가</p>
+			<p class="fs16 fcGray6 fw400"><strong>"프리스타일 리브레"</strong> 카카오톡 채널을 추가하고<br /><strong>혈당관리를 위한 다양한 정보</strong>를 확인해보세요.</p>
+			<p class="mt20"><a href="https://pf.kakao.com/_FmxhxeK" class="btn btn-orange fw600 wp100" target="_blank">등록하기</a></p>
+		</div>
+		<!-- <div class="mt20 text-left">ADC-21809 v2.0</div> -->
+
+	</div>
+
+	<div class="footer_info">
+		<ul class="fs11">
+					<!--li class="mt10">†이미지와 설명은 이해를 돕기 위한 목적으로 사용되었습니다.<br>
+		프리스타일 리브레 링크 앱은 NFC 기능을 가지고 있는 스마트폰 중에 Android OS7.1이상 및 iOS13.2이상의 스마트폰 기종에서 다운로드할 수 있습니다.
+		</li-->
+		<li class="mt10">이미지와 설명은 이해를 돕기 위한 목적으로 사용되었습니다.<br>
+		<sup>1</sup>Evans M, Welsh Z, Ells S, Seibold A.<br>
+		The impact of flash glucose monitoring on glycaemic control as measured by HbA1c: a meta-analysis of clinical trials and real-world observational studies.<br>
+		Diabetes Ther. 2020;11(1):83-95
+		<li class="mt10">이 제품은 '의료기기(개인용체내연속혈당측정시스템 / 혈당관리)'이며, '사용상의 주의사항'과 '사용방법'을 잘 읽고 사용하십시오.<br>
+		광고심의필 :12021-I10-12-1145 (유효기간 24.09.17).. </li>
+
+		</ul>
+	</div>
+	
+	
+</div>	
+<div class="mb20">ADC-70930 v3.0</div>
+
+<div class="loading-layer">파일 업로드 중...</div>
+<style>
+        .loading-layer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            padding-top: 20%;
+        }
+	.sub_content{padding:0px 20px;}
+
+	.file_div{width:100%;text-align:center;}
+	.info_mation{width:100%;margin:auto;padding-bottom:50px;}
+	.info_mation strong{font-size:25px;}
+	.info_mation ul li{list-style:none;font-size:18px;}
+        input[type="file"] {
+            display: none;
+        }
+
+        .file_add {
+            display: inline-block;
+            padding: 15px 100px;
+            background-color: #012060;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+			font-size:18px;
+			font-weight:bold;
+        }
+		
+        @media (max-width: 768px) {
+            .page_title {
+                font-size: 24px;
+            }
+            .page_sub_title {
+                font-size: 20px;
+            }
+            .file_div {
+                margin: 20px 0;
+            }
+            .info_mation {
+                width: 100%;
+                padding-bottom: 20px;
+            }
+            .info_mation strong {
+                font-size: 18px;
+            }
+            .info_mation ul li {
+                font-size: 14px;
+            }
+            .file_add {
+                padding: 10px 30px;
+                font-size: 14px;
+            }
+        }
+        @media (max-width: 480px) {
+            .page_title {
+                font-size: 20px;
+            }
+            .page_sub_title {
+                font-size: 18px;
+            }
+            .file_add {
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+        }		
+</style>
+<script type="text/javascript">
+        $(document).ready(function() {
+			
+            $('.file_add').click(function() {
+                
+				if(confirm("의료기관에서 발급 받은 처방전의 스캔본 혹은 촬영 이미지를 선택해주세요.")==true){
+				
+					$('input[type="file"]').click();
+				}
+            });
+
+            $('input[type="file"]').change(function() {
+                
+				if ($(this).val()) {
+					$(".loading-layer").html($(this).get(0).files[0].name + " 파일을 업로드 중입니다...")
+					$(".loading-layer").show();
+					
+					document.pForm.submit();
+				}
+
+            });
+        });
+</script>
+{ # footer }

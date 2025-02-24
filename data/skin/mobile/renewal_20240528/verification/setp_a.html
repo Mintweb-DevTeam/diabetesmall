@@ -1,0 +1,66 @@
+{ # header }
+<div class="pl20 pr20 pt20 mb60">
+	<h3 class="fcBlue fs16 fw600 mb10 mt30">다음 항목을 입력해 주세요</h3>
+
+	<div class="join_box_orange ">
+		<form id="co_frm" action="./setp_b.php" method="post">
+		<section>
+		<div class="container">
+			<div class="fs14 mb20 "><span class="fcOrange">*</span> 표시는 반드시 입력하셔야 하는 항목입니다</div>
+			<div class="form-wrap">
+				<ul>
+					<li>
+						<h2 class="fcGray6 fs15">휴대폰 번호<span class="fcOrange">&#42;</span></h2>
+						<input name="cellPhone" type="tel" value="{cellPhone}" class="form-control w160" readonly>
+					</li>
+				</ul>
+			</div>
+		</div>
+		</section>
+		<section class="mt30">
+		<div class="container">
+			<div class="form-wrap">
+				<ul>
+					<li>
+						<h2 class="fcGray6 fs15">성함<span class="fcOrange">&#42;</span></h2>
+						<input name="memNm" type="text" class="form-control w160" >
+					</li>
+				</ul>
+			</div>
+		</div>
+		</section>
+
+		<section class="mt30">
+		<div class="container">
+			<div class="form-wrap">
+				<ul>
+					<li>
+						<h2 class="fcGray6 fs15">이메일<span class="fcOrange">&#42;</span></h2>
+						<input name="email" type="email"  class="form-control w160" >
+					</li>
+				</ul>
+			</div>
+		</div>
+		</section>
+		</form>			
+
+		<div class="mt30">
+			<input type="button" onClick="vfc_next()"value="완료" class="btn btn-orange btn-sm  w200  fw600" style="border:0;" />
+		</div>
+	</div>
+</div>
+<script>
+function vfc_next(){
+	if( !$('input[name="memNm"]').val() ){
+		alert('성함은 필수 입니다.');
+		return;
+	}
+	if( !$('input[name="email"]').val() ){
+		alert('이메일은 필수 입니다.');
+		return;
+	}
+	$('#co_frm').submit();
+}
+	
+</script>
+{ # footer }

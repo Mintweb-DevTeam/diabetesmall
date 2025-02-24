@@ -1,0 +1,197 @@
+{*** 회원가입 > 애보트 동의페이지 | main/html.php?htmid=member/mem_agree.html ***}
+{ # header }
+
+<div class="content_box">
+	<div class="join_agreement_wrap">
+		<div class="member_tit">
+			<h2>{=__('회원가입')}</h2>
+			<ol>
+				<li><span>01</span> {=__('애보트인증')}<span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+				<li class="page_on"><span>02</span> {=__('약관동의')}<span><img src="../img/member/icon_join_step_on.png" alt=""></span></li>
+				<li><span>03</span> {=__('정보입력')}<span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+				<li><span>04</span> {=__('가입완료')}</li>
+			</ol>
+		</div>
+		<!-- //member_tit -->
+		<div class="adela_member_cont">
+			<div class="container">
+				
+				<h3 class="mem_title mb20 lineH12">PERSONAL INFORMATION PROCESSING<br />CONSENT FORM</h3>
+				<p class="fs26 fcGray7 lineH12 mb30">Abbott Diabetes Care (”Abbott”) processes your personal information as set forth below in connection with your use of LibreView.</p>
+				<h4 class="fs26 fcGray7 lineH12 mb50 fw600">Please indicated your consent by clicking the tick boxes:</h4>
+
+				<section>
+					<!--필수 1 -->
+					<!--{@privateApprovalOption}-->
+					<!--{?.sno == 19}-->
+					<h4 class="informNm fs26 fcOrange fw600 mb20">{.informNm}</h4>
+					<div class="scroll-info-content mb20">{.content}</div>
+					<p class="check_style01">
+						<input name="privateApprovalOptionFl[19]" type="checkbox" value="y" class="check-box" data-must="y" data-name="{.informNm}" id="privateApprovalOptionFl19" />
+						<label for="privateApprovalOptionFl19">상기 내용에 동의 합니다.</label>
+					</p>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				
+				<section class="mt50">
+					<!--필수 2 -->
+					<!--{@privateApprovalOption}-->
+					<!--{?.sno == 21}-->
+					<h4 class="informNm fs26 fcOrange fw600 mb20">{.informNm}</h4>
+					<div class="scroll-info-content mb20">{.content}</div>
+					<p class="check_style01">
+						<input name="privateApprovalOptionFl[21]" type="checkbox" value="y" class="check-box" data-must="y" data-name="{.informNm}" id="privateApprovalOptionFl21" />
+						<label for="privateApprovalOptionFl21">상기 내용에 동의 합니다.</label>
+					</p>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				
+				<section class="mt50">
+				<!--필수 3-->
+					<!--{@privateOffer}-->
+					<!--{?.sno == 5}-->
+					<h4 class="informNm fs26 fcOrange fw600 mb20">{.informNm}</h4>
+					<div class="scroll-info-content mb20">{.content}</div>
+					<p class="check_style01">
+						<input name="privateOfferFl[5]" type="checkbox" value="y" class="check-box" data-must="y" data-name="{.informNm}" id="privateOfferFl5" />
+						<label for="privateOfferFl5">상기 내용에 동의 합니다.</label>
+					</p>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				<section class="mt50">
+				<!--필수 4 -->
+					<!--{@privateOffer}-->
+					<!--{?.sno == 22}-->
+					<h4 class="informNm fs26 fcOrange fw600 mb20">{.informNm}</h4>
+					<div class="scroll-info-content mb20">{.content}</div>
+					<p class="check_style01">
+						<input name="privateOfferFl[22]" type="checkbox" value="y" class="check-box" data-must="y" data-name="{.informNm}" id="privateOfferFl22" />
+						<label for="privateOfferFl22">상기 내용에 동의 합니다.</label>
+					</p>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				<section class="mt50">
+				<!--선택 1-->
+					<!--{@privateConsign}-->
+					<!--{?.sno == 20}-->
+					<h4 class="informNm fs26 fcOrange fw600 mb20">{.informNm}</h4>
+					<div class="scroll-info-content mb20">{.content}</div>
+					<p class="check_style01">
+						<input name="privateConsignFl[20]" type="checkbox" value="y" class="check-box" id="privateConsignFl20" />
+						<label for="privateConsignFl20">상기 내용에 동의 합니다.</label>
+					</p>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				<section class="mt50">
+				<!--선택 2-->
+					<!--{@privateConsign}-->
+					<!--{?.sno == 23}-->
+					<h4 class="informNm fs26 fcOrange fw600 mb20">{.informNm}</h4>
+					<div class="scroll-info-content mb20">{.content}</div>
+					<p class="check_style01">
+						<input name="privateConsignFl[23]" type="checkbox" value="y" class="check-box" id="privateConsignFl23" />
+						<label for="privateConsignFl23">상기 내용에 동의 합니다.</label>
+					</p>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				<section class="mt50">
+				<!--선택 3-->
+					<!--{@privateOffer}-->
+					<!--{?.sno == 25}-->
+					<h4 class="informNm fs26 fcOrange fw600 mb20">{.informNm}</h4>
+					<div class="scroll-info-content mb20">{.content}</div>
+					<p class="check_style01">
+						<input name="privateOfferFl[25]" type="checkbox" value="y" class="check-box" id="privateOfferFl25" />
+						<label for="privateOfferFl25">상기 내용에 동의 합니다.</label>
+					</p>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				<section class="mt50">
+				<!--선택 4-->
+					<!--{@privateOffer}-->
+					<!--{?.sno == 26}-->
+					<h4 class="informNm fs26 fcOrange fw600 mb20">{.informNm}</h4>
+					<div class="scroll-info-content mb20">{.content}</div>
+					<p class="check_style01">
+						<input name="privateOfferFl[26]" type="checkbox" value="y" class="check-box" id="privateOfferFl26" />
+						<label for="privateOfferFl26">상기 내용에 동의 합니다.</label>
+					</p>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				<section class="mt40">
+					<p class="check_style01">
+						<input type="checkbox" id="all-check" onChange="all_ck(this)"><label for="all-check" class="fcOrange fw600 fs28">전체동의</label>
+					</p>
+				</section>
+				<div class="clearfix mt40">
+					<div class="pull-left">
+						<button type="button" class="btn btn-orange btn-lg w480" onClick="next_step()">COMPLETE</button>
+					</div>
+					<div class="pull-right">
+						<a href="#." class="btn btn-gray btn-lg w480" onClick="history.back(); return false;">GO BACK</a>
+					</div>
+					
+					
+				</div>
+
+		
+			</div>
+		</div>
+		<!-- //member_cont -->
+	</div>
+	<!-- //join_agreement_wrap -->
+</div>
+<!-- //content_box -->
+<form id="frm" action="./complete.php" method="post" style="display: none">
+	<!--{@post}-->
+	<input name="{.key_}" type="hidden" value="{.value_}">
+	<!--{/}-->
+	<div id="agree-input">
+	</div>
+</form>
+<script type="text/javascript">
+var input = '<input name="%name%" type="hidden" value="%value%">';
+function all_ck(obj){
+	if( $(obj).is(':checked') ) $('.check-box').prop('checked', true);
+	else $('.check-box').prop('checked', false);
+}
+function next_step(){
+	$('#agree-input').empty();
+	var msg = [];
+	$('.check-box').each(function(){
+		var value = $(this).is(':checked') ? 'y' : 'n';
+		$('#agree-input').append( input.co_split( {'name':$(this).prop('name'), 'value': value } ) );
+		if( $(this).data('must') == 'y' ){
+			if( value == 'n' ) msg.push( $(this).data('name').replace('(필수)', '') );
+		}
+	});
+	if( msg.length != 0 ){
+		alert( msg.join( "\n" ) + ' 은(는) 필수 항목 입니다.' );
+		return;
+	}
+	$('#frm').submit();
+}
+String.prototype.co_split = String.prototype.co_split || function () { 
+    "use strict";
+    var str = this.toString();
+    if (arguments.length) {
+        var t = typeof arguments[0];
+        var key;
+        var args = ("string" === t || "number" === t) ? Array.prototype.slice.call(arguments) : arguments[0];
+        for (key in args) {
+            str = str.replace(new RegExp("\\%" + key + "\\%", "gi"), args[key]);
+        }
+    }
+    return str;
+};
+
+</script>
+{ # footer }

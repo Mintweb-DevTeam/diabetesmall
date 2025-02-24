@@ -1,0 +1,151 @@
+{*** 회원가입 > 애보트 완료 | main/html.php?htmid=member/complete.html ***}
+{ # header }
+
+<style>
+.youcan{display:none;}
+</style>
+
+<div class="content_box pr20 pl20 pt20 mb60">
+	<div class="join_agreement_wrap">
+
+		<div class="adela_member_cont">
+
+			<div class="container">
+				<div class="intro pb10 mb20 clearfix" style="border-bottom:2px solid #ffc600; ">
+					<h1 class="fcBlue fs20 pull-left mt20">리브레케어 멤버십</h1>
+					<p class="pull-right"><img src="../img/qrcode/test-img_01.jpg" alt="test-img_01" width="60px"></p>
+				</div>
+				<h4 class="fcOrange fs18 fw600 mb30">리브레케어 멤버십 가입이 {text}되었습니다!</h4>
+				<!-- <div class="mb50">
+					<img src="/data/skin/mobile/moment/img/qrcode/test-img_01.jpg" alt="test-img_01" class="test-img_01">
+				</div> -->
+				<div class="form-wrap">
+					<!-- YOU ARE {now}A LIBRECARE MEMBER !
+					<h4 class="fs26 fcGray7 lineH12 mb30 fw600">You have agreed to the Terms &#38; Conditions.</h4> -->
+					<ul class="complete-ul fs16 mb30 fcGray6 lineH16">
+						<li>이름 : {post.memNm}</li>
+						<li>이메일 : {post.memId}</li>
+						<li>휴대폰 번호 : {post.cellPhone}</li>
+					</ul>
+					
+				</div>
+			</div>
+
+			<div class="mail_form_new">
+				<p class="welcome fcBlue fs18 fw600">리브레케어 멤버십에 등록하시면</p>
+<!-- 				<img src="../img/qrcode/mail_form_logo.jpg" class="form_logo" alt="" /> -->
+				<div class="formImg">
+					<img src="../img/common/Logo_FreeStyle_LibreCare_Final_OL.png" style="max-width:100%;width:100px"
+					alt="프리스타일 리브레 연속 당 측정시스템" title="프리스타일 리브레 연속 당 측정시스템">
+				</div>
+				<ul class="list-unstyled blue-list fs16 fcGray6 lineH16">
+					<li>
+						<p><span class="">1</span></p>
+						<p>공식 지정 약국, 의료기기 판매점 및 온라인 샵에서 프리스타일 리브레 센서를 구매할 수 있습니다.</p>
+					</li>
+					<li>
+						<p><span class="">2</span></p>
+						<p>품질 보증 서비스를 비롯한 다양한 고객 서비스를 받을 수 있습니다.</p>
+					</li>
+					<li>
+						<p><span class="">3</span></p>
+						<p>다양한 혈당관리 관련 정보를 받아볼 수 있습니다.</p>
+					</li>
+
+<!-- 					<li><span class="">2</span>품질 보증 서비스를 비롯한 다양한 고객 서비스를 받을 수 있습니다.</li>
+					<li><span class="">3</span>다양한 혈당관리 관련 정보를 받아볼 수 있습니다.</li> -->
+				</ul>
+				
+			</div>
+
+			<div class="mb50">
+				<p class="welcome fcBlue fs18 fw600 mb15">카카오톡 “채널 추가” 하고<br />혈당 관리를 위한 다양한 정보를 확인해보세요 </p>
+				<p><a href="https://pf.kakao.com/_FmxhxeK" target="_blank"><img src="../img/kakao_chat_btn.jpg" width="288px"alt=""></a></p>
+			</div>
+			
+			<div class="cta-box text-center">
+				<h4 class="fcOrange  fcBlue fs20 fw600">프리스타일 리브레링크 앱<br> 무료 다운로드</h4>
+				<img src="../img/qrcode/cta_01.jpg" class="mt20 mb20" alt="" />
+				<div>
+					<a href="https://play.google.com/store/apps/details?id=com.freestylelibre.app.kr" target="_blank"><img src="../img/sub/app01.jpg" class="mr05" alt="" /></a>
+					<a href="https://itunes.apple.com/app/freestyle-librelink-kr/id1354596227?ls=1&mt=8" target="_blank"><img src="../img/sub/app02.jpg" class="mr05_2" alt="" /></a>
+				</div>
+			</div>
+
+			<p class="fcGray6 fs12 fw300 mt20 mb40">* 리브레케어 멤버십 등록 관련 문의와 탈퇴는 (02)6451-0040 로 문의하십시오.  <br>   *월요일~금요일 9.00am-6.00pm  (토,일 ,공휴일 휴무)</p>
+
+			<div class="text-center">
+				<a href="{url}" class="continue btn btn-orange btn-sm fs14 fw500">쇼핑몰 회원가입 바로가기</a>
+			</div>
+			
+
+<!-- 			<div class="container">
+				<h4 class="fcBlue fs18 fw600 mb30">리브레케어 멤버십에 등록하시면</h4>
+				<ul class="list-unstyled blue-list">
+					<li>공식 지정 약국, 의료기기 판매점 및 온라인 샵에서 프리스타일 리브레 센서를 구매할 수 있습니다.</li>
+					<li>품질 보증 서비스를 비롯한 다양한 고객 서비스를 받을 수 있습니다.</li>
+					<li>다양한 혈당관리 관련 정보를 받아볼 수 있습니다.</li>
+				</ul>			
+			</div> -->
+
+		</div>
+		<!-- //member_cont -->
+	</div>
+	<!-- //join_agreement_wrap -->
+</div>
+<!-- //content_box -->
+
+
+	<style>
+		.mail_form_new .formImg,.mail_form_new ul{
+			display:inline-block;
+			vertical-align:middle;
+		}
+		.mail_form_new .formImg{
+			width:40%;
+		}
+		.mail_form_new ul{
+			display:inline-block;
+			vertical-align:middle;
+			width:58%;
+		}
+		.mail_form_new ul p{
+			width:11%;
+			display:inline-block;
+			vertical-align:top;
+			font-size:12px;
+		}
+		.mail_form_new ul p:last-child{
+			width:85%;
+		}
+		.mail_form_new img{
+			width:120px;
+		}
+		.blue-list li span {
+			margin-right: 0;
+		}
+		.cta-box img {
+			width: 100px;
+		}
+	</style>
+
+
+
+<script language='JavaScript1.1' async src='//pixel.mathtag.com/event/js?mt_id=1476287&mt_adid=237044&mt_exem=&mt_excl=&v1=&v2=&v3=&s1=&s2=&s3='></script>
+<!--
+Start of Floodlight Tag: Please do not remove
+Activity name of this tag: Membership complete MO
+URL of the webpage where the tag is expected to be placed: 
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 07/21/2021
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=membe00;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+</script>
+<noscript>
+<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=membe00;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+</noscript>
+<!-- End of Floodlight Tag: Please do not remove -->
+{ # footer }

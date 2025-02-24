@@ -1,0 +1,185 @@
+{*** 요양비 지급청구 신청 | proxyorder/proxy_medical.php ***}
+{ # header }
+<script type="text/javascript" src="../js/jSignature/jSignature.min.js"></script>	
+	<style>
+		#contents{font-size:14px;}
+		#contents .title{background: #00000014;height: 120px;line-height: 120px;text-align: center;margin: 50px 0px;}
+		#contents h4 { font-size:32px;}
+		.content_body{width:80%;margin:auto;}
+
+		.content_body .Table{border-spacing:0px;width:100%;}
+		.content_body .Table th{font-size:16px;font-weight:bold;text-align:left;padding-left:20px;}
+
+		.content_body .Table td{height:50px;padding:10px 0px;}
+		.content_body .Table td:nth-child(2){padding-left:10px;}
+
+		.content_body .Table div{height:45px;line-height:45px;}
+		.content_body input[type="checkbox"]{vertical-align:middle;}
+
+		.content_body .innerTable {width:100%;}
+	
+		#signatureparent{padding: 0px; background-color: grey; border:0px;width:350px;height:100px !important;}
+		#signature{border:0px solid #000;width:350px;height:100px !important;} 
+		.sign_reset{display: block;cursor: pointer;border: 1px solid #4584c5;width: 96px;text-align: center;padding: 2px 0px;margin-top:5px;}
+		.import{color:red;font-weight:bold;display:inline-block;vertical-align: sub;}
+
+
+		.content_body .filebox label {display: inline-block;padding: 0.3em 1.3em;color: #fff;font-size: inherit;line-height: normal;vertical-align: middle;background-color: #4584c5;cursor: pointer;}
+		.content_body .filebox input[type="file"] {position: absolute;width: 1px;height: 1px;padding: 0;margin: -1px;overflow: hidden;clip:rect(0,0,0,0);border: 0;}
+
+		.borderTop{border-top:1px solid #000;}
+		.borderBottom{border-bottom:1px solid #000;}
+		.borderLeft{border-left:1px solid #000;}
+		.borderRight{border-right:1px solid #000;}
+		.btn {text-align:center;width:100%;}
+		.btn .register{background-color: #4584c5;color: #fff;width: 150px;display: inline-block;margin: 10px 0px;border: 0px;height: 35px;}
+
+	</style>
+	<div id="container">
+		<div id="contents">
+			<div class="title">
+				<h4>요양비 지급청구 위임장 작성</h4>
+			</div>
+
+			<div class="content_body">
+				<form id="proxy" method="post" action="proxy_indb.php" enctype="multipart/form-data">
+				<table class="Table">
+					<colgroup>
+						<col width="30%"/>
+						<col>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th class="borderTop borderLeft borderRight">가입자</br>또는</br>피부양자</th>
+							<td  class="borderTop borderRight">
+								<div>성명<span class='import'>*</span> <input type="text" name="pname"required/></div>
+								<div>주민(외국인)등록번호<span class='import'>*</span> <input type="text" name="pjumin1" required  maxlength="6"  placeholder="숫자만입력"/> - <input type="text" name="pjumin2" required  maxlength="7"  placeholder="숫자만입력"/></div>
+							</td>
+						</tr>
+						<tr>
+							<th class="borderTop borderLeft borderRight">법정대리인</br>또는</br>가족</th>
+							<td class="borderTop borderRight">
+								<div>성명 <input type="text" name="lname"/></div>
+								<div>생년월일 <input type="text" name="birth"  maxlength="8"  placeholder="숫자만입력 예19800130"/></div>
+								<div>가입자·피부양자와의 관계 <input type="text" name="conn" /></div>
+							
+							</td>
+						</tr>
+						<tr>
+							
+							<td colspan="2" class="borderTop borderLeft borderRight">
+								<table class="innerTable">
+									<colgroup>
+										<col width="35%"/>
+										<col/>
+									</colgroup>
+									<tr>
+										<th>
+											전화번호(위임사항 및 지급내역 수신용)<span class='import'>*</span>
+										</th>
+										<td>
+											<input type="text" name="cellPhone" required  maxlength="15" placeholder="숫자만입력"/>
+										</td>
+									</tr>
+								</table>
+							
+							</td>
+						</tr>
+						<tr>
+							<th class="borderTop borderLeft borderRight">
+								<div>위임기간</div>
+								<div>위임일</div>
+								<div>위임사항</div>
+							</th>
+							<td class="borderTop borderRight">
+								<div>{start_date}부터 {end_date}까지(최장5년)</div>
+								<div>{=date('Y')}년 {=date('m')}월 {=date('d')}일</div>
+								<div>
+									
+									<input type="checkbox" name="item1" id="item1" value="1"required checked readonly  onclick="return false;"/><label for="item1">당뇨병소모성 재료</label>&nbsp;&nbsp;
+									<input type="checkbox" name="item2" id="item2" value="1"required checked readonly  onclick="return false;"/>연속혈당측정용 전극(센서)
+
+								</div>
+							
+							</td>
+						</tr>
+						<tr>
+							<th class="borderTop borderLeft borderRight">신분증사본</th>
+							<td class="borderTop borderRight">
+								<div class="filebox">
+								  <label for="ex_file">파일찾아보기</label>
+								  <input type="file" id="ex_file" name="upfile" required> 
+								</div>
+								<!--input type="file" name="upfile" id="upfile"/-->
+							</td>
+						</tr>
+						<tr>
+							<th class="borderTop borderLeft borderBottom borderRight">위임인 서명</th>
+							<td class="borderTop borderRight borderBottom">
+								<div id="signatureparent">
+									<div id="signature"></div>
+								</div>
+								<span class='sign_reset'>서명다시하기</span>
+								
+									<input id="signVal" name="signVal" style="width:100%" type="hidden" required placeholder="위임인 서명을 해주세요."/>
+							
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="btn">
+					<input type="submit" value="등록하기" class="register">
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="mt20">ADC-70930 v3.0</div>
+{ # footer }
+<script>
+$(function(){
+	//$('#signature').jSignature({'UndoButton':true});
+	
+	var $sigdiv = $("#signature").jSignature({width:350,height:100,color:"#00f","background-color":"#0f0"});
+	var datapair = $sigdiv.jSignature('getData', 'base30');
+	
+	$('#signature').bind('change', function(e) {
+		var data = $('#signature').jSignature('getData');
+		$("#signVal").val(data+"");
+	});
+	
+	$('.sign_reset').click(function(e){
+		$('#signature').jSignature('clear');
+		$("#signVal").val('');
+		e.preventDefault();
+	});
+	
+
+	$("#proxy").submit(function(e) {
+
+		e.preventDefault();    
+		var formData = new FormData(this);
+	
+		$.ajax({
+			url:"proxy_indb.php",
+            processData: false,
+            contentType: false,
+			type:"POST",
+			data:formData,
+		})
+		.done(function(data){
+		
+			if(data.result=='n'){
+			
+				alert(data.message);
+			
+			}else if(data.result=='y'){
+				
+				document.location.href="./proxy_medical_result.php?sno="+data.idx;
+			}
+		});
+	});
+
+
+});
+</script>

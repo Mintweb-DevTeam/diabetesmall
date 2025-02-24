@@ -1,0 +1,111 @@
+{*** index | qrcode/co_join_stepa.html ***}
+{ # header }
+<!-- header -->
+
+<div class="pl20 pr20 pt20 mb60">
+
+	
+	<div class="intro pb10 mb20 clearfix" style="border-bottom:2px solid #ffc600; border:1px solid red;">
+		<h1 class="fcBlue fs20 pull-left mt20">리브레케어 멤버십</h1>
+		<!-- <p class="pull-right"><img src="../img/qrcode/test-img_01.jpg" alt="test-img_01" width="60px"></p> -->
+	</div>
+
+	<div class="member-item form-wrap">
+		<!-- <h2 class="fcOrange fs16 mb10">프리스타일 리브레 제품의 오프라인 구매를 위한 리브레케어 멤버이십니까?</h2> -->
+		
+
+		<h3 class="fcBlue fs16 fw600 mb10">아직 리브레케어 멤버가 아니신가요?</h3>
+		<div class="join_box_blue text-center">
+			<a href="./co_join_stepb.php?device={device}" class="btn btn-yellow btn-sm fs14">리브레케어 등록을 희망합니다.</a>
+		</div>
+
+		
+		<!-- <span class="inp_rdo"><input type="radio" name="member_name" value="" checked="checked" id="member01"><label for="member01">Yes, I am</label></span>
+		<span class="inp_rdo"><input type="radio" name="member_name" value="" id="member02"><label for="member02">Not yet, but I want to join</label></span> -->
+	</div>
+
+	<h3 class="fcBlue fs16 fw600 mb10 mt30">리브레케어에 이미 등록을 완료하셨다면 인증해주세요.</h3>
+
+	<div class="join_box_orange ">
+	
+		<section>
+		<div class="container">
+			<div class="fs14 mb20 "><span class="fcOrange">*</span> 항목은 필수 입력사항입니다.</div>
+			<div class="form-wrap">
+				<iframe name="frm_" style="display: none"></iframe>
+				<form id="frm" action="./old_mem_agree_ps.php" method="post" target="frm_">
+				<ul>
+					<li>
+						<h2 class="fcGray6 fs15">휴대전화 번호 <span class="fcOrange">&#42;</span></h2>
+						<input name="cellPhone" type="tel" class="form-control w160">
+						<a href="#." id="request" onClick="getPassNum()" class="btn btn-orange btn-sm">
+							<span class="button-txt">인증번호 요청</span>
+						</a>
+					</li>
+				</ul>
+				</form>
+			</div>
+		</div>
+		</section>
+		<section class="mt30">
+		<div class="container">
+			<div class="form-wrap">
+				<ul>
+					<li>
+						<h2 class="fcGray6 fs15">인증번호 <span class="fcOrange">&#42;</span></h2>
+						<input name="passNum" type="text"  class="form-control w160" >
+						<a href="#." type="button" onClick="checkPass()" id="submit" class="btn btn-orange btn-sm">
+							<span class="button-txt">인증번호확인</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		</section>
+
+		<div class="mt30">
+			<input type="submit" id="submit_frm" value="제출" class="btn btn-orange btn-sm  w200  fw600" style="border:0;" />
+		</div>
+	</div>
+
+
+</div>
+
+<script>
+$(function(){
+	$.cookie('memNm', '{data.memNm}', {expires:20*365});
+	$.cookie('memId', '{data.email}', {expires:20*365});
+	$.cookie('cellPhone', '{data.cellPhone}', {expires:20*365});
+	$('#member02').change(function() {
+		if( $(this).is(':checked') ){
+			window.location.href = './co_join_stepb.php?device={get.device}&pharmacy_code={get.pharmacy_code}';
+		}
+	});
+})
+var pass_num = null;
+function getPassNum(){
+	if( !$('input[name="cellPhone"]').val() ){
+		alert('전화번호는 필수 입니다.');
+		return;
+	}
+	pass_num = get_pass_num( $('input[name="cellPhone"]').val() );
+	console.log(pass_num);
+	$('#submit').prop('disabled', false);
+}
+function checkPass(){
+	if(!pass_num){
+		alert('인증번호를 요청해 주세요');
+		return;
+	}
+	if( pass_num != $('input[name="passNum"]').val() ){
+		alert('인증번호가 다릅니다.');
+		return;
+	}
+	alert('인증번호 확인이 완료 되었습니다.');
+	$('#submit_frm').on('click', function(){
+		$('#frm').submit();
+	});
+}
+</script>
+
+{ # footer }

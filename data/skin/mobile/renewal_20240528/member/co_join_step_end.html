@@ -1,0 +1,37 @@
+{*** 회원가입 > 가입완료 | main/html.php?htmid=member/co_join_step_end.html ***}
+{ # header }
+<style>
+.member_cont .informNm {font-size: 16px; font-weight: bold}
+.member_cont .info-content {width: 100%; height: 80px; overflow-y: scroll; border: 1px #ccc solid}
+.member_cont section {margin-top: 20px}
+.youcan{display:none;}
+</style>
+<div class="content_box">
+	<div class="join_agreement_wrap">
+		<div class="member_tit">
+			<!--<h2>{=__('아델라 회원가입')}</h2> -->
+<!-- 			<ol>
+				<li><span>01</span> {=__('애보트인증')}<span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+				<li><span>02</span> {=__('약관동의')}<span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+				<li><span>03</span> {=__('동의완료')}<span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+				<li><span>04</span> {=__('정보입력')}<span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+				<li class="page_on"><span>05</span> {=__('가입완료')}</li>
+			</ol> -->
+		</div>
+		<div class="adela_member_cont">
+			<p class="fs18 fcBlue pt20 pb20"style="text-align:center;">아델라 쇼핑몰 회원가입이 완료되었습니다! <br />감사합니다.</p>
+
+			{?gd_session('join_view')=='1'}
+			<p class="mt20" style="text-align:center">
+				<a href="http://www.cgmedu.co.kr/_online1?ad_name={=urlencode(data.memNm)}&ad_tel={=urlencode(data.cellPhone)}&ad_email={=urlencode(data.email)}" target="_blank" class="btn btn-orange btn">무료체험 이벤트 참여하기</a>
+			</p>
+			{/}
+<!-- 			<p class="mt20" style="text-align:center">
+				<a href="/main/index.php" class="btn btn-orange w150 btn">HOME</a>
+				<a href="/member/login.php?returnUrl=" class="btn btn-orange w150 btn ml10">로그인</a>
+			</p> -->
+		</div>
+	</div>
+</div>
+<div class="mt20">ADC-21800 v2.0</div>
+{ # footer }

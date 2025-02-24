@@ -1,0 +1,93 @@
+{*** 회원가입 > 애보트 본인인증 | main/html.php?htmid=member/join_is_abbott.html ***}
+{ # header }
+<div class="content_box">
+	<div class="join_agreement_wrap">
+		<div class="member_tit">
+			<h2>{=__('회원가입')}</h2>
+			<ol>
+				<li class="page_on"><span>01</span> {=__('애보트인증')}<span><img src="../img/member/icon_join_step_on.png" alt=""></span></li>
+				<li><span>02</span> {=__('약관동의')}<span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+				<li><span>03</span> {=__('정보입력')}<span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+				<li><span>04</span> {=__('가입완료')}</li>
+			</ol>
+		</div>
+		<!-- //member_tit -->
+
+
+		<div class="adela_member_cont">
+			<div class="container">
+				
+				<h3 class="mem_title mb50">FREESTYLE LIBRECARE MEMBERSHIP</h3>
+				
+				<h4 class="mem_stitle">Are You A FreeStyle LibreCare Member?</h4>
+
+				<div class="mb50">
+						<p class="radio_style01 mr60">
+							<input type="radio" name="member_name" value="" id="member01" checked />
+							<label for="member01">Yes, I am</label>
+						</p>
+						<p class="radio_style01">
+							<input type="radio" name="member_name" value="" id="member02" />
+							<label for="member02">Not yet, but I want to join</label>
+						</p>
+				</div>
+
+
+				<div>
+					<iframe name="frm_" style="display: none"></iframe>
+					<form id="frm" action="./old_mem_agree_ps.php" method="post" target="frm_">
+						<div class="mb30">
+							<h5 class="fs26 fcGray6 mb10">전화번호 <span class="fcOrange">*</span></h5>	
+							<input name="cellPhone" class="form-control w380" type="tel">
+							<button type="button" onClick="getPassNum()" class="btn btn-orange">인증번호요청</button>
+						</div>
+						<div>
+							<h5 class="fs26 fcGray6 mb10">인증번호 <span class="fcOrange">*</span></h5>	
+							<input name="passNum" class="form-control w380" type="text">
+							<button type="button" id="submit_" onClick="checkPass()" disabled class="btn btn-orange">인증번호확인</button>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+
+		<!-- //member_cont -->
+	</div>
+	<!-- //join_agreement_wrap -->
+</div>
+<!-- //content_box -->
+<script type="text/javascript">
+$(function(){
+	$('#member02').change(function() {
+		if( $(this).is(':checked') ){
+			window.location.href = './new_abbott_member.php';
+		}
+	});
+})
+var pass_num = null;
+function getPassNum(){
+	if( !$('input[name="cellPhone"]').val() ){
+		alert('전화번호는 필수 입니다.');
+		return;
+	}
+	/*  get_pass_num 위치 : /js/gd_common.js  */
+	pass_num = get_pass_num( $('input[name="cellPhone"]').val() );
+	console.log(pass_num);
+	$('#submit_').prop('disabled', false);
+}
+function checkPass(){
+	if(!pass_num){
+		alert('인증번호를 요청해 주세요');
+		return;
+	}
+	if( pass_num != $('input[name="passNum"]').val() ){
+		alert('인증번호가 다릅니다.');
+		return;
+	}
+	$('#frm').submit();
+}
+
+</script>
+{ # footer }

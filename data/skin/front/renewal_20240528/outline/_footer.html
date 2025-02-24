@@ -1,0 +1,123 @@
+{*** 하단 레이아웃 | main/index.php ***}
+                <!--{ ? tpls.side_inc && layout.outline_sidefloat == 'right' }-->
+                <div class="side_cont">
+                    { # side_inc // 측면디자인 }
+                </div>
+                <!--{ / }-->
+            </div>
+            <!-- //sub_content -->
+        </div>
+        <!-- //본문 끝 contents -->
+    </div>
+    <!-- //container -->
+
+    <!--{ ? tpls.footer_inc }-->
+    <div id="footer_wrap">
+        { # footer_inc // 하단디자인 }
+    </div>
+    <!--{ / }-->
+    <!-- //footer_wrap -->
+
+
+    <div class="scroll_wrap">
+
+        <!-- 좌측 스크롤 배너 -->
+        <div id="scroll_left">
+            { # scroll_banner_left // 좌측 스크롤 배너 }
+        </div>
+        <!-- //scroll_left -->
+        <!-- //좌측 스크롤 배너 -->
+
+
+        <!-- 우측 스크롤 배너 -->
+        <div id="scroll_right">
+            { # scroll_banner_right // 우측 스크롤 배너 }
+        </div>
+        <!-- //scroll_right -->
+        <!-- //우측 스크롤 배너 -->
+
+        <!--{ ? is_array(gd_isset(footerScript)) }-->
+        <!-- Add footer script : start -->
+        <!--{ @ footerScript }-->
+        <script type="text/javascript" src="{=.value_}"></script>
+        <!--{ / }-->
+        <!-- Add footer script : end -->
+        <!--{ / }-->
+
+    </div>
+    <!-- //scroll_wrap -->
+
+
+    <!-- 퀵 검색 폼 -->
+    <!--{ ? tpls.quick_search }-->
+    {=includeWidget('proc/_quick_search.html')}
+    <!--{ / }-->
+    <!-- 퀵 검색 폼 -->
+
+</div>
+<!-- //wrap -->
+
+<!-- 쇼핑 카트 탭 -->
+{=plusShop('proc/_cart_tab.html')}
+<!-- //쇼핑 카트 탭 -->
+
+<!-- 절대! 지우지마세요 : Start -->
+<div id="layerDim" class="dn">&nbsp;</div>
+<iframe name="ifrmProcess" src='/blank.php' style="display:none<!--{ ? !isProduction }-->block<!--{ / }-->" width="100%" height="<!--{ ? !isProduction }-->50<!--{ / }-->0" bgcolor="#000"></iframe>
+<!-- 절대! 지우지마세요 : End -->
+
+<!-- 외부 스크립트 -->
+{=customFooter}
+
+<script>
+function coKakaoChannel(){
+	//DV360
+	var axel = Math.random() + "";
+	var a = axel * 10000000000000;
+	var img = document.createElement("iframe");
+	img.setAttribute('src','https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre001;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=' + a + '?');
+	img.setAttribute('width',1);
+	img.setAttribute('height',1);
+	img.setAttribute('frameborder',0);
+	img.setAttribute('style','display:none');
+	document.body.appendChild(img);
+
+	var img1 = document.createElement("iframe");
+	img1.setAttribute('src','https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre001;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?');
+	img1.setAttribute('width',1);
+	img1.setAttribute('height',1);
+	img1.setAttribute('frameborder',0);
+	img1.setAttribute('style','display:none');
+	document.body.appendChild(img1);
+	//DV360 --//
+	
+	let type="shop",
+		memNo = "{=gSess.memNo}",
+		memNm = "{=gSess.memNm}",
+		email = "",
+		cellPhone = "";
+	if( memNo != '' ){
+		$.ajax({
+			url:'/service/co_kakao_channel.php',
+			type:'POST',
+			data:{'type':type,'memNo':memNo,'memNm':memNm,'email':email,'cellPhone':cellPhone},
+			dataType : "json",
+			success: function(x){
+				window.open('https://pf.kakao.com/_FmxhxeK', '_blank');
+			},
+			error:function(request,status,error){
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	} else {
+		window.open('https://pf.kakao.com/_FmxhxeK', '_blank');
+	}
+}
+</script>
+
+
+
+
+
+</body>
+</html>

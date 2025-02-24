@@ -1,0 +1,33 @@
+{*** 상세보기 | board/view.php ***}
+{ # header }
+<div class="content  ">
+    { #view}
+</div>
+<!-- //content -->
+{ # footer }
+
+<script>
+var param = new URLSearchParams(location.search);
+var bdId = param.get('bdId');
+var sno = param.get('sno');
+
+if(bdId == 'notice' && sno == '13') {
+	var axel = Math.random() + "";
+	var a = axel * 10000000000000;
+	var img = document.createElement("iframe");
+	img.setAttribute('src','https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre000;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=' + a + '?');
+	img.setAttribute('width',1);
+	img.setAttribute('height',1);
+	img.setAttribute('frameborder',0);
+	img.setAttribute('style','display:none');
+	document.body.appendChild(img);
+
+	var img1 = document.createElement("iframe");
+	img1.setAttribute('src','https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre000;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?');
+	img1.setAttribute('width',1);
+	img1.setAttribute('height',1);
+	img1.setAttribute('frameborder',0);
+	img1.setAttribute('style','display:none');
+	document.body.appendChild(img1);
+}
+</script>

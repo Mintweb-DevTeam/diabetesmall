@@ -1,0 +1,111 @@
+{*** 상단 기본파일 | main/index.php ***}
+<div id="header_wrap">
+	<header>
+		<div class="header_box">
+			<div class="h_logo clearfix pl20">
+				<p class="pull-left logo w80 "><!--{ @dataBanner('1855338920') }-->{.tag}<!--{ / }--></p>
+			</div> <!-- 로고 -->
+
+
+			
+			
+			
+			<!-- 좌측 메뉴 -->
+			<ul class="left_menu">
+				<!-- <li><a href="#" class="side_menu"><span>{=__('메뉴')}</span></a></li> -->
+				<!-- <li><button class="top_search bn_srch"><span>{=__('검색')}</span></button></li> -->
+			</ul>
+			
+
+			<!--{ ? gCurrentPageName != 'main/index' }-->
+			<div class="sub_top">
+
+
+				<!--{ ? (gCurrentPageName == 'board/list' || gCurrentPageName == 'mypage/mypage_qa' || gCurrentPageName == 'mypage/mypage_goods_qa' || gCurrentPageName == 'mypage/mypage_goods_review') && bdList.cfg.auth.write == 'y'}-->
+				<div class="sub_top_right2"><a href="../board/write.php?bdId={req.bdId}&mypageFl={req.mypageFl}&goodsNo={goodsView.goodsNo}&gboard=r&noheader=y" data-toggle="modal" data-target="#popupBoard" class="board_btn">{=__('글쓰기')}</a></div>
+				<!--{ / }-->
+				<!--{ ? gCurrentPageName == 'board/view' }-->
+				<div class="sub_top_right2"><a href="../board/list.php?bdId={req.bdId}&mypageFl={req.mypageFl}" class="board_btn">{=__('목록가기')}</a></div>
+				<!--{ / }-->
+				<!--{ ? gCurrentPageName == 'board/plus_review_article' || gCurrentPageName == 'board/plus_review_photo' || gCurrentPageName == 'board/plus_review_goods' }-->
+				<div class="sub_top_right2 btn_plus_review_register"><a href="../board/plus_review_popup_write.php?mode=addPopup" class="ogl_reviewrite" data-toggle="modal" data-target="#popupBoard">{=__('리뷰등록')}</a></div>
+				<!--{ / }-->
+			</div>
+			<!--{ / }-->
+		</div>
+
+		<!-- <div class="gnb">
+			<ul class="clearfix">
+				<li><a href="/">홈</a></li>
+				<li><a href="/goods/goods_list.php?cateCd=001">제품소개</a></li>
+				<li><a href="/main/html.php?htmid=product/pro02.html">프리스타일 리브레 더알아보기</a></li>
+				<li><a href="/main/html.php?htmid=service/insurance.html">건강보험 급여지원</a></li>
+				<li><a href="/main/html.php?htmid=service/data.html">고객센터</a></li>
+			</ul>
+		</div> -->
+	</header>
+</div>
+<!-- //header_wrap -->
+<nav>
+	<div class="bg"></div>
+	<div class="left_close"></div>
+	<div class="nav_bg_box">
+		<div class="nav_box">
+			<div class="nav_iscroll_box">
+				<div class="nav_content_box">
+					<div class="nav_language">
+						{=includeWidget('proc/_global_select.html')}
+					</div>
+					<!-- //nav_language -->
+
+
+					<div class="nav_category">
+						<div class="nav_tabmenu_box">
+							
+							<ul class="nav fw600">
+								<!-- <li><a href="#.">홈</a></li> -->
+								<li>
+									<a href="/goods/goods_list.php?cateCd=001">제품소개</a>
+									<ul>
+										<li><a href="/goods/goods_view.php?goodsNo=1000000000">센서</a></li>
+										<li><a href="/main/html.php?htmid=product/pro02.html">프리스타일 리브레링크 앱</a></li>
+										<li><a href="/main/html.php?htmid=product/pro03.html">리브레뷰</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="/main/html.php?htmid=product/pro02.html">프리스타일 리브레 더알아보기</a>
+									<ul>
+										<li><a href="/main/html.php?htmid=product/pro02.html">프리스타일 리브레링크 앱</a></li>
+										<li><a href="/main/html.php?htmid=product/pro04.html">프로그램</a></li>
+										<li><a href="/main/html.php?htmid=product/pro05.html">영상</a></li>
+										<li><a href="/main/html.php?htmid=product/pro06.html">AGP</a></li>
+										<li><a href="/main/html.php?htmid=product/pro07.html">임상연구</a></li>
+									</ul>
+								</li>
+								<li><a href="/main/html.php?htmid=service/insurance.html">건강보험 급여지원</a></li>
+								<li>
+									<a href="/main/html.php?htmid=service/data.html">고객센터</a>
+									<ul>
+										<li><a href="/main/html.php?htmid=service/data.html">참고자료</a></li>
+										<li><a href="/main/html.php?htmid=service/faq_new.html">FAQ</a></li>
+										<li><a href="/board/write.php?&bdId=qa">문의사항</a></li>
+									</ul>
+								</li>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+				<!-- //nav_content_box -->
+			</div>
+		</div>
+		<!-- //nav_box -->
+	</div>
+	<!-- //nav_bg_box -->
+</nav>
+<div id="container">
+	<div id="contents_wrap">
+
+
+
+

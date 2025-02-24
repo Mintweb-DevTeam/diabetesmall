@@ -1,0 +1,132 @@
+{***  | lcverification/index.php ***}
+{ # header }
+<div class="pl20 pr20 pt20 mb60">
+
+	
+	<h3 class="fs16 fw600 mb10 mt30">
+		프리스타일 리브레 멤버십 가입정보를 입력하신 후​
+		<br />핸드폰 인증을 완료해 주시기 바랍니다.​
+	</h3>
+
+	<div class="join_box_orange ">
+	
+		<section>
+		<div class="container">
+			<div class="fs14 mb20 "><span class="fcOrange">*</span> 표시는 반드시 입력하셔야 하는 항목입니다</div>
+			<form id="co_frm" action="./input_agree.php" method="post">
+			<div class="form-wrap">
+				<ul>
+					<li class="mb10">
+						<h2 class="fcGray6 fs15">이름<span class="fcOrange">&#42;</span></h2>
+						<input name="memNm" type="text" class="form-control wp100">
+					</li>
+					<li class="mb10">
+						<h2 class="fcGray6 fs15">이메일<span class="fcOrange">&#42;</span></h2>
+						<input name="email" type="email" class="form-control wp100">
+					</li>
+					<li>
+						<h2 class="fcGray6 fs15">휴대폰 번호<span class="fcOrange">&#42;</span></h2>
+						<input name="cellPhone" type="tel" class="form-control w160">
+						<!--a href="#." type="button" onClick="getPassNumTwo(this)" data-undi="injung" class="btn btn-orange btn-sm w120 fs14">인증번호요청</a-->
+						<button type="button" onClick="callSnNo()" id="buttonA"  class="btn btn-orange btn-sm w130 fs14"  data-undi="injung">인증번호 요청<span class="time-left hide">2m 43s left</span></button>
+					</li>
+				</ul>
+			</div>
+			</form>
+		</div>
+		</section>
+		<section class="mt30">
+		<div class="container">
+			<div class="form-wrap">
+				<ul>
+					<li>
+						<h2 class="fcGray6 fs15">인증번호<span class="fcOrange">&#42;</span></h2>
+						<input name="passNum" type="text"  class="form-control w160" >
+						<button type="button" id="injung" onClick="checkPass()" disabled class="btn btn-orange btn-sm w120 fs14">인증</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+		</section>
+		<div class="mt30">
+			<input type="button" onClick="vfc_next()"value="완료" class="btn btn-orange btn-sm  w200  fw600" style="border:0;" />
+		</div>
+	</div>
+</div>
+
+<script>
+function callSnNo(obj){
+	if( !$('input[name="cellPhone"]').val() ){
+		alert('전화번호는 필수 입니다.');
+		return;
+	}
+	if( !$('input[name="email"]').val() ){
+		alert('이메일은 필수 입니다.');
+		return;
+	}
+	if( !$('input[name="memNm"]').val() ){
+		alert('이름은 필수 입니다.');
+		return;
+	}
+	
+	$.ajax({
+		url:'../verification/member_verification.php',
+		type:'POST',
+		data:{
+			memNm: $('input[name="memNm"]').val(),
+			email: $('input[name="email"]').val(),
+			cellPhone: $('input[name="cellPhone"]').val()
+		},
+		dataType : "json",
+		success: function(x){
+			if( x === true ){
+				pass_num = get_pass_num( $('input[name="cellPhone"]').val() );
+				sms_min_count($("#buttonA"));
+			}else{
+				alert('이름, 이메일, 전화번호를 확인해 주세요');
+				return;
+			}
+		},
+		error:function(request,status,error){
+			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+	});
+}
+function sms_min_count(obj){
+	co_obj = obj;
+	$(obj).prop('disabled', true);
+	$( '#'+$(obj).data('undi') ).prop('disabled', false);
+	var minute = 1,
+		second = 59;
+	co_count = setInterval(function(){
+		$(obj).text(co_pad(minute, 2)+':'+co_pad(second, 2));
+		if( second == 0 ){
+			if( minute == 0 ){
+				sms_min_stop();
+			}
+			minute--;
+			second = 60;
+		}
+		second--;
+	}, 1000);
+}
+function sms_min_stop(){
+	clearInterval(co_count);
+	$(co_obj).prop('disabled', false).text('인증번호요청');
+}
+
+function co_pad(n, width) {
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+}
+
+function vfc_next(){
+	if( !is_pass ){
+		alert('휴대폰 인증이 필요합니다.');
+		return;
+	}
+	$('#co_frm').submit();
+}
+	
+</script>
+{ # footer }

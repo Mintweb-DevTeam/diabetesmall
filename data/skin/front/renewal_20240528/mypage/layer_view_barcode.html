@@ -1,0 +1,29 @@
+{*** 바코드 보기 레이어 | mypage/layer_view_barcode.php ***}
+<div class="layer_wrap_cont">
+    <div class="ly_tit">
+        <h4>{=__('바코드 보기')}</h4>
+    </div>
+    <div class="ly_cont" style="min-height:120px;">
+        <!--{ ? checkType == 'fail' }-->
+        <div class="btn_center_box" style="padding:50px 0px">
+            <!-- free icon -->
+            <img src="/data/commonimg/barcode.png" style="width:32px;" /><br />
+            {=alertMsg}
+        </div>
+        <!--{ : }-->
+        <div id="barcodeDiv" class="btn_center_box" style="text-align:center;">
+            {=barcodeGenerator}
+            {=authKey}
+        </div>
+        <!--{ / }-->
+    </div>
+    <!-- //ly_cont -->
+    <a href="#close" class="ly_close layer_close"><img src="../img/common/layer/btn_layer_close.png" alt="{=__('닫기')}"></a>
+</div>
+<!-- //layer_wrap_cont -->
+<script>
+    $(function(){
+        //바코드 재정렬 (가운데)
+        $('#barcodeDiv > div:first-child').css({'margin':'0px auto'});
+    });
+</script>

@@ -1,0 +1,269 @@
+{*** [위젯] 정기배송 약관 선택 | goods/_goods_display.php ***}
+<link rel="stylesheet" type="text/css" href='../subscription/css/order.css'>
+<style>
+	#datepicker{
+    width: 100%;
+    height: 31px;
+    padding: 0 10px 0 10px;
+    font-size: 14px;
+    color: #333333;
+    background: #ffffff;
+    border: 1px solid #c3c3c3;
+    box-sizing: border-box;
+	}
+</style>
+<div class='order_subscription'>
+<h2 class="my_tit">정기배송 이용약관</h2>
+<div class="join_bx2">
+<div class='term_box'>
+    <div class='inner'>{=nl2br(subCfg.terms)}</div>
+     <div class='terms_agree inp_chk' style="position:static;margin:5px 15px;">
+        <input type='checkbox' id='agree_subscription' value='1' class="checkbox sp"><label for='agree_subscription'>정기배송 이용약관에 동의합니다.</label>
+     </div>
+     <div class='cr'></div>
+</div> <!-- terms_box -->
+
+<div class='selection_area'>
+    <div class='area_box area_box1 mb20'>
+        <div class='mtitle'>배송일 선택</div>
+        <div class='inner_box'>
+            <div class='rows rows1'>
+                <div class='cell cell1'>배송횟수</div>
+                <div class='cell cell2 inp_sel'>
+					<!--{ @subCfg.deliveryEa }-->
+					<span class='select_box inp_rdo'>
+						<input type="radio"  name='deliveryEa' class='deliveryEa' value="{.value_}" <!--{ ? .value_ == deliveryEa }--> checked<!--{ / }-->/>{.value_}회
+					</span>
+					 <!--{ / }-->
+                </div> <!-- cell -->
+            </div>
+            <div class='rows' style='margin-top: 1em;'>
+                <div class='cell cell1'>배송주기</div>
+                <div class='cell cell2'>
+                <!--{ @subCfg.period }-->
+                    <span class='select_box inp_rdo'>
+                    <!--{ @explode("_", .value_) }-->
+                        <!--{ ? ..index_ == 0 }-->
+                        <input type='radio' name='period' id='period_{.value_}' class='radio sp period' value='{.value_}'<!--{ ? .value_ ==  period }--> checked<!--{ / }-->>
+                        <label for='period_{.value_}' class='choice<!--{ ? .value_ ==  period }--> on<!--{ / }-->'>
+                            {..value_}<!--{ : ..index_ == 1 }--><!--{ ? ..value_ == 'week' }-->주<!--{ : }-->달<!--{ / }-->에 한번
+                        </label>
+                            
+                        <!--{ / }-->
+                    <!--{ / }-->
+                </span>
+               <!--{ / }-->
+                </div> <!-- cell -->
+            </div>
+
+
+			<input type="hidden" name="deliverydate" id="datepicker"  value="{=deliverydate}">
+            <div class='rows' style="margin-bottom: 1em;">
+			<!--{?autoExtendView!='y'}-->
+				<input type="hidden" name="autoExtend" value="0">
+			<!--{ : }-->
+                <div class='cell cell1'>자동연장</div-->
+                <div class='cell cell2'>
+				  <span class='select_box inp_rdo'>
+					<input type="radio" name="autoExtend" value="1" >사용
+				  </span>
+				  <span class='select_box inp_rdo'>
+					<input type="radio" name="autoExtend" value="0" checked>미사용
+				  </span>
+                </div> <!-- cell -->
+			<!--{ / }-->
+            </div>
+
+        </div> <!-- inner_box -->
+    </div> <!-- area_box -->
+    <div class='area_box area_box2'>
+        <div class='mtitle'>회차별 배송요약</div>
+        <div class='inner_box'>
+            <table cellpadding=0 cellspacing=0 width='100%' class='schedule_list_table'>
+                <thead>
+                <tr class='tr_head'>
+                    <td width='50'>회차</td>
+                    <td>결제일</td>
+                    <td>배송일</td>
+                    <td>상품금액</td>
+                </tr>
+                </thead>
+                <tbody>
+                 <!--{ @scheduleList }--> 
+                  <tr>
+                      <td>{.index_ + 1}회</td>
+                      <td>{=date("Y.m.d", .stamp)}</td>
+                      <td>{=date("Y.m.d", .delivery_stamp)}</td>
+                      <td>
+                           <!--{ ? .discount }-->
+                            <strike class='consumer'>{=number_format(.price)}</strike>→<span class='goodsPrice'>{=number_format(.price - .discount)}</span>
+                           <!--{ : }-->
+                           <span class='goodsPrice'>{=number_format(.price - .discount)}</span>
+                           <!--{ / }-->
+                      </td>
+                  </tr>
+                 <!--{ / }-->
+               </tbody>
+            </table>
+        </div> <!-- inner_box -->
+    </div> <!-- area_box -->
+</div> <!-- selection_area -->
+<!--{ ? subCfg.orderGuide }-->
+<div class='mtitle mtitle2 mt20'>정기배송 이용안내</div>
+<div class='guide_box'>{=nl2br(subCfg.orderGuide)}</div>
+<!--{ / }-->
+</div> <!-- join_bx2 -->
+</div> <!-- order_subscription -->
+
+
+<script>
+
+var disabledDays = [];
+{?disabled_date}
+	{@disabled_date}
+		disabledDays.push("{.value_}");
+	{/}
+{/}
+$(function() {
+    $(".order_subscription .deliveryEa, .order_subscription .period").click(function() {
+        updateScheduleList();
+    });
+
+
+	$( "#datepicker" ).datepicker({
+
+		showMonthAfterYear:true,
+		yearSuffix: "년",
+		closeText: '닫기',
+		showButtonPanel: true,
+		dateFormat: 'yy-mm-dd',
+		minDate: 0,
+		monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],	//한글 캘린더중 월 표시를 위한 부분
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],	//한글 캘린더 중 월 표시를 위한 부분
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],	//한글 캘린더 요일 표시 부분
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],	//한글 요일 표시 부분
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],	// 한글 요일 표시 부분	
+
+		onSelect: function(date) {
+			updateScheduleList()
+		 },
+		beforeShowDay: disableAllTheseDays
+		
+	});
+});
+var month_arr=[];
+
+function disableAllTheseDays(date) {
+	var day = date.getDay();
+
+	if(day == 0 || day == 6)
+	 return [false];
+
+    var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+	var month=m+1;
+
+		
+
+	var chk=0;
+
+	if($.inArray(m,month_arr)==-1){
+	
+		month_arr.push(m);
+
+		$.ajax({
+			url:"disabled_day.php",
+			method:"post",
+			async: false,
+			data:{year:y,month:month}
+		})
+		.done(function(data){
+			
+			if(data!=""){
+				var jdata = jQuery.parseJSON(data);
+				
+				for(var j=0;j<jdata.length;j++){
+					disabledDays.push(jdata[j]);
+				}
+				
+				for (var i = 0; i < disabledDays.length; i++) {
+					if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+						chk=1;
+					}
+				}
+			
+			}
+		
+		});
+
+		if(chk==1)
+		 return [false];
+		else
+		 return [true];
+
+	}else{
+		for (var i = 0; i < disabledDays.length; i++) {
+			if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+				return [false];
+			}
+		}	
+
+		 return [true];
+	}
+   
+}
+
+
+function updateScheduleList()
+{
+    var ea = $(".order_subscription .deliveryEa:checked").val();
+    var period = $(".order_subscription .period:checked").val();
+	var delivery_date =$("input[name='deliverydate']").val();
+
+    var cartSno = [];
+    $('input[name="cartSno[]"]').each(function(idx){
+       cartSno.push($(this).val());
+    });
+    if (typeof ea != "undefined" && ea != "" && typeof period != "undefined" && period != "") {
+        var html = "";
+        $.ajax({
+             url : "../subscription/ajax.php",
+             type : "post",
+             dataType : "json",
+             data : { mode : "getSchedule", ea : ea, period : period, cartSno : cartSno,hope_date:delivery_date },
+             async : false, 
+             success : function (data) {
+               if (data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        var d = data[i];
+                        var price = parseInt(d.price);
+                        if (isNaN(price))
+                            price = 0;
+                            
+                        var discount = parseInt(d.discount);
+                        if (isNaN(discount))
+                            discount = 0;
+                            
+                        html += "<tr>";
+                        html += "<td>" + (i + 1) + "회</td>";
+                        html += "<td>" + d.date + "</td>";
+                        html += "<td>"+ d.delivery_date + "</td>";
+                        html += "<td>";
+                        if (discount > 0)
+                            html += "<strike class='consumer'>" + numeral(price).format() + "</strike>→<span class='goodsPrice'>" + numeral(price - discount).format() + "</span>";
+                        else
+                           html += "<span class='goodsPrice'>" + numeral(price - discount).format() + "</span>";
+                       html += "</td>";
+                       html += "</tr>";
+                    }
+
+               }
+             },
+             error : function (res) {
+                console.log(res);
+             }
+         });
+         
+         $(".order_subscription .schedule_list_table tbody").html(html);
+     }
+}
+</script>

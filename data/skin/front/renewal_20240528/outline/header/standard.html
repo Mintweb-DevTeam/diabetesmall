@@ -1,0 +1,181 @@
+{*** 상단 기본파일 | main/index.php ***}
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCJ4N47"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="user_Id" style="display:none;">{=gSess.memId}</div>
+
+<div id="header">
+
+    <div class="header_top">
+        <div class="header_top_cont">
+
+			<h1 class="h1_logo">
+				<p class="dp-inblock"><!--{ @dataBanner('4238483832') }-->{.tag}<!--{ / }--></p>
+				<p class="dp-inblock ml10"><!--{ @dataBanner('2792407469') }-->{.tag}<!--{ / }--></p>
+			</h1>
+			<div class="top_com_box">
+				<ul class="clearfix">
+					<!--{ ? gd_is_login() === false }-->
+					<li>
+						<a href="../member/login.php">
+							<p><img src="../../img/icon/icon_login.jpg" alt="" /></p>
+							<p>로그인</p>
+						</a>
+					</li>
+					<li>
+						<a href="../member/join_method.php">
+							<p class="icon"><img src="../../img/icon/icon_join.jpg" alt="" /></p>
+							<p>회원가입</p>
+						</a>
+					</li>
+					<!--{ : }-->
+					<li>
+						<a href="../member/logout.php?returnUrl={=logoutReturnUrl}">
+							<p><img src="../../img/icon/icon_login.jpg" alt="" /></p>
+							<p>로그아웃</p>
+						</a>
+					</li>
+					<li>
+						<a href="../mypage/index.php">
+							<p><img src="../../img/icon/icon_join.jpg" alt="" /></p>
+							<p>마이페이지</p>
+						</a>
+					</li>
+					<!--{ / }-->
+					<li>
+						<a href="../order/cart.php">
+							<p><img src="../../img/icon/icon_cart.jpg" alt="" /></p>
+							<p>장바구니</p>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:coKakaoChannel()">
+							<p><img src="../../img/icon/icon_top_chat.png" alt="" /></p>
+							<p>채널추가</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- 멀티상점 선택 -->
+			{=includeWidget('proc/_global_select.html')}
+			<!-- 멀티상점 선택 -->
+
+		</div>
+		<!-- //header_top_cont -->
+	</div>
+	<!-- //header_top -->
+
+    <div class="header_gnb">
+
+		<div class="gnb">
+			<ul class="clearfix">
+				<li><a href="/">홈</a></li>
+				<li>
+					<a class="gnb_dp1" href="/main/html.php?htmid=service/goods_list.html">제품소개</a>
+					<ul class="gnb_dp2">
+						<li><a href="/goods/goods_list.php?cateCd=001">프리스타일 리브레 센서</a></li>
+<!--						<li><a href="../member/login.php">프리스타일 리브레 센서</a></li> -->
+						<li><a href="/main/html.php?htmid=product/pro02.html">프리스타일 리브레링크 앱</a></li>
+						<li><a href="/main/html.php?htmid=product/pro03.html">리브레뷰</a></li>
+					</ul>
+				</li>
+				<li>
+					<a class="gnb_dp1" href="/main/html.php?htmid=product/pro05.html">프리스타일 리브레 더 알아보기</a>
+					<ul class="gnb_dp2 more">
+<!-- 						<li><a href="/main/html.php?htmid=product/pro02.html">프리스타일 리브레링크 앱</a></li>   -->
+<!-- 						<li><a href="/main/html.php?htmid=product/pro04.html">CGM (연속 당 측정 시스템)은 무엇이 좋은가요?</a></li> -->
+						<li><a href="/main/html.php?htmid=product/pro05.html">프리스타일 리브레 센서의 혈당 측정 방법</a></li>
+						<li><a href="/main/html.php?htmid=product/pro06.html">의료 전문가와 진료 상담 전 준비하세요</a></li>
+						<li><a href="/main/html.php?htmid=product/pro07.html">프리스타일 리브레 센서 부착 가이드</a></li>
+					</ul>
+				</li>
+
+				<li>
+					<a  class="gnb_dp1" href="/main/html.php?htmid=product/pro08.html">영상보기</a>
+					<ul class="gnb_dp2">
+						<li><a href="/main/html.php?htmid=product/pro08.html">사용법 영상</a></li>
+						<li><a href="/main/html.php?htmid=product/pro09.html">광고 및 참고 영상</a></li>
+					</ul>
+				</li>
+				
+				<li>
+					<a  class="gnb_dp1" href="/main/html.php?htmid=service/insurance.html">건강보험 급여지원</a>
+					<ul class="gnb_dp2">
+						<li><a href="/main/html.php?htmid=service/insurance.html">건강보험 급여지원 안내</a></li>
+						<li><a href="/main/html.php?htmid=service/insurance_app.html">신청방법 및 서식 다운로드</a></li>
+						<li><a href="/main/html.php?htmid=service/insurance_guide.html">처방전 입력예시</a></li>
+						<li><a href="/main/html.php?htmid=service/blood_sugar_info.html">연속혈당정보 수집안내</a></li>
+						<li><a href="/main/html.php?htmid=proxyorder/proxy_purchase.html">임신성 당뇨 교육신청</a></li>
+					</ul>
+				</li>
+
+				<li>
+					<!-- a class="gnb_dp1" href="/main/html.php?htmid=service/insurance_01.html"--><a href="../proxyorder/proxy_service.php">대리청구서비스 </a>
+					
+					<ul class="gnb_dp2">
+						<li><!-- a href="/main/html.php?htmid=service/insurance_01.html">대리청구서비스 안내</a--><a href="../proxyorder/proxy_service.php">대리청구서비스 안내</a></li>
+						<!--<li><a href="/service/mandate_set.php">대리청구서비스 신청하기</a></li>-->
+						
+						<li><a href="/proxyorder/proxy_medical.php">대리청구 위임장 작성하기</a></li>
+					
+						<li><a href="/goods/goods_list.php?cateCd=002">대리청구 구매페이지</a></li>
+						
+						<!--2024 04.16 웹앤모바일 추가메뉴-->
+						<li><a href="/member/prescription_img_up.php">처방전 이미지 업로드</a></li>
+					</ul>
+				</li>
+
+				<li>
+					<a class="gnb_dp1" href="/main/html.php?htmid=service/faq_new.html">고객센터 </a>
+					<ul class="gnb_dp2">
+						<li><a href="/board/list.php?bdId=notice">공지사항</a></li>
+				<!-- 		<li><a href="/main/html.php?htmid=service/data.html">참고자료</a></li> -->
+						<li><a href="/main/html.php?htmid=service/faq_new.html">FAQ</a></li>
+						<li><a href="/board/write.php?&bdId=qa">문의사항</a></li>
+					</ul>
+				</li>
+				<!-- <li><a href="/main/html.php?htmid=service/event.html">이벤트</a></li> -->
+ 				<li class="cart"><a href="/goods/goods_list.php?cateCd=001"><i class="xi-cart-o xi-x xi-li"></i>제품구매</a></li>
+			</ul>
+		</div>
+		<!-- //gnb -->
+
+		<!-- //gnb_allmenu -->
+	</div>
+	<!-- //header_gnb -->
+</div>
+<!-- //header -->
+
+
+<div class="quick_wrap">
+<!-- 	<a href="../../main/html.php?htmid=product/pro10.html">
+		<img src="../../img/icon/icon_quick_3.png" alt="">
+	</a>
+ 	<div class="chat_quick">
+		<p style="text-align:center; padding-top:20px;"><a href="#."><img src="../../img/icon/ebo_logo.png" width="100px" alt="프리스타일 리브레"></a></p>
+		<p class="mt10"><a href="javascript:coKakaoChannel()" ><img src="../../img/icon/icon_quick_chat2.jpg" alt="카카오톡 채널"></a></p>
+	</div> -->
+	
+	
+	<!-- <a class="mt10" href="https://www.diabetesmall.co.kr/goods/goods_view.php?goodsNo=1000000061">
+		<img src="../../img/wm/start_side_banner.jpg" alt="">
+	</a> -->
+	<a class="mt10" href="https://www.diabetesmall.co.kr/board/view.php?&bdId=notice&sno=26">
+		<img src="../../img/icon/icon_quick_7.jpg" alt="">
+	</a>
+
+	<!-- <a class="mt10" href="https://www.diabetesmall.co.kr/board/view.php?&bdId=notice&sno=27">
+		<img src="../../img/icon/icon_quick_8.jpg" alt="">
+	</a> -->
+	
+
+	<a class="mt10" href="https://www.diabetesmall.co.kr/goods/goods_view.php?goodsNo=1000000076">
+		<img src="../../img/icon/icon_quick_5.jpg" alt="">
+	</a> 
+	
+ 	<a class="no mt10" href="javascript:coKakaoChannel()">
+		<img src="../../img/icon/icon_quick_4.jpg" alt="">
+	</a>
+</div>

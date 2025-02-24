@@ -1,0 +1,144 @@
+{*** 상단 기본파일 | main/index.php ***}
+<div id="header_wrap">
+	<header>
+		<div class="header_box">
+			<div class="h_logo"><!--{ @dataBanner('1865762709') }-->{.tag}<!--{ / }--></div> <!-- 로고 -->
+			<!-- 좌측 메뉴 -->
+			<ul class="left_menu">
+				<li><a href="#" class="side_menu"><span>{=__('메뉴')}</span></a></li>
+				<li><button class="top_search bn_srch"><span>{=__('검색')}</span></button></li>
+			</ul>
+			<!-- 우측 메뉴 -->
+			<ul class="right_menu">
+				<li><a href="../mypage/index.php" class="mypage"><span>=__('마이페이지')}</span></a></li>
+				<li>
+					<a href="../order/cart.php" class="cart"><span>=__('장바구니')}</span></a>
+					<span class="cart_count">{=dataCartGoodsCnt()}</span>
+				</li>
+			</ul>
+			<!-- 네비게이터 -->
+			<!--{ ? layout.current_page == 'y' && layout.page_name }-->
+			<div class="navi_g">
+				<ul>
+					<li>{=__('홈')}</li>
+					<!--{ ? gCurrentPageName == 'goods/goods_list' }-->
+					<li>{=dataCategoryPosition(cateCd,'</li>
+					<li>',cateType)}</li>
+					<!--{ : }-->
+					<li>{=layout.page_name}</li>
+					<!--{ / }-->
+				</ul>
+			</div>
+			<!--{ / }-->
+			<!--{ ? gCurrentPageName != 'main/index' }-->
+			<div class="sub_top">
+				<div class="sub_top_left">
+					<!--{ ? gReturnUrl }-->
+					<a href="{=gReturnUrl}" class="all_page_prev">{=__('이전')}</a>
+					<!--{ : }-->
+					<a href="{=gReferer}" class="all_page_prev js_bn_back">{=__('이전')}</a>
+					<!--{ / }-->
+				</div>
+				<h2><a href="#" class="js_page_reload "><!--{ ? gPageName }-->{=gPageName}<!--{:}-->{=layout.page_name}<!--{/}--></a></h2>
+				<!--{ ? (gCurrentPageName == 'board/list' || gCurrentPageName == 'mypage/mypage_qa' || gCurrentPageName == 'mypage/mypage_goods_qa' || gCurrentPageName == 'mypage/mypage_goods_review') && bdList.cfg.auth.write == 'y'}-->
+				<div class="sub_top_right2"><a href="../board/write.php?bdId={req.bdId}&mypageFl={req.mypageFl}&goodsNo={goodsView.goodsNo}&gboard=r&noheader=y" data-toggle="modal" data-target="#popupBoard" class="board_btn">{=__('글쓰기')}</a></div>
+				<!--{ / }-->
+				<!--{ ? gCurrentPageName == 'board/view' }-->
+				<div class="sub_top_right2"><a href="../board/list.php?bdId={req.bdId}&mypageFl={req.mypageFl}" class="board_btn">{=__('목록가기')}</a></div>
+				<!--{ / }-->
+				<!--{ ? gCurrentPageName == 'board/plus_review_article' || gCurrentPageName == 'board/plus_review_photo' || gCurrentPageName == 'board/plus_review_goods' }-->
+				<div class="sub_top_right2 btn_plus_review_register"><a href="../board/plus_review_popup_write.php?mode=addPopup" class="ogl_reviewrite" data-toggle="modal" data-target="#popupBoard">{=__('리뷰등록')}</a></div>
+				<!--{ / }-->
+			</div>
+			<!--{ / }-->
+		</div>
+	</header>
+</div>
+<!-- //header_wrap -->
+<nav>
+	<div class="bg"></div>
+	<div class="left_close"></div>
+	<div class="nav_bg_box">
+		<div class="nav_box">
+			<div class="nav_iscroll_box">
+				<div class="nav_content_box">
+					<div class="nav_language">
+						{=includeWidget('proc/_global_select.html')}
+					</div>
+					<!-- //nav_language -->
+					<div class="nav_banner">
+						<!--{ @dataBanner('569534203') }-->{.tag}<!--{ / }-->
+						<div class="nav_login">
+							<ul>
+								<!--{ ? gd_is_login() === false }-->
+								<li><a href="../member/login.php">{=__('로그인')}</a></li>
+								<li><a href="../member/join_method.php">{=__('회원가입')}</a></li>
+								<!--{ : }-->
+								<li><a href="../member/logout.php">{=__('로그아웃')}</a></li>
+								<li><a href="../mypage/index.php">{=__('마이페이지')}</a></li>
+								<!--{ / }-->
+							</ul>
+						</div>
+						<!--{ ? gd_is_login() === false }-->
+						<div class="left_logo"><!--{ @dataBanner('1865762709') }-->{.tag}<!--{ / }--></div>
+						<!--{ : }-->
+						<div class="login_txt">
+							{=__('%s님%s방문을 환영합니다.', '<p class="name"><strong>' + gd_get_login_name() + '</strong>', '</p>')}
+						</div>
+						<!--{ / }-->
+					</div>
+					<!-- //nav_banner -->
+					<div class="nav_link">
+						<ul>
+							<li><a href="../board/list.php?bdId=goodsqa">{=__('Q&A')}</a></li>
+							<li><a href="../goods/goods_today.php">{=__('최근본상품')}</a></li>
+							<li><a href="../mypage/wish_list.php">{=__('찜리스트')}</a></li>
+						</ul>
+					</div>
+					<!-- //nav_link -->
+					<div class="nav_category">
+						<div class="nav_tabmenu_box">
+							<ul class="nav_tabmenu">
+								<li class="on"><span>CATEGORY</span></li>
+								<li><span>BRAND</span></li>
+							</ul>
+							<div class="tab_menu0">
+								<div class="prd_cate">
+									{=includeWidget("proc/category_all.html",'cateType','category')}
+								</div>
+								<!-- //prd_cate -->
+							</div>
+							<!-- //tab_menu0 -->
+							<div class="tab_menu1" style="display:none;">
+								<a href="../goods/brand.php" class="btn_nav_brand_search">{=__('브랜드 검색')}</a>
+								<div class="brand_cate">
+									{=includeWidget("proc/category_all.html",'cateType','brand')}
+								</div>
+								<!-- //brand_cate -->
+							</div>
+							<!-- //tab_menu1 -->
+							<div class="nav_community_box">
+								<p class="comm_tit">COMMUNITY</p>
+								<ul class="board_cate">
+									<!--{ @defaultBoardList }-->
+									<li><a href="../board/list.php?bdId={.key_}">{=__(.value_)}</a></li>
+									<!--{/}-->
+									<li><a href="../service/faq_list.php">{=__('FAQ')}</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- //nav_content_box -->
+			</div>
+		</div>
+		<!-- //nav_box -->
+	</div>
+	<!-- //nav_bg_box -->
+</nav>
+<div id="container">
+	<div id="contents_wrap">
+
+
+
+

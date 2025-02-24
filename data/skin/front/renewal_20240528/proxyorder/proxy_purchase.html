@@ -1,0 +1,483 @@
+{*** 임신성 당뇨 교육신청 | proxyorder/proxy_purchase.php ***}
+{ # header }
+
+	<style>
+		.purchase-wrap{font-size:18px; color:#222; min-width:1100px;}
+		.purchase-wrap section {position:relative; box-sizing:border-box; overflow:hidden;}
+		.purchase-wrap h3 {font-size:34px; font-weight:600; color:#001389; margin-bottom:20px; }
+		.purchase-wrap h3 small {font-size:22px; font-weight:400; color:#222;}
+		.purchase-wrap input[type="radio"] {width:40px; height:40px; border:1px solid #ccc; border-radius:50%; outline:none; cursor: pointer;}
+		.purchase-wrap input[type="radio"]:checked {border:1px solid #222;}
+		.purchase-wrap .sec02 {background:#001389; color:#fff; padding:70px 20px;}
+		.purchase-wrap .sec02 .txt {text-align:center; font-size:36px; font-weight:400; line-height:1.4;}
+		.purchase-wrap .sec02 .txt > b {display:inline-block; position:relative;}
+		.purchase-wrap .sec02 .txt > b:before {content:""; display:block; width:5px; height:5px; border-radius:50%; background:#fff; position:absolute; top:-3px; left:50%; transform:translateX(-50%);}
+		.purchase-wrap .sec02 .txt > strong > span {color:#fcc007;}
+		.purchase-wrap .sec03 {padding:0 50px;}
+		.purchase-wrap .sec03:before {content:""; display:block; position:absolute; width:100%; height:180px; background:#001389; left:0; top:0; z-index:-1;}
+		.purchase-wrap .sec03 .inner {box-sizing:border-box; padding:50px 50px 80px; background:#f0f0f0; border-radius:20px;}
+		.purchase-wrap .sec03 .inner .group:not(:last-child) {margin-bottom:50px; padding-bottom:50px; border-bottom:1px solid #ccc;}
+		.purchase-wrap .sec03 .group01 ul li {position:relative; box-sizing:border-box; padding-left:15px; font-size:22px; margin-bottom:4px;}
+		.purchase-wrap .sec03 .group01 ul li:before {content:""; display:block; width:4px; height:4px; border-radius:50%; background:#222; position:absolute; top:15px; left:0;}
+		.purchase-wrap .sec03 .group01 .info {margin-top:0; font-size:22px; font-weight:600; color:#001389;}
+		.purchase-wrap .sec03 .group02 .top {display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:20px;}
+		.purchase-wrap .sec03 .group02 .top h3 {margin-bottom:0;}
+		.purchase-wrap .sec03 .group02 .top .t_r {text-align:right;}
+		.purchase-wrap .sec03 .group02 dl {display:flex; align-items:center;}
+		.purchase-wrap .sec03 .group02 dl:not(:last-child) {margin-bottom:20px;}
+		.purchase-wrap .sec03 .group02 dl dt {width:180px; font-size:22px;}
+		.purchase-wrap .sec03 .group02 dl dd {width:calc(100% - 180px);}
+		.purchase-wrap .sec03 .group02 dl dd input[type="text"] {width:100%; height:60px; box-sizing:border-box; padding:10px 15px; border:0; border-radius:10px; font-size:18px;}
+		.purchase-wrap .sec03 .group02 dl dd.raido-section {display:flex; align-items:center; gap:15px;}
+		.purchase-wrap .sec03 .group02 dl dd.raido-section > p {display:flex; align-items:center; gap:10px; font-size:20px;}
+		.purchase-wrap .sec03 .group03 .schedule {display:flex; flex-wrap:wrap; align-items:flex-start; gap:10px;}
+		.purchase-wrap .sec03 .group03 .schedule .in {width:calc(25% - 8px); text-align:center; font-size:22px; line-height:1.4;}
+		.purchase-wrap .sec03 .group03 .schedule .in p {margin-top:10px;}
+		.purchase-wrap .sec03 .group03 .schedule .in p > span {font-weight:600; color:#f00;}
+		.purchase-wrap .sec03 .group03 .info {margin-top:30px; text-align:center; font-size:22px; font-weight:600; color:#001389;}
+		.purchase-wrap .sec03 .group04 .box {box-sizing:border-box; padding:40px; border-radius:10px; background:#fff;}
+		.purchase-wrap .sec03 .group04 .box dl {display:flex; align-items:center;}
+		.purchase-wrap .sec03 .group04 .box dl dt,
+		.purchase-wrap .sec03 .group04 .box dl dd {font-size:22px; line-height:1.6; box-sizing:border-box;}
+		.purchase-wrap .sec03 .group04 .box dl dt {font-weight:600; width:210px; border-right:1px solid #000; }
+		.purchase-wrap .sec03 .group04 .box dl dd {padding-left:60px; width:calc(100% - 210px);}
+		.purchase-wrap .sec03 .group04 .agree {display:flex; align-items:center; gap:10px; margin-top:30px; font-size:22px;}
+		.purchase-wrap .sec03 .group04 .txt {margin-top:50px;}
+		.purchase-wrap .sec03 .group04 .txt h4 {font-size:20px; margin-bottom:5px;}
+		.purchase-wrap .sec03 .group04 .txt p {line-height:1.6;}
+		.purchase-wrap .sec03 .group04 .txt p.info {position:relative; margin-top:5px; padding-left:20px;}
+		.purchase-wrap .sec03 .group04 .txt p.info:before {content:"※"; display:block; position:absolute; left:0; top:0;}
+		.purchase-wrap .sec03 .group04 .btnArea {margin-top:40px; display:flex; justify-content:center;}
+		.purchase-wrap .sec03 .group04 .btnArea .btn-submit {display:flex; align-items:center; justify-content:space-between; box-sizing:border-box; font-size:34px; font-weight:600; line-height:1; background:#001389; color:#fff; text-align:center; padding:18px 40px; border-radius:10px;}
+		.purchase-wrap .sec03 .group04 .btnArea .btn-submit > i {font-size:30px;}
+		.purchase-wrap .sec04 {padding:80px 0; text-align:center;}
+		.purchase-wrap .sec04 .txt p {font-size:34px; font-weight:500; line-height:1.4;}
+		.purchase-wrap .sec04 .txt p > b {color:#001389;}
+		.purchase-wrap .sec04 .btnArea {margin-top:40px; display:flex; justify-content:center;}
+		.purchase-wrap .sec04 .btnArea .btn-more {display:flex; align-items:center; justify-content:space-between; box-sizing:border-box; font-size:28px; font-weight:600; line-height:1; background:#222; color:#fff; text-align:center; padding:16px 40px; border-radius:10px;}
+		.purchase-wrap .sec04 .btnArea .btn-more > i {font-size:26px;}
+		.modal-inner {box-sizing:border-box; padding:20px;}
+		.modal-inner .inner {text-align:center; padding:40px 0;}
+		.modal-inner .inner p {font-size:28px; font-weight:600;}
+		.modal-inner .inner .btn-close {display:inline-block; box-sizing:border-box; margin-top:20px; padding:10px 40px; font-size:18px; color:#222; border:1px solid #ccc; border-radius:40px; }
+	</style>
+	<div id="container">
+		<div class="purchase-wrap">
+			<section class="sec01">
+				<div class="img"><img src="./img/proxy_purchase_sec01_img-pc-1.jpg" alt="건강한 임신성 당뇨 관리" style="width:100%;"></div>
+			</section>
+			<section class="sec02">
+				<div class="txt">
+					임신 중 혈당 관리에 대한 궁금증, <b>한</b><b>번</b><b>에</b> 해결<br>
+					<strong>지금 바로 <span>교육을 신청</span>하시고,</strong><br>
+					<strong><span>프리스타일 리브레 2 센서를 무료로 체험</span>해보세요!</strong>
+				</div>
+			</section>
+			<section class="sec03">
+				<div class="inner">
+					<!--<form name="frm" >-->
+						<div class="group group01">
+							<h3>교육 내용 <small>(교육 시간 : 20분)</small></h3>
+							<ul>
+								<li>임신 중 당뇨병 이란?</li>
+								<li>임신 중 당뇨 대상 실시간 혈당 관리 방법 (연속혈당측정기 리브레2 센서 사용법)</li>
+								<li>국민건강보험 급여 지원 안내</li>
+							</ul>
+							<p class="info">* 교육 수강 후 무료 체험 신청 링크가 발송됩니다.</p>
+						</div>
+						<div class="group group02">
+							<div class="top">
+								<h3>교육신청하기</h3>
+								<p class="t_r">* 표시는 필수 항목입니다</p>
+							</div>
+							<dl>
+								<dt><label for="">* 성함</label></dt>
+								<dd><input type="text" id="userName" maxlength="50" /></dd>
+							</dl>
+							<dl>
+								<dt><label for="">* 연락처</label></dt>
+								<dd><input type="text" id="userHp" maxlength="15" placeholder="핸드폰 번호 숫자만 입력" /></dd>
+							</dl>
+							<dl>
+								<dt><label for="">* E-mail</label></dt>
+								<dd><input type="text" id="userEmail" maxlength="100" /></dd>
+							</dl>
+							<dl>
+								<dt><label for="">* 교육신청경로</label></dt>
+								<dd class="raido-section">
+									<p><input type="radio" id="signUpPath1" name="signUpPath" value="009001" /> <label for="signUpPath1">마미톡</label></p>
+									<p><input type="radio" id="signUpPath2" name="signUpPath" value="009002" /> <label for="signUpPath2">맘스 다이어리</label></p>
+									<p><input type="radio" id="signUpPath3" name="signUpPath" value="009003"  /> <label for="signUpPath3">베이비 빌리</label></p>
+									<p><input type="radio" id="signUpPath4" name="signUpPath" value="009004" /> <label for="signUpPath4">아델라 팝업</label></p>
+									<p><input type="radio" id="signUpPath5" name="signUpPath" value="009005"/> <label for="signUpPath5">기타</label></p>
+								</dd>
+							</dl>
+						</div>
+						<div class="group group03">
+							<h3>교육 스케줄</h3>
+							<div class="schedule">
+								<!--
+								<div class="in">
+									<input type="radio">
+									<p>
+										1월 17일 (금)<br>
+										오후 12시 ~ 12시 20분
+									</p>
+								</div>
+								<div class="in">
+									<input type="radio">
+									<p>
+										1월 20일 (월)<br>
+										오후 4시 ~ 4시 20분
+									</p>
+								</div>
+								<div class="in">
+									<input type="radio">
+									<p>
+										1월 24일 (금)<br>
+										오후 12시 ~ 12시 20분
+									</p>
+								</div>
+								<div class="in">
+									<input type="radio">
+									<p>
+										1월 27일 (월)<br>
+										오후 4시 ~ 4시 20분
+									</p>
+								</div>
+								-->
+							</div>
+							<div class="info">* 해당 교육은 온라인으로 진행됩니다.<br>교육 신청 완료 후 온라인 교육 참석 안내 문자가 발송됩니다.</div>
+						</div>
+						<div class="group group04">
+							<h3>개인정보 수집 및 이용에 대한 안내</h3>
+							<div class="box">
+								<dl>
+									<dt>항목</dt>
+									<dd>성명, 연락처, E-mail</dd>
+								</dl>
+								<dl>
+									<dt>수집 목적</dt>
+									<dd>이용자 식별 및 본인 여부 확인</dd>
+								</dl>
+								<dl>
+									<dt>보유 및 이용 기간</dt>
+									<dd>프로그램 종료 후 2년까지</dd>
+								</dl>
+							</div>
+							<div class="agree">
+								<input type="radio" id="checkPersonInfo" />
+								<p><label for="checkPersonInfo">개인정보 수집 및 이용에 동의합니다.</label></p>
+							</div>
+							<div class="txt">
+								<h4>개인정보 처리 업무 위탁 내역</h4>
+								<p>
+									<b>[ 위탁 업무 ]</b> 개인정보 수집 및 처리 등<br>
+									<b>[ 위탁 목적 ]</b>프리스타일 리브레 교육 프로그램 서비스 제공<br>
+									<b>[ 수탁자 ]</b><br>
+									메디플래너(주) 서울시 송파구 법원로 128 SK V1 GL 메트로시티 B동 501호<br>
+									교육 신청 및 이벤트 문의 : 1661 - 5427, 상담 시간 평일 오전 9시 ~ 오후 6시 (점심 시간 12시 ~ 1시 제외)<br>
+								</p>
+								<p class="info">위의 개인정보 수집 이용에 대한 동의를 거부할 권리가 있습니다. <br>그러나 동의를 거부할 경우 원활한 프로그램 운용을 할 수 없어 프로그램 이용에 제한을 받을 수 있습니다.</p>
+							</div>
+							<div class="btnArea">
+								<button type="button" class="btn-submit" onclick="f_Application()">온라인 교육 신청하기 <i class="xi-angle-right"></i></button><!--data-toggle="modal" data-target="#myModal"-->
+							</div>
+						</div>
+					<!--</form>-->
+				</div>
+			</section>
+			<section class="sec04">
+				<div class="txt">
+					<p>
+						24년도 11월부터 <b>임신 중 당뇨병 환자</b>에 대한<br>
+						<b>건강보험 급여 지원이 확대</b>되었습니다!
+					</p>
+					<div class="btnArea">
+						<a href="https://www.diabetesmall.co.kr/main/html.php?htmid=service/insurance.html" class="btn-more">더 알아보기 <i class="xi-angle-right"></i></a>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+		<div class="modal-inner">
+			<button type="button" class="close" data-dismiss="modal" onclick="$('#myModal').hide()">&times;</button>
+			<div class="inner">
+				<p>교육 신청이 완료되었습니다.</p>
+				<button type="button" class="btn-close" data-dismiss="modal" onclick="$('#myModal').hide()" >확인</button>
+			</div>
+		</div>
+    </div>
+  </div>
+</div>
+<!--
+	<div id="footer_wrap">
+	<!-- footer_con01 ->
+	<div class="footer_con01">
+		<h3>고객지원</h3> </br></br></br></br>
+		<ul class="clearfix">
+			<li>
+				<div class="item">
+					<p><img src="../img/main/main_sec06_img01.gif" alt="" /></p>
+					<h4>FAQ</h4>
+					<p class="tx1">자주하는 질문으로 프리스타일<br /> 시스템에 대해 더 알아보십시오</p>
+					<p class="more"><a href="/main/html.php?htmid=service/faq_new.html">더 알아보기</a></p>
+				</div>
+			</li>
+			<li>
+				<div class="item">
+					<p><img src="../img/main/main_sec06_img02.gif" alt="" /></p>
+					<h4>고객 서비스</h4>
+					<p class="tx1">도움이 필요하시다면 <br />
+						프리스타일 리브레 고객서비스 <br />
+						팀에게 문의하십시오 
+					</p>
+					<div class="tx2">
+						<strong>AS 및 제품관련 문의</strong>
+						<br /><a href="tel:080-014-5757" style="color:#666">080-014-5757</a>
+						<br />ADC-CS.KR@abbott.com
+						<br>월요일-금요일, 오전 09:00-오후 06:00
+						<br>(토요일·일요일·공휴일 휴무)
+					</div>
+					<div class="tx2">
+						<strong>제품 구매 및 배송관련 문의</strong>
+						<br /><a href="tel:02-6451-0040" style="color:#777">02-6451-0040</a>
+						<br />contact@adelaltd.co.kr
+						<br />월요일-금요일, 오전 09:00-오후5:30
+						<br />점심시간 12:00~13:00 
+						<br />(토요일·일요일 ·공휴일 휴무)
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="item">
+					<p><img src="../img/main/main_sec06_img03.gif" alt="" /></p>
+					<h4>리브레케어 멤버십</h4>
+					<p class="tx1">리브레 멤버십에 등록 후 <br />
+						프리스타일 리브레 센서를 구매하세요!</p>
+					<p class="more"><a href="/member/co_join_stepa.php">등록하기</a></p>
+				</div>
+			</li>
+		</ul>
+		
+	</div>
+	</div>
+-->
+<div class="mt20 mb20 pl10">ADC-106010 v2.0</div>
+{ # footer }
+
+<script type="text/javascript" src="/data/js/sha512.js"></script>
+<script type="text/javascript">
+$(function () {
+	// 교육일정 표시
+	f_viewSchedule();
+});
+
+// 교육일정 표시
+function f_viewSchedule() {
+	jQuery.ajax({
+		type : 'GET',
+		url : 'https://www.medi-planner.com/_api/_v1/_gdm/_education/available-dates.asp',
+		dataType : 'json',
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("apiKey", "Q20fVMza4MncMgHA9Wjm");
+			xhr.setRequestHeader("content-type","application/json");
+		},
+		error: function(xhr, status, error) {
+			console.log(error);
+		},
+		success : function(response) {
+			/*
+				response
+				{
+					"statusCode": 200,
+					"errorCode": 0,
+					"result": {
+						"scheduleInfo": [
+							{
+							  "educationDate": "2025-01-15",
+							  "educationTime": "예약불가",
+							  "educationWeek": "(수)"
+							},
+							{
+							  "educationDate": "2025-01-17",
+							  "educationTime": "오후12시~12시 20분",
+							  "educationWeek": "(금)"
+							}
+						]
+					}
+				}
+			*/
+//			console.log(JSON.stringify(response,null,2));
+			if( response.statusCode == "200" && response.result.scheduleInfo && response.result.scheduleInfo.length > 0 ) {
+				let scheduleHTML = "";
+				for( var i = 0; i < 4 ; i++ ) { // response.result.scheduleInfo.length
+					if( response.result.scheduleInfo[i].educationTime != "예약불가" ) {
+						scheduleHTML	+= '<div class="in">'
+										+ 	'<input type="radio" name="reqDateTime" value="' + response.result.scheduleInfo[i].educationDate + '|' + response.result.scheduleInfo[i].educationTime + '" >'
+										+ 	'<p>'
+										+	response.result.scheduleInfo[i].educationDate + ' ' + response.result.scheduleInfo[i].educationWeek + '<br>' + response.result.scheduleInfo[i].educationTime
+										+	'</p>'
+										+ '</div>'
+						;
+					} else {
+						scheduleHTML	+= '<div class="in">'
+										+ 	'<input type="radio" name="reqDateTime" value="" disabled >'
+										+ 	'<p>'
+										+	response.result.scheduleInfo[i].educationDate + ' ' + response.result.scheduleInfo[i].educationWeek + '<br>' + '<span>예약불가</span>'
+										+	'</p>'
+										+ '</div>'
+						;
+					}
+//					console.log(response.result.scheduleInfo[i].educationDate);
+//					console.log(response.result.scheduleInfo[i].educationWeek);
+//					console.log(response.result.scheduleInfo[i].educationTime);
+				}
+				$(".schedule").html(scheduleHTML);
+			}
+//			console.log(response.result.scheduleInfo.length);
+//			console.dir("[response.result.scheduleInfo]" + JSON.stringify(response.result.scheduleInfo,null,2));
+		}
+	});
+}
+
+// 교육신청가능여부 확인
+function f_checkApplication() {
+	var hpCipher = hex_sha512("Vo4YzlGm12" + $("#userHp").val().trim().replaceAll("-",""));
+//	console.log("hpCipher============" + hpCipher);
+	jQuery.ajax({
+		type : 'GET',
+		url : 'https://www.medi-planner.com/_api/_v1/_gdm/_education/_applications/check-existing.asp',
+		dataType : 'json',
+		data : {
+			"hp" : $("#userHp").val().trim().replaceAll("-",""),
+			"hpCipher" : hpCipher
+        },
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("apiKey", "Q20fVMza4MncMgHA9Wjm");
+			xhr.setRequestHeader("content-type","application/json");
+		},
+		error: function(xhr, status, error) {
+			console.log("error:" + error);
+		},
+		success : function(response) {
+			/*
+				response
+				{
+					"statusCode"      : 200,
+					"errorCode"       : 0,
+					"registrantCode"  : 0,
+					"message"         : "'리브레  케어' 이용  이력이  없습니다. 등록이  가능합니다."
+				}
+			*/
+			console.log("response:::" + JSON.stringify(response,null,2))
+			if( response.statusCode == "200" && response.registrantCode == 0 ) { // 등록 가능
+				alert("등록 가능합니다.");
+			} else if( response.statusCode == "200" && response.statusCode == 1 ) { // 중복 신청
+				alert("이미 신청 정보가 있습니다. 확인 부탁드립니다.");
+			}
+		}
+	});
+}
+
+// 교육 신청
+function f_Application() {
+	if( !f_ApplicationValid() )	return;
+
+	let reqDateTime = $('input:radio[name="reqDateTime"]:checked').val().split("|"); // ex) 2025-01-17|오후12시~12시 20분
+	let educationDate = reqDateTime[0];
+	let educationTime = reqDateTime[1].split("~")[0]; // ex) 오후12시~12시 20분
+
+	var hpCipher = hex_sha512("Vo4YzlGm12" + $("#userHp").val().trim().replaceAll("-",""));
+
+//	console.log("signUpPath:::" + $('input:radio[name="signUpPath"]:checked').val());
+	jQuery.ajax({
+		type : 'POST',
+		url : 'https://www.medi-planner.com/_api/_v1/_gdm/_education/applications.asp',
+		dataType : 'json',
+		data : JSON.stringify({
+			"name" : $("#userName").val().trim(),
+			"hp" : $("#userHp").val().trim().replaceAll("-",""),
+			"hpCipher" : hpCipher,
+			"email" : $("#userEmail").val().trim(),
+			"educationDate" : educationDate,
+			"educationTime" : educationTime,
+			"signUpPath" : $('input:radio[name="signUpPath"]:checked').val()
+        }),
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("apiKey", "Q20fVMza4MncMgHA9Wjm");
+			xhr.setRequestHeader("content-type","application/json");
+		},
+		error: function(xhr, status, error) {
+			console.log("error:" + error);
+		},
+		success : function(response) {
+			/*
+				response
+				{
+					"statusCode"      : 200,
+					"errorCode"       : 0,
+					"registrantCode"  : 0,
+					"message"         : "온라인 교육신청이 완료되었습니다."
+				}
+			*/
+			console.log("response:::" + JSON.stringify(response,null,2));
+			if( response.statusCode == "200" && response.registrantCode == 0 ) { // 등록 완료
+				$('#myModal').show();
+				return;
+				//alert("등록완료!");
+			} else if( response.statusCode == "200" && response.statusCode == 1 ) { // 중복 신청
+				alert("이미 신청 정보가 있습니다. 확인 부탁드립니다.");
+			}
+		}
+	});
+}
+
+// 교육 신청 입력값 검증
+function f_ApplicationValid() {
+
+	if( $("#userName").val().trim() == "" ) {
+		alert("성함을 입력하세요.");
+		return false;
+	}
+	if( $("#userHp").val().trim() == "" ) {
+		alert("연락처를 입력하세요.");
+		return false;
+	}
+	if( $("#userEmail").val().trim() == "" ) {
+		alert("E-mail을 입력하세요.");
+		return false;
+	}
+	if( $('input:radio[name="signUpPath"]:checked').val() == undefined ) {
+		alert("교육 신청경로를 선택하세요.");
+		return false;
+	}
+	if( $('input:radio[name="reqDateTime"]:checked').val() == undefined ) {
+		alert("교육 스케줄을 선택하세요.");
+		return false;
+	}
+//	console.log("checkPersonInfo [" + document.getElementById('checkPersonInfo').checked + "]");
+	if( !document.getElementById('checkPersonInfo').checked ) {
+		alert("개인정보 수집 및 이용에 동의를 해주세요.");
+		return false;
+	}
+	
+//	console.log("userName [" + $("#userName").val().trim() + "]");
+//	console.log("userHp [" + $("#userHp").val().trim().replaceAll("-","") + "]");
+//	console.log("userEmail [" + $("#userEmail").val().trim() + "]");
+	return true;
+}
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {			
+        $("#userHp").keyup(function() {
+            var replace_text = $(this).val().replace(/[^-0-9]/g, '');
+            $(this).val(replace_text);
+        });
+    });
+</script>

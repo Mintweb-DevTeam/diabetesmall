@@ -1,0 +1,55 @@
+{*** 기존회원 양식 | qrcode/mem_agree.html ***}
+{ # header }
+<section>
+	<iframe name="frm_" style="display: none"></iframe>
+	<form id="frm" action="./old_mem_agree_ps.php" method="post" target="frm_">
+	<ul>
+		<li>
+			<span>전화번호</span><input name="cellPhone" type="tel" >
+		</li>
+		<li>
+			<button type="button" id="request" onClick="getPassNum()">인증번호 요청</button>
+		</li>
+	</ul>
+	</form>
+</section>
+<section>
+	<ul>
+		<li>
+			<span>인증번호</span><input name="passNum" type="text" >
+		</li>
+		<li>
+			<button type="button" onClick="checkPass()" id="submit" disabled>확인</button>
+		</li>
+	</ul>
+</section>
+<script>
+$(function(){
+	$.cookie('memNm', null, {expires:0});
+	$.cookie('memId', null, {expires:0});
+	$.cookie('cellPhone', null, {expires:0});
+});
+var pass_num = null;
+function getPassNum(){
+	if( !$('input[name="cellPhone"]').val() ){
+		alert('전화번호는 필수 입니다.');
+		return;
+	}
+	pass_num = get_pass_num( $('input[name="cellPhone"]').val() );
+	console.log(pass_num);
+	$('#submit').prop('disabled', false);
+}
+function checkPass(){
+	if(!pass_num){
+		alert('인증번호를 요청해 주세요');
+		return;
+	}
+	if( pass_num != $('input[name="passNum"]').val() ){
+		alert('인증번호가 다릅니다.');
+		return;
+	}
+	$('#frm').submit();
+}
+</script>
+
+{ # footer }

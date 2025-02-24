@@ -1,0 +1,43 @@
+{*** 회원가입 > 애보트 완료 | main/html.php?htmid=member/complete.html ***}
+{ # header }
+<div class="content_box">
+	<div class="join_agreement_wrap">
+		<div class="member_tit">
+			<h2>{=__('회원가입')}</h2>
+			<ol>
+				<li><span>01</span> {=__('애보트인증')}<span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+				<li><span>02</span> {=__('약관동의')}<span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+				<li class="page_on"><span>03</span> {=__('동의완료')}<span><img src="../img/member/icon_join_step_on.png" alt=""></span></li>
+				<li><span>04</span> {=__('정보입력')}<span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+				<li><span>05</span> {=__('가입완료')}</li>
+			</ol>
+		</div>
+		<!-- //member_tit -->
+		<div class="adela_member_cont">
+
+			<div class="container">
+				<h3 class="mem_title mb20 lineH12 mb50">freestyle librecare membership</h3>
+
+				<div class="mb50">
+					<img src="../img/qrcode/test-img_01.jpg" alt="test-img_01" class="test-img_01">
+				</div>
+
+				<div class="form-wrap">
+					<p class="fs26 fcGray7 lineH12 mb30">welcome to freestyle librecare!</p>
+					<h4 class="fs26 fcGray7 lineH12 mb30 fw600">You have agreed to the Terms &#38; Conditions.</h4>
+					<ul class="complete-ul fs26 mb40">
+						<li>Name : {post.memNm}</li>
+						<li>Email : {post.memId}</li>
+						<li>Handphone : {post.cellPhone}</li>
+					</ul>
+					<a href="{url}" class="continue btn btn-orange btn-lg">continue to e-shop registration</a>
+				</div>
+			</div>
+
+		</div>
+		<!-- //member_cont -->
+	</div>
+	<!-- //join_agreement_wrap -->
+</div>
+<!-- //content_box -->
+{ # footer }

@@ -1,0 +1,350 @@
+{*** 회원로그인 | member/login.php ***}
+{ # header }
+
+<style>
+.youcan{display:none;}
+</style>
+
+<div class="login">
+	<div class="login_box">
+		<form id="formLogin" name="login_form" action="<!--{= loginActionUrl}-->" method="post">
+			<fieldset>
+				<div class="text-center mb20">
+					<a href="../main/index.php">
+						<img src="/data/skin/mobile/moment/img/banner/6cdf6f753e98a6f10f1c55bbb9a284eb_65847.png" alt="로그인 로고" title="로그인 로고" style="width:100px;">	
+					</a>
+				</div>	
+
+				<div class="member_login_box">
+	
+				<legend>{=__('로그인 영역')}</legend>
+				{?return_url}
+					<input type="hidden" id="returnUrl" name="returnUrl" value="{return_url}{=session_param}"/>
+				{:}
+					<input type="hidden" id="returnUrl" name="returnUrl" value="{returnUrl}{?strpos(returnUrl,'\?')===false}?{/}{=session_param}"/>
+				{/}
+				<input type="hidden" name="close" value=""/>
+				<input type="hidden" name="saveFlag" value="{data.saveFlag}"/>
+				<input type="hidden" id="mode" name="mode" value="{modeLogin}"/>
+				<!-- 21-11-03 웹앤모바일 패치 -->
+				<input type="hidden" id="isMyapp" name="isMyapp" value="{isMyapp}"/>
+				<input type="hidden" id="secretKey" name="secretKey" value="{secretKey}"/>
+				<input type="hidden" id="encryptFl" name="encryptFl" value="Y"/>
+				<!-- 21-11-03 웹앤모바일 패치 -->
+					<dl>
+						<h4 class="fcGray6 fw600 fs14 mb10 mt10">이메일</h4>
+						<dt><label for="loginId" class="fcGray6 fw600 fs14 mb10">{=__('이메일')}</label></dt>
+						<dd><input type="text" id="loginId" name="loginId" value="{data.loginId}" placeholder="{=__('')}" class="form-control"></dd>
+					</dl>
+					<dl class="mb20">
+						<h4 class="fcGray6 fw600 fs14 mb10 mt10">비밀번호</h4>
+						<dt><label for="loginPwd">{=__('비밀번호')}</label></dt>
+						<dd><input type="password" placeholder="{=__('')}" id="loginPwd" name="loginPwd" value="{data.loginPwd}" class="form-control"></dd>
+					</dl>
+
+					<div class="inp_chk">
+						<input type="checkbox" id="saveId" name="saveId" value="y" <!--{? !empty(data.loginId) }checked="checked"{/}-->/>
+						<label for="saveId">{=__('아이디 저장')}</label>
+					</div>
+
+					<div class="submit text-center">
+						<button type="submit" class="btn-blue btn wp100 mb10">{=__('로그인')}</button>
+						<a href="../member/find_password.php">{=__('비밀번호를 잊으셨나요?')}</a>
+					</div>		
+					
+					<div class="text-center mt40">
+						<p class="fs13 text-center fcGray4 dp-inblock clearfix">
+							<span class="pull-left mr20 mt05">	아직 아델라 회원이 아니신가요? </span>
+							<a href="../member/co_join_stepa.php" id="btnJoinMember" class="btn btn-gray2 btn-sm w100 fs14">{=__('회원가입')}</a>
+						</p>
+					</div>
+
+
+					
+				</div>
+				<!-- //login_box -->
+
+			</fieldset>
+		</form>
+		<!--{ ? usePaycoLogin || useFacebookLogin || useNaverLogin || useKakaoLogin || useWonderLogin }-->
+		<ul class="sns_login">
+			<!--{ ? usePaycoLogin }-->
+			<li class="payco js_btn_payco_login"><img src="../img/etc/txt_mo_payco.png" alt="{=__('PAYCO')} {=__('아이디 로그인')}"></li>
+			<!--{ / }-->
+			<!--{ ? useFacebookLogin }-->
+			<li class="facebook js_btn_facebook_login" data-facebook-url="{=facebookUrl}"><img src="../img/etc/txt_mo_facebook.png" alt="{=__('FACEBOOK')} {=__('아이디 로그인')}"></li>
+			<!--{ / }-->
+			<!--{ ? useNaverLogin }-->
+			<li class="naver js_btn_naver_login"><img src="../img/etc/txt_mo_naver.png" alt="{=__('네이버')} {=__('아이디 로그인')}" /></li>
+			<!--{ / }-->
+			<!--{ ? useKakaoLogin }-->
+			<li class="kakao js_btn_kakao_login" data-return-url="{=kakaoReturnUrl}"><img src="../img/etc/txt_mo_kakao.png" alt="{=__('카카오')}  {=__('아이디 로그인')}"></li>
+			<!--{ / }-->
+			<!--{ ? useWonderLogin }-->
+			<li class="wonder js_btn_wonder_login" data-wonder-type="login" data-wonder-url="{=wonderReturnUrl}"><img src="../img/etc/txt_mo_wonder.png" alt="{=__('위메프')}  {=__('아이디로 로그인')}"></li>
+			<!--{ / }-->
+		</ul>
+		<!-- //sns_login -->
+		<!--{ / }-->
+
+		<!-- //login_find -->
+	</div>
+	<!-- //login_box -->
+	<div class="guest_order_box">
+		<!--{ ? isMemberOrder == false }-->
+		<p class="guest_txt">
+			<strong>{=__('비회원 주문')}</strong>
+		</p>
+		<!--  //guest_txt -->
+		<form action="../member/member_ps.php" method="post">
+			<fieldset>
+				<legend>{=__('비회원 주문하기')}</legend>
+				<input type="hidden" name="mode" value="guest">
+				<input type="hidden" name="returnUrl" value="{returnUrl}">
+				<button type="submit" class="member_login_order_btn"> {=__('비회원 주문하기')}</button>
+			</fieldset>
+		</form>
+		<!--{ / }-->
+		<!--{ ? isMemberOrder == false }-->
+		<p class="guest_txt">
+			<strong>{=__('비회원 주문조회')}</strong>
+			<span>{=__('주문자 이름과 주문 번호를 입력해주세요')}</span>
+		</p>
+		<!-- //guest_txt -->
+		<form id="formOrderLogin" name="login_form" action="../member/member_ps.php" method="post">
+			<fieldset>
+				<legend>{=__('주문조회 영역')}</legend>
+				<input type="hidden" name="mode" value="guestOrder">
+				<input type="hidden" name="returnUrl" value="../mypage/order_view.php">
+				<dl>
+					<dt><label for="orderNm">{=__('주문자 이름')}</label></dt>
+					<dd><input type="text" id="orderNm" name="orderNm" value="" maxlength="12" title="{=__('주문자명')}" required="required" msgr="{=__('주문자명을 입력하세요.')}" placeholder="{=__('주문자명')}"></dd>
+				</dl>
+				<dl>
+					<dt><label for="orderNo">{=__('주문번호')}</label></dt>
+					<dd><input type="text" id="orderNo" name="orderNo" maxlength="34" title="{=__('주문번호')}" required="required" msgr="{=__('주문번호를 입력하세요.')}" placeholder="{=__('주문번호')}" data-max-length="{=orderNoMaxLength}"></dd>
+				</dl>
+				<button type="submit" class="member_login_order_btn">{=__('주문 조회')}</button>
+			</fieldset>
+		</form>
+		<!--{ / }-->
+	</div>
+	<!-- //guest_order_box -->
+</div>
+<script type="text/javascript" src="../js/jquery/jquery.serialize.object.js"></script>
+<script type="text/javascript">
+    var $formLogin;
+    //21-11-03 웹앤모바일 패치
+	var isMyapp = $('#isMyapp').val();
+
+
+	/**
+	 * 로그인 정보 암호화 처리
+	 */
+
+	var Encryption = {
+		get encryptMethod() {
+			return 'AES-256-CBC';
+
+		},
+
+		get encryptMethodLength() {
+			var encryptMethod = this.encryptMethod;
+			var aesNumber = encryptMethod.match(/\d+/)[0];
+			return parseInt(aesNumber);
+
+		},
+
+
+		encrypt : function (string, key) {
+			var iv = CryptoJS.lib.WordArray.random(16);
+			var salt = CryptoJS.lib.WordArray.random(256);
+			var iterations = 999;
+			var encryptMethodLength = (this.encryptMethodLength/4);
+			var hashKey = CryptoJS.PBKDF2(key, salt, {'hasher': CryptoJS.algo.SHA512, 'keySize': (encryptMethodLength/8), 'iterations': iterations});
+			var encrypted = CryptoJS.AES.encrypt(string, hashKey, {'mode': CryptoJS.mode.CBC, 'iv': iv});
+			var encryptedString = CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
+
+			var output = {
+				'ciphertext': encryptedString,
+				'iv': CryptoJS.enc.Hex.stringify(iv),
+				'salt': CryptoJS.enc.Hex.stringify(salt),
+				'iterations': iterations
+			};
+
+			return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(JSON.stringify(output)));
+		}
+	}
+
+	/**
+	 * form serialize 값 변경
+	 *
+	 * @param values 폼명
+	 * @param k 변경할 inputName
+	 * @param v 변경할 inputValue
+	 */
+	function changeSerialize(values, k, v) {
+		var found = false;
+		for (i = 0; i < values.length && !found; i++) {
+			if (values[i].name == k) {
+				values[i].value = v;
+				found = true;
+			}
+		}
+
+		if (!found) {
+			values.push({name: k,value: v});
+		}
+		return values;
+	}
+
+
+
+
+	//21-11-03 웹앤모바일 패치
+
+	$(document).ready(function () {
+        var order_no_max_length = $('input[name=orderNo]').data('max-length');
+        $formLogin = $('#formLogin');
+        $formLogin.validate({
+            dialog: false,
+            rules: {
+                loginId: {
+                    required: true
+                },
+                loginPwd: {
+                    required: true
+                }
+            },
+            messages: {
+                loginId: {
+                    required: "{=__('아이디를 입력해주세요')}"
+                },
+                loginPwd: {
+                    required: "{=__('패스워드를 입력해주세요')}"
+                }
+            }, submitHandler: function (form) {
+				
+								
+				// 로그인 정보 암호화 처리 (보안이슈)
+				var encryptLoginId = Encryption.encrypt($('#loginId').val(),$('#secretKey').val());
+				var encryptLoginPwd = Encryption.encrypt($('#loginPwd').val(),$('#secretKey').val());
+
+				if (isMyapp) {
+					$('#loginId').val(encryptLoginId);
+					$('#loginPwd').val(encryptLoginPwd);
+					form.target = 'ifrmProcess';
+					form.submit();
+				} else {
+					$('.member_login_btn').attr('disabled', true);
+					if (window.location.search) {
+						var _tempUrl = window.location.search.substring(1);
+						var _tempVal = _tempUrl.split('=');
+
+						if (_tempVal[1] == 'lnCouponDown') {
+							$('input[name=returnUrl]').val(document.referrer);
+						}
+					}
+					
+
+					var params = $(form).serializeArray();
+					
+
+					params = changeSerialize(params, 'loginId', encryptLoginId); // 암호화 된 아이디로 변경
+					params = changeSerialize(params, 'loginPwd', encryptLoginPwd); // 암호화 된 패스워드로 변경
+					$.post('../member/login_ps.php', params).done(function (data) {
+						var code = data.code;
+						var message = data.message;
+						var url = data.url;
+						
+					
+						if (_.isUndefined(code) && _.isUndefined(message)) {
+							var returnUrl = '{=urldecode(returnUrl)}';
+							
+							//2024.11.25웹앤모바일 시작
+							{?return_url}
+								returnUrl="{=return_url}";
+								
+								
+							{/}	
+														
+							if (returnUrl.indexOf('?') !== -1) {
+								returnUrl+="{=session_param}";
+							}else{
+								returnUrl+="?{=session_param}";
+							}
+							//2024.11.25웹앤모바일 종료
+						
+							if (_.isEmpty(returnUrl)) {
+								location.href = '/';
+							} else {
+								window.location.href = returnUrl;
+							}
+						} else {
+							alert(message);
+							if (_.isUndefined(url) === false) {
+								location.href = url;
+							}
+						}
+						$('.member_login_btn').attr('disabled', false);
+					});
+				}
+
+            }
+        });
+
+        // 비회원 주문조회 폼 체크
+        $('#formOrderLogin').validate({
+            rules: {
+                orderNm: 'required',
+                orderNo: {
+                    required: true,
+                    number: true,
+                    maxlength: order_no_max_length
+                }
+            },
+            messages: {
+                orderNm: {
+                    required: "{=__('주문자명을 입력해주세요.')}",
+                },
+                orderNo: {
+                    required: "{=__('주문번호를 입력해주세요.')}",
+                    number: "{=__('숫자로만 입력해주세요.')}",
+                    maxlength: "{=__('주문번호는 " + order_no_max_length + "자리입니다.')}"
+                }
+            },
+            submitHandler: function (form) {
+                $.post(form.action, $(form).serializeObject()).done(function (data, textStatus, jqXhr) {
+                    console.log(data);
+                    if (data.result == 0) {
+                        location.replace('../mypage/order_view.php?guest=y&orderNo=' + data.orderNo);
+                    } else {
+                        alert(data.message);
+                        //$('.js-caution').empty().removeClass('caution-msg2').addClass('caution-msg1').html('주문자명과 주문번호가 일치하는 주문이 존재하지 않습니다. 다시 입력해 주세요.<br><span>주문번호와 비밀번호를 잊으신 경우, 고객센터로 문의하여 주시기 바랍니다.</span>');
+                    }
+                });
+                return false;
+            }
+        });
+    });
+</script>
+
+<script language='JavaScript1.1' async src='//pixel.mathtag.com/event/js?mt_id=1480102&mt_adid=237044&mt_exem=&mt_excl=&v1=&v2=&v3=&s1=&s2=&s3='></script>
+<!--
+Start of Floodlight Tag: Please do not remove
+Activity name of this tag: Login MO
+URL of the webpage where the tag is expected to be placed: 
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 07/21/2021
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=login0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+</script>
+<noscript>
+<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=login0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+</noscript>
+<!-- End of Floodlight Tag: Please do not remove -->
+
+{ # footer }

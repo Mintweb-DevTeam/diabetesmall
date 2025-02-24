@@ -1,0 +1,351 @@
+{*** 회원가입 > 애보트 동의페이지 | main/html.php?htmid=member/mem_agree.html ***}
+{ # header }
+
+<style>
+.youcan{display:none;}
+</style>
+
+<div class="content_box pr20 pl20 pt20 mb60">
+	<div class="join_agreement_wrap">
+
+		<div class="adela_member_cont">
+			<div class="container">
+				<div class="intro pb10 mb20 clearfix" style="border-bottom:2px solid #ffc600; ">
+					<h1 class="fcBlue fs20 pull-left mt20">개인정보 처리에 관한 동의서</h1>
+					<p class="pull-right"><img src="../img/qrcode/test-img_01.jpg" alt="test-img_01" width="60px"></p>
+				</div>
+
+				<p class="fs16 fcGray7 lineH14 mb20">Abbott Diabetes Care, Inc.(이하 “회사”)는 귀하의 LibreView(이하 “리브레뷰”) 사용과 관련하여 다음과 같이 귀하의 개인정보를 처리합니다</p>
+				<!-- <h4 class="fs14 fcGray7 lineH14 mb50 fw600">Please indicated your consent by clicking the tick boxes:</h4> -->
+
+				<section class="mt30 mb15">
+					<p class="check_style01 orange">
+						<input type="checkbox" id="all-check" onChange="all_ck(this)"><label for="all-check" class="fcOrange fw600 fs15">전체동의</label>
+					</p>
+				</section>
+
+				<section>
+					<!--필수 1 -->
+					<!--{@privateApprovalOption}-->
+					<!--{?.sno == 19}-->
+					<div class="agree_modal_pop">
+						<div class="inner">
+							<div class="modal_cont">
+								<h3>{.informNm} <button class="modal_close"></button></h3>
+								<div class="modal_body">{.content}</div>
+							</div>
+						</div>
+					</div>
+					<p class="check_style01 orange">
+						<input name="privateApprovalOptionFl[19]" type="checkbox" value="y" class="check-box check-mandatory" data-must="y" data-name="{.informNm}" id="privateApprovalOptionFl19" />
+						<label for="privateApprovalOptionFl19" class="fcOrange fw600 fs15">{.informNm}</label>
+					</p>
+					<button class="agree_modal_btn">자세히 보기</button>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				
+				<section class="mt15">
+					<!--필수 2 -->
+					<!--{@privateApprovalOption}-->
+					<!--{?.sno == 21}-->
+					<div class="agree_modal_pop">
+						<div class="inner">
+							<div class="modal_cont">
+								<h3>{.informNm} <button class="modal_close"></button></h3>
+								<div class="modal_body">{.content}</div>
+							</div>
+						</div>
+					</div>
+					<p class="check_style01 orange">
+						<input name="privateApprovalOptionFl[21]" type="checkbox" value="y" class="check-box check-mandatory" data-must="y" data-name="{.informNm}" id="privateApprovalOptionFl21" />
+						<label for="privateApprovalOptionFl21" class="fcOrange fw600 fs15">{.informNm}</label>
+					</p>
+					<button class="agree_modal_btn">자세히 보기</button>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+
+				
+				<section class="mt15">
+				<!--필수 3-->
+					<!--{@privateOffer}-->
+					<!--{?.sno == 5}-->
+					<div class="agree_modal_pop">
+						<div class="inner">
+							<div class="modal_cont">
+								<h3>{.informNm} <button class="modal_close"></button></h3>
+								<div class="modal_body">{.content}</div>
+							</div>
+						</div>
+					</div>
+					<p class="check_style01 orange">
+						<input name="privateOfferFl[5]" type="checkbox" value="y" class="check-box check-mandatory" data-must="y" data-name="{.informNm}" id="privateOfferFl5" />
+						<label for="privateOfferFl5"  class="fcOrange fw600 fs15">{.informNm}</label>
+					</p>
+					<button class="agree_modal_btn">자세히 보기</button>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				<section class="mt15">
+				<!--필수 4 -->
+					<!--{@privateOffer}-->
+					<!--{?.sno == 22}-->
+					<div class="agree_modal_pop">
+						<div class="inner">
+							<div class="modal_cont">
+								<h3>{.informNm} <button class="modal_close"></button></h3>
+								<div class="modal_body">{.content}</div>
+							</div>
+						</div>
+					</div>
+					<p class="check_style01 orange">
+						<input name="privateOfferFl[22]" type="checkbox" value="y" class="check-box check-mandatory" data-must="y" data-name="{.informNm}" id="privateOfferFl22" />
+						<label for="privateOfferFl22"  class="fcOrange fw600 fs15">{.informNm}</label>
+					</p>
+					<button class="agree_modal_btn">자세히 보기</button>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+
+				<!-- <section class="mt40">
+					<div class="all_check_box">
+						<p class="check_style01">
+							<input type="checkbox" id="all-check3" class="check-box" onChange="mandatory_ck(this)"><label for="all-check3" class=" fcWhite fw600 fs24">필수항목 모두 동의</label>
+						</p>
+					</div>
+				</section> -->
+
+				<section class="mt15">
+				<!--선택 1-->
+					<!--{@privateConsign}-->
+					<!--{?.sno == 20}-->
+					<div class="agree_modal_pop">
+						<div class="inner">
+							<div class="modal_cont">
+								<h3>{.informNm} <button class="modal_close"></button></h3>
+								<div class="modal_body">{.content}</div>
+							</div>
+						</div>
+					</div>
+					<p class="check_style01 orange">
+						<input name="privateConsignFl[20]" type="checkbox" value="y" class="check-box check-optional" id="privateConsignFl20" />
+						<label for="privateConsignFl20"  class="fcOrange fw600 fs15">{.informNm}</label>
+					</p>
+					<button class="agree_modal_btn">자세히 보기</button>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				<section class="mt15">
+				<!--선택 2-->
+					<!--{@privateConsign}-->
+					<!--{?.sno == 23}-->
+					<div class="agree_modal_pop">
+						<div class="inner">
+							<div class="modal_cont">
+								<h3>{.informNm} <button class="modal_close"></button></h3>
+								<div class="modal_body">{.content}</div>
+							</div>
+						</div>
+					</div>
+					<p class="check_style01 orange">
+						<input name="privateConsignFl[23]" type="checkbox" value="y" class="check-box check-optional" id="privateConsignFl23" />
+						<label for="privateConsignFl23"  class="fcOrange fw600 fs15">{.informNm}</label>
+					</p>
+					<button class="agree_modal_btn">자세히 보기</button>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				<!-- <div class=" pl20" style="color:#001489;font-size:12px; font-weight:500;padding-right:95px;">
+					*마케팅 수신 동의를 하시면 혈당 관리를 위한 더 다양한 정보를 받아보실 수 있습니다
+				</div> -->
+				<section class="mt15">
+				<!--선택 3-->
+					<!--{@privateOffer}-->
+					<!--{?.sno == 25}-->
+					<div class="agree_modal_pop">
+						<div class="inner">
+							<div class="modal_cont">
+								<h3>{.informNm} <button class="modal_close"></button></h3>
+								<div class="modal_body">{.content}</div>
+							</div>
+						</div>
+					</div>
+					<p class="check_style01 orange">
+						<input name="privateOfferFl[25]" type="checkbox" value="y" class="check-box check-optional" id="privateOfferFl25" />
+						<label for="privateOfferFl25"  class="fcOrange fw600 fs15">{.informNm}</label>
+					</p>
+					<button class="agree_modal_btn">자세히 보기</button>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				<section class="mt15">
+				<!--선택 4-->
+					<!--{@privateOffer}-->
+					<!--{?.sno == 26}-->
+					<div class="agree_modal_pop">
+						<div class="inner">
+							<div class="modal_cont">
+								<h3>{.informNm} <button class="modal_close"></button></h3>
+								<div class="modal_body">{.content}</div>
+							</div>
+						</div>
+					</div>
+					<p class="check_style01 orange">
+						<input name="privateOfferFl[26]" type="checkbox" value="y" class="check-box check-optional" id="privateOfferFl26" />
+						<label for="privateOfferFl26" class="fcOrange fw600 fs15">{.informNm}</label>
+					</p>
+					<button class="agree_modal_btn">자세히 보기</button>
+					<!--{/}-->
+					<!--{/}-->
+				</section>
+				
+				<!-- <section class="mt40">
+					<div class="all_check_box">
+						<p class="check_style01">
+							<input type="checkbox" id="all-check2" class="check-box" onChange="optional_ck(this)"><label for="all-check2" class=" fcWhite fw600 fs24">선택항목 모두 동의</label>
+						</p>
+					</div>
+				</section> -->
+
+
+				<div class="clearfix mt30">
+					
+					<div class="pull-left">
+						<a href="#." class="btn btn-gray btn-sm w150 fs14" onClick="history.back(); return false;">뒤로가기</a>
+					</div>
+					<div class="pull-right">
+						{?adobe_member == 1}
+							<!--2024.06.27웹앤모바일 추가시작-->
+							<button type="button" class="btn btn-orange btn-sm w150 fs14 submit_btn" onClick="next_step_check();">등록하기</button>
+						{:}					
+							<button type="button" class="btn btn-orange btn-sm w150 fs14 submit_btn" onClick="next_step()">제출하기</button>
+						{/}
+					</div>
+					
+					
+				</div>
+
+				<div class="mt10 fs13">
+					© 2022 Abbott. All Rights Reserved. ADC-63904 v1.0
+				</div>
+
+		
+			</div>
+		</div>
+		<!-- //member_cont -->
+	</div>
+	<!-- //join_agreement_wrap -->
+</div>
+<!-- //content_box -->
+<iframe name="frm_" style="display: none"></iframe>
+<form id="frm" action="./co_join_stepd.php" method="post" style="display: none">
+	<!--{@post}-->
+	<input name="{.key_}" type="hidden" value="{.value_}">
+	<!--{/}-->
+	<div id="agree-input">
+	</div>
+</form>
+<script type="text/javascript">
+var input = '<input name="%name%" type="hidden" value="%value%">';
+function all_ck(obj){
+	if( $(obj).is(':checked') ) $('.check-box').prop('checked', true);
+	else $('.check-box').prop('checked', false);
+}
+function mandatory_ck(obj){
+	if( $(obj).is(':checked') ) $('.check-mandatory').prop('checked', true);
+	else $('.check-mandatory').prop('checked', false);
+}
+function optional_ck(obj){
+	if( $(obj).is(':checked') ) $('.check-optional').prop('checked', true);
+	else $('.check-optional').prop('checked', false);
+}
+$('.check-box').change(function(){
+	var check_len = $('.check-box').length;
+	if($('.check-box:checked').length == check_len){
+		$('#all-check').prop('checked', true);
+	} else {
+		$('#all-check').prop('checked', false);
+	}
+});
+
+//2024.06.27웹앤모바일 어도비 데이터 전송용 추가함수 시작
+function next_step_check(){
+	
+	let errMsgArr=[];
+	let errMsg =[];
+	$(".check-box").each(function(){
+		
+		
+		if($(this).data("must")=='y' && !$(this).is(":checked")){
+			errMsg={
+				"errorType":"form",
+				"errorMessage":$(this).data("name")+"은(는) 필수 항목입니다.",
+				"formName":"registrationForm",
+				"formType":"signup"
+			}
+			errMsgArr.push(errMsg);
+		}
+	});
+	
+	if(errMsgArr.length>0){
+	
+		_satellite.track('error',{
+			'errors': errMsgArr
+		});	
+		
+	}
+	
+	next_step();
+	
+}
+//2024.06.27웹앤모바일 어도비 데이터 전송용 추가함수 종료
+
+function next_step(){
+	$('#agree-input').empty();
+	var msg = [];
+	$('.check-box').each(function(){
+		var value = $(this).is(':checked') ? 'y' : 'n';
+		$('#agree-input').append( input.co_split( {'name':$(this).prop('name'), 'value': value } ) );
+		if( $(this).data('must') == 'y' ){
+			if( value == 'n' ) msg.push( $(this).data('name').replace('(필수)', '') );
+		}
+	});
+	if( msg.length != 0 ){
+		alert( msg.join( "\n" ) + ' 은(는) 필수 항목 입니다.' );
+		return;
+	}
+	$('#frm').submit();
+	$('.submit_btn').attr('onClick' , '');
+	alert('제출 완료');
+
+}
+String.prototype.co_split = String.prototype.co_split || function () { 
+    "use strict";
+    var str = this.toString();
+    if (arguments.length) {
+        var t = typeof arguments[0];
+        var key;
+        var args = ("string" === t || "number" === t) ? Array.prototype.slice.call(arguments) : arguments[0];
+        for (key in args) {
+            str = str.replace(new RegExp("\\%" + key + "\\%", "gi"), args[key]);
+        }
+    }
+    return str;
+};
+
+
+$(function(){
+	$(".agree_modal_btn").on("click", function(){
+		$(this).parents("section").find(".agree_modal_pop").fadeIn(300);
+	});
+	$(".modal_close").on("click", function(){
+		$(this).parents(".agree_modal_pop").fadeOut(300);
+	});
+});
+
+</script>
+
+<script language='JavaScript1.1' async src='//pixel.mathtag.com/event/js?mt_id=1476274&mt_adid=237044&mt_exem=&mt_excl=&v1=&v2=&v3=&s1=&s2=&s3='></script>
+
+{ # footer }

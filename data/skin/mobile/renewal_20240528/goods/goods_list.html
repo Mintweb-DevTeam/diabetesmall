@@ -1,0 +1,379 @@
+{*** 상품리스트 | goods/goods_list.php ***}
+{#header}
+<style>
+	.goods_list ul li{text-align:center;}
+	.goods_list img{max-width:100%;}
+	.goods_list_item_tit{padding:20px 0px;}
+	.goods_list{padding:20px 0px 0 0;}
+</style>
+<div class="goods_list pl20 pr20 pt20">
+
+	<!--{ ? cateCd =='002' }-->
+	<h2 class="fs20 fcOrange mb10">대리청구 서비스 구매페이지</h2>
+	<p class="fs16 fcGray6 mb20">대리청구 서비스를 신청하신 분에 한해서 구매가 가능합니다</p>
+	<!--{ : }-->
+	<div style="margin-left:-20px;margin-right:-20px; margin-top:-20px"><img src="../img/sensor_new1.jpg" alt=""></div>
+	<h2 class="fs20 fcOrange  mb30 mt40">개인용 체내 연속 혈당 측정 시스템<br /> 프리스타일 리브레 특징 </h2>
+	<div class="mb50"><img src="../img/sensor_new2.jpg" alt=""></div>
+	<h2 class="fs20 fcOrange mb20">프리스타일 리브레 센서 제품</h2>
+	<!--{ / }-->
+
+
+
+
+	<!-- 설문조사 배너 -->{=pollViewBanner()}<!-- 설문조사 배너 -->
+	<!-- gd5 상단 하위 카테고리 -->
+	<!--{ ? themeInfo.cateHtml1Mobile }--><div>{=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml1Mobile))}</div><!--{ / }-->
+	<!--{ ? naviDisplay.naviUse =='y' }-->
+	<div class="goods_list_category">
+		<ul>
+			<!--{ @ dataSubCategory( cateCd, cateType ) }-->
+			<li {.style} <!--{ ? cateCd == .cateCd }-->class="selected" <!--{ / }-->><a href="?{cateType}Cd={.cateCd}" >{.cateNm} <!--{ ? naviDisplay.naviCount =='y' }--><span>({.goodsCnt+0})</span> <!--{ / }--></a></li>
+			<!--{ / }-->
+		</ul>
+	</div>
+	<!--{ / }-->
+	<!--{ ? themeInfo.recomDisplayMobileFl == 'y'  && widgetGoodsList}-->
+	<div class="goods_list_recom">
+		<!--{ ? themeInfo.cateHtml2Mobile }-->
+		<div class="user_tune">{=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml2Mobile))}</div>
+		<!--{ / }-->
+
+		<h3>{=__('추천상품')}
+			<div class="more_btn_box">
+				<a class="recommend_more_btn" href="../goods/goods_recom.php?{cateType}Cd={=cateCd}">{=__('더보기')}</a>
+			</div>
+		</h3>
+		<!-- 추천상품 -->
+		<ul class="recommend_prd_list">
+			{=includeWidget('goods/_goods_display.html')}
+		</ul>
+		<!-- 추천상품 -->
+	</div>
+	<!--{ / }-->
+
+<!-- 가격 숨기기 임시 -->
+<style>
+.goods_prd_item11 .goods_prd_content .goods_info_list li.price .c_price {_display:none;}
+</style>	
+<!-- //가격 숨기기 임시 -->
+
+	<div id="goodslist" class="goods_list_content">
+		<!--{ ? themeInfo.cateHtml3Mobile }--><div>{=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml3Mobile))}</div><!--{ / }-->
+
+		<div class="goods_list_box">
+			<ul class="goods_product_list">{ # goodsTemplate }</ul>
+			
+
+			{?chk==1}
+		{?goods_data}
+		<div class="goods_list_item_tit  mb0 pb0 mt40">
+			<h2 class="fs20 fcOrange fw600 mb10">정기 배송 혜택</h2>
+			<p class="fs15 mb40" style="color:#666666;letter-spacing:-0.04em">
+				프리스타일 리브레의 효과적인 사용 및 편의를 위해서 원하시는 주기에 맞춰 자동결제, 자동 배송하는 정기배송  서비스를 시작합니다. 
+				<br /><strong class="fcBlue">보다 경제적인 가격</strong>으로 정기 배송 신청하고, 맞춤 교육 서비스도 받아보세요.
+			</p>
+			<div class="mb30"><img src="../img/sensor_new3.jpg" alt=""></div>
+		        </div>
+		<div class="goods_list">
+		            <div class="goods_list_cont">
+		
+				<div class="item_gallery_type item_gallery_type_new">
+					<ul>
+						{@goods_data}
+						<li style="width:100%">
+							<div class="item_cont item_cont_new">
+								<div class="item_photo_box">
+									<a href="../goods/goods_view.php?goodsNo={.value_['goodsNo']}"><img src="{.value_['goodsImage']}"/></a>
+								</div>
+								<div class="item_info_cont">
+									<div class="item_tit_box"><span>배송주기별</span><br /> 2개씩 정기 배송</div>
+									<div class="item_money_box">
+										<p>12% 할인</p>
+										<p>1개당 <span>104,500</span> <strong>92,400원</strong></p>
+										<!-- <img src="../img/sub/price_img_del.jpg" style="max-width: 296px;" alt=""> -->	
+									</div>
+									<div class="buy_now">
+										<a href="../goods/goods_view.php?goodsNo={.value_['goodsNo']}" class="btn btn-orange fw600 wp100" style="width:auto;">정기배송 신청하기</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						{/}
+					</ul>
+				</div>
+		            </div>
+		
+		        </div>
+		{/}
+		{/}
+
+
+		<!-- 	<div class="add_item">
+				<div><img src="../img/sub/product_thum02.jpg" class="wp100" alt="" /></div>
+				<div class="fs22 fcBlue fw600 mt10">프리스타일 리브레링크 앱</div>
+				<div class="mt10"><a href="/main/html.php?htmid=product/pro02.html" class="btn btn-orange wp100" style="max-width:200px;">지금 다운로드</a></div>
+				<div class="mt15">
+					<a href="https://play.google.com/store/apps/details?id=com.freestylelibre.app.kr" target="_blank" class="mr10"><img src="../img/sub/app_down_gp.jpg" class="wp100" style="max-width:128px" alt="" /></a>
+					<a href="https://apps.apple.com/app/freestyle-librelink-kr/id1354596227?ls=1" target="_blank" class="mr10_2"><img src="../img/sub/app_down_app.jpg" class="wp100" style="max-width:115px" alt="" /></a>
+				</div>
+			</div>	
+			<div class="add_item">
+				<div><img src="../img/sub/product_thum03.jpg" class="wp100" alt="" /></div>
+				<div class="fs22 fcBlue fw600 mt10">리브레뷰</div>
+				<div class="fs16 fcGray6 mt10">안전한 클라우드 베이스 혈당 관리 시스템</div>
+				<div class="mt10"><a href="/main/html.php?htmid=product/pro03.html" class="btn btn-orange wp100" style="max-width:200px;">더 알아보기</a></div>
+			</div>		 -->
+			<!-- <div class="btn_box">
+				<button type="button" class="more_btn" data-page="2" >{=__('더보기')}</button>
+			</div> -->
+			<div class="loading_img"></div>
+		</div>
+		<div class="mb20">ADC-49030 v3.0</div>
+	</div>
+</div>
+<script type="text/javascript">
+	<!--
+	<!--{ ? cateType == 'cate' }-->
+	var keyValue = 'C{gGlobal.locale}{cateCd}';
+	<!--{ : }-->
+	var keyValue = 'B{gGlobal.locale}{brandCd}';
+	<!--{ / }-->
+
+	var key = {
+		html: 'html' + keyValue,
+		page: 'page' + keyValue,
+		viewType: 'viewType' + keyValue,
+		sortType: 'sortType' + keyValue,
+		endFlag: 'endflag' + keyValue,
+	};
+
+	var gdStorage = gd_load_session(key.html);
+	var gdPage = gd_load_session(key.page);
+	var gdViewType = gd_load_session(key.viewType);
+	var gdSortType = gd_load_session(key.sortType);
+	var endFlag = gd_load_session(key.endFlag);
+
+	$(document).ready(function(){
+		if (gdStorage) {
+			$(".goods_product_list").html(gdStorage);
+			$('.btn_box button').data('page',parseInt(gdPage)+1);
+			$('.goods_view_type ul li button [data-key!="' + gdViewType + '"]').removeClass('on');
+			$('.goods_view_type ul li button [data-key="' + gdViewType + '"]').addClass('on');
+			$('input[name="displayType"]').val(gdViewType);
+			$('select[name="goods_sort"]>option[value="' + gdSortType + '"]').prop('selected', true);
+		}
+		$('.btn_box button.more_btn').on('click', function(e){
+			gd_get_list($(this).data('page'),false);
+		});
+
+		$('.goods_view_type ul li').on('click', function(e){
+			$(".goods_view_type ul li button").removeClass('on');
+			$('input[name="displayType"]').val($(this).find('button').data('key'));
+			$(this).find('button').addClass('on');
+			gd_get_list('1',true);
+    });
+
+		$(document).on('click','.btn_alert_login',function (e){
+			alert("{=__('로그인하셔야 본 서비스를 이용하실 수 있습니다.')}");
+			document.location.href = "../member/login.php";
+			return false;
+		});
+
+		$('body').on('click', '.js_option_layer', function(e){
+			var params = {
+				type : $(this).data('type'),
+				sno: $(this).data('sno'),
+				goodsNo: $(this).data('goodsno')
+			};
+
+			$('#popupOption').modal({
+				remote: '../goods/layer_option.php',
+				cache: false,
+				params: params,
+				type : 'POST',
+				show: true
+			});
+		});
+
+	});
+
+	function before_more_btn() {
+        $('.goods_product_list').on('click', function(){return false;})
+        $('.btn_box button').hide();
+        $('.loading_img').append('<img src="../img/icon/icon_loading.gif">');
+	}
+
+	function after_more_btn() {
+        $('.goods_product_list').off('click');
+        $('.btn_box button').show();
+        $('.loading_img img').remove();
+	}
+
+	var endflag = false;
+	function gd_get_list(page, reloadFl){
+		var displayType = $('input[name="displayType"]').val();
+		var sort =  $('select[name="goods_sort"]').val();
+
+		$.ajax({
+			method		: 'GET',
+			url			: './goods_list.php',
+			data		: {
+			    'mode' : 'data',
+				'cateCd' : '{cateCd}',
+				'brandCd' : '{brandCd}',
+				'cateType' : '{cateType}',
+				'displayType' : displayType,
+				'page' : page,
+				'sort' : sort
+			},
+			beforeSend	: function(){
+                before_more_btn();
+			},
+			success	: function(data){
+                after_more_btn();
+
+                if($(data).filter("li.no_bx").length) {
+                    if(page =='1' && endflag == false) {
+                        $(".goods_product_list").append(data);
+                        gd_save_session(key.endFlag, true);
+                        gd_save_session(key.html, $('.goods_product_list').html());
+                        endflag = true;
+                        if ($(data).find('.goods_list_info').length < {themeInfo.lineCnt * themeInfo.rowCnt}) {
+                            $('.more_btn').hide();
+                        }
+                    } else {
+                        alert("{=__('더이상 상품이 없습니다')}");
+                        $('.more_btn').hide();
+                    }
+
+                } else {
+                    if(reloadFl === true) $(".goods_product_list").html(data);
+                    else  $(".goods_product_list").append(data);
+
+                    $('.btn_box button').data('page',parseInt(page)+1);
+                    gd_save_session(key.html, $('.goods_product_list').html());
+                    gd_save_session(key.page, parseInt(page));
+                    if ($(data).find('.goods_list_info').length < {themeInfo.lineCnt * themeInfo.rowCnt}) {
+                        $('.more_btn').hide();
+                    }
+                }
+			}
+		});
+		gd_save_session(key.sortType, sort);
+		gd_save_session(key.viewType, displayType);
+	}
+
+	//-->
+</script>
+
+<script type="text/javascript">
+gtag('event', 'view_item_list', {
+  "items": [
+    {
+      "id": '1000000011',
+      "name": "프리스타일 리브레<br />  싱글 패키지 (1개)",
+      "list_name": "프리스타일 리브레<br />  싱글 패키지 (1개)",
+      "quantity": '1',
+      "price": '95000.00'
+    },
+	{
+      "id": '1000000013',
+      "name": "프리스타일 리브레<br /> 스타트 패키지 (2개)",
+      "list_name": "프리스타일 리브레<br /> 스타트 패키지 (2개)",
+      "quantity": '1',
+      "price": '184000.00'
+    },
+	{
+      "id": '1000000012',
+      "name": "프리스타일 리브레<br /> 스페셜 패키지 (7개)",
+      "list_name": "프리스타일 리브레<br /> 스페셜 패키지 (7개)",
+      "quantity": '1',
+      "price": '588000.00'
+    },	  
+  ]
+});
+</script>
+
+
+	</div>
+	<!-- //contents_wrap -->
+</div>
+
+		
+
+
+<!-- //container -->
+<div id="footer">
+	<div class="footer_cs text-center">
+		<h3 class="fs30 fcWhite fw600 mb10">고객지원</h3>
+
+		<div class="box">
+			<p><img src="../img/common/foot_cs_img01.jpg" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">FAQ</p>
+			<p class="fs16 fcGray6 fw400">FAQ를 통해 프리스타일 리브레 시스템에 <br />대해 더 알아보십시오</p>
+			<p class="mt20"><a href="/main/html.php?htmid=service/faq_new.html" class="btn btn-orange fw600 wp100">알아보기</a></p>
+		</div>
+
+		<div class="box mt20">
+			<p><img src="../img/common/foot_cs_img02.jpg" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">고객서비스</p>
+			<p class="fs16 fcGray6 fw400 mb20">도움이 필요하시다면 프리스타일 리브레 <br />고객서비스 팀에게 문의하십시오</p>
+			<p class="fs18 fcOrange fw600">AS 및 제품관련 문의</p>
+			<div class="mb20 fcGray6 fs14 fw400">
+				<a href="tel:080-014-5757" style="color:#666">080-014-5757</a>
+				<br />ADC-CS.KR@abbott.com
+				<br />월요일-금요일, 오전 09:00-오후 06:00</span>
+				<br /> (토요일·일요일·공휴일 휴무)
+			</div>
+			<p class="fs18 fcOrange fw600">제품 구매 및 배송관련 문의</p>
+			<div class=" fcGray6 fs14 fw400">
+				<a href="tel:02-6451-0040" style="color:#666">02-6451-0040</a>
+				<br />contact@adelaltd.co.kr
+				<br />월요일-금요일, 오전 09:00-오후5:30
+				<br />점심시간 12:00~13:00
+				<br /> (토요일·일요일·공휴일 휴무)
+			</div>
+		</div>
+
+		<div class="box mt20">
+			<p><img src="../img/common/foot_cs_img03.jpg" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">리브레케어 멤버십</p>
+			<p class="fs16 fcGray6 fw400">리브레 멤버십에 등록 후 프리스타일 <br />리브레  센서를 구매하세요!</p>
+			<p class="mt20"><a href="/member/co_join_stepa.php" class="btn btn-orange fw600 wp100">등록하기</a></p>
+		</div>
+
+		<div class="box mt20">
+			<p><img src="../img/common/foot_cs_img_kakao_chat.png" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">카카오톡채널추가</p>
+			<p class="fs16 fcGray6 fw400"><strong>"프리스타일 리브레"</strong> 카카오톡 채널을 추가하고<br /><strong>혈당관리를 위한 다양한 정보</strong>를 확인해보세요.</p>
+			<p class="mt20"><a href="https://pf.kakao.com/_FmxhxeK" class="btn btn-orange fw600 wp100" target="_blank">등록하기</a></p>
+		</div>
+		<!-- <div class="mt20 text-left">ADC-21809 v2.0</div> -->
+
+	</div>
+
+	<div class="footer_info">
+		<ul class="fs11">
+			<!--li class="mt10">†이미지와 설명은 이해를 돕기 위한 목적으로 사용되었습니다.<br>
+프리스타일 리브레 링크 앱은 NFC 기능을 가지고 있는 스마트폰 중에 Android OS7.1이상 및 iOS13.2이상의 스마트폰 기종에서 다운로드할 수 있습니다.
+</li-->
+		<li class="mt10">이미지와 설명은 이해를 돕기 위한 목적으로 사용되었습니다.<br>
+		<sup>1</sup>Evans M, Welsh Z, Ells S, Seibold A.<br>
+		The impact of flash glucose monitoring on glycaemic control as measured by HbA1c: a meta-analysis of clinical trials and real-world observational studies.<br>
+		Diabetes Ther. 2020;11(1):83-95
+		<li class="mt10">이 제품은 '의료기기(개인용체내연속혈당측정시스템 / 혈당관리)'이며, '사용상의 주의사항'과 '사용방법'을 잘 읽고 사용하십시오.<br>
+		광고심의필 :12021-I10-12-1145 (유효기간 24.09.17).. </li>
+
+		</ul>
+	</div>
+</div>
+<style>
+.goods_prd_item11 .goods_prd_img .img_box .img img {
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+}
+</style>
+
+{#footer}

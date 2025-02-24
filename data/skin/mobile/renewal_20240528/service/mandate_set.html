@@ -1,0 +1,267 @@
+{*** 위임청구 | service/mandate_set.php ***}
+{ # header }
+<style>
+.text-center a:hover{color:#fff;}
+.join_base_wrap .member_cont {width:100%!important;}
+.member_cont {padding:0!important;}
+.btn_comfirm:hover {border: 1px solid #001489;color: #fff;background: #001489;}
+.join_base_wrap .important {background:none!important;font-size:16px;font-weight:400;}
+input[type="checkbox"] {vertical-align: initial;}
+form{padding:20px;}
+table{
+    border-top: 1px solid #000;
+}
+th{
+font-size: 14px;
+    text-align: center;
+    color: #000;
+    border-bottom: 1px solid #dcdcdc;
+    font-weight: 400;
+    width: 100%;
+    padding: 10px 0;
+    background: #f8f8f8;
+}
+table, thead, tbody, tr, th, td {
+    width: 100%;
+    display: block;
+}
+td {
+    color: #666;
+    border-bottom: 1px solid #dcdcdc;
+    padding: 10px 0;
+}
+.base_info_box input{
+	height: 35px;
+    width: 100%!important;
+    padding: 2px 0 3px 3px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e0e0e0;
+    color: #565656;
+    font-size: 16px;
+    background: #fff!important;
+    border-radius: 5px;
+    text-align: center;
+}
+.member_password input{
+	width:31%!important;
+}
+.btn_center_box{
+	text-align:center;
+	margin:50px 0;
+}
+.btn_center_box > button{
+	border:none;
+}
+
+/**2022.1115민트웹 추가시작**/
+.red-btn {
+    width: 80%;
+    height: 50px;
+    background: red;
+    display: inline-block;
+    line-height: 50px;
+    color: #fff;
+    text-align: Center;
+}
+/**2022.1115민트웹 추가종료**/
+
+</style>
+	
+<div class="content">
+<link type="text/css" rel="stylesheet" href="{=setBrowserCache('../css/member/member.css')}">
+    <div class="mypage_cont">
+        <div class="my_page">
+			<div class="mypage_zone_tit ins-01 mt40" style="width:90%;margin:0 auto;">
+                <h2 class="fs26 fcGray3 text-center">{=__('대리청구')} 서비스</h2>
+            </div>
+            <div class="join_base_wrap">
+                <div class="member_cont">
+					<iframe name="frm_" style="display: none"></iframe>
+                    <form id="frm" method="post" action="./mandate_ps.php" target="frm_">
+						<input name="memNo" type="hidden" value="{memNo}">
+							<hr style="width:30px;height:2px;display:inline-block;background:#001489;margin:0;">
+							<h2 class="fs20 fcGray3 fwBold mb20">신청서 기입란</h2>
+							
+						<div class="base_info_box">
+							<div class="base_info_sec">
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tbody>
+									<tr>
+										<th><span class="important">이름</span></th>
+										<td>
+											<div class="member_warning">
+												<input type="text" value="{memNm}" readonly>
+											</div>
+										</td>
+										<th><span class="important">전화번호</span></th>
+										<td class="member_password">
+											<div class="member_warning">
+												<input type="text" value="{cellPhone[0]}" style="width: 120px" readonly> -
+												<input type="text" value="{cellPhone[1]}" style="width: 120px" readonly> -
+												<input type="text" value="{cellPhone[2]}" style="width: 120px" readonly>
+											</div>
+										</td>
+									</tr>
+									<tr class="">
+										<th><span class="important">이메일</span></th>
+										<td>
+											<div class="member_warning">
+												<input type="text" value="{email}" readonly>
+											</div>
+										</td>
+										<th><span class="important">사용자와의관계</span></th>
+										<td>
+											<div class="member_warning">
+												<input type="text" name="relation" maxlength="30">
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="check_style01">
+												<input name="charsang" type="checkbox" id="chk_name1" value="y" class="check-box check-mandatory"/>
+												<label for="chk_name1" class="fs15 fcGray6 fw400" style="word-break:keep-all">차상위 해당</label>
+											</p>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- //base_info_sec -->
+						</div>
+						<div class="base_info_box">
+							<div class="ins-01">
+									<!-------------- table start ----------------->
+									<div id="gray_board_write">
+
+											
+										<div id="gray_board_write" class="mt50">
+											<hr style="width:30px;height:2px;display:inline-block;background:#001489;margin:0;">
+											<h2 class="fs20 fcGray3 fwBold">대리청구 신청을 위한 정보제공 동의</h2>
+												<!--동의서 start -->
+												<table class="table_board_write mt20">
+													<tr>
+														<td class="td_left_num" style="padding:0;border:none;">
+															<textarea name="" rows="" cols="" style="width:100%; height:150px; margin:0 auto;" class="textarea_basic" readonly>복지부 고시 제 2018-36호 당뇨병소모성재료 처방전의 관련 법령에 의거 
+															1. 요양비 대리 청구를 위한 개인정보의 수집에 동의합니다.
+															2. 요양비 대리청구를 위하여 당뇨병소모성재료처방전(연속혈당측전용 전극)의 기재사항을 제공하는 데 동의합니다.
+															3. 개인정보 보유기간은 청구가능기간 3년입니다.
+
+															개인정보수집항목 : 진료받은 사람의 성명, 주민등록번호, 처방전발행 요양기관 명칭, 기호, 처방전발행일, 요양비청구기간, 청구인의 성명, 전화번호, 진료받은 사람과의 관계
+															</textarea>
+														</td>
+													</tr>
+												</table>
+												<!--동의서 end -->
+										</div>
+									</div>
+									<!-------------- table end ----------------->
+							</div>	
+
+					<p class="check_style01">
+						<input name="privateApprovalOptionFl[19]" type="checkbox" id="agree" for="agree" value="y" class="check-box check-mandatory"/>
+						<label for="agree" class="fs15 fcGray6 fw400" style="word-break:keep-all">국민건강보험공단 요양비 지급청구와 관련하여, 개인정보식별 및 민감정보수집에 관한 내용을 숙지하였으며 아델라에 청구를 위임합니다.</label>
+					</p>
+
+						</div>
+                        <div class="btn_center_box">
+                            <button type="button" onClick="submit_()" class="btn_comfirm js_btn_join blue-btn fs18 fwBold" >{=__('서비스 신청')}</button>
+                        </div>
+                        <!-- //btn_center_box -->
+                    </form>
+                </div>
+                <!-- //member_cont -->
+            </div>
+            <!-- //join_base_wrap -->
+
+        </div>
+        <!-- //my_page -->
+
+    </div>
+    <!-- //mypage_cont -->
+
+	
+
+</div>
+<!-- //content -->
+<script>
+function submit_(){
+	if( !$('input[name="relation"]').val().trim() ){
+		alert('사용자와의관계는 필수 입니다.');
+		return;
+	}
+	if( !$('#agree').is(':checked') ){
+		alert('약관동의는 필수입니다.');
+		return;
+	}
+	$('#frm').submit();
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+	<!-- //contents_wrap -->
+</div>
+
+<!-- //container -->
+<div id="footer">
+	<div class="footer_cs text-center">
+		<h3 class="fs30 fcWhite fw600 mb10">고객지원</h3>
+
+		<div class="box">
+			<p><img src="../img/common/foot_cs_img01.jpg" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">FAQ</p>
+			<p class="fs16 fcGray6 fw400">FAQ를 통해 프리스타일 리브레 시스템에 <br />대해 더 알아보십시오</p>
+			<p class="mt20"><a href="/main/html.php?htmid=service/faq_new.html" class="btn btn-orange fw600 wp100">알아보기</a></p>
+		</div>
+
+		<div class="box mt20">
+			<p><img src="../img/common/foot_cs_img02.jpg" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">고객서비스</p>
+			<p class="fs16 fcGray6 fw400 mb20">도움이 필요하시다면 프리스타일 리브레 <br />고객서비스 팀에게 문의하십시오</p>
+			<p class="fs18 fcOrange fw600">AS 및 제품관련 문의</p>
+			<div class="mb20 fcGray6 fs14 fw400">
+				<a href="tel:080-014-5757" style="color:#666">080-014-5757</a>
+				<br />ADC-CS.KR@abbott.com
+				<br />월요일-금요일, 오전 09:00-오후 06:00</span>
+				<br /> (토요일·일요일·공휴일 휴무)
+			</div>
+			<p class="fs18 fcOrange fw600">제품 구매 및 배송관련 문의</p>
+			<div class=" fcGray6 fs14 fw400">
+				<a href="tel:02-6451-0040" style="color:#666">02-6451-0040</a>
+				<br />contact@adelaltd.co.kr
+				<br />월요일-금요일, 오전 09:00-오후5:30
+				<br />점심시간 12:00~13:00
+				<br /> (토요일·일요일·공휴일 휴무)
+			</div>
+		</div>
+
+		<div class="box mt20">
+			<p><img src="../img/common/foot_cs_img03.jpg" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">리브레케어 멤버십</p>
+			<p class="fs16 fcGray6 fw400">리브레 멤버십에 등록 후 프리스타일 <br />리브레  센서를 구매하세요!</p>
+			<p class="mt20"><a href="/member/co_join_stepa.php" class="btn btn-orange fw600 wp100">등록하기</a></p>
+		</div>
+
+		<div class="box mt20">
+			<p><img src="../img/common/foot_cs_img_kakao_chat.png" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">카카오톡채널추가</p>
+			<p class="fs16 fcGray6 fw400"><strong>"프리스타일 리브레"</strong> 카카오톡 채널을 추가하고<br /><strong>혈당관리를 위한 다양한 정보</strong>를 확인해보세요.</p>
+			<p class="mt20"><a href="javascript:coKakaoChannel()" class="btn btn-orange fw600 wp100" target="_blank">등록하기</a></p>
+		</div>
+
+
+
+	</div>
+
+{ # footer }

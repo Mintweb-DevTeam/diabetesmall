@@ -1,0 +1,73 @@
+{*** 배송주기 변경 | subscription/change_period.php ***}
+{=includeFile('subscription/outline/_popup_header.html')}
+<style>
+	.wok{
+		display: inline-block;
+		border: 1px solid #03a9f4;
+		padding: 3px 15px;
+		background: #03a9f4;
+		color: #fff;
+		cursor:pointer;
+	}
+	.wcancle{
+		display: inline-block;
+		border: 1px solid #9e9e9e;
+		padding: 3px 15px;
+		background: #9e9e9e;
+		color: #fff;
+		cursor:pointer;
+	}
+</style>
+<div class='subscription_popup2 change_period_page'>
+    <div class='mtitle'>배송주기 변경</div>
+    <form name='frm' method='post' action='../subscription/indb.php' autocomplete='off' target='ifrmProcess'>
+        <input type='hidden' name='mode' value='change_delivery'>
+        <input type='hidden' name='uid' value='{uid}'>
+        <input type='hidden' name='period' value='{period}'>
+        <div class='selection_rows first'>
+        <!--{ @subCfg['period'] }-->
+        <!--{ ? .index_ > 0 && .index_ % 3 == 0 }--></div><div class='selection_rows'><!--{ / }-->
+        <div class='cell_rows'>
+            <div class='sel_period<!--{ ? .value_ == period }--> on<!--{ / }-->' data-period='{.value_}'>
+                <div class='box'>
+                <!--{ @explode('_', .value_) }-->
+                <!--{ ? ..index_ == 0 }-->{..value_}<!--{ : }--><!--{ ? ..value_ == 'month' }-->달<!--{ : }-->주<!--{ / }-->에 한번<!--{ / }-->
+                <!--{ / }-->
+                </div> <!-- box -->
+            </div> <!-- sel_period -->
+        </div> <!-- cell_rows -->
+        <!--{ / }-->
+        <!--{ ? count(subCfg['period']) % 3 > 0 }-->
+        <!--{ @range(1, 3 - count(subCfg['period']) % 3) }-->
+        <div class='cell_rows'></div>
+        <!--{ / }-->
+        <!--{ / }-->
+        </div> <!-- selection_rows -->
+    </form>
+
+
+</div> <!-- subscription_popup2 -->
+	<div style="text-align:center;">
+		<span class="wok">확인</span>
+		<span class="wcancle">취소</span>
+	</div>
+<script>
+$(function() {
+	$(".sel_period").click(function(){
+			var period = $(this).data("period");
+			$(".sel_period").removeClass("on");
+			$(this).addClass("on");	
+			frm.period.value = period;
+
+	});
+    
+	$(".wok").click(function() {
+
+			frm.submit();
+    });
+	$(".wcancle").on("click",function(){
+		parent.wm.layer.close();
+	});
+});
+</script>
+{=includeFile('subscription/outline/_popup_footer.html')}

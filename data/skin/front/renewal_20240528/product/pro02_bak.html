@@ -1,0 +1,45 @@
+{*** 프리스타일 리브레 링크 앱 | product/pro02.php ***}
+{ # header }
+	
+		<div class="product_wrap">
+		
+		<div class="pro_info_box clearfix">
+			<div class="pro_detail pt50">
+				<h3 class="fs60 fw600 fcOrange lineH11 mb20">프리스타일<br />리브레링크 앱</h3>
+				<div class="fs22 fcGray6 fw400 mb30">
+					프리스타일 리브레링크 앱 설치 후 센서를 스캔하면, 현재 당 수치 및 지난 8시간 동안의 당 패턴 등 다양한 당 수치 분석 보고서를 스마트폰을 통해 확인할 수 있습니다. 또한, 메모기능을 통해 다양한 이벤트 (음식, 운동, 인슐린 등)를 기록할 수 있습니다. 
+				</div>
+
+				<div class="fcGray6 fw600 fs22 mb10">무료 앱 다운로드</div>
+				<div>
+					<a href="#." class="mr30"><img src="../img/sub/app_down_gp.jpg" alt="" /></a>
+					<a href="#."><img src="../img/sub/app_down_app.jpg" alt="" /></a>
+				</div>
+				<p class="mt20 fs16">프리스타일 리브레 센서 사용 전, 프리스타일 리브레링크 앱을<br /> 스마트폰에  먼저 다운 받으십시오. </p>
+			</div>
+			<div class="pro_thum">
+				<div class="text-center big mb20"><img src="../img/sub/pro02_app01.jpg" alt="" /></div>
+				<div class="small">
+					<a href="#." class="active" rel="../img/sub/pro02_app01.jpg"><img src="../img/sub/pro02_app01.jpg" alt="" width="60px" /></a>
+					<a href="#." rel="../img/sub/pro02_app02.jpg"><img src="../img/sub/pro02_app02.jpg" alt="" width="60px" /></a>
+					<a href="#." rel="../img/sub/pro02_app03.jpg"><img src="../img/sub/pro02_app03.jpg" alt="" width="60px" /></a>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="mt60"><img src="../img/sub/pro02_img01_new.jpg" alt="" /></div>
+	</div>
+
+	<script type="text/javascript">
+		$(function(){
+			$('.pro_thum > .small > a').on('click', function(){
+				$('.pro_thum > .small > a').removeClass('active');
+				$(this).addClass('active');
+				var pro_name = $(this).attr('rel');
+				$('.pro_thum > .big > img').attr('src',pro_name);
+			});
+		});
+	</script>
+
+{ # footer }

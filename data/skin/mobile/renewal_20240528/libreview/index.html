@@ -1,0 +1,115 @@
+{#header}
+
+
+<div id="contents_wrap">
+
+
+	<div class="pl20 pr20 pt20 mb60">
+
+		
+		<div class="intro pb10 mb20 clearfix" style="border-bottom:2px solid #ffc600;">
+			<h1 class="fcBlue fs20 pull-left mt20">Libreview Professional Privacy Consent​</h1>
+		</div>
+
+
+
+		<div class="join_box_orange ">
+			<form id="frm" method="post" action="./input_agree.php" >
+			<section>
+				<div class="container">
+					<div class="fs14 mb20 "><span class="fcOrange">*</span> 표시는 반드시 입력하셔야 하는 항목입니다</div>
+					<div class="form-wrap">
+						<ul>
+							<li class="mb20">
+								<h2 class="fcGray6 fs15 mb05">이름<span class="fcOrange">*</span></h2>
+								<input name="name" type="text"  class="form-control w160">
+							</li>
+							<li class="mb20">
+								<h2 class="fcGray6 fs15 mb05">이메일 <span class="fcOrange">*</span></h2>
+								<input name="email" type="email"  class="form-control w160">
+							</li>
+							<li class="mb20">
+								<h2 class="fcGray6 fs15 mb05">휴대폰 <span class="fcOrange">*</span></h2>
+								<input name="phone" type="tel"  class="form-control w160">
+								<button type="button" onClick="callSnNo()" id="buttonA"  class="btn btn-orange btn-sm w130 fs14">인증번호 요청</button>
+							</li>
+							<li>
+								<h2 class="fcGray6 fs15 mb05">인증번호 <span class="fcOrange">*</span></h2>
+								<p class="mb20"><input id="certiNo" type="number" disabled  class="form-control w160" /></p>
+								<button type="button" onClick="passCk()" id="buttonB" disabled class="btn btn-orange btn-sm  w200  fw600">인증</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			</form>
+		</div>
+
+		<div class="fcGray6 fs14 mt20 ">
+			<p>프리스타일 리브레 프로페셔널 관련 문의와 탈퇴는<br /> 02-6451-0040으로 문의하십시오.​</p>
+			<p class="pt10">운영시간 : 월~금 오전 9시 ~ 오후 6시(토, 일, 공휴일 휴무)​</p>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+<script>
+let pass_num = null;
+const callSnNo = () => {
+	if( !$(`input[name="name"]`).val() || !$(`input[name="email"]`).val() || !$(`input[name="phone"]`).val() ){
+		alert('이름, 이메일, 휴대폰 번호는 필수 입니다.');
+		return;
+	}
+	$.ajax({
+		url:'/member/co_ajax.php',
+		type:'POST',
+		dataType:"json",
+		async: false,
+		data:{cellPhone: $(`input[name="phone"]`).val(), email: $(`input[name="email"]`).val(), type: 'agreeCk'},
+		success: function(d){
+			if( d.cnt != 0 ){
+				alert('이미 등록 되었습니다.');
+			}else{
+				$(`#buttonA`).prop('disabled', true);
+				$(`input[name="name"], input[name="email"], input[name="phone"]`).prop('readonly', true);
+				$(`#certiNo, #buttonB`).prop('disabled', false);
+				pass_num = get_pass_num( $(`input[name="phone"]`).val() );
+			}
+		},
+		error:function(request,status,error){
+			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+       	}
+	});
+},
+passCk = () => {
+	if( !$(`#certiNo`).val() ){
+		alert('인증번호를 입력해 주세요');
+		return;
+	}
+	if( pass_num != $('#certiNo').val() ){
+		alert('인증번호가 다릅니다.');
+		return;
+	}
+	$(`#frm`).submit();
+},
+get_pass_num = (phone) => {
+	const jqXHR = $.ajax({
+		url:'/member/set_cossia_ajax.php',
+		type:'POST',
+		dataType:"json",
+		async: false,
+		data:{'phone':phone},
+		success: function(d){},
+		error:function(request,status,error){
+			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+       	}
+	});
+	return jqXHR.responseJSON;
+}
+</script>
+{#footer}

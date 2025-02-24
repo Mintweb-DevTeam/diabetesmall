@@ -1,0 +1,93 @@
+{*** 동의항목 체크 | qrcode/mem_agree.html ***}
+{ # header }
+<style>
+	section .agreement_box {width: 100%; height: 70px; overflow-x: hidden; overflow-y: scroll}
+</style>
+<script>
+function submit_(){
+	if( !$('#termsAgree1').is(':checked') || !$('#privateApprovalFl').is(':checked') ){
+		alert('이용약관 및 개인정보 수집 및 이용은 필수 입니다.');
+		return;
+	}
+	$('#frm').submit();
+}
+</script>
+<iframe name="frm_" style="display: none"></iframe>
+<form id="frm" method="post" action="./mem_agree_ps.php" target="frm_">
+<input name="memNm" type="hidden" value="{memNm}">
+<input name="cellPhone" type="hidden" value="{cellPhone}">
+<input name="memId" type="hidden" value="{memId}">
+<input name="memPw" type="hidden" value="{memPw}">
+<input name="pharmacy_code" type="hidden" value="{pharmacy_code}">
+	
+<section>
+	<p class="inp_chk">
+		<input type="checkbox" id="termsAgree1" name="agreementInfoFl" value="y">
+		<label for="termsAgree1"> {=__('이용약관')}<strong>({=__('필수')})</strong> </label>
+	</p>
+	<div class="agreement_box">
+		{=nl2br(agreementInfo['content'])}
+	</div>
+</section>
+
+<section>
+	<p class="inp_chk">
+		<input type="checkbox" id="privateApprovalFl" name="privateApprovalFl" value="y">
+		<label for="privateApprovalFl"> {=__('개인정보 수집 및 이용')}<strong>({=__('필수')})</strong> </label>
+	</p>
+	<div class="agreement_box">
+		{=nl2br(agreementInfo['content'])}
+	</div>
+</section>
+
+<!--{@privateApprovalOption}-->
+<!--{?.modeFl == 'y'}-->
+<section>
+	<p class="inp_chk">
+		<input type="checkbox" id="privateApprovalOption_{.sno}" name="privateApprovalOption[{.sno}]" value="y">
+		<label for="privateApprovalOption_{.sno}">{=nl2br(.informNm)}<strong>({=__('선택')})</strong></label>
+	</p>
+	<div class="agreement_box">
+		{=nl2br(.content)}
+	</div>
+</section>
+<!--{/}-->
+<!--{/}-->
+
+
+<!--{@ privateConsign}-->
+<!--{?.modeFl == 'y'}-->
+<section>
+	<p class="inp_chk">
+		<input type="checkbox" id="privateConsign_{.sno}" name="privateConsign[{.sno}]" value="y">
+		<label for="privateConsign_{.sno}">{=nl2br(.informNm)}<strong>({=__('선택')})</strong></label>
+	</p>
+	<div class="agreement_box">
+		{=nl2br(.content)}
+	</div>
+</section>
+<!--{/}-->
+<!--{/}-->
+
+
+<!--{@ privateOffer}-->
+<!--{?.modeFl == 'y'}-->
+<section>
+	<p class="inp_chk">
+		<input type="checkbox" id="privateOffer_{.sno}" name="privateOffer[{.sno}]" value="y">
+		<label for="privateOffer_{.sno}">{=nl2br(.informNm)}<strong>({=__('선택')})</strong></label>
+	</p>
+	<div class="agreement_box">
+		{=nl2br(.content)}
+	</div>
+</section>
+<!--{/}-->
+<!--{/}-->
+	<button type="button" class="submit" onClick="submit_()">확인</button>
+</form>
+
+
+<style type="text/css">
+	
+</style>
+{ # footer }

@@ -1,0 +1,34 @@
+.goods_view_subscription { padding: 10px 0px; box-sizing: border-box; }
+.goods_view_subscription * { box-sizing: border-box; }
+.goods_view_subscription .subscription_type_box .choice {  padding: 0 !important; cursor: pointer;  }
+.goods_view_subscription .subscription_type_box .rows1 { margin-bottom: 5px; }
+.goods_view_subscription .subscription_type_box .rows { font-weight: bold; font-size: 15px; }
+.goods_view_subscription .subscription_type_box .choice.on .text { color: #ab3e55; }
+.goods_view_subscription .subscription_type_box .choice .text { padding-left: 30px; }
+.goods_view_subscription .subscription_type_box .subscription_benefit { font-weight: normal; font-size: 12px; background-color: #ff9900; color: #ffffff; display: inline-block; cursor: pointer; padding: 3px 10px; margin-left: 10px; }
+
+.goods_view_subscription .subscription_selection { display: block; border: 1px solid #cccccc; border-radius: 2px; padding: 10px; background: #fafafa; margin: 13px 0;  }
+.goods_view_subscription .subscription_selection .discount_amount { display: table; width: 100%; margin-bottom: 6px; }
+.goods_view_subscription .subscription_selection .discount_amount > .box { display: table-cell; width: 33.3333%; padding: 0 3px; }
+.goods_view_subscription .subscription_selection .discount_amount > .box  > .inner { background-color: #ffffff;  border: 2px solid #212121; height: 50px; padding: 5px; padding-left: 30px; text-align: center; position: relative; }
+.goods_view_subscription .subscription_selection .badge { position: absolute; top: 0; left: 0; height: 17px; color: #ffffff; background-color: #212121; font-size: 11px; line-height: 17px; padding: 0 5px; font-weight: bold; }
+.goods_view_subscription .subscription_selection .gprice { color: #f24a00; font-weight: bold; font-size: 13px; letter-spacing: -1px; }
+.goods_view_subscription .subscription_selection strike { font-size: 12px; color: #888888; letter-spacing: -1px; }
+.goods_view_subscription .subscription_selection .mtitle { font-weight: bold; font-size: 13px; margin-bottom: 5px; margin: 5px 0 8px 4px; }
+
+.goods_view_subscription .subscription_selection .mtitle .small_txt { font-weight: normal;  font-size: 12px; color: #888888;  margin-left: 5px; }
+.goods_view_subscription .subscription_selection .selection_rows { display: table; width: 100%; margin-top: 6px; }
+.goods_view_subscription .subscription_selection .selection_rows.first { margin-top: 0; }
+.goods_view_subscription .subscription_selection .selection_rows .cell_rows { display: table-cell; vertical-align: middle; width: 33.3333%; padding: 0 3px;  }
+.goods_view_subscription .subscription_selection .selection_rows .cell_rows .sel_period { border: 1px solid #bbbbbb; color: #111111; background-color: #ffffff; display: table; width: 100%; cursor: pointer; }
+.goods_view_subscription .subscription_selection .selection_rows .cell_rows .sel_period .box { display: table-cell; vertical-align: middle; width: 100%; height: 40px; font-size: 12px; font-weight: bold; text-align: center; }
+.goods_view_subscription .subscription_selection .selection_rows .cell_rows .sel_period.on { border: 1px solid #346AFF; color: #346AFF; }
+.goods_view_subscription .subscription_selection .selection_rows .cell_rows .sel_period.on * { color: #346AFF; }
+
+.goods-view-subscsription .onetime_buy { display: none; }
+.goods-view-subscsription .subscription_buy { display: block; background-color: #cf4520; color: #ffffff; text-align: center; height: 48px; font-size: 15px; line-height: 48px; font-weight: bold; cursor: pointer; margin-top: 20px; width: 100%; }
+.onfixed .subscription_buy { position: fixed; bottom: 30px; right: 10px; width: 290px; }
+.onfixed .subscription_selection { position: fixed; bottom: 80px; right: 10px; width: 290px; }
+
+.add_cart_layer .btn_subscriptionconfirm {min-width:74px; padding:10px 10px 9px 10px; margin:0 0 0 6px; border:1px solid #ab3e55; color:#ffffff; background:#ab3e55; font-weight:bold;}
+.add_cart_layer .btn_subscriptionconfirm:hover {border:1px solid #9b344a; background:#9b344a;}

@@ -1,0 +1,148 @@
+{*** 처방전업로드 | member/prescription_img_up.php ***}
+{ # header }
+	<h2 class="page_title">처방전 이미지 업로드 페이지</h2>
+	<div class="sub_content">
+		<div id="container">
+			<div id="contentss">
+				<form name="pForm" method="post" action="prescription_in_db.php" enctype="multipart/form-data" target="ifrmProcess">
+					<div class="page_sub_title">
+						의료기관에서 발급 받은 처방전의 스캔본 혹은 촬영 이미지를 제출 해 주세요.
+					</div>
+					
+					<div class="file_div">
+						    <span class="file_add">파일추가</span>
+							<input type="file" name="up_file">	
+						
+					</div>
+					<div class="info_mation">
+						<strong>개인정보 수집 및 이용 안내</strong>
+						<ul>
+							<li>· 수집 항목 : 처방전 및 처방전 기입 정보</li>
+							<li>· 수집 목적 : 처방전 제출을 통한 건강보험공단 요양비 지급 대리 청구</li>
+							<li>· 보유 및 이용 기간 : 건강보험공단의 요양비 지급 승인 완료일 당월 말일 까지</li>
+						</ul>
+					</div>
+				</form>
+				
+				<div id="footer_wrap">
+				<!-- footer_con01 -->
+				<div class="footer_con01">
+					<h3>고객지원</h3> </br></br></br></br>
+					<ul class="clearfix">
+						<li>
+							<div class="item">
+								<p><img src="../img/main/main_sec06_img01.gif" alt="" /></p>
+								<h4>FAQ</h4>
+								<p class="tx1">자주하는 질문으로 프리스타일<br /> 시스템에 대해 더 알아보십시오</p>
+								<p class="more"><a href="/main/html.php?htmid=service/faq_new.html">더 알아보기</a></p>
+							</div>
+						</li>
+						<li>
+							<div class="item">
+								<p><img src="../img/main/main_sec06_img02.gif" alt="" /></p>
+								<h4>고객 서비스</h4>
+								<p class="tx1">도움이 필요하시다면 <br />
+									프리스타일 리브레 고객서비스 <br />
+									팀에게 문의하십시오 
+								</p>
+								<div class="tx2">
+									<strong>AS 및 제품관련 문의</strong>
+									<br /><a href="tel:080-014-5757" style="color:#666">080-014-5757</a>
+									<br />ADC-CS.KR@abbott.com
+									<br>월요일-금요일, 오전 09:00-오후 06:00
+									<br>(토요일·일요일·공휴일 휴무)
+								</div>
+								<div class="tx2">
+									<strong>제품 구매 및 배송관련 문의</strong>
+									<br /><a href="tel:02-6451-0040" style="color:#777">02-6451-0040</a>
+									<br />contact@adelaltd.co.kr
+									<br />월요일-금요일, 오전 09:00-오후5:30
+									<br />점심시간 12:00~13:00 
+									<br />(토요일·일요일 ·공휴일 휴무)
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item">
+								<p><img src="../img/main/main_sec06_img03.gif" alt="" /></p>
+								<h4>리브레케어 멤버십</h4>
+								<p class="tx1">리브레 멤버십에 등록 후 <br />
+									프리스타일 리브레 센서를 구매하세요!</p>
+								<p class="more"><a href="/member/co_join_stepa.php">등록하기</a></p>
+							</div>
+						</li>
+					</ul>
+					
+				</div>
+				</div>
+				<div class="mt20">ADC-70930 v3.0</div>				
+			</div>
+		</div>
+	
+	</div>
+<div class="loading-layer">파일 업로드 중...</div>
+<style>
+	.page_title{font-size:35px;}
+	.page_sub_title{font-size:30px;}
+	.file_div{width:100%;text-align:center;margin:50px 0px;}
+	.info_mation{width:70%;margin:auto;padding-bottom:50px;}
+	.info_mation strong{font-size:25px;}
+	.info_mation ul li{list-style:none;font-size:18px;}
+       /* input[type="file"] 요소를 숨기기 */
+        input[type="file"] {
+            display: none;
+        }
+
+        /* .file_add 스타일 설정 */
+        .file_add {
+            display: inline-block;
+            padding: 15px 100px;
+            background-color: #012060;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+			font-size:18px;
+			font-weight:bold;
+        }
+		
+        .loading-layer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            padding-top: 20%;
+        }		
+</style>
+
+
+<script type="text/javascript">
+        $(document).ready(function() {
+			
+            $('.file_add').click(function() {
+                
+				if(confirm("의료기관에서 발급 받은 처방전의 스캔본 혹은 촬영 이미지를 선택해주세요.")==true){
+					
+
+					$('input[type="file"]').click();
+				}
+            });
+
+            $('input[type="file"]').change(function() {
+                
+				if ($(this).val()) {
+					$(".loading-layer").html($(this).get(0).files[0].name + " 파일을 업로드 중입니다...")
+					$(".loading-layer").show();
+					document.pForm.submit();
+				}
+
+            });
+        });
+</script>
+{ # footer }

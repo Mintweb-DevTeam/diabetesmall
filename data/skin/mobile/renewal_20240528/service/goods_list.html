@@ -1,0 +1,228 @@
+{*** 상품리스트 연동 안됨 | service/goods_list.html ***}
+{ # header }
+
+<div class="goods_list pl20 pr20 pt20">
+	<h2 class="fs20 fcOrange mb20">프리스타일 리브레 시스템 제품</h2>
+	<!-- 설문조사 배너 --><!-- 설문조사 배너 -->
+	<!-- gd5 상단 하위 카테고리 -->
+	<div class="goods_list_category">
+		<ul>
+		</ul>
+	</div>
+
+<!-- 가격 숨기기 임시 -->
+<style>
+.goods_prd_item11 .goods_prd_content .goods_info_list li.price .c_price {display:none;}
+</style>	
+<!-- //가격 숨기기 임시 -->
+
+	<div id="goodslist" class="goods_list_content">
+
+		<div class="goods_list_box">
+			<ul class="goods_product_list"><li class="goods_prd_item11 ">
+	<div class="goods_prd_item11_box">
+		<div class="goods_prd_img">
+			<div class="img_box">
+				<a href="../goods/goods_view.php?goodsNo=1000000000" target="_self">
+<div class="img"><img src="/data/goods/20/01/01/1000000000/1000000000_main_075.png" width="300" alt="프리스타일 리브레 센서" title="프리스타일 리브레 센서" class="middle"></div>				</a>
+			</div>
+		</div>
+		<div class="goods_prd_content">
+			<div class="goods_list_info">
+				<a href="/goods/goods_list.php?cateCd=001" target="_self">
+				<div class="goods_prd_icon"></div>
+					<ul class="goods_info_list">
+						<li class="prd_name text-center fs20 fcBlue fw600">프리스타일 리브레 센서</li>
+						<!-- <li class="price text-center">
+							<span class="c_price">
+								84,000원
+								<span class="add_currency"></span>
+							</span>
+						</li> -->
+					</ul>
+				</a>
+				<ul class="btn_area text-center">
+					<li>
+						<a href="/goods/goods_list.php?cateCd=001" class="btn btn-orange">
+							자세히 보기
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</li>
+<!-- 타임세일 더보기 -->
+<!-- 장바구니 담기 레이어 -->
+<div id="optionViewLayer" class="layer_wrap dn"></div>
+<form id="frmWishTemplateView" method="post">
+    <input type="hidden" name="mode" value="wishIn">
+    <input type="hidden" name="cartMode" value="">
+    <input type="hidden" name="optionFl" value="">
+</form>
+
+<script type="text/javascript">
+<!--
+
+// DOM 로드
+$(document).ready(function() {
+    if ($('body #layerDim').length < 1) {
+        var addHtml = '<div id="layerDim" class="dn zidx310"></div>';
+        $('body').append(addHtml);
+    }
+
+    //찜하기
+	$('.btn_area').on('click', '.btn_add_wish', function(e){
+        e.stopImmediatePropagation();
+
+        
+        var minOrderCnt = 1;
+        if ($(this).data('min-order-cnt')) {
+            minOrderCnt = parseInt($(this).data('min-order-cnt'));
+            if (minOrderCnt > 1) {
+                alert(__('최소 %s개 이상 구매가능합니다', minOrderCnt));
+            }
+        }
+        $('#frmWishTemplateView input[name=\'cartMode\']').val($(this).data('goods-no'));
+        $('#frmWishTemplateView input[name=\'optionFl\']').val($(this).data('optionfl'));
+
+        var params = $('#frmWishTemplateView').serialize();
+
+        $.ajax({
+            method: "POST",
+            cache: false,
+            url: '../mypage/wish_list_ps.php',
+            data: params,
+            success: function (data) {
+                // error 메시지 예외 처리용
+                if (!_.isUndefined(data.error) && data.error == 1) {
+                    alert(data.message);
+                    return false;
+                }
+
+                location.href = "../mypage/wish_list.php";
+                return false;
+
+                $("#addWishLayer").removeClass('dn');
+                $('#layerDim').removeClass('dn');
+                return false;
+            },
+            error: function (data) {
+                alert(data.message);
+            }
+        });
+
+		return false;
+	});
+
+    // 장바구니 이동 레이어
+
+    // 찜리스트 레이어
+
+    // 타임세일 더보기
+    $('.btn_time_sale_bottom_more').on('click', function(e){
+        gd_get_list_more($(this).data('page'));
+    });
+});
+
+// 타임세일 더보기
+function gd_get_list_more(page) {
+    var displayType = $('input[name="displayType"]').val();
+    var sort = $('select[name="goods_sort"]').val();
+    var totalPage = $('input[name="totalPage"]').val();
+
+    $.post('./time_sale_ps.php', {'mode' : 'get_more', 'more' : page, 'displayType' : displayType, 'sno' : '','sort' : sort}, function (data) {
+        $('.goods_product_list').html(data);
+        if (parseInt(page) + 1 > totalPage) {
+            $('.btn_time_sale_bottom_more').hide();
+        } else {
+            $('.btn_time_sale_bottom_more').data('page', parseInt(page) + 1);
+        }
+    });
+}
+//-->
+</script></ul>
+
+			<div class="add_item">
+				<div><img src="/data/skin/mobile/moment/img/sub/product_thum02.jpg" class="wp100" alt=""></div>
+				<div class="fs22 fcBlue fw600 mt10">프리스타일 리브레링크 앱</div>
+				<div class="mt10"><a href="/main/html.php?htmid=product/pro02.html" class="btn btn-orange wp100" style="max-width:200px;">지금 다운로드</a></div>
+				<div class="mt15">
+					<a href="https://play.google.com/store/apps/details?id=com.freestylelibre.app.kr" target="_blank" class="mr10"><img src="/data/skin/mobile/moment/img/sub/app_down_gp.jpg" class="wp100" style="max-width:128px" alt=""></a>
+					<a href="https://apps.apple.com/app/freestyle-librelink-kr/id1354596227?ls=1" target="_blank"><img src="/data/skin/mobile/moment/img/sub/app_down_app.jpg" class="wp100" style="max-width:115px" alt=""></a>
+				</div>
+			</div>	
+			<div class="add_item">
+				<div><img src="/data/skin/mobile/moment/img/sub/product_thum03.jpg" class="wp100" alt=""></div>
+				<div class="fs22 fcBlue fw600 mt10">리브레뷰</div>
+				<div class="fs16 fcGray6 mt10">안전한 클라우드 베이스 혈당 관리 시스템</div>
+				<div class="mt10"><a href="/main/html.php?htmid=product/pro03.html" class="btn btn-orange wp100" style="max-width:200px;">더 알아보기</a></div>
+			</div>		
+			<!-- <div class="btn_box">
+				<button type="button" class="more_btn" data-page="2" >더보기</button>
+			</div> -->
+			<div class="loading_img"></div>
+		</div>
+	</div>
+</div>
+
+<p class="pb20 pt20 pl15">ADC-99164 v1.0</p>
+
+<div id="footer">
+	<div class="footer_cs text-center">
+		<h3 class="fs30 fcWhite fw600 mb10">고객지원</h3>
+
+		<div class="box">
+			<p><img src="../img/common/foot_cs_img01.jpg" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">FAQ</p>
+			<p class="fs16 fcGray6 fw400">FAQ를 통해 프리스타일 리브레 시스템에 <br />대해 더 알아보십시오</p>
+			<p class="mt20"><a href="/main/html.php?htmid=service/faq_new.html" class="btn btn-orange fw600 wp100">알아보기</a></p>
+		</div>
+
+			<div class="box mt20">
+			<p><img src="../img/common/foot_cs_img02.jpg" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">고객서비스</p>
+			<p class="fs16 fcGray6 fw400 mb20">도움이 필요하시다면 프리스타일 리브레 <br />고객서비스 팀에게 문의하십시오</p>
+			<p class="fs18 fcOrange fw600">AS 및 제품관련 문의</p>
+			<div class="mb20 fcGray6 fs14 fw400">
+				<a href="tel:080-014-5757" style="color:#666">080-014-5757</a>
+				<br />ADC-CS.KR@abbott.com
+				<br />월요일-금요일, 오전 09:00-오후 06:00</span>
+				<br /> (토요일·일요일·공휴일 휴무)
+			</div>
+			<p class="fs18 fcOrange fw600">제품 구매 및 배송관련 문의</p>
+			<div class=" fcGray6 fs14 fw400">
+				<a href="tel:02-6451-0040" style="color:#666">02-6451-0040</a>
+				<br />contact@adelaltd.co.kr
+				<br />월요일-금요일, 오전 09:00-오후5:30
+				<br />점심시간 12:00~13:00
+				<br /> (토요일·일요일·공휴일 휴무)
+			</div>
+		</div>
+
+		<div class="box mt20">
+			<p><img src="../img/common/foot_cs_img03.jpg" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">리브레케어 멤버십</p>
+			<p class="fs16 fcGray6 fw400">리브레 멤버십에 등록 후 프리스타일 <br />리브레  센서를 구매하세요!</p>
+			<p class="mt20"><a href="/member/co_join_stepa.php" class="btn btn-orange fw600 wp100">등록하기</a></p>
+		</div>
+
+		<div class="box mt20">
+			<p><img src="../img/common/foot_cs_img_kakao_chat.png" width="125px"alt="" /></p>
+			<p class="fcBlue fs26 fw600">카카오톡채널추가</p>
+			<p class="fs16 fcGray6 fw400"><strong>"프리스타일 리브레"</strong> 카카오톡 채널을 추가하고<br /><strong>혈당관리를 위한 다양한 정보</strong>를 확인해보세요.</p>
+			<p class="mt20"><a href="javascript:coKakaoChannel()" class="btn btn-orange fw600 wp100" target="_blank">등록하기</a></p>
+		</div>
+
+	</div>
+
+	<!-- <div class="footer_info">
+		<ul class="fs11">
+			<li class="mt10">†이미지와 설명은 이해를 돕기 위한 목적으로 사용되었습니다.<br>
+프리스타일 리브레 링크 앱은 NFC 기능을 가지고 있는 스마트폰 중에 Android OS 5.0이상 그리고 iPhone 7이상이거나 OS 11 이상의 스마트폰 기종에서 다운로드할 수 있습니다. 
+</li>
+		</ul>
+	</div> -->
+</div>
+
+{ # footer }

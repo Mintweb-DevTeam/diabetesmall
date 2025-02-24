@@ -1,0 +1,427 @@
+{ # header }
+
+<form name="frmView" id="frmView" method="post" action="../order/cart_ps.php">
+
+{@in}
+
+	{?!is_array(.value_)}
+		<input type='hidden' name='{.key_}' value="{.value_}"/>
+	{:}
+		{@.value_}
+			{?is_array(..value_)}
+				{@..value_}
+				
+					{? !is_array(...value_)}
+						<input type='hidden' name='{.key_}[{..key_}][{...key_}]' value="{...value_}"/>
+					{:}
+						{@...value_}
+							<input type='hidden' name='{.key_}[{..key_}][{...key_}][{....key_}]' value="{....value_}"/>
+						{/}
+						
+					{/}
+				{/}
+
+			{:}
+				<input type='hidden' name='{.key_}[{..key_}]' value="{..value_}"/>
+			{/}
+		
+		{/}
+	{/}
+
+{/}
+</form>
+<form name="aform" method="post" action="../goods/agree_sub.php" target="ifrmProcess">
+<input type="hidden" name="cellPhone" value="{cellPhone}"/>
+<div class="content_box">
+	<!--div class="video_div">
+		<video id="startVideo" width="100%" height="100%" muted autoplay>
+			<source src="{=movie_link}" type="video/mp4">
+			Your browser does not support the video tag.
+		</video>
+		<div id="rTime"></div>
+	</div>
+
+	<div>
+		<button id="play" onclick="playPause()"><span>재생/일시정지</span></button>
+		<button onclick="changeSpeed(1)">1배속</button>
+		<button onclick="changeSpeed(1.25)">1.25배속</button>
+		<button onclick="changeSpeed(1.5)">1.5배속</button>
+		<button onclick="changeSpeed(2)">2배속</button>
+		<button id="toggleSoundButton">음소거 해제</button>		
+		<input type="range" id="seekBar" value="0" step="1" style="display: none;" />
+		
+	</div>
+	
+	
+	<div class="section1 caution">
+		동영상 시청을 완료하고 개인정보 처리 업무 위탁내역과 마케팅 정보 수신에 동의하셔야 주문서로 이동할 수 있습니다.
+	</div-->
+	
+	<div class="section2">
+		<div class="stitle">개인정보처리 업무 위탁 내역</div>
+		<div class="section2_content">
+			
+				<span>• 수탁자 :  메디플래너</span>
+				<span>(서울시 송파구 법원로 128 SK V1 GL 메트로시티 B동 501호)</span>
+				<span class="wt">• 위탁 목적 : 프리스타일 리브레 교육 프로그램 서비스 제공을 위한 전화 상담 및 문자 발송</span>
+				<span>• 위탁 항목 : 성명, 연락처, Email 주소</span>
+				<span>• 보유 및 이용기간 : 프로그램 종료 후부터 5년</span>
+				</br>
+				<span class="check_style01  orange wt"><input type="checkbox" name="agree1" value="y" id="agree1" class="agree"><label for="agree1" class="fcOrange">개인정보 처리 업무 위탁에 동의합니다.</label></span>
+				<span class="check_style01 wt orange"><input type="checkbox" name="agree2" value="n" id="agree2" class="agree"><label for="agree2" class="fcOrange">동의하지 않습니다.</label></span>
+				</br>
+				<span>※ 위의 개인정보 처리 업무 위탁에 대한 동의를 거부할 권리가 있습니다. 그러나 동의를 거부할 경우 원활한 프로그램 운용을 할 수 없어  프로그램 이용에 제한을 받을 수 있습니다.</span>
+				</br>
+				<span class="check_style01 orange"><input type="checkbox" name="agree3" value="y" id="agree3"><label for="agree3" class="fcOrange"><strong>상기 본인은 이벤트 대상자인 당뇨병 환자에 해당되며, 프리스타일 리브레 센서 무료 체험 교육은 최초 1인 1회만 신청하는 것에 동의합니다. 
+				프리스타일 리브레 센서 무료체험으로 받으신 제품은 반드시 환자 본인이 사용해야 하며, 그 외의 목적으로는 사용할 수 없습니다. 프리스타일 리브레 센서 무료 체험은 반드시 전문 간호사의 교육을 받으신 후 사용해야 하며, 무료체험으로 제공받은 제품의 교환 및 반품은 어렵습니다.</strong></label></span>
+			</pre>
+		</div>
+	</div>
+	
+	<div class="section3">
+		<div class="stitle">마케팅 정보 수신 동의</div>
+		<div class="section3_content">
+					<div class="mt20">
+						<!--{@privateConsign}-->
+						<!--{?.sno == 20}-->
+						<div class="agree_modal_pop">
+							<div class="inner">
+								<div class="modal_cont">
+									<h3>{.informNm} <button class="modal_close"></button></h3>
+									<div class="modal_body">{.content}</div>
+								</div>
+							</div>
+						</div>
+						<p class="check_style01 orange">
+							<input name="privateConsignFl[20][]" type="checkbox" value="y" class="check-box check-optional" id="privateConsignFl20-1" />
+							<label for="privateConsignFl20-1"  class="fcOrange wt">{.informNm}</label>
+						</p>
+						</br>
+						<p class="check_style01 orange">
+							<input name="privateConsignFl[20][]" type="checkbox" value="n" class="check-box check-optional" id="privateConsignFl20-2" />
+							<label for="privateConsignFl20-2"  class="fcOrange wt">동의하지 않음(선택)</label>
+						</p>						
+						<button class="agree_modal_btn">자세히 보기</button>
+						<!--{/}-->
+						<!--{/}-->
+					</div>
+					
+					<div class="mt20">
+				<!--선택 2-->
+					<!--{@privateConsign}-->
+					<!--{?.sno == 23}-->
+					<div class="agree_modal_pop">
+						<div class="inner">
+							<div class="modal_cont">
+								<h3>{.informNm} <button class="modal_close"></button></h3>
+								<div class="modal_body">{.content}</div>
+							</div>
+						</div>
+					</div>
+					<p class="check_style01 orange ">
+						<input name="privateConsignFl[23][]" type="checkbox" value="y" class="check-box check-optional" id="privateConsignFl23-0" />
+						<label for="privateConsignFl23-0"  class="fcOrange wt">{.informNm}</label>
+					</p>				
+					</br>
+					<p class="check_style01 orange">
+						<input name="privateConsignFl[23][]" type="checkbox" value="n" class="check-box check-optional" id="privateConsignFl23-1" />
+						<label for="privateConsignFl23-1"  class="fcOrange wt">동의하지 않음(선택)</label>
+					</p>						
+					
+					<button class="agree_modal_btn">자세히 보기</button>
+					<!--{/}-->
+					<!--{/}-->	
+				</div>
+		</div>
+	</div>
+	
+	<div class="section4">
+		<span>※ 위의 개인정보 처리 업무 위탁에 대한 동의를 거부할 권리가 있습니다. 그러나 동의를 거부할 경우 원활한 프로그램 운용을 할 수 없어 프로그램 이용에 제한을 받을 수 있습니다.</span>
+	</div>
+	
+	<div class="section5">
+		<span class="check_style01  orange wt"><input type="checkbox" name="all" value="" id="all" class="all"><label for="all" class="fcOrange">모두 동의하기</label></span>
+	</div>
+	
+	<div style="text-align:center;">
+		<span class="order_btn wt order_btn_on">구매하기</span>
+	</div>	
+	
+	<div style="margin-top:20px;">
+		ADC-87512
+	</div>
+</div>
+</form>
+<form name="wform" method="post" action="../order/order.php">
+</form>
+{ # footer }
+<style>
+	.content_box{padding:5px 5px;}
+	.video_div{width:100%;height:100%;position:relative;margin-bottom:5px;}
+	#rTime{position:absolute;bottom:5px;left:3px;padding:1px solid #00000029;padding:1px 5px;background:#fff;}
+    #startVideo::-webkit-media-controls-play-button,
+    #startVideo::-webkit-media-controls-mute-button {display: none !important;}
+	#startVideo{border:1px solid #00000021;}
+    button {display: inline-block;padding: 2px 5px;font-size: 12px;text-align: center;text-decoration: none;cursor: pointer;border: none;border-radius: 5px;background-color: #3498db;color: #fff;transition: background-color 0.3s ease;}
+    button:hover {background-color: #2980b9;}
+    #play {background-color: #2ecc71;}
+    #play:hover {background-color: #27ae60;}
+    #pause {background-color: #e74c3c;}
+    #pause:hover {background-color: #c0392b;}
+    #speed1, #speed1\\.5 {background-color: #f39c12;}
+    #speed1, #speed1\\.5:hover {background-color: #d35400;}
+    #duration, #checkRemainingTime {background-color: #34495e;}
+    #duration, #checkRemainingTime:hover {background-color: #2c3e50;}
+	.caution{font-size:16px;color:red;margin:15px 0px;}
+	/*.section2{margin-top:120px;}*/
+	.section2 .stitle{font-size:20px;}
+	.section2_content span{display:block;font-size:15px;}
+	.section2_content span input[type="checkbox"]{vertical-align:middle;}
+	label {display: inline-block;vertical-align: top;margin-left: 5px;width: 98%;}	
+	.wt{font-weight:bold;}
+
+	.section3{margin:70px 0px 0px 0px;}
+	.section3 .mt20{position:relative;}
+	.section3 .stitle{font-size:20px;}
+	.section3_content span{display:block;font-size:20px;}
+	.section3_content span input[type="checkbox"]{vertical-align:middle;}
+	label {display: inline-block;vertical-align: top;margin-left: 5px;width: 96.5%;padding-left: 40px;    color: #cf4520}	
+	
+	.section4{margin:30px 0px 0px 0px;}
+	.section4 span{display:block;font-size:15px;}
+	.section5{margin:30px 0px 70px 0px;}
+	.order_btn{padding: 10px 30px;font-size: 20px;border-radius: 10px;/*background: #e7e12c;color: red;display:none;*/cursor:pointer;}
+	.order_btn_on{background: #ffd100;color: #cf4520;}
+	.order_btn_off{background: #0000002e;}
+
+	
+	.check_style01 > label{font-size:15px !important;}
+	.check_style01{display:block !important;}
+	.agree_modal_btn{position:relative;margin: 15px 0px 0px 5px;}
+	.modal_cont{position:relative;}
+	.modal_close{top:50% !important;right:10px !important;}
+</style>
+<script>
+	var soundButton="";
+	$(function(){
+
+		$(".section2_content").find(".agree").click(function(){
+			
+			let agree = $(this).prop("checked");
+			
+			$(".section2_content").find(".agree").each(function(){
+				$(this).prop("checked",false);
+			});			
+
+			if(agree==true){
+				$(this).prop("checked",true);
+			}
+			
+		});		
+		
+		$(".agree_modal_btn").on("click", function(){
+			$(this).parents(".mt20").find(".agree_modal_pop").fadeIn(300);
+		});
+		$(".modal_close").on("click", function(){
+			$(this).parents(".agree_modal_pop").fadeOut(300);
+		});	
+		
+		$("input:checkbox[name*='privateConsignFl[20]']").click(function(){
+			
+			let input = $(this).prop("checked");
+			
+			$("input:checkbox[name*='privateConsignFl[20]']").each(function(){
+				
+				$(this).prop("checked",false);
+			});
+			
+			if(input==true){
+				$(this).prop("checked",true);
+			}
+			
+		});		
+		$("input:checkbox[name*='privateConsignFl[23]']").click(function(){
+			
+			let input = $(this).prop("checked");
+			
+			$("input:checkbox[name*='privateConsignFl[23]']").each(function(){
+				
+				$(this).prop("checked",false);
+			});
+			
+			if(input==true){
+				$(this).prop("checked",true);
+			}
+			
+		});
+		
+		$(".all").click(function(){
+			
+			//if($(this).prop("checked")==true){
+			let element = $(this).prop("checked");
+			$(".check_style01").find("input:checkbox").each(function(){
+				
+				if($(this).val()=='y'){
+					$(this).prop("checked",element);
+				}
+				if($(this).val()=='n'){
+					$(this).prop("checked",false);
+				}
+			});
+			//}
+			
+		});
+		
+		
+		$(".order_btn").click(function(){
+			
+			if($(this).hasClass("order_btn_off")==true){
+			
+				return false;
+			}
+			
+			let check = $(".check_style01").find("input:checkbox:checked").length;
+			
+			if(check<4){
+				alert("동의여부를 선택해주세요.");
+				return false;
+			}
+			
+			let cheked_val='n';
+			$(".agree").each(function(){
+				
+				if($(this).prop("checked")==true){
+					cheked_val=$(this).val();
+				}
+			});
+
+			if(cheked_val =='n'){
+				alert("개인정보 처리 업무 위탁 및 마케팅 정보 수신 동의를 하지  않으면  이벤트 신청이 불가합니다.");
+				return false;
+			}
+			
+			
+			
+			
+			document.aform.submit();
+			
+		}); 
+		
+		soundButton = document.getElementById("toggleSoundButton");
+		soundButton.addEventListener("click", toggleSound);		
+		
+		
+	});
+
+    var video = document.getElementById("startVideo");	
+    var seekBar = document.getElementById("seekBar");
+	var rTime = document.getElementById("rTime");
+		
+    video.addEventListener("timeupdate", function() {
+        seekBar.value = video.currentTime;
+        updateRemainingTime();
+    });
+	
+	video.addEventListener("ended", function() {
+        alert("모든 영상을 시청하셨습니다.구매버튼을 클릭해주세요.");
+		//$(".order_btn").show();
+		$(".order_btn").removeClass("order_btn_off");
+		$(".order_btn").addClass("order_btn_on");
+		
+    });
+	
+    seekBar.addEventListener("input", function() {
+        seekBar.value = video.currentTime;
+		updateRemainingTime();
+    });
+	
+    function toggleSound() {
+        if (video.muted) {
+            video.muted = false;
+            soundButton.textContent = "음소거";
+        } else {
+            video.muted = true;
+            soundButton.textContent = "음소거 해제";
+        }
+    }	
+    function playPause() {
+        if (video.paused) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    }
+
+    function checkRemainingTime() {
+        var remainingTime = video.duration - video.currentTime;
+        alert("남은 시간: " + formatTime(remainingTime));
+    }
+
+    function changeSpeed(speed) {
+        video.playbackRate = speed;
+        video.pause();
+        video.play();
+    }
+
+    function formatTime(timeInSeconds) {
+        var minutes = Math.floor(timeInSeconds / 60);
+        var seconds = Math.floor(timeInSeconds % 60);
+        return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+    }
+
+    function checkDuration() {
+        alert("동영상 시간: " + formatTime(video.duration));
+    }
+	
+    function updateRemainingTime() {
+        var remainingTime = video.duration - video.currentTime;
+        rTime.textContent = "남은 시간: " + formatTime(remainingTime);
+    }	
+	/*
+	function _submit(){
+		document.wform.submit();
+	}
+	*/
+	function orderSubmit(mode,jdata){
+		
+		let data = $.parseJSON(jdata);
+		
+		if(mode != 'd'){
+			
+			return false;
+		}
+		/*
+		
+		$.ajax({	
+			type : 'POST',
+			url : 'https://www.medi-planner.com/ajax/addPatient.asp',
+			dataType : 'json',
+			data : JSON.stringify({
+				
+				"name":data.name,
+				"hp" : data.hp,
+				"hpCipher" : data.hpCipher,
+				"email":data.email
+				
+			}),
+			beforeSend : function(xhr){
+				xhr.setRequestHeader("apiKey", "Q20fVMza4MncMgHA9Wjm");
+				xhr.setRequestHeader("content-type","application/json");
+			},
+			error: function(xhr, status, error){
+				console.log(error);
+			},
+			success : function(response){
+				$('#frmView input[name="mode"]').val('cartIn');
+				$('#frmView input[name=\'cartMode\']').val(mode);
+				document.frmView.submit();				
+			}
+		});	
+		*/
+		
+		$('#frmView input[name="mode"]').val('cartIn');
+		$('#frmView input[name=\'cartMode\']').val(mode);
+		document.frmView.submit();
+		
+	}
+</script>

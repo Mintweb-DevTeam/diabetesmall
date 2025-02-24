@@ -1,0 +1,188 @@
+{*** 신규회원 양식 | qrcode/new_member.html ***}
+{ # header }
+
+<style>
+.hide{display: none}
+
+.wtable{display:table;}
+.wtable .wrow{display:table-row;}
+.wtable .wrow .wcell{display:table-cell;}
+.wtable .wrow .wbtn_cell{background:#cf4520;color:#fff;cursor:pointer;}
+.wtable .wrow .first{width:120px;}
+.wtable .wrow  .second{padding-left:3px;}
+.wtable .wrow .wbtn_cell span{font-size:14px;font-weight:600;cursor:pointer;text-align:center;display:inline-block;width:100%;}
+</style>
+<section class="mb60">
+    <div class="container form-wrap pl20 pr20  {?get.pharmacy_code !='MSCOMMON'  && get.pharmacy_code!="TRYNOWDWGH"}pt20{/} mb60">
+		
+		<div class="intro pb10 mb20 clearfix" style="border-bottom:2px solid #ffc600; ">
+			<h1 class="fcBlue fs20 pull-left mt20">리브레케어 멤버십</h1>
+			<!-- <p class="pull-right"><img src="../img/qrcode/test-img_01.jpg" alt="test-img_01" width="60px"></p> -->
+		</div>
+
+		<p class="fs17 fcOrange fw600">리브레케어 멤버십 계정 생성</p>
+		<p class="fs15 fcGray6 fw400">본인 확인을 위해 이름, 이메일, 휴대폰 번호를 입력하세요.</p>
+		<div class="fs14 mb30"><span class="fcOrange">*</span> 표시는 반드시 입력하셔야 하는 항목입니다</div>
+
+        <form id="frm" action="./co_join_stepc.php" method="post">
+		
+			{?get.pharmacy_code!="MSCOMMON" && get.pharmacy_code!="TRYNOWDWGH"}
+				<input name="pharmacy_code" onChange="pharmacy(this.value)" type="hidden" value="{get.pharmacy_code}">
+			{/}
+			
+			<input name="device" type="hidden" value="{get.device}">
+            <ul class="member-form">
+                <li class="mb30">
+                    <h2 class="fcGray6 fs15">이름 <span class="fcOrange">&#42;</span></h2>
+					<input name="memNm" type="text" class="form-control wp80 co-check" />
+					<p id="memId-error" class="text_warning fs16 mt05">최소 2 이상 입력해 주세요.</p>
+                </li>
+                <li class="mb30">
+                    <h2 class="fcGray6 fs15">이메일 <span class="fcOrange">&#42;</span></h2>
+                    <input name="memId" type="email" class="form-control wp80 co-check" />
+					<p id="email-error" class="text_warning fs16 mt05" style="display: block">이메일을 입력해주세요</p>
+                </li>
+              <li style="display:none;">
+                    <!-- <span>medical shop code</span> -->
+                </li>
+                <li class="mb30">
+                    <h2 class="fcGray6 fs15">휴대폰 번호 <span class="fcOrange">&#42;</span></h2>
+                    <input name="cellPhone" type="tel"  class="form-control w160 co-check" />
+					<button type="button" id="request" onClick="getPassNum(this)" data-undi="injung" class="btn btn-orange btn-sm w120 fs14" disabled>
+						<span class="button-txt">인증번호요청<span class="time-left hide">2m 43s left</span>
+					</span>
+					</button>
+                </li>
+				{?get.pharmacy_code!="MSCOMMON" && get.pharmacy_code!="TRYNOWDWGH"}
+                <li id="pharmacy-info" class="hide">
+                    <p>상호 : <span id="pharmacy-name"></span></p>
+                    <p>전화번호 : <span id="pharmacy-phone"></span></p>
+                </li>
+				{/}
+            </ul>
+       
+        <div class="member-form">
+            <h2 class="fcGray6 fs15">인증번호 <span class="fcOrange">&#42;</span></h2>
+            <input name="passNum" type="number"class="form-control w160" >
+            <button type="button" onClick="checkPass()" id="injung" class="btn btn-orange btn-sm w120 fs14" disabled><span class="button-txt">인증</span></button>
+        </div>
+		
+		{?(get.pharmacy_code=="MSCOMMON" || get.pharmacy_code=="TRYNOWDWGH" )}
+        <div class="member-form" style="margin-top:30px;">
+            <h2 class="fcGray6 fs15">추천인 <span class="fcOrange">&#42;</span></h2>
+             <div class="wtable">
+				<div class="wrow">
+					<div class="wcell wbtn_cell first">
+						<span class="wSsearch">검색하기</span>
+					</div>
+					<div class="wcell second">
+						<!--input name="pharmacy_code" onChange="pharmacy(this.value)" type="text" value="" class="form-control w160 co-check" required -->
+						<input type="text" name="pharmacy_code" class="form-control w160 co-check" required readonly />
+					</div>
+					
+				</div>
+				
+			 </div>
+			 <p style="font-size:15px;font-weight:600;">추천메디컬샵코드를 검색하여 입력해주세요.</p>
+			 <div id="pharmacy-info" class="hide">
+			 <p>상호 : <span id="pharmacy-name"></span></p>
+			<!--p>전화번호 : <span id="pharmacy-phone"></span></p-->
+			</div>
+        </div>
+		{/}
+		 </form>
+		<p class="mt40">
+			{?(get.pharmacy_code=="MSCOMMON" || get.pharmacy_code=="TRYNOWDWGH" )}
+				<input type="button" onClick="submit_this(this)" data-form="frm" data-ckcount="3" data-ck1="memNm" data-ck1text="이름" data-ck2text="이메일" data-ck2="memId"  data-ck3text="추천인" data-ck3="pharmacy_code" value="다음" class="btn_submit btn btn-orange btn-sm w200" />
+			
+			{:}
+				<input type="button" onClick="submit_this(this)" data-form="frm" data-ckcount="2" data-ck1="memNm" data-ck1text="이름" data-ck2text="이메일" data-ck2="memId"  value="다음" class="btn_submit btn btn-orange btn-sm w200" />
+			{/}
+		</p>
+    </div>
+</section>
+
+<script>
+$(function(){
+	$.cookie('memNm', '{data.memNm}', {expires:20*365});
+	$.cookie('memId', '{data.email}', {expires:20*365});
+	$.cookie('cellPhone', '{data.cellPhone}', {expires:20*365});
+	$('.co-check').on('change', function(){
+		if( $('input[name="memNm"]').val() && $('input[name="cellPhone"]').val() && $('input[name="memId"]').val() ){
+			$.ajax({
+				url:'./co_ajax.php',
+				type:'POST',
+				data:{
+					'type':'doubleCheck',
+					'memNm' : $('input[name="memNm"]').val(),
+					'cellPhone' : $('input[name="cellPhone"]').val(),
+					'email' : $('input[name="memId"]').val()
+				},
+				dataType : "json",
+				success: function(x){
+					if(x.isJoin === 'n'){
+						alert("이미 가입된 회원입니다. 해당 이벤트 참여 대상이 아닙니다.");
+						window.location.replace('./co_join_stepe.php?sno='+x.sno+'&name='+x.memNm+'&type=uze');
+					}else if(x.isJoin === 'y'){
+						alert('아델라 회원으로 가입하셨습니다.\n로그인이 필요합니다.');
+						window.location.replace('/member/login.php?returnUrl=');
+					}else{
+						$('#request').prop('disabled', false);
+					}
+				},
+				error:function(request,status,error){
+					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		}
+	});
+	
+	$(".wbtn_cell").click(function(){
+		
+		let x = window.innerWidth;
+		let y = window.innerHeight-200;
+		
+		window.open("medical_select.php","medical_select","width="+x+",height="+y);
+		
+	});
+})
+
+function pharmacy(code){
+	$('#pharmacy-name').text('');
+	$('#pharmacy-phone').text('');
+	$.ajax({
+		url:'./pharmacy_ajax.php',
+		type:'POST',
+		data:{'code':code},
+		dataType : "json",
+		success: function(x){
+			var name = x.name ? x.name : '등록된 메디컬샵이 없습니다.';
+			let phone="";
+				
+					if(name && x.phone)
+						phone  = x.phone;
+						
+				
+						//phone = x.phone ? x.phone : '등록된 메디컬샵이 없습니다.';
+			
+			if(!name && !phone){
+				$("input[name='pharmacy_code']").val('');
+			}
+			$('#pharmacy-info').removeClass('hide');
+			if(name)
+			$('#pharmacy-name').text(name);
+			//if(phone)
+			//$('#pharmacy-phone').text(phone);
+			
+			
+			
+		},
+		error:function(request,status,error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
+</script>
+<script language='JavaScript1.1' async src='//pixel.mathtag.com/event/js?mt_id=1476274&mt_adid=237044&mt_exem=&mt_excl=&v1=&v2=&v3=&s1=&s2=&s3='></script>
+
+{ # footer }

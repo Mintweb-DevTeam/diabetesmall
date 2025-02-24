@@ -1,0 +1,211 @@
+{*** 연속혈당정보수집업로드 | service/blood_info_upload.html ***}
+{ # header }
+
+
+
+<div class="blood_info_upload">
+
+<h3 class="fs24 fcOrange fw600 mb30">연속혈당정보(민감정도 등)<br /> 제3자 제공 동의서</h3>
+
+<div class="agree_box">
+<article>
+	애보트 당뇨사업부는 연속혈당측정정보 DB구축처리에 관한 국민건강보험공단의 지침에 따라, 동의인(만 14세 미만인 경우 법정 대리인, 이하 법정대리인)이 제공하는 개인정보와 민감정보(연속혈당정보)가 어떠한 목적과 방식으로 수집하는지 안내드리며, 제 3자(국민건강보험공단)에게만 제출하는 업무를 부여 받아 이에 아래 사항에 대해 동의를 구하고자 합니다.​
+	<br />
+	<br />동의인(법정대리인)은 국민건강보험공단의 취지 [연속혈당측정용 전극 지원 대상자의 연속혈당측정기 사용에 따른 혈당 변화내역 정보를 구축하여 급여 관리 및 효과평가에 활용]에 동의합니다.​
+	<br />동의인(법정대리인)이 제공한 개인정보와 민감정보(연속혈당정보)의 일체의 정보관리는 국민건강보험공단임을 충분히 이해하고 동의합니다.,​
+	<br />동의인(법정대리인)이 동의한 연속혈당정보(민감정보 등)의 고지한 사항들에 반하는 사고가 발생할 경우 모든 책임은 국민건강보험공단에 있습니다.​
+	​<br />
+	<br />
+	<br />■ 개인정보 및 민감정보 제 3자 제공에 대한 동의​
+	<br />
+	<br />개인정보 및 민감정보의 동의 대상자 : 연속혈당측정용 전극(센서) 급여지원 대상자​
+	<br />개인정보 및 민감정보 수집･이용 목적 : 연속혈당측정용 전극 지원 대상자의 연속혈당측정기 사용에 따른 혈당 변화내역 정보를 구축하여 급여 관리 및 효과평가에 활용​
+	<br />개인정보의 항목 : 성명, 생년월일, 성별​
+	<br />민감정보의 항목 : 연속혈당측정용 당뇨관리프로그램(리브레뷰)의 표준화된 수집 항목(측정날짜, 측정시간, 측정혈당값)​
+	<br />민감정보의 제공주기 : 분기별로 제공​
+	<br />개인정보의 보유 및 이용기간 : 정보수집·이용 목적 달성시까지​
+	<br />민감정보의 보유 및 이용기간 : 정보제공부터 국민건강보험공단 제출 후 7일 이내까지​
+	<br />개인정보 및 민감정보의 제공(제3자) : 국민건강보험공단​
+	<br />
+	<br />동의 거부권리 안내 : 동의인(법정대리인)은 본 연속혈당정보 수집･이용에 대한 동의를 거부하실 수 있습니다. 애보트 당뇨사업부는 여러분의 거부권리를 존중합니다.​
+	<br />정보 수집의 근거: 국민건강보험공단 공고 급여보장실-2019-제2호, ‘당뇨병 소모성 재료 공급업소 등록 기준 등에 관한 공고’​
+	<br />
+	<br />[7. 연속혈당측정에 관한 정보수집공단은 연속혈당측정용 전극 지원 대상자의 연속혈당측정기 사용에 따른 혈당 변화내역 정보를 구축하여 급여 관리 및 효과평가에 활용하기 위해 연속혈당측정용 전극(당뇨병 소모성 재료) 공급업소로부터 연속혈당측정 정보 등을 제공받을 수 있다. 단, 정보제공에 동의한 지원대상자에 한한다.]​
+</article>
+</div>
+
+<div class="mt15">	
+	<span class="inp_chk">
+		<input name="health" type="checkbox" value="y" id="health-agree">
+		<label for="health-agree" class="fs13">국민겅강보험공단의 연속혈당정보 구축을 위해 아래 개인정보 제공에 대한 동의합니다.</label>
+	</span>
+</div>
+
+<div class="mt10 mb40">	
+	<span class="inp_chk">
+		<input name="csv" type="checkbox" value="y" id="csv-agree">
+		<label for="csv-agree"class="fs13">CSV 파일로 업로드 한 연속혈당정보(민감정보)를 국민건강보험공단에 제공함에 동의합니다.</label>
+	</span>
+</div>
+	
+
+<form action="/service/blood_info_upload_ps.php" method="POST" enctype="multipart/form-data" target="ifrmProcess">
+<div class="table_style01 wp100 mb40">
+<table>
+	<colgroup>
+		<col width="140px" />
+		<col />
+	</colgroup>	
+	<tr>
+		<th class="fs13">동의인(환자명,수검자)</th>
+		<td class="fs13 text-left pl15"><input name="patientName" type="text" value="{=memInfo.patientName}"></td>
+	</tr>
+	<tr>
+		<th class="fs13">환자생년월일</th>
+		<td class="fs13 text-left pl15">
+			 <div class="date_check_calendar">
+				<input type="date"  name="patientBirth" class="anniversary js_datepicker" value="{=memInfo.patientBirth}"> 
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<th class="fs13">환자성별</th>
+		<td class="fs13 text-left pl15">
+			<span class="inp_rdo mr10">
+				<input name="gender" type="radio" value="m" id="gender-m" checked />
+				<label for="gender-m"class="fs14 choice_s on">남성</label>
+			</span>
+			<span class="inp_rdo">
+				<input name="gender" type="radio" value="f" id="gender-f" {?memInfo.gender == 'f'}checked{/}>
+				<label for="gender-f"class="fs14 choice_s">여성</label>
+			</span>
+
+			
+		</td>
+	</tr>
+	<tr>
+		<th class="fs13">연속혈당정보<br>제3자 제공 동의일</th>
+		<td class="fs13 text-left pl15">
+			<input name="agreeDt" type="text" value="" style="background-color: #fafafa" readonly>
+		</td>
+	</tr>
+	<tr>
+		<th class="fs13">CSV 파일</th>
+		<td class="fs13 text-left pl15">
+			<input name="csv_file" type="file" accept=".csv">
+		</td>
+	</tr>
+	<tr>
+		<th class="fs13">법정대리인</th>
+		<td class="fs13 text-left pl15">
+			<input name="agent" type="text" value="{=memInfo.agent}" disabled>
+		</td>
+	</tr>
+</table>
+</div>
+<div class="text-center mb50">
+	<button id="btn-save" type="submit" class="btn btn-orange w130 fw600 fs16" disabled>완료</button>
+</div>
+</form>
+
+</div>
+
+
+<style>
+.btn-orange:disabled{cursor:not-allowed; opacity: 0.5;}
+.blood_info_upload{
+	padding:0px 20px;
+	padding-top:40px;
+}
+.blood_info_upload .agree_box{
+	padding:30px;
+	border:1px solid #ddd;
+	height:250px;
+	overflow-y:scroll;
+}
+
+input[type="text"],input[type="file"], input[type="date"] {
+    height: 31px;
+    padding: 0 5px;
+    color: #333333;
+    border: 1px solid #d6d6d6;
+    line-height: 31px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	width:100%;
+}
+</style>
+<script>
+const today = new Date(),
+arr_input = ['patientName','agreeDt','csv_file','patientBirth'],
+checkbox_check=()=>{
+	if($(`input:checkbox[name="csv"]`).is(':checked')&&$(`input:checkbox[name="health"]`).is(':checked')) return true;
+	else return false;
+},
+submit_btn=()=>{
+	let bool = true;
+	$.each(arr_input, function(k, v){
+		if( !$('input[name="'+v+'"]').val().trim() ) bool = false;
+	});
+	if( !$(`input[name="agent"]`).prop('disabled') ){
+		if( !$(`input[name="agent"]`).val() ) bool = false;
+	}
+	if( bool ) $(`#btn-save`).prop( 'disabled', false );
+	else $(`#btn-save`).prop( 'disabled', true );
+},
+checkFileName=(str)=>{
+	const ext = str.split('.').pop().toLowerCase();
+	let bool = true;
+    if($.inArray(ext, ['csv']) == -1) {
+		bool = false;
+    }
+	return bool;
+},
+setEnable=()=>{
+	const arr = $(`input[name="patientBirth"]`).val().split('-'),
+		  birthDate = new Date( arr[0],arr[1],arr[2] ),
+		  age = today.getFullYear() - birthDate.getFullYear() + 1;
+	if( isNaN(age) && $(`input[name="patientBirth"]`).val()  ){
+		alert('정확한 날짜를 입력해 주세요');
+		return;
+	}
+	if( age < 14 ) $(`input[name="agent"]`).prop('disabled', false);
+	else $(`input[name="agent"]`).prop('disabled', true);
+};
+Date.prototype.toFrm = function() {
+  const mm = this.getMonth() + 1,
+  		dd = this.getDate();
+  return [this.getFullYear() + '-',
+          (mm>9 ? '' : '0') + mm + '-',
+          (dd>9 ? '' : '0') + dd
+         ].join('');
+};
+$(function(){
+	setEnable();
+	$(`input[name="patientBirth"]`).on('change', function(){
+		$(`input[name="agent"]`).val('');
+		setEnable();
+		submit_btn();
+	});
+	$(`input:checkbox[name="csv"], input:checkbox[name="health"]`).on('change', function(){
+		if( checkbox_check() ) $(`input[name="agreeDt"]`).val( today.toFrm() );
+		else $(`input[name="agreeDt"]`).val('');
+		submit_btn();
+	});
+	
+	$(`input[name="patientName"], input[name="agreeDt"], input[name="agent"]`).on('change', function(){
+		submit_btn();
+	});
+	$(`input[name="csv_file"]`).on('change', function(){
+		if( !checkFileName( $(this).val().split('\\').pop().toLowerCase() ) ){
+			$(this).val('');
+			alert('CSV 파일만 업로드가 가능합니다.');
+			return;
+		}
+		submit_btn();
+	});
+});
+	
+</script>
+{ # footer }

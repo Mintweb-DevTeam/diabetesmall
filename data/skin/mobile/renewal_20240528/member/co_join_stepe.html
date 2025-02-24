@@ -1,0 +1,312 @@
+{*** 회원가입 > 정보입력 | main/html.php?htmid=member/new_join.html ***}
+{ # header }
+
+<style>
+.youcan{display:none;}
+</style>
+
+<div class="content_box  pr20 pl20 pt20 mb60">
+	<div class="join_agreement_wrap">
+
+		<iframe name="frm_" style="display: none"></iframe>
+		<form id="frm" method="post" action="./co_join_step_ps.php" target="frm_">
+		<!--{@data.privateApprovalOptionFl}-->
+		<input name="privateApprovalOptionFl[{.key_}]" type="hidden" value="{.value_}">
+		<!--{/}-->
+		<!--{@data.privateConsignFl}-->
+		<input name="privateConsignFl[{.key_}]" type="hidden" value="{.value_}">
+		<!--{/}-->
+		<!--{@data.privateOfferFl}-->
+		<input name="privateOfferFl[{.key_}]" type="hidden" value="{.value_}">
+		<!--{/}-->
+		<div class="adela_member_cont">
+
+			<div class="intro pb10 mb20 clearfix" style="border-bottom:2px solid #ffc600; ">
+				<h1 class="fcBlue fs20 pull-left wp70 mt20">
+					아델라 회원가입
+					<p class="fs14 fw300">등록된 리브레케어 멤버십 정보로 온라인 쇼핑몰(아델라) 회원가입이 가능합니다</p>
+				</h1>
+				
+				<p class="pull-right mt30"><img src="../img/qrcode/test-img_01.jpg" alt="test-img_01" width="60px"></p>
+			</div>
+
+
+			<h4 class="fcOrange fs18 fw600"style="letter-spacing:5px;">개인정보 입력:</h4>
+			<p class="fs14 fcGray6"><span class="fcOrange">*</span> 항목은 필수 입력사항입니다.</p>
+			
+
+
+			<div class="mb20 mt30">
+				<h5 class="fs16 fcGray6 ">이름<span class="fcOrange">*</span></h5>	
+				<input name="memNm" type="text" value="{data.memNm}" readonly class="form-control wp90"/>
+			</div>
+
+			<div class="mb20">
+				<h5 class="fs16 fcGray6 ">비밀번호<span class="fcOrange">*</span></h5>
+				
+				<input name="memPw" onKeyUp="test_password(this)" type="password" value="" class="form-control wp90"/>
+				 <p id="pass-error" class="mt10 fcGray6 fs12 text_warning" style="display: block">비밀번호 8자 이상 16자 이하이어야 하며 숫자, 영문, 특수문자가 하나 이상 포함되어야 합니다.</p>
+			</div>
+
+			<div class="mb20">
+				<h5 class="fs16 fcGray6 ">비밀번호 확인<span class="fcOrange">*</span></h5>	
+				 <input id="password-ck" type="password" value="" class="form-control wp90"/>
+			</div>
+
+			<div class="mb20 ">
+				<h5 class="fs16 fcGray6 ">ID<span class="fcOrange">*</span></h5>	
+				<input name="memId" type="text" value="{data.email}" class="form-control wp90" readonly />
+				<input name="abbott_sno" type="hidden" value="{data.sno}" >
+				<input name="groupModDt" type="hidden" value="0000-00-00 00:00:00" >
+				<input name="groupValidDt" type="hidden" value="0000-00-00 00:00:00" >
+				<input name="sleepWakeDt" type="hidden" value="0000-00-00 00:00:00" >
+				<input name="lifeMemberConversionDt" type="hidden" value="0000-00-00 00:00:00" >
+				<input name="pharmacy_code" type="hidden" value="{data.pharmacy_code}" >
+				<input name="appFl" type="hidden" value="y" >
+				<input name="entryDt" type="hidden" value="{=date('Y-m-d H:i:s')}" >
+				<input name="regDt" type="hidden" value="{=date('Y-m-d H:i:s')}" >
+				<input name="approvalDt" type="hidden" value="{=date('Y-m-d H:i:s')}" >
+				<input name="memberFl" type="hidden" value="personal" >
+				<input name="email" type="hidden" value="{data.email}" >
+				<input name="loginLimit" type="hidden" value="null" >
+				<input name="pakey" type="hidden" value="" >
+			</div>
+			
+			
+
+			<div class="mb20">
+				<h5 class="fs16 fcGray6 mb10">휴대폰 번호<span class="fcOrange">*</span></h5>	
+				<!-- <input type="text" value="+82" readonly class="form-control w70"/> -->
+				<input name="cellPhone" type="text" value="{data.cellPhone}" readonly class="form-control wp90"/>
+			</div>
+
+			<div class="mb20">
+				<h5 class="fs16 fcGray6 mb10">주소<span class="fcOrange">*</span></h5>	
+				<p class="post_num wp90">
+					<input name="zonecode" type="text" onClick="gd_postcode_search('zonecode', 'address', 'zipcode')" readonly class="form-control wp100"/>
+					<span><button type="button" onClick="gd_postcode_search('zonecode', 'address', 'zipcode')" class="btn btn-orange fs14">검색</button></span>
+				</p>
+				
+				<p class="mt10"><input name="address" type="text" onClick="gd_postcode_search('zonecode', 'address', 'zipcode')" readonly class="form-control wp90"/></p>
+				<p class="mt10"><input name="addressSub" type="text" class="form-control wp90"/></p>
+			</div>
+
+
+			<section>
+				<h4 class="informNm fs26 fcOrange fw600 mb20">{agreementInfo.informNm}</h4>
+				<div class="scroll-info-content mb20">{=nl2br(agreementInfo.content)}</div>
+				<p class="check_style01">
+					<input name="privateApprovalFl" type="checkbox" value="y" class="check-box" data-must="y" data-name="{agreementInfo.informNm}" id="privateApprovalFl">
+					<label for="privateApprovalFl"" class="fs14">동의 <span class="fcRed">(필수)</span></label>
+				</p>
+			</section>
+			<section>
+				<!--{?privateApproval.displayShopFl == 'y'}-->
+				<h4 class="informNm fs16 fcOrange fw600 mb20">{privateApproval.informNm}</h4>
+				<div class="scroll-info-content mb20">{=nl2br(privateApproval.content)}</div>
+				<p class="check_style01 ">
+					<input name="privateApproval" type="checkbox" value="y" class="check-box" data-must="{privateApproval.modeFl}" data-name="{privateApproval.informNm}" id="privateApproval">
+					<label for="privateApproval" class="fs14">동의 <span class="fcRed">(필수)</span></label>
+				</p>
+				<!--{/}-->
+			</section>
+			
+			<section>
+				<!--{@privateApprovalOption}-->
+				<!--{?.sno != 19 && .sno != 21 && .displayShopFl == 'y'}-->
+				<h4 class="informNm fs26 fcOrange fw600 mb20">{.informNm}</h4>
+				<div class="scroll-info-content mb20">{=nl2br(.content)}</div>
+				<p class="check_style01">
+					<input name="privateApprovalOptionFl[{.sno}]" type="checkbox" value="y" class="check-box" data-must="{.modeFl}" data-name="{.informNm}" id="privateApprovalOptionFl{.sno}">
+					<label for="privateApprovalOptionFl{.sno}"" class="fs14">동의 <span class="fcRed">(필수)</span></label>
+				</p>
+				<!--{/}-->
+				<!--{/}-->
+			</section>
+			<section><!--필수 3-->
+				<!--{@privateOffer}-->
+				<!--{?.sno != 5 && .sno != 22 && .sno != 25 && .sno != 26 && .displayShopFl == 'y'}-->
+					<h4 class="informNm fs26 fcOrange fw600 mb20">{.informNm}</h4>
+				<div class="scroll-info-content mb20">{=nl2br(.content)}</div>
+				<p class="check_style01">
+					<input name="privateOfferFl[{.sno}]" type="checkbox" value="y" class="check-box" data-must="{.modeFl}" data-name="{.informNm}" id="privateOfferFl{.sno}">
+					<label for="privateOfferFl{.sno}"" class="fs14">동의 <span class="fcRed">(필수)</span></label>
+				</p>
+				<!--{/}-->
+				<!--{/}-->
+			</section>
+			<section><!--선택 1-->
+				<!--{@privateConsign}-->
+				<!--{?.sno != 20 && .sno != 23 && .displayShopFl == 'y'}-->
+				<h4 class="informNm fs26 fcOrange fw600 mb20">{.informNm}</h4>
+				<p class="check_style01">
+				<div class="scroll-info-content mb20">{=nl2br(.content)}</div>
+					<input name="privateConsignFl[{.sno}]" type="checkbox" value="y" class="check-box" data-must="{.modeFl}" id="privateConsignFl{.sno}">
+					<label for="privateConsignFl{.sno}"" class="fs14">동의 <span class="fcRed">(필수)</span></label>
+				</p>
+				<!--{/}-->
+				<!--{/}-->
+			</section>
+
+				<p class="mt20" style="text-align:center">
+				{?adobe_member == 1}
+					<button type="button" onClick="submit_check()" class="btn btn-orange w150 btn-sm submit_btn">가입완료</button>
+				{:}
+					<button type="button" onClick="submit_()" class="btn btn-orange w150 btn-sm submit_btn">가입완료</button>
+				{/}
+				</p>
+		</div>
+		</form>
+		<!-- //member_cont -->
+	</div>
+	<!-- //join_agreement_wrap -->
+</div>
+<div class="mt20">ADC-21797 v2.0</div>
+<!-- //content_box -->
+<script>
+//2024.06.27웹앤모바일 회원가입 어도비 전송시작
+function submit_check(){
+	let errMsgArr=[];
+	let errMsg =[];
+	if(!$("input[name='memNm']").val()){
+		errMsg={
+			"errorType":"form",
+			"errorMessage":"이름을 입력하세요.",
+			"formName":"registrationForm",
+			"formType":"signup"
+		}
+		errMsgArr.push(errMsg);
+	}
+	
+	if(!$("input[name='memPw']").val()){
+		errMsg={
+			"errorType":"form",
+			"errorMessage":"비밀번호를 입력하세요.",
+			"formName":"registrationForm",
+			"formType":"signup"
+		}
+		errMsgArr.push(errMsg);
+	}	
+	if(!$("#password-ck").val()){
+		errMsg={
+			"errorType":"form",
+			"errorMessage":"확인 비밀번호를 입력하세요.",
+			"formName":"registrationForm",
+			"formType":"signup"
+		}
+		errMsgArr.push(errMsg);
+	}	
+	
+	if($("#password-ck").val()!=$("input[name='memPw']").val()){
+		errMsg={
+			"errorType":"form",
+			"errorMessage":"비밀번호가 일치하지 않습니다.",
+			"formName":"registrationForm",
+			"formType":"signup"
+		}
+		errMsgArr.push(errMsg);
+	}
+	
+	
+	if(!$("input[name='memId']").val()){
+		errMsg={
+			"errorType":"form",
+			"errorMessage":"아이디를 입력하세요.",
+			"formName":"registrationForm",
+			"formType":"signup"			
+		}
+		errMsgArr.push(errMsg);
+	}	
+	
+	if(!$("input[name='cellPhone']").val()){
+		errMsg={
+			"errorType":"form",
+			"errorMessage":"핸드폰번호를 입력하세요.",
+			"formName":"registrationForm",
+			"formType":"signup"			
+		}
+		errMsgArr.push(errMsg);
+	}
+	
+	
+	if(!$("input[name='zonecode']").val()){
+		errMsg={
+			"errorType":"form",
+			"errorMessage":"우편번호를 입력하세요.",
+			"formName":"registrationForm",
+			"formType":"signup"			
+		}
+		errMsgArr.push(errMsg);
+	}	
+
+	if(!$("input[name='address']").val()){
+		errMsg={
+			"errorType":"form",
+			"errorMessage":"주소를 입력하세요.",
+			"formName":"registrationForm",
+			"formType":"signup"			
+		}
+		errMsgArr.push(errMsg);
+	}
+	if(!$("input[name='addressSub']").val()){
+		errMsg={
+			"errorType":"form",
+			"errorMessage":"나머지 주소를 입력하세요.",
+			"formName":"registrationForm",
+			"formType":"signup"			
+		}
+		errMsgArr.push(errMsg);
+	}	
+	
+	if(!$("input:checkbox[name='privateApprovalFl']").is(":checked")){
+		errMsg={
+			"errorType":"form",
+			"errorMessage":"동의항목에 체크해주세요.",
+			"formName":"registrationForm",
+			"formType":"signup"			
+		}
+		errMsgArr.push(errMsg);
+	}	
+	
+	
+	if(errMsgArr.length>0){
+	
+		_satellite.track('error',{
+			'errors': errMsgArr
+		});
+			
+	}else{
+		_satellite.track('formSubmitSuccess',{
+		'formName': 'registrationForm',
+		'formType': 'signup'
+		});
+	
+	}
+	
+	submit_();
+}
+//2024.06.27웹앤모바일 회원가입 어도비 전송종료
+
+function submit_(){
+	var pw = $('#password-ck').val(),
+		msg = [];
+	if( $('input[name="memPw"]').val() != pw || !pw ){
+		alert('비밀번호를 확인해 주세요');
+		return;
+	}
+	$('.check-box').each(function(){
+		var value = $(this).is(':checked') ? 'y' : 'n';
+		if( $(this).data('must') == 'y' ){
+			if( value == 'n' ) msg.push( $(this).data('name').replace('(필수)', '') );
+		}
+	});
+	if( msg.length != 0 ){
+		alert( msg.join( "\n" ) + ' 은(는) 필수 항목 입니다.' );
+		return;
+	}
+	$('#frm').submit();
+	$('.submit_btn').attr('onClick' , '');
+	alert('가입 완료');
+}
+</script>
+{ # footer }

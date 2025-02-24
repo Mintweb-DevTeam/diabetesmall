@@ -1,0 +1,131 @@
+{*** index | qrcode/co_join_stepa.html ***}
+{ # header }
+<!-- header -->
+
+<div class="pl20 pr20 pt20 mb60">
+
+	
+	<div class="intro pb10 mb20 clearfix" style="border-bottom:2px solid #ffc600;">
+		{?gd_session('co_joinFl')=='1'}
+		<h1 class="fcBlue fs20 pull-left mt20">리브레케어 멤버십 등록</h1>
+		{:}
+		<h1 class="fcBlue fs20 pull-left mt20">리브레케어 멤버십</h1>
+		{/}
+		
+		<!-- <p class="pull-right"><img src="../img/qrcode/test-img_01.jpg" alt="test-img_01" width="60px"></p> -->
+	</div>
+
+	<div class="member-item form-wrap">
+		<!-- <h2 class="fcOrange fs16 mb10">프리스타일 리브레 제품의 오프라인 구매를 위한 리브레케어 멤버이십니까?</h2> -->
+		{?gd_session('co_joinFl')=='1'}
+		<h3 class="fcBlue fs16 fw600 mb10">프리스타일 리브레 무료 체험이벤트 참여를 위해, 리브레 케어를 등록 해주세요</h3>
+		<div class="fs14 mb20 ">해당 이벤트는 1인 1회만 참여  가능하며, 리브레케어 신규 등록 및 사이트 회원 가입  후, 해당 이벤트를 참여 할 수 있습니다.</div>
+		{:}
+		<h3 class="fcBlue fs16 fw600 mb10">아직 리브레케어 멤버가 아니신가요?</h3>
+		<div class="fs14 mb20 ">
+			‘리브레케어’는 프리스타일 리브레 사용자께 제공되는 포괄적인 교육 및 지원 서비스로, 센서 사용 및 수치 이해에 관련한 
+			교육 서비스를 비롯해 제품 교환을 포함한 품질 보증 서비스를 받으실 수 있습니다.
+		</div>
+		{/}
+
+		<div class=" text-center">
+			<div style="position:relative;">
+				<a href="javascript:fn_joinstepb();" style="position:absolute;width:80%;padding-top:16%; z-index:1; bottom:6.5%;left:10%;"></a>
+				<img src="../img/join_stapa_app_mo_v1.jpg" style="width:100%;"alt="" />
+			</div>
+		</div>
+
+<!-- 		<div class="join_box_blue text-center">
+			<a href="javascript:fn_joinstepb();" class="btn btn-yellow btn-sm fs14">리브레케어 멤버십 등록하기</a>
+		</div> -->
+		
+		<!-- <span class="inp_rdo"><input type="radio" name="member_name" value="" checked="checked" id="member01"><label for="member01">Yes, I am</label></span>
+		<span class="inp_rdo"><input type="radio" name="member_name" value="" id="member02"><label for="member02">Not yet, but I want to join</label></span> -->
+	</div>
+
+	<h3 class="fcBlue fs16 fw600 mb10 mt30">리브레케어 멤버십에 이미 등록을 완료하셨다면 인증해주세요.</h3>
+
+	<div class="join_box_orange ">
+	
+		<section>
+		<div class="container">
+			<div class="fs14 mb20 "><span class="fcOrange">*</span> 표시는 반드시 입력하셔야 하는 항목입니다</div>
+			<div class="form-wrap">
+				<iframe name="frm_" style="display: none"></iframe>
+				<form id="frm" action="./old_mem_agree_ps.php" method="post" target="frm_">
+				<input name="pharmacy_code" type="hidden" value="{get.pharmacy_code}">
+				<ul>
+					<li>
+						<h2 class="fcGray6 fs15">휴대폰 번호<span class="fcOrange">&#42;</span></h2>
+						<input name="cellPhone" type="tel" class="form-control w160">
+						<a href="#." type="button" onClick="getPassNum(this)" data-undi="injung" class="btn btn-orange btn-sm w120 fs14">인증번호요청</a>
+					</li>
+				</ul>
+				</form>
+			</div>
+		</div>
+		</section>
+		<section class="mt30">
+		<div class="container">
+			<div class="form-wrap">
+				<ul>
+					<li>
+						<h2 class="fcGray6 fs15">인증번호<span class="fcOrange">&#42;</span></h2>
+						<input name="passNum" type="text"  class="form-control w160" >
+						<button type="button" id="injung" onClick="checkPass()" disabled class="btn btn-orange btn-sm w120 fs14">인증</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+		</section>
+
+		<div class="mt30">
+			<input type="button" onClick="submit_this(this)" data-form="frm" value="완료" class="btn btn-orange btn-sm  w200  fw600" style="border:0;" />
+		</div>
+	</div>
+
+	<p class="mt20">ADC-21804 v2.0</p>
+</div>
+<!--
+Start of Floodlight Tag: Please do not remove
+Activity name of this tag: Libre Care Membership MO
+URL of the webpage where the tag is expected to be placed: 
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 05/09/2022
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre004;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+</script>
+<noscript>
+<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre004;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+</noscript>
+<!-- End of Floodlight Tag: Please do not remove -->
+
+<script>
+function fn_joinstepb() {
+	var axel = Math.random() + "";
+	var a = axel * 10000000000000;
+	var img = document.createElement("iframe");
+	img.setAttribute('src','https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre005;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=' + a + '?');
+	img.setAttribute('width',1);
+	img.setAttribute('height',1);
+	img.setAttribute('frameborder',0);
+	img.setAttribute('style','display:none');
+	document.body.appendChild(img);
+
+	var img1 = document.createElement("iframe");
+	img1.setAttribute('src','https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=libre005;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?');
+	img1.setAttribute('width',1);
+	img1.setAttribute('height',1);
+	img1.setAttribute('frameborder',0);
+	img1.setAttribute('style','display:none');
+	document.body.appendChild(img1);
+	
+	document.location.href = './co_join_stepb.php?device={get.device}&pharmacy_code={get.pharmacy_code}';	
+}
+</script>
+
+
+{ # footer }

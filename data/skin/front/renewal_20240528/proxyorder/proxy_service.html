@@ -1,0 +1,342 @@
+{*** 대리(위임)청구 서비스 안내 | proxyorder/proxy_service.php ***}
+{ # header }
+
+	<style>
+		#contentss{font-size:17px;}
+		#contentss .title{background: #00000014;height: 120px;line-height: 120px;text-align: center; margin:20px 0px 50px;}
+		#contentss h4 { font-size:32px;}
+		#contentss .info{margin-bottom: 30px;}
+		#contentss .info span{display:block;margin-left: 60px;margin-right:40px;}
+		.content_body{width:80%;margin:auto;}
+		.subTit{font-size:22px;color:#001489;font-weight:bold;}
+		.subTit .number{    background: #001489;color: #fff;border-radius: 50%;display: inline-block;width: 40px;height: 40px;line-height: 40px;text-align: center;margin-right: 20px;font-size:22px;font-weight:300;}
+		.button {background:#e95526;color: #fff;padding: 3px 10px;font-size: 16px;margin-left: 50px;cursor: pointer;font-weight:600;}
+		.button2 {background: #e95526;color: #fff;padding: 3px 10px;font-size: 14px;cursor: pointer;}
+		
+		#contentss ul{margin: 10px 0px;}
+		#contentss ul li{line-height: 25px;display: block;height: 25px;    margin-left: 60px;}
+		.marking{font-size: 1px;vertical-align: bottom;margin-right:5px;}
+		.marking_sub{font-size: 1px;vertical-align: top;margin-right:5px;}
+
+		.inner_div{margin: 10px 0px;} 
+		.inner_div .itemw{display: block;line-height: 25px;margin-left: 60px;margin-right:40px;}
+		.itemw .break{display:block;}
+		.itemw .item_sub{display:inline-block;}
+		.itemw .box{   }
+		.sms {display:table;background:#dadada;padding: 30px;width:90%;margin:20px 60px;}
+		.sms div{display:table-cell;vertical-align: middle;}
+		
+		/*
+		.sms div:nth-child(1){background:#fff;width:40%;border-radius:10px;padding: 5px 20px;}
+		.sms div:nth-child(1) span img{width:35%;}
+		.sms div:nth-child(1) span{display:block;font-size:14px;}
+		.sms div:nth-child(1) .first{padding:10px 0px;}
+		.sms div:nth-child(1) .last{padding:10px 0px;}
+		*/
+		.sms_content{width:40%;}
+		.sms_content .con1{background:#fff;width:100%;border-radius:10px;padding: 5px 20px;display:block;}
+		.sms_content span img{width:35%;}
+		.sms_content span{display:block;font-size:14px;}
+		.sms_content .first{padding:10px 0px;}
+		.sms_content .last{padding:10px 0px;}
+		.sms_content .con2{display:block;font-size:13px;width:100%;text-align:center;}
+
+		.sms .sms_content2{text-align:center;}
+		.sms div:nth-child(3){width:40%;}
+		.sms div:nth-child(3) span{display:block;font-size:18px;font-weight:bold;}
+		.sms div:nth-child(3) .tel{margin:10px 0px;color:#e95526;}
+		.sms div:nth-child(3) .button{margin-left:0px;}
+		.sms .button{width:62%;}
+		.send_address_info{background: #0000001f;line-height: 2;width: 90%;margin: 10px 60px;padding: 10px 10px;}
+		.red-color{color:#e95526;}
+
+		#tel_send_form{z-index: 9999;background: #fff;position: absolute;left: 50%;top: 65%;display:none;}
+		#tel_send_form table{border-spacing:0px;border:0px solid #0f2f76;width: 400px;}
+		#tel_send_form table th{background:#0f2f76;border-top:1px solid #0f2f76;border-left:1px solid #0f2f76;border-right:1px solid #0f2f76;color:#fff;}
+		#tel_send_form table td{height:35px;border-top:1px solid #0f2f76;border-right:1px solid #0f2f76;padding:0px 5px;}
+		#tel_send_form table tfoot td{text-align:center;border-left:1px solid #0f2f76;border-bottom:1px solid #0f2f76;}
+		#tel_send_form table tfoot td span{padding: 5px 15px;border: 0px solid #000;background: #0f2f76;color:#fff;cursor:pointer;}
+		#tel_send_bg{position: fixed;top: 0px;width: 100%;height: 100%;left: 0px;background: #00000026;z-index: 999;display:none;}
+		.mb{margin-bottom:60px;}
+
+        .proxyorder_top_bnr{ max-width:100%; }
+
+
+
+	</style>
+	<div id="container">
+
+		<div id="contentss">
+            <img src="./img/proxy_service_top_img1.jpg" alt="연속혈당 측정용 적극은 제1형 당뇨병 환자를 대상으로 건강보험 급여 지원이 가능합니다 (30% 본인부담)" class="proxyorder_top_bnr" />
+			<div class="title"> 
+				<h4>원스톱 대리(위임)청구 서비스 안내</h4>
+			</div>
+
+			<div class="content_body">
+				<div class="info">
+					<span style="letter-spacing: -0.03em;">프리스타일리브레 공식 온라인몰 아델라에서는 보다 편리한 대리(위임)청구 신청 서비스 이용을 위해서 아래와 같이 대리(위임)청구 신청 프로세스를 간소화하였습니다.</span>
+
+				</div>
+                <!--
+				<div class="mb">
+					<span class="subTit"><span class='number'>1</span>대리청구 서비스신청</span><span class='button' onclick="document.location.href='../service/mandate_set.php'">대리청구 서비스 신청하기[클릭]</span>
+					<ul>
+						<li><span class='marking'>-</span>대리청구 서비스 정보제공동의 및 신청</li>
+						<li><span class='marking'>-</span>대리청구 서비스 신청완료문자수신</li>
+					</ul>
+				</div>
+                -->
+				<div class="mb">
+					<span class="subTit"><span class='number'>1</span>요양비 지급청구 위임장작성</span><span class='button'  onclick="document.location.href='../proxyorder/proxy_medical.php'">요양비 지급청구 위임장 작성하기[클릭]</span>
+					<div class="inner_div">
+						<div class="itemw"><span class='marking'>-</span>요양비 지급청구 위임장 작성</div>
+						<div class="itemw">
+							<span class='marking'>-</span>위임하는 사람 신분증 사본첨부
+							<span class="break red-color" >※요양비 지급청구 위임장 및 신분증 사본은 위임기간(최장 5년)에 최초 한번만 등록해 주시면됩니다.</span>
+							
+						</div>
+						<div class="itemw">
+							<div class="item_sub"><span class='marking_sub'>-</span>온라인을 통한 요양비 지급청구 위임장 작성을 윈치 않으실 경우 아래 위임장 양식을 다운로드하여 등기로 발송 해 주시기 바랍니다.
+								<span class="break">- 요양비 지급청구 위임장 양식<a href="/data/skin/front/adela_02_C/file/2022_reimbursement_form.hwp" download  class="fcBlue fwBold">[HWP 다운로드]</a><a href="/data/skin/front/adela_02_C/file/2022_reimbursement_form.pdf" download  class="fcBlue fwBold">[PDF다운로드]</a></span>
+								<span class="break box">
+									※ 위임장 보내실 곳 : 아델라 대리청구 서비스팀 (06147)서울시 강남구 봉은사로 44길 68 이화빌딩 2층
+								</span>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+
+				<div class="mb">
+					<span class="subTit"><span class='number'>2</span>연속혈당측정전극(센서) 처방전 등록 및 발송</span> <span class="button2" onclick="document.location.href='../main/html.php?htmid=service/insurance_guide.html'">처방전 입력예시</span>
+					
+					<div class="inner_div">
+					
+					<div class="itemw">· 종이 처방전을 받으신 경우 스캔 또는 촬영이미지 업로드 <span class="button2" onclick="document.location.href='/member/prescription_img_up.php'">처방전 이미지 업로드</span></div>
+					
+					<div  class="itemw">· 전자처방전을 발행한 경우 처방전 번호 문자발송</div>
+					
+					<div class="sms">
+
+						<div class="sms_content">
+							<div class="con1">
+								
+								<span><img src="./img/health_logo.png"/></span>
+								<span class='first'>[Web발신]</span>
+								<span>○○○님 당뇨병급여대상자입니다.</span>
+								<span>처방전등록번호(DMN202203000001)를 준요양기관(판매대여업소)에 인적사항과 함께 제공(제시) 후 급여품목을 구입(대여)하시기 바랍니다.</span>
+								<span class='last'>☎국민건강보험공단 대표전화 1577-1000</span>
+								
+										
+									
+							</div>
+							<div class="con2">
+								[전자처방전 문자예시]
+							</div>
+						</div>
+						<div class="sms_content2"><img src="./img/arrow.png"/></div>
+						<div style="position:relative;">
+							<span>전자처방전 발행결과 발송된 국민건강보험공단의 문자메시지를 전체복사한 후 전자처방전 전담수신번호로 문자를 보내주세요.</span>
+							<span class='tel'>문자발송번호 : {=substr(cfg['cellPhone'],0,3)}-{=substr(cfg['cellPhone'],3,4)}-{=substr(cfg['cellPhone'],7,4)}</span>
+							<!--span class='button send_tel' data-tel="{cfg['cellPhone']}">전자처방전번호문자발송하기</span-->
+						</div>
+						
+						<div id="tel_send_bg"></div>
+						<div id="tel_send_form">
+							<form name="sendForm" id="sendForm" method="post" action="ifrmProcess">
+							<table >
+								<colgroup>
+									<col width="25%"/>
+									<col width="75%"/>
+								</colgroup>
+								<tbody>
+								<tr><td colspan="2"><div style="font-size:15px;font-weight:bold;text-align:center;">전자처방전번호 문자발송</div></td></tr>
+								<tr>
+									<th>발신자명</th>
+									<td><input type="text" name="sendName" maxlength="50" value="{=memNm}"/></td>
+								</tr>
+								<tr>
+									<th>발신자번호</th>
+									<td>
+										<input type="text" name="sendTel" maxlength="11" placeholder="숫자만입력" value="{cellPhone}"/>
+									</td>
+								</tr>
+								<tr>
+									<th>내용</th>
+									<td>
+										<textarea style="width:300px;height:150px;" name="sendMsg"></textarea>
+									</td>
+								</tr>
+								</tbody>
+								<tfoot>
+								<tr>
+									<td colspan='2'><span class='send'>전송</span> <span class="cancle">취소</span></td>
+								</tr>
+								</tfoot>
+							</table>
+							</form>
+						</div>
+					</div>
+					
+
+					<div style="display:flex; margin-top:1rem;" class="pl60">
+						<div class="fs22 fw600 red-color">※ </div>
+						<div class="ml10">
+							<div class="fs22 fw400 red-color">처방전은 대리(위임)청구시 매번 등록 또는 발송 해 주셔야 합니다.</div>
+						</div>
+					</div>
+					</div>
+				</div>
+
+				<div class="mb">
+					 <div class="subTit"><span class='number'>3</span>서류 등록 또는 발송 후 대리청구 구매 페이지에서 결제</div>
+					 <div class="inner_div">
+						 <div class="itemw"><span class='marking'>-</span>대리청구 구매페이지에서 상품 선택 및 결제 <span class='button' onclick="document.location.href='/goods/goods_list.php?cateCd=002'">대리청구 구매페이지[클릭]</span></div>
+					</div>
+
+				</div>
+				<div class="mb">
+					<div class="subTit"><span class='number'>4</span>아델라 대리청구서비스팀에서 서류확인 후 제품발송</div>
+					<div class="inner_div">
+						<div class="itemw">
+							<!--ul-->
+								<div><span class='marking'>-</span>요양비 지급청구 위임장과 처방전 확인이 완료된 후 제품 발송이 가능합니다.</div>
+								<div><span class='marking'>-</span>처방전 이미지 업로드 또는 전자처방전을 등록하실 경우 당일 확인 및 발송이 가능합니다.</div>	
+							<!--/ul-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="text-center" style="padding:0px 0 60px 0px;">
+					<p class="fs22 pt10 pb10">
+					<img src="../img/sub/ins_img_01.jpg" alt="" width="80px" style="vertical-align:middle; margin-right:15px" /> 대리청구 관련 문의사항 : <span class="fwBold fcBlue">(02)6451-0041</p>
+					<!-- <a href="/service/mandate_set.php" class="blue-btn fs18 fwBold mt20">대리 청구 신청하기</a> -->
+				</div>
+			<div class="insurance_new_box1 clearfix" >
+				<div><img src="/data/skin/front/adela_02_C/img/insurance_new_img1.jpg" class="wp100" alt=""></div>
+				<div style="height:286.96px; overflow:hidden;">
+                    <img src="../img/sub/insurance_new1_img2_1.jpg" class="wp100" alt="">
+                    <a href="/main/html.php?htmid=service/insurance_app.html​"><img src="../img/sub/insurance_new1_img2_2.jpg" class="wp100" alt=""></a>
+                    <!-- <a href="https://youtu.be/VLuAJYfA-VY" target="_blank"><img src="../img/sub/insurance_new1_img2_3.jpg" class="wp100" alt=""></a> -->   <!-- 영상보기버튼 -->
+					<img src="../img/sub/insurance_new1_img2_3_blank.jpg" class="wp100" alt="">
+                </div>
+				<div><a href="/main/html.php?htmid=service/insurance_guide.html"><img src="/data/skin/front/adela_02_C/img/insurance_new_img3.jpg" class="wp100" alt=""></a></div>
+				<div><img src="/data/skin/front/adela_02_C/img/insurance_new_img4.jpg" class="wp100" alt=""></div>
+			</div>
+
+
+		</div>
+		
+	</div>
+
+
+	<div id="footer_wrap">
+	<!-- footer_con01 -->
+	<div class="footer_con01">
+		<h3>고객지원</h3> </br></br></br></br>
+		<ul class="clearfix">
+			<li>
+				<div class="item">
+					<p><img src="../img/main/main_sec06_img01.gif" alt="" /></p>
+					<h4>FAQ</h4>
+					<p class="tx1">자주하는 질문으로 프리스타일<br /> 시스템에 대해 더 알아보십시오</p>
+					<p class="more"><a href="/main/html.php?htmid=service/faq_new.html">더 알아보기</a></p>
+				</div>
+			</li>
+			<li>
+				<div class="item">
+					<p><img src="../img/main/main_sec06_img02.gif" alt="" /></p>
+					<h4>고객 서비스</h4>
+					<p class="tx1">도움이 필요하시다면 <br />
+						프리스타일 리브레 고객서비스 <br />
+						팀에게 문의하십시오 
+					</p>
+					<div class="tx2">
+						<strong>AS 및 제품관련 문의</strong>
+						<br /><a href="tel:080-014-5757" style="color:#666">080-014-5757</a>
+						<br />ADC-CS.KR@abbott.com
+						<br>월요일-금요일, 오전 09:00-오후 06:00
+						<br>(토요일·일요일·공휴일 휴무)
+					</div>
+					<div class="tx2">
+						<strong>제품 구매 및 배송관련 문의</strong>
+						<br /><a href="tel:02-6451-0040" style="color:#777">02-6451-0040</a>
+						<br />contact@adelaltd.co.kr
+						<br />월요일-금요일, 오전 09:00-오후5:30
+						<br />점심시간 12:00~13:00 
+						<br />(토요일·일요일 ·공휴일 휴무)
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="item">
+					<p><img src="../img/main/main_sec06_img03.gif" alt="" /></p>
+					<h4>리브레케어 멤버십</h4>
+					<p class="tx1">리브레 멤버십에 등록 후 <br />
+						프리스타일 리브레 센서를 구매하세요!</p>
+					<p class="more"><a href="/member/co_join_stepa.php">등록하기</a></p>
+				</div>
+			</li>
+		</ul>
+		
+	</div>
+	</div>
+	<div class="mt20">ADC-70930 v3.0</div>
+
+{ # footer }
+
+<script type="text/javascript">
+
+	$(function(){
+	
+		$(".cancle").click(function(){
+			$("#tel_send_bg").hide();
+			$("#tel_send_form").hide();
+		
+		});
+
+		/*$(".send").click(function(){
+			let check = /^[0-9]+$/;
+
+			var tel=$("input[name='sendTel']").val();
+
+			if(!$("input[name='sendName']").val()){
+				alert("발신자명을 입력해주세요.");
+				return false;
+			}
+
+			if(!check.test(tel)){
+				alert("숫자만 입력해주세요.");
+				return false;
+			}
+
+			if(!$("textarea[name='sendMsg']").val()){
+				alert("발신내용을 입력해주세요.");
+				return false;
+			}
+
+			$.ajax({
+				url:"sms_send.php",
+				method:"POST",
+				data:$("#sendForm").serialize(),
+			})
+			.done(function(msg){
+
+				if(msg.result==1){
+					alert("발송되었습니다.");
+					document.location.reload();
+				}
+			
+			});
+
+					
+		});
+		*/
+
+		$("#tel_send_bg").click(function(){
+			$("#tel_send_bg").hide();
+			$("#tel_send_form").hide();
+		});
+	});
+</script>

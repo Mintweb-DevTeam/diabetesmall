@@ -1,0 +1,224 @@
+{*** [위젯] 정기배송 주문서 카드 선택 | goods/_select_card.php ***}
+<link rel="stylesheet" type="text/css" href='js/swiper.min.css'>
+<link rel="stylesheet" type="text/css" href='css/widget/select_card.css'>
+<script src='js/swiper.min.js'></script>
+<div class='card_list_page' style='margin-top: 10px;'>
+<input type='hidden' name='idx_card' class='idx_card' value=''>
+<input type='hidden' name='settleKind' class='settleKind' value='pc'>
+ <div class='card_selection_box'>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+     <!--{ @list }-->
+      <div class="swiper-slide card" data-idx='{.idx}'>
+          <div class='select_card'></div>
+          <div class='cardNm'>{.cardNm}</div>
+         <div class='cardInfo'>등록일 : {=date("Y.m.d", .regStamp)}</div>
+      </div> <!-- cardNm -->
+     <!--{ / }-->
+     <div class="swiper-slide addCard">
+            <a class='inner_box js_add_card_order_btn' href='#'>
+                  <img src='img/card/plus.png' width='30'>
+                <div class='text'>결제카드추가</div>
+            </a>
+     </div>  <!-- addCard -->
+    </div>
+</div> <!-- swiper-container -->
+</div> <!-- card_selection_box -->
+{?adobe==1}
+<!--2024.06.25웹앤모바일 어도비 전송용데이터 생성시작-->
+<!--{ @ cartInfo }-->
+<!--{ @ .value_ }-->
+<!--{ @ ..value_ }-->
+		
+			<!--2024.06.24 웹앤모바일 변경시작-->
+			<input type="hidden" name="TmpCartSno[]" value="{...idx}" data-price="{=...price['goodsPriceSubtotal']}" data-mileage="{=(...mileage.goodsMileage + ...mileage.memberMileage)}" data-goodsdc="{=...price.goodsDcPrice}" data-memberdc="{=(...price.memberDcPrice + ...price.memberOverlapDcPrice)}" data-coupondc="{...price.couponGoodsDcPrice}" data-possible="{=...orderPossible}" data-goods-key="{=...goodsKey}" data-goods-no="{=...goodsNo}" data-goods-nm="{=gd_remove_only_tag(...goodsNm)}" data-option-nm="{=...optionNm}" data-fixed-sales="{=...fixedSales}" data-sales-unit="{=...salesUnit}" data-fixed-order-cnt="{=...fixedOrderCnt}" data-min-order-cnt="{=...minOrderCnt}" data-max-order-cnt="{=...maxOrderCnt}" data-default-goods-cnt="{=...goodsCnt}" data-catenm="{=...cateNm}" data-brandnm="{=...brandNm}" data-variant="{...variant}" data-tax="{...price.goodsVat.tax}"  data-supply="{...price.goodsVat.supply}"/>
+			<!--2024.06.24 웹앤모바일 변경종료-->
+		
+<!--{ / }-->
+<!--{ / }-->
+<!--{ / }-->
+<!--2024.06.25웹앤모바일 어도비 전송용데이터 생성종료-->
+{/}
+<script>
+var swiper = new Swiper('.card_selection_box .swiper-container', {
+     slidesPerView: 'auto',
+     spaceBetween: 10
+});
+
+$(function() {
+
+	var agree_subscription =  localStorage.getItem("agree_subscription");
+	
+	if(agree_subscription == "true"){
+
+		$("#agree_subscription").trigger("click");//prop("checked",true);
+	}
+	
+	var deliverydate =  localStorage.getItem("deliverydate");
+
+	if(deliverydate != ""){
+		$("#datepicker").val(deliverydate);
+		 updateScheduleList();
+	}
+
+
+	var orderName =  localStorage.getItem("orderName");
+
+	if(orderName != "" && orderName!= null)
+		$("input[name='orderName']").val(orderName);
+
+	var orderPhone =  localStorage.getItem("orderPhone");
+	if(orderPhone != "" && orderPhone!= null)
+	$("input[name='orderPhone']").val(orderPhone);
+
+	var orderCellPhone =  localStorage.getItem("orderCellPhone");
+	if(orderCellPhone != "" && orderCellPhone!= null)
+	$("input[name='orderCellPhone']").val(orderCellPhone);
+
+	var orderEmail =  localStorage.getItem("orderEmail");
+	if(orderEmail != "" && orderEmail!= null)
+	$("input[name='orderEmail']").val(orderEmail);
+
+	var receiverName =  localStorage.getItem("receiverName");
+	if(receiverName != "" && receiverName!= null)
+	$("input[name='receiverName']").val(receiverName);
+
+	var receiverZonecode =  localStorage.getItem("receiverZonecode");
+	if(receiverZonecode != "" && receiverZonecode!= null)
+	$("input[name='receiverZonecode']").val(receiverZonecode);
+
+
+	var receiverAddress =  localStorage.getItem("receiverAddress");
+	if(receiverAddress != "" && receiverAddress!= null)
+	$("input[name='receiverAddress']").val(receiverAddress);
+
+
+	var receiverAddressSub =  localStorage.getItem("receiverAddressSub");
+	if(receiverAddressSub != "" && receiverAddressSub!= null)
+	$("input[name='receiverAddressSub']").val(receiverAddressSub);
+
+	var receiverPhone =  localStorage.getItem("receiverPhone");
+	if(receiverPhone != "" && receiverPhone!= null)
+	$("input[name='receiverPhone']").val(receiverPhone);
+
+	var receiverCellPhone =  localStorage.getItem("receiverCellPhone");
+	if(receiverCellPhone != "" && receiverCellPhone!= null)
+	$("input[name='receiverCellPhone']").val(receiverCellPhone);
+
+	var orderMemo =  localStorage.getItem("orderMemo");
+	if(orderMemo != "" && orderMemo!= null)
+	$("input[name='orderMemo']").val(orderMemo);
+
+
+   $(".card_selection_box .card").click(function() {
+        if ($(this).hasClass("disabled"))
+            return false;
+            
+        var idx = "";
+        if ($(this).hasClass("on")) {
+            $(this).removeClass("on");
+        } else {
+            $(".card_selection_box .card").removeClass("on");
+            $(this).addClass("on");
+            idx = $(this).data("idx");
+        }
+        
+        $(".idx_card").val(idx);
+		
+		{?adobe==1}
+			//2024.06.24웹앤모바일 주문서페이지에서 9단계처리
+				let loginStatus="logged-in";
+				
+				<!--{ ? gd_is_login() === false }-->
+					loginStatus="logged-out";
+				<!--{ / }-->
+				
+				let  paymentMethod="";
+				paymentMethod="Credit Card";
+
+				
+				
+				setTimeout(function(){
+					let products = [];
+					let total = 0;
+					let tax = 0;
+					let shipping = parseFloat($("input[name='totalDeliveryCharge']").val()) + parseFloat($("input[name='deliveryAreaCharge']").val());
+					
+					$('input[name="TmpCartSno[]"]').each(function() {
+						
+						tax+=parseFloat($(this).data("tax"));
+						total+=parseFloat($(this).data("tax")) + parseFloat($(this).data("supply"));
+						
+						let product = {
+							'id': $(this).data("goods-no"),
+							'name': $(this).data("goods-nm") + " "+ $(this).val(),
+							'category': $(this).data("catenm") + " "+  $(this).val(), 
+							'variant': $(this).data("variant") + " "+  $(this).val(),
+							'brand': $(this).data("brandnm") + " "+  $(this).val(),
+							'price': parseFloat($(this).data("price")/parseInt($(this).data("default-goods-cnt"))),
+							'quantity': $(this).data("default-goods-cnt") 
+						};
+
+						products.push(product);		
+						
+					});
+					
+					
+					_satellite.track('purchase',{
+						'cartId': "{=adobeCartId}",
+						'currency': 'KRW',
+						'total':total,
+						'transactionId':'{=transactionId}',
+						'shipping':shipping,
+						'tax':tax,
+						'paymentMethod':paymentMethod,
+						'loginStatus':loginStatus,
+						'products': products
+					});	
+					
+					
+				},1000);
+			
+			////2024.06.24웹앤모바일 주문서페이지에서 9단계 전송종료		
+		{/}		
+   });
+});
+
+function pgRegisterCallbackOrder(pass)
+{   
+        
+    if (typeof pass == "undefined" || pass == "") {
+        alert("결제 비밀번호를 등록하세요.");
+        wm.layer.close();
+        return false;
+    }
+    
+    var idx_card = $(".idx_card").val();
+    if (typeof idx_card == "undefined" || idx_card == "") {
+        alert("결제카드를 선택하세요.");
+        wm.layer.close();
+        return false;
+    }
+    
+    /* 결제 비밀번호 체크 */
+    $.ajax({
+        url : "../subscription/ajax.php",
+        type : "post",
+        dataType : "text",
+        data : { mode : "chkCardPassword", idx_card : idx_card, password : pass },
+        async : false, 
+        success : function (data) {
+            if (data == '1') {
+                changePaymentButton(0);
+                frmOrder.target = 'ifrmProcess';
+                frmOrder.submit();
+            } else {
+                alert("결제 비밀번호가 일치하지 않습니다.");
+            }
+        },
+        error : function (res) {
+            console.log(res);
+        }
+    });
+}
+</script>

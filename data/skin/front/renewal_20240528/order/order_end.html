@@ -1,0 +1,671 @@
+{*** 주문완료 | order/order_end.php ***}
+{ # header }
+
+
+<div class="content_box">
+    <div class="order_wrap">
+        <div class="order_tit">
+            <h2>{=__('주문완료')}</h2>
+            <ol>
+                <li><span>01</span> {=__('장바구니')} <span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+                <li><span>02</span> {=__('주문서작성/결제')}<span><img src="../img/member/icon_join_step_off.png" alt=""></span></li>
+                <li class="page_on"><span>03</span> {=__('주문완료')}</li>
+            </ol>
+        </div>
+        <!-- //member_tit -->
+
+        <div class="order_cont">
+            <div class="order_end">
+
+                <!--{ ? gd_isset(orderInfo.orderStatus) == 'o' }-->
+                <!-- 주문 접수 완료 -->
+                <div class="order_end_completion">
+                    <span><img src="../img/order/order_end_completion.png" alt="" /></span>
+                    <p><strong>{=__('주문이 정상적으로 접수 되었습니다.')}</strong><!-- <br /><em>{=__('감사합니다.')}</em> --></p>
+					<!--2024.02.05웹앤모바일 start_goods조건추가-->
+					{?start_goods!=1}
+					<div class="mt10"><strong>프리스타일 리브레를 효과적으로 사용하기 위하여,<br>
+					아래 "교육 신청 하기"를 클릭해주세요.</strong></div>
+					<div style="margin-top:20px;">
+						<a href='http://crm.medi-planner.com/_pop/adela_pop.asp?ad_name={codata.memNm}&ad_tel={codata.cellPhone}&ad_email={codata.email}' target="_blank" class="btn_order_end_edu" style="background:#cf4520; border:1px solid #cf4520; width:340px"><em style="font-size:18px">교육 신청 하기</em></a>
+					</div>
+					{/}
+
+                </div>
+                <!--{ : orderInfo.orderStatus == 'p' }-->
+				<script language='JavaScript1.1' async src='//pixel.mathtag.com/event/js?mt_id=1475429&mt_adid=237044&v1={=gd_global_currency_display(gd_isset(orderInfo.settlePrice))}&s1={orderInfo.orderNo}&s2=1000000000&s3={orderInfo.orderGoodsCnt}'></script>
+				<script language='JavaScript1.1' async src='//pixel.mathtag.com/event/js?mt_id=1553085&mt_adid=237044&mt_exem=&mt_excl=&v1={=gd_global_currency_display(gd_isset(orderInfo.settlePrice))}&v2=&v3=&s1={orderInfo.orderNo}&s2={=.goodsNo}&s3={orderInfo.orderGoodsCnt}'></script>
+
+                <!-- 결제 완료 -->
+                <div class="order_end_completion">
+                    <span><img src="../img/order/order_end_completion.png" alt="" /></span>
+                    <p><strong>{=__('결제가 완료 되었습니다.')}</strong><br /><em style="font-size:18px;">{=__('감사합니다.')}</em></p>
+					
+					<!--2024.02.05웹앤모바일 start_goods조건추가-->
+					{?start_goods!=1}
+					{?!codata.msg}
+					<p style="font-size:16px;line-height:1.6">
+						 신청 고객 대상으로
+						<br />온라인 교육을 진행합니다.
+						<br />
+						<br />교육을 원하실 경우
+						<br />아래 교육 신청 버튼을 클릭하여 신청서를 작성해주시기 바랍니다.
+					</p>
+					<div style="margin-top:40px;">
+						<a href='http://crm.medi-planner.com/_pop/adela_pop.asp?ad_name={codata.memNm}&ad_tel={codata.cellPhone}&ad_email={codata.email}' target="_blank" class="btn_order_end_edu" style="background:#cf4520; border:1px solid #001489; width:340px"><em style="font-size:18px">프리스타일리브레 온라인 교육 신청하기</em></a>
+					</div>
+					{/}
+					{/}
+				</div>
+                <!--{ : orderInfo.orderStatus == 'f' }-->
+                <!-- 결제 실패 -->
+                <div class="order_end_completion">
+                    <span><img src="../img/order/order_end_completion.png" alt="" /></span>
+                    <p>
+                        <!--{ ? gd_pg_result_recheck(orderInfo.pgName) === true }-->
+                        <strong>{=__('결제가 정상적으로 이루어지지 않았습니다. [결제확인] 버튼을 클릭하여 정상여부를 다시 확인해주시기 바랍니다.')}</strong><br /><em>{=__('지속적으로 문제가 발생될 경우 관리자에게 문의 하시기 바랍니다.')}</em>
+                        <!--{ : }-->
+                        <strong>{=__('결제가 정상적으로 이루어지지 않았습니다. 다시 결제 진행을 해주시기 바랍니다.')}</strong><br /><em>{=__('지속적으로 문제가 발생될 경우 관리자에게 문의 하시기 바랍니다.')}</em>
+                        <!--{ / }-->
+                    </p>
+                </div>
+                <!--{ : empty(orderInfo.orderStatus) === false }-->
+                <!-- 재접속 등에 의한 기주문 완료 건으로 접속시 -->
+                <div class="order_end_completion">
+                    <span><img src="../img/order/order_end_completion.png" alt="" /></span>
+                    <p><strong>{=__('이미 결제가 완료된 주문입니다.')}</strong><br /><em>{=__('감사합니다.')}</em></p>
+                </div>
+                <!--{ : }-->
+                <!-- 재접속 등에 의한 기주문 완료 건으로 접속시 -->
+                <div class="order_end_completion">
+                    <span><img src="../img/order/order_end_completion.png" alt="" /></span>
+                    <p><strong>{=__('주문 정보가 없습니다. 다시 확인 바랍니다.')}</strong><br /><em>{=__('지속적으로 문제가 발생될 경우 관리자에게 문의 하시기 바랍니다.')}</em></p>
+                </div>
+                <!--{ / }-->
+
+                <div class="order_end_more">
+                    <a href="https://www.diabetesmall.co.kr/board/view.php?&bdId=notice&sno=26"></a>
+                    <img src="../img/order/order_end_more.jpg" alt="" />
+                </div>
+
+                <!--{ ? empty(orderInfo.orderStatus) === false }-->
+                <div class="order_zone_tit">
+                    <h4>{=__('주문요약정보')}</h4>
+                </div>
+
+                <div class="order_table_type">
+                    <table class="table_left">
+                        <colgroup>
+                            <col style="width:15%;">
+                            <col style="width:85%;">
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <th>{=__('결제수단')}</th>
+                            <td><div class="pay_with_list">
+                                <strong>{=gd_isset(orderInfo.settleName)}</strong>
+                                <ul>
+                                    <!--{ ? gd_isset(orderInfo.settleGateway) == 'f' }-->
+                                    <!--작업자는 간편결제 내용을 작성해주세요.-->
+                                    <!--{ : }-->
+                                    <!--{ ? gd_isset(orderInfo.settleKind) == 'gb' }-->
+                                    <li>{=__('입금은행')} : {=gd_isset(orderInfo.bankAccount[0])}</li>
+                                    <li>{=__('입금계좌')} : {=gd_isset(orderInfo.bankAccount[1])}</li>
+                                    <li>{=__('예금주명')} : {=gd_isset(orderInfo.bankAccount[2])}</li>
+                                    <li>{=__('입금금액')} : <strong class="deposit_money">{=gd_global_currency_display(gd_isset(orderInfo.settlePrice))}</strong></li>
+                                    <li>{=__('입금자명')} : {=gd_isset(orderInfo.bankSender)}</li>
+                                    <!--{ : }-->
+                                    <!--{ ? gd_isset(orderInfo.settleMethod) == 'c' }-->
+                                    <li>{=gd_isset(orderInfo.pgSettleNm[0])}</li>
+                                    <li>{=__('결제금액')} : <strong class="deposit_money">{=gd_global_currency_display(gd_isset(orderInfo.settlePrice))}</strong></li>
+                                    <!--{ : gd_isset(orderInfo.settleMethod) == 'b' }-->
+                                    <li>{=__('이체은행')} : {=gd_isset(orderInfo.pgSettleNm[0])}</li>
+                                    <li>{=__('결제금액')} : <strong class="deposit_money">{=gd_global_currency_display(gd_isset(orderInfo.settlePrice))}</strong></li>
+                                    <!--{ : gd_isset(orderInfo.settleMethod) == 'v' }-->
+                                    <li>{=__('입금은행')} : {=gd_isset(orderInfo.pgSettleNm[0])}</li>
+                                    <li>{=__('가상계좌')} : {=gd_isset(orderInfo.pgSettleNm[1])}</li>
+                                    <!--{ ? gd_isset(orderInfo.pgSettleNm[2]) != '' }-->
+                                    <li>{=__('예금자명')} : {=gd_isset(orderInfo.pgSettleNm[2])}</li>
+                                    <!--{ / }-->
+                                    <!--{ ? gd_isset(orderInfo.pgSettleCd[0]) != '' }-->
+                                    <li>{=__('송금일자')} : {=gd_date_format('Y-m-d', gd_isset(orderInfo.pgSettleCd[0]))} {=__('까지')}</li>
+                                    <!--{ / }-->
+                                    <li>{=__('입금금액')} : <strong class="deposit_money">{=gd_global_currency_display(gd_isset(orderInfo.settlePrice))}</strong></li>
+                                    <!--{ : gd_isset(orderInfo.settleMethod) == 'h' }-->
+                                    <!--{ ? gd_isset(orderInfo.pgSettleNm[0]) != '' }-->
+                                    <li>{=__('통신사')} : {=gd_isset(orderInfo.pgSettleNm[0])}</li>
+                                    <!--{ / }-->
+                                    <!--{ ? gd_isset(orderInfo.pgSettleCd[0]) != '' }-->
+                                    <li>{=__('결제 휴대폰 번호')} : {=gd_isset(orderInfo.pgSettleCd[0])}</li>
+                                    <!--{ / }-->
+                                    <li>{=__('결제금액')} : <strong class="deposit_money">{=gd_global_currency_display(gd_isset(orderInfo.settlePrice))}</strong></li>
+                                    <!--{ / }-->
+                                    <!--{ / }-->
+                                    <!--{ / }-->
+                                </ul>
+                            </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{=__('주문번호')}</th>
+                            <td>{orderInfo.orderNo}</td>
+                        </tr>
+                        <!--{ ? orderInfo.orderStatus == 'f' }-->
+                        <tr>
+                            <th>{=__('결제실패사유')}</th>
+                            <td>{=gd_isset(orderInfo.pgFailReason)}</td>
+                        </tr>
+                        <!--{ ? gd_pg_result_recheck(orderInfo.pgName) === true }-->
+                        <tr>
+                            <th>{=__('결제확인')}</th>
+                            <td><a href="../payment/{=orderInfo.pgName}/pg_result_recheck.php?orderNo={orderInfo.orderNo}" class="normal-btn small2"><em>{=__('결제확인')}</em></a></td>
+                        </tr>
+                        <!--{ / }-->
+                        <!--{ : }-->
+                        <tr>
+                            <th>{=__('주문일자')}</th>
+                            <td>{orderInfo.regDt}</td>
+                        </tr>
+                        <tr>
+                            <th>{=__('주문상품')}</th>
+                            <td>{orderInfo.orderGoodsNm}</td>
+                        </tr>
+                        <tr>
+                            <th>{=__('주문자명')}</th>
+                            <td>{orderInfo.orderName}</td>
+                        </tr>
+                        <tr>
+                            <th>{=__('배송정보')}</th>
+                            <td>
+                                <!--{ ? orderInfo.multiShippingFl == 'y' }-->
+                                <div class="order_table_type">
+                                    <table class="table_left">
+                                        <colgroup>
+                                            <col style="width:15%;">
+                                            <col style="width:85%;">
+                                        </colgroup>
+                                        <tr>
+                                            <th>{=__('메인 배송지')}</th>
+                                            <td>
+                                                <p>
+                                                    <!--{ ? orderInfo.deliveryVisit != 'y' }-->
+                                                    <strong>{=gd_isset(orderInfo.receiverName)}</strong> <br />
+                                                    <!--{ ? gGlobal.isFront }-->
+                                                    [{=gd_isset(orderInfo.receiverZonecode)}] {=gd_isset(orderInfo.receiverAddressSub)}, {=gd_isset(orderInfo.receiverAddress)}, {=gd_isset(orderInfo.receiverState)}, {=gd_isset(orderInfo.receiverCity)}, {=gd_isset(orderInfo.receiverCountry)}<br />
+                                                    (+{=gd_isset(orderInfo.receiverPhonePrefix)}) {=gd_isset(orderInfo.receiverPhone)}  / (+{=gd_isset(orderInfo.receiverCellPhonePrefix)}) {=gd_isset(orderInfo.receiverCellPhone)}<br />
+                                                    {=__('남기실 말씀')} : {=gd_isset(orderInfo.orderMemo)}
+                                                    <!--{ : }-->
+                                                    [{=gd_isset(orderInfo.receiverZonecode)}] {=gd_isset(orderInfo.receiverAddress)} {=gd_isset(orderInfo.receiverAddressSub)}<br />
+                                                    {=gd_isset(orderInfo.receiverPhone)}  /  {=gd_isset(orderInfo.receiverCellPhone)}<!--{ ? orderInfo.receiverUseSafeNumberFl == 'w' || orderInfo.receiverUseSafeNumberFl == 'y' }-->&nbsp;({=__('안심번호 사용')})<!--{ / }--><br />
+                                                    {=__('남기실 말씀')} : {=gd_isset(orderInfo.orderMemo)}
+                                                    <!--{ / }-->
+                                                    <!--{ / }-->
+                                                    <!--{ ? orderInfo.deliveryVisit == 'a' || orderInfo.deliveryVisit == 'y' }-->
+                                                    <!--{ ? orderInfo.deliveryVisit == 'a' }--><div style="width:100%; border-top:1px solid #dbdbdb; margin-top:10px; padding-top:10px;"></div><!--{ / }-->
+                                                    [{=__('방문 수령지 주소')}] {=gd_isset(orderInfo.visitAddress)} <!--{ ? count(orderInfo.visitDeliveryInfo.address[orderInfo.infoSno]) > 1 }-->외 {=(count(orderInfo.visitDeliveryInfo.address[orderInfo.infoSno]) - 1)}건 <span class="button"><a class="skinbtn point2  btn_review_write ogl_reviewrite btn_open_layer" data-order-no="{=orderInfo.orderNo}" data-goods-sno='{=json_encode(orderInfo.visitDeliveryInfo.goodsSno[orderInfo.infoSno])}' href="#visitAddressLayer">상품정보</a></span><!--{ / }--><br />
+                                                    {=gd_isset(orderInfo.visitName)} / {=gd_isset(orderInfo.visitPhone)}<br />
+                                                    {=gd_isset(orderInfo.visitMemo)}
+                                                    <!--{ / }-->
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <!--{ ? multiOrderInfo }-->
+                                        <!--{ @ multiOrderInfo.receiverNm }-->
+                                        <tr>
+                                            <th>{=__('추가 배송지')}{=.index_ + 1}</th>
+                                            <td>
+                                                <p>
+                                                    <!--{ ? multiOrderInfo.deliveryVisit[.index_] != 'y' }-->
+                                                    <strong>{=gd_isset(multiOrderInfo.receiverNm[.index_])}</strong> <br />
+                                                    <!--{ ? gGlobal.isFront }-->
+                                                    [{=gd_isset(multiOrderInfo.receiverZonecode[.index_])}] {=gd_isset(multiOrderInfo.receiverAddressSub[.index_])}, {=gd_isset(multiOrderInfo.receiverAddress[.index_])}, {=gd_isset(multiOrderInfo.receiverState[.index_])}, {=gd_isset(multiOrderInfo.receiverCity[.index_])}, {=gd_isset(multiOrderInfo.receiverCountry[.index_])}<br />
+                                                    (+{=gd_isset(multiOrderInfo.receiverPhonePrefix[.index_])}) {=gd_isset(multiOrderInfo.receiverPhone[.index_])}  / (+{=gd_isset(multiOrderInfo.receiverCellPhonePrefix[.index_])}) {=gd_isset(multiOrderInfo.receiverCellPhone[.index_])}<br />
+                                                    {=__('남기실 말씀')} : {=gd_isset(multiOrderInfo.orderMemo[.index_])}
+                                                    <!--{ : }-->
+                                                    [{=gd_isset(multiOrderInfo.receiverZonecode[.index_])}] {=gd_isset(multiOrderInfo.receiverAddress[.index_])} {=gd_isset(multiOrderInfo.receiverAddressSub[.index_])}<br />
+                                                    {=gd_isset(multiOrderInfo.receiverPhone[.index_])}  /  {=gd_isset(multiOrderInfo.receiverCellPhone[.index_])}<!--{ ? multiOrderInfo.receiverUseSafeNumberFl[.index_] == 'w' || multiOrderInfo.receiverUseSafeNumberFl[.index_] == 'y' }-->&nbsp;({=__('안심번호 사용')})<!--{ / }--><br />
+                                                    {=__('남기실 말씀')} : {=gd_isset(multiOrderInfo.orderMemo[.index_])}
+                                                    <!--{ / }-->
+                                                    <!--{ / }-->
+                                                    <!--{ ? multiOrderInfo.deliveryVisit[.index_] != 'n' }-->
+                                                    <!--{ ? multiOrderInfo.deliveryVisit[.index_] == 'a' }--><div style="width:100%; border-top:1px solid #dbdbdb; margin-top:10px; padding-top:10px;"></div><!--{ / }-->
+                                                    [{=__('방문 수령지 주소')}] {=gd_isset(multiOrderInfo.visitAddress[.index_])} <!--{ ? count(orderInfo.visitDeliveryInfo.address[multiOrderInfo.InfoSno[.index_]]) > 1 }-->외 {=(count(orderInfo.visitDeliveryInfo.address[multiOrderInfo.InfoSno[.index_]]) - 1)}건 <span class="button"><a class="skinbtn point2  btn_review_write ogl_reviewrite btn_open_layer" data-order-no="{=orderInfo.orderNo}" data-goods-sno='{=json_encode(orderInfo.visitDeliveryInfo.goodsSno[multiOrderInfo.InfoSno[.index_]])}' href="#visitAddressLayer">상품정보</a></span><!--{ / }--><br />
+                                                    {=gd_isset(multiOrderInfo.visitName[.index_])} / {=gd_isset(multiOrderInfo.visitPhone[.index_])}<br />
+                                                    {=gd_isset(multiOrderInfo.visitMemo[.index_])}
+                                                    <!--{ / }-->
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <!--{ / }-->
+                                        <!--{ / }-->
+                                    </table>
+                                </div>
+                                <!--{ : }-->
+                                <p>
+                                    <!--{ ? orderInfo.deliveryVisit != 'y' }-->
+                                    <strong>{=gd_isset(orderInfo.receiverName)}</strong> <br />
+                                    <!--{ ? gGlobal.isFront }-->
+                                    [{=gd_isset(orderInfo.receiverZonecode)}] {=gd_isset(orderInfo.receiverAddressSub)}, {=gd_isset(orderInfo.receiverAddress)}, {=gd_isset(orderInfo.receiverState)}, {=gd_isset(orderInfo.receiverCity)}, {=gd_isset(orderInfo.receiverCountry)}<br />
+                                    (+{=gd_isset(orderInfo.receiverPhonePrefix)}) {=gd_isset(orderInfo.receiverPhone)}  / (+{=gd_isset(orderInfo.receiverCellPhonePrefix)}) {=gd_isset(orderInfo.receiverCellPhone)}<br />
+                                    {=__('남기실 말씀')} : {=gd_isset(orderInfo.orderMemo)}
+                                    <!--{ : }-->
+                                    [{=gd_isset(orderInfo.receiverZonecode)}] {=gd_isset(orderInfo.receiverAddress)} {=gd_isset(orderInfo.receiverAddressSub)}<br />
+                                    {=gd_isset(orderInfo.receiverPhone)}  /  {=gd_isset(orderInfo.receiverPhone)}  /  {=gd_isset(orderInfo.receiverCellPhone)}<!--{ ? orderInfo.receiverUseSafeNumberFl == 'w' || orderInfo.receiverUseSafeNumberFl == 'y' }-->&nbsp;({=__('안심번호 사용')})<!--{ / }--><br />
+                                    {=__('남기실 말씀')} : {=gd_isset(orderInfo.orderMemo)}
+                                    <!--{ / }-->
+                                    <!--{ / }-->
+                                    <!--{ ? orderInfo.deliveryVisit == 'a' || orderInfo.deliveryVisit == 'y' }-->
+                                    <!--{ ? orderInfo.deliveryVisit == 'a' }--><div style="width:100%; border-top:1px solid #dbdbdb; margin-top:10px; padding-top:10px;"></div><!--{ / }-->
+                                    [{=__('방문 수령지 주소')}] {=gd_isset(orderInfo.visitAddress)} <!--{ ? count(orderInfo.visitDeliveryInfo.address[orderInfo.infoSno]) > 1 }-->외 {=(count(orderInfo.visitDeliveryInfo.address[orderInfo.infoSno]) - 1)}건 <span class="button"><a class="skinbtn point2  btn_review_write ogl_reviewrite btn_open_layer" data-order-no="{=orderInfo.orderNo}" data-goods-sno='{=json_encode(orderInfo.visitDeliveryInfo.goodsSno[orderInfo.infoSno])}' href="#visitAddressLayer">상품정보</a></span><!--{ / }--><br />
+                                    {=gd_isset(orderInfo.visitName)} / {=gd_isset(orderInfo.visitPhone)}<br />
+                                    {=gd_isset(orderInfo.visitMemo)}
+                                    <!--{ / }-->
+                                </p>
+                                <!--{ / }-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{=__('상품 금액')}</th>
+                            <td><strong class="order_payment_sum">{=gd_global_currency_display(gd_isset(orderInfo.totalGoodsPrice))}</strong>
+                                <span class="add_currency">{=gd_global_add_currency_display(gd_isset(orderInfo.totalGoodsPrice))}</span>
+                            </td>
+                        </tr>
+                        <!--{ ? gGlobal.isFront }-->
+                        <tr>
+                            <th>{=__('총 무게')}</th>
+                            <td><strong>{=number_format(orderInfo.totalDeliveryWeight, 2)}kg</strong></td>
+                        </tr>
+                        <!--{ / }-->
+                        <tr>
+                            <th>{=__('배송비')}</th>
+                            <td>{=__('기본배송')} {=gd_global_currency_display(gd_isset(orderDeliveryInfo.deliveryPolicyCharge))}
+                                <span class="add_currency">{=gd_global_add_currency_display(gd_isset(orderDeliveryInfo.deliveryPolicyCharge))}</span>
+                                <!--{ ? orderInfo.multiShippingFl == 'y' }-->
+                                <!--{ ? orderDeliveryInfo.orderInfoCharge }-->
+                                (<!--{ @ orderDeliveryInfo.orderInfoCharge }-->
+                                <!--{ ? .index_ == 0 }-->{=__('메인 배송지')}<!--{ : }-->{=__('추가 배송지')}{=.index_}<!--{ / }--> : {=gd_global_currency_display(gd_isset(.value_))}
+                                <!--{ / }-->)
+                                <!--{ / }-->
+                                <!--{ / }-->
+                            </td>
+                        </tr>
+                        <!--{ ? orderDeliveryInfo.deliveryAreaCharge > 0}-->
+                        <tr>
+                            <th>{=__('지역별 배송비')}</th>
+                            <td>{=gd_global_currency_display(gd_isset(orderDeliveryInfo.deliveryAreaCharge))}</td>
+                        </tr>
+                        <!--{ / }-->
+                        <!--{ ? gGlobal.isFront }-->
+                        <tr>
+                            <th>{=__('해외배송 보험료')}</th>
+                            <td>
+                                <strong>{=gd_global_currency_display(gd_isset(orderInfo.totalDeliveryInsuranceFee))}</strong>
+                                <!--{ ? gGlobal.isFront && gGlobal.useAddCurrency }-->
+                                {=gd_global_add_currency_symbol()}<span class="add_currency">{=gd_global_add_money_format(gd_isset(orderInfo.totalDeliveryInsuranceFee))}</span>{=gd_global_add_currency_string()}
+                                <!--{ / }-->
+                            </td>
+
+                        </tr>
+                        <!--{ / }-->
+                        <!--{ ? depositUse.payUsableFl === 'y' && orderInfo.useDeposit > 0 }-->
+                        <tr>
+                            <th>{=__('사용')} {=depositUse.name}</th>
+                            <td><strong>{=gd_money_format(orderInfo.useDeposit)}{depositUse.unit}</strong></td>
+                        </tr>
+                        <!--{ / }-->
+                        <!--{ ? mileage.useFl === 'y' && orderInfo.useMileage > 0 }-->
+                        <tr>
+                            <th>{=__('사용')} {=mileage.name}</th>
+                            <td><strong>{=gd_money_format(orderInfo.useMileage)}{mileage.unit}</strong></td>
+                        </tr>
+                        <!--{ / }-->
+                        <tr>
+                            <th>{=__('할인 및 적립')}</th>
+                            <td>
+                                <ul class="order_benefit_list">
+                                    <li class="order_benefit_sale">
+                                        <em>{=__('할인')} : <strong>(-) {=gd_global_currency_display(orderInfo.totalGoodsDcPrice + (orderInfo.totalMemberDcPrice + orderInfo.totalMemberOverlapDcPrice) + orderInfo.totalCouponGoodsDcPrice + orderInfo.totalCouponOrderDcPrice + orderInfo.totalCouponDeliveryDcPrice + orderInfo.totalMemberDeliveryDcPrice)}</strong>
+                                            <span>(
+                                            {=__('상품')} {=gd_global_currency_display(orderInfo.totalGoodsDcPrice)}
+                                                <!--{ ? !gGlobal.isFront }-->
+                                            , {=__('회원')} {=gd_global_currency_display(orderInfo.totalMemberDcPrice + orderInfo.totalMemberOverlapDcPrice)}
+                                            , {=__('배송비')} {=gd_global_currency_display(orderInfo.totalMemberDeliveryDcPrice)}
+                                            , {=__('상품쿠폰')} {=gd_global_currency_display(orderInfo.totalCouponGoodsDcPrice)}
+                                            , {=__('주문쿠폰')} {=gd_global_currency_display(orderInfo.totalCouponOrderDcPrice)}
+                                            , {=__('배송비쿠폰')} {=gd_global_currency_display(orderInfo.totalCouponDeliveryDcPrice)}
+                                                <!--{ / }-->
+                                            )</span>
+                                            <!--{ ? !gGlobal.isFront && gGlobal.useAddCurrency }-->
+                                            <!--{ ? (orderInfo.totalGoodsDcPrice + (orderInfo.totalMemberDcPrice + orderInfo.totalMemberOverlapDcPrice) + orderInfo.totalCouponGoodsDcPrice + orderInfo.totalCouponOrderDcPrice + orderInfo.totalCouponDeliveryDcPrice + orderInfo.totalMemberDeliveryDcPrice) != 0 }-->{=gd_global_add_currency_symbol()}<!--{ / }--><span class="add_currency" style="color: #717171;">{=gd_global_add_money_format(orderInfo.totalGoodsDcPrice + (orderInfo.totalMemberDcPrice + orderInfo.totalMemberOverlapDcPrice) + orderInfo.totalCouponGoodsDcPrice + orderInfo.totalCouponOrderDcPrice + orderInfo.totalCouponDeliveryDcPrice + orderInfo.totalMemberDeliveryDcPrice)}</span>
+                                            <!--{ / }-->
+                                        </em>
+                                    </li>
+                                    <!--{ ? mileage.useFl === 'y' }-->
+                                    <li class="order_benefit_mileage">
+                                        <!--{ ? orderInfo.mileageGiveExclude === 'n' && orderInfo.useMileage > 0 }-->
+                                        <em>{=__('적립')} {=mileage.name} : {=__('마일리지 지급정책에 의거하여 마일리지를 사용한 주문 건에 대해 적립마일리지를 지급하지 않습니다.')}</em>
+                                        <!--{ : }-->
+                                        <em> {=__('적립')} {=mileage.name} : <strong>(+) {=gd_money_format(orderInfo.totalGoodsMileage + orderInfo.totalMemberMileage + orderInfo.totalCouponGoodsMileage + orderInfo.totalCouponOrderMileage)}{=mileage.unit}</strong>
+                                            <span>(
+                                                <!--{ ? orderInfo.totalGoodsMileage > 0 }-->{=__('상품')} {=gd_money_format(orderInfo.totalGoodsMileage)}{=mileage.unit}<!--{ / }-->
+                                                <!--{ ? orderInfo.totalMemberMileage > 0 }-->, {=__('회원')} {=gd_money_format(orderInfo.totalMemberMileage)}{=mileage.unit}<!--{ / }-->
+                                                <!--{ ? orderInfo.totalCouponGoodsMileage > 0 }-->, {=__('상품쿠폰')} {=gd_money_format(orderInfo.totalCouponGoodsMileage)}{=mileage.unit}<!--{ / }-->
+                                                <!--{ ? orderInfo.totalCouponOrderMileage > 0 }-->, {=__('주문쿠폰')} {=gd_money_format(orderInfo.totalCouponOrderMileage)}{=mileage.unit}<!--{ / }-->
+                                            )</span>
+                                        </em>
+                                        <!--{ / }-->
+                                    </li>
+                                    <!--{ / }-->
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{=__('총 결제금액')}</th>
+                            <td><strong class="order_payment_sum">{=gd_global_currency_display(gd_isset(orderInfo.settlePrice))}</strong>
+                                <span class="add_currency">{=gd_global_add_currency_display(gd_isset(orderInfo.settlePrice))}</span>
+                            </td>
+                        </tr>
+                        <!--{ ? gd_isset(orderInfo.settleGateway) == 'o' }-->
+                        <tr>
+                            <th>{=__('승인금액')}</th>
+                            <td><strong class="deposit_money">{=orderInfo.overseasSettleCurrency} {=gd_isset(orderInfo.overseasSettlePrice)}</strong></td>
+                        </tr>
+                        <!--{ / }-->
+                        <tr>
+                            <th>{=__('현금영수증')}</th>
+                            <td>
+                                <!--{ ? orderInfo.receiptFl == 'r' }-->
+                                {=__('소득공제용')} or {=__('지출증빙용 신청완료')}
+                                <!--{ : }-->
+                                {=__('미발급')}
+                                <!--{ / }-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{=__('세금계산서')}</th>
+                            <td>
+                                <!--{ ? orderInfo.receiptFl == 't' }-->
+                                {=__('신청완료')}
+                                <!--{ : }-->
+                                {=__('미발급')}
+                                <!--{ / }-->
+                            </td>
+                        </tr>
+                        <!--{ / }-->
+                    </table>
+                </div>
+                <!--{ / }-->
+
+
+			
+
+
+
+
+
+
+
+            </div>
+            <!-- //order_info -->
+            <div class="btn_center_box">
+                <a href="/" class="btn_order_end_ok"><em>{=__('확인')}</em></a>
+				
+				
+				
+            </div>
+        </div>
+        <!-- //order_end -->
+    </div>
+    <!-- //order_cont -->
+</div>
+<!-- //order_wrap -->
+</div>
+<!-- //content_box -->
+<!-- 방문수령 주소 레이어 -->
+<div id="visitAddressLayer" class="layer_wrap reason_layer dn" data-remote="../mypage/layer_visit_address.php"></div>
+<!-- 방문수령 주소 레이어 -->
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    $(function(){
+        // 레이어 오픈 바인딩
+        $('.btn_open_layer').bind('click', function (e) {
+            e.preventDefault();
+            if ($(this).attr('href') == '#visitAddressLayer') {
+                var target = $(this).attr('href');
+                var url = $(target).data('remote');
+                var params = {
+                    orderNo: $(this).data('order-no'),
+                    goodsSno : $(this).data('goods-sno')
+                };
+
+                $(target).empty();
+                $.get(url, params, function (data) {
+                    if (!_.isUndefined(data.code) && data.code == 0) {
+                        alert(data.message);
+                        gd_close_layer();
+                        return false;
+                    }
+                    $(target).empty().html(data);
+                    $(target).find('>div').center();
+                });
+            }
+        });
+
+
+		localStorage.removeItem("agree_subscription");
+		localStorage.removeItem("deliverydate");
+		localStorage.removeItem("shipping");
+		localStorage.removeItem("orderName");
+		localStorage.removeItem("orderPhone");
+		localStorage.removeItem("orderCellPhone");
+		localStorage.removeItem("orderEmail");
+		localStorage.removeItem("receiverName");
+		localStorage.removeItem("receiverZonecode");
+		localStorage.removeItem("receiverAddress");
+		localStorage.removeItem("receiverAddressSub");
+		localStorage.removeItem("receiverPhone");
+		localStorage.removeItem("receiverCellPhone");
+		localStorage.removeItem("orderMemo");
+		localStorage.removeItem("reflectApplyMember");
+
+		{?start_goods==1}
+			//2024.02.15 웹앤모바일 스타트상품인경우 api전송
+			var dataToSend = {
+				name: "{name}",
+				hp: "{hp}", 
+				hpCipher: "{hpCipher}",
+				email: "{email}",
+			};
+
+			$.ajax({	
+				type : 'POST',
+				url : 'https://www.medi-planner.com/ajax/addPatient.asp',
+				dataType : 'json',
+				data :JSON.stringify(dataToSend),
+				beforeSend : function(xhr){
+					xhr.setRequestHeader("apiKey", "Q20fVMza4MncMgHA9Wjm");
+					xhr.setRequestHeader("content-type","application/json");
+				},
+				error: function(xhr, status, error){
+					console.log(error);
+				},
+				success : function(response){				
+					console.log("success");		
+				}
+			});	
+		{/}
+		
+		//2024.10.18웹앤모바일 추가시작
+		{?other_start_goods==1}
+			//2024.02.15 웹앤모바일 스타트상품인경우 api전송
+			var dataToSend = {
+				name: "{other_name}",
+				hp: "{other_hp}", 
+				hpCipher: "{other_hpCipher}",
+				email: "{other_email}",
+			};
+
+			$.ajax({	
+				type : 'POST',
+				url : 'https://www.medi-planner.com/ajax/addPatient.asp',
+				dataType : 'json',
+				data :JSON.stringify(dataToSend),
+				beforeSend : function(xhr){
+					xhr.setRequestHeader("apiKey", "Q20fVMza4MncMgHA9Wjm");
+					xhr.setRequestHeader("content-type","application/json");
+				},
+				error: function(xhr, status, error){
+					console.log(error);
+				},
+				success : function(response){				
+					console.log("success");		
+				}
+			});	
+		{/}
+		
+		{?event_goods==1}
+			//2024.02.15 웹앤모바일 이벤트스타트상품인경우 api전송
+			var dataToSend = {
+				name: "{name}",
+				hp: "{hp}", 
+				hpCipher: "{hpCipher}",
+				email: "{email}",
+			};
+
+			$.ajax({	
+				type : 'POST',
+				url : 'https://www.medi-planner.com/ajax/addPatient.asp',
+				dataType : 'json',
+				data :JSON.stringify(dataToSend),
+				beforeSend : function(xhr){
+					xhr.setRequestHeader("apiKey", "Q20fVMza4MncMgHA9Wjm");
+					xhr.setRequestHeader("content-type","application/json");
+				},
+				error: function(xhr, status, error){
+					console.log(error);
+				},
+				success : function(response){				
+					console.log("success");		
+				}
+			});	
+		{/}		
+		//2024.10.18웹앤모바일 추가종료
+		
+		{?adobe == 1}
+			//2024.06.24 웹앤모바일 어도비 전송시작
+			setTimeout(function(){
+			if (!localStorage.getItem('purchaseTracked')) {
+			let products = [];
+			
+			{?orderInfo['goods']}
+			
+				{@orderInfo['goods']}
+					
+					let product = {
+						'id': "{.value_['goodsNo']}",
+						'name': "{.value_['goodsNm']}",
+						'category': "{=goodsInfoArr[.value_['goodsNo']]['cateNm']}", 
+						'variant': "{=goodsInfoArr[.value_['goodsNo']]['variant']}", 
+						'brand': "{=goodsInfoArr[.value_['goodsNo']]['brandNm']}", 
+						'price': parseFloat("{.value_['goodsPrice']}"),
+						'quantity': "{.value_['goodsCnt']}",
+					};
+
+					products.push(product);		
+				
+				{/}
+			{/}
+			
+			let counpons = [];
+			
+			{?couponData}
+				{@couponData}
+					/*
+					let coupon={
+						'code':"{=.value_['couponNo']}",
+						'amount':"{=.value_['couponPrice']}"
+					}
+					*/
+					let coupon={
+						'code':"{=.value_['couponNo']}"
+					}					
+					counpons.push(coupon);		
+				{/}
+				
+			{/}
+			
+			_satellite.track('purchase',{
+				'cartId': "{=adobeCartId}",
+				'currency': 'KRW',
+				'total':parseFloat("{=orderInfo['settlePrice']}"),
+				'transactionId':"{=transactionId}",//주문번호를 넣어줘야 하지만 고도몰은 주문서에서 주문번호를 생성하지 않음 따라서 주문서와 일치해야 함으로 주문서에서 만들 세션값으로 대체
+				'shipping':parseFloat("{=orderInfo['totalDeliveryCharge']}"),
+				'tax':parseFloat("{=orderInfo['taxVatPrice']}"),
+				'couponCode':counpons,
+				'products': products
+			});
+			}
+			
+			localStorage.setItem('purchaseTracked', 'true');
+			//2024.06.24 웹앤모바일 어도비 전송종료
+			
+			},1500);
+		{/}		
+    });
+</script>
+{=naverCommonInflowScript}
+{=fbOrderEndScript}
+
+
+
+<!-- Enhanced eCommerce Code for purchase event -->
+<script type="text/javascript">
+    <!--{ @ orderInfo.goods }-->
+gtag('event', 'purchase', {
+  "transaction_id": '{orderInfo.orderNo}',
+  "value": {=orderInfo.settlePrice},
+  "currency": "KRW",
+  "shipping": {=gd_isset(orderInfo.totalDeliveryCharge)},
+  "items": [
+      {
+      'id': '{=.goodsNo}',
+      'name': '{=.goodsNm}',
+      'quantity': {=.goodsCnt},
+      'price': {=.goodsPrice},
+	  "list_name": '{=.goodsNm}'
+	  }
+  ]
+
+});
+<!--{ / }-->
+</script>
+<!-- End Enhanced eCommerce Code for purchase event -->
+
+
+
+
+
+
+
+
+<!--
+Start of Floodlight Tag: Please do not remove
+Activity name of this tag: Order Complete_PC
+URL of the webpage where the tag is expected to be placed: 
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 07/27/2021
+-->
+<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=sales;cat=order0;qty={orderInfo.orderGoodsCnt};cost={=gd_global_currency_display(gd_isset(orderInfo.settlePrice))};u1={orderInfo.orderNo};u2={=.goodsNo};u3={orderInfo.orderGoodsCnt};u4={=gd_global_currency_display(gd_isset(orderInfo.settlePrice))};dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord={orderInfo.orderNo}?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+<!-- End of Floodlight Tag: Please do not remove -->
+
+{ # footer }

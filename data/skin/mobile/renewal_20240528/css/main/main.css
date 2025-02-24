@@ -1,0 +1,256 @@
+@charset "utf-8";
+/*───────────────────────────────────────────────────────────
+
+	 리스트 타입 및 옵션
+
+───────────────────────────────────────────────────────────*/
+@import url("../goods/goods.css");
+
+
+/*** 쇼핑몰 메인본문 | main/index.php ***/
+
+.main {}
+.main .main_top_menu {display:table; width:100%;}
+.main .main_top_menu li {display:table-cell; width:25%; text-align:center;}
+.main .main_top_menu li a {display:block; padding:13px 0 13px 0;font-size:14px; color:#333333;}
+.main .main_notice {display:table; width:100%; margin:0 auto; padding:22px 0 22px 0;}
+.main .main_notice .tit {display:table-cell; width:84px; font-size:13px; font-weight:bold; color:#282828; text-align:center;}
+.main .main_notice ul {display:table-cell;}
+.main .main_notice ul li {overflow:hidden; width:80%; display:-webkit-box; text-overflow:ellipsis; -webkit-line-clamp:1; -webkit-box-orient:vertical; letter-spacing:-1px;}
+.main .main_notice ul li a {display:block; width:100%;}
+/* 메인배너 */
+.main .main_banner_box {font-size:0;}
+.main .main_banner_box img {width:100%; font-size:0;}
+.main .main_banner_box1 {display:table; width:100%;}
+.main .main_banner_box1 li {display:table-cell; width:50%; font-size:0; text-align:center; vertical-align:top;}
+.main .main_banner_box1 li a {}
+.main .main_banner_box1 li a img {width:100%; font-size:0;}
+.main .main_banner_box2 {padding:10px 0; font-size:0;}
+.main .main_banner_box2 img {width:100%; font-size:0;}
+
+/* 이벤트 최근게시물 */
+.main .main_event {}
+.main .main_event ul {}
+.main .main_event ul li {position:relative; padding:7px 0;}
+.main .main_event ul li .img_box {font-size:0;}
+.main .main_event ul li .img_box img {width:100%;}
+.main .main_event ul li .event_info_box {/*position:absolute; bottom:7px; left:0;*/ width:100%; }
+.main .main_event ul li .event_info_box dl {padding:20px; background:rgba(255,255,255,0.8); box-sizing:border-box;}
+.main .main_event ul li .event_info_box dl dt {}
+.main .main_event ul li .event_info_box dl dt a {display:block; font-size:17px; color:#222222; font-weight:bold;}
+.main .main_event ul li .event_info_box dl dd {font-size:15px; color:#ab295d; font-weight:bold;}
+
+/* 하단 정보 BOX */
+.main .main_info_box {padding:0 10px}
+.main .main_info_box .main_info {display:table; width:100%; margin:0 auto; padding:12px 0 12px 0; text-align:center;}
+.main .main_info_box .main_info dl {display:table-cell; width:50%; text-align:left; vertical-align:top;}
+.main .main_info_box .main_info dl dt {font-size:13px; margin:0 5px; font-weight:bold; border-bottom:1px solid #999;}
+.main .main_info_box .main_info dl dd {font-size:11px; padding-left:5px;}
+
+/* CS CENTER */
+.main .main_info dl dd p.phone {padding:5px 0;}
+.main .main_info dl dd p.phone a {font-size:22px; color:#ab3e55;}
+.main .main_info dl dd p.business_hours {font-size:11px; color:#666;}
+
+/* BANK INFO */
+.main .main_info dl dd .account_holder {padding:11px 0; font-size:14px;}
+.main .main_info dl dd ul.main_bank {display:table-cell;}
+.main .main_info dl dd ul.main_bank li { vertical-align:middle;}
+.main .main_info dl dd ul.main_bank li span {font-weight:bold;}
+
+
+/*추가*/
+.main_sec01{
+	background:#f9f9f9;
+}
+.main_sec01 ul li{
+	position:relative;
+	width:100%;
+}
+.main_sec01 ul li div.text-left{
+	position:absolute;
+	top:50%;
+	transform:translateY(-50%);
+	right:0;
+	width:50%;
+}
+.main_sec01 ul h4,
+.main_sec01 ul p{
+	line-height:1.2;
+}
+.main_sec01 ul .cta a{
+	width:80%;
+	display:inline-block;
+	padding:8px;
+	background:#cf4520;
+	color:#fff;
+	font-weight:500;
+	font-size:13px;
+	text-align:center;
+}
+
+.main_sec02,
+.main_sec05{
+	background: #f9f9f9;
+/*
+	background: rgb(255,255,255);
+	background: linear-gradient(180deg, rgba(255,255,255,1) 40%, rgba(227,227,227,1) 100%);*/
+}
+
+
+.slider-banner-3606671697 .slick-dots{
+	width:auto !important;
+	bottom:20px !important;
+	left:20px !important;
+}
+
+
+.main_sec02 .video_box{
+	position:relative;
+	padding-top:56.25%;
+}
+.main_sec02 .video_box video{
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+}
+.main_sec02 .video_box .video_play_btn{
+	position:absolute;
+	width:100px;
+	height:100px;
+	left:50%;
+	top:50%;
+	margin-top:-70px;
+	margin-left:-55px;
+	z-index:10;
+}
+
+/* 2021-12-01 */
+.main_sec02 .iwrap{
+	width:100%;
+	padding-top: 56.26%;
+	position: relative;
+}
+.main_sec02 .iwrap iframe{
+	width:100%;
+	height:100%;
+	position: absolute;
+	top:0;
+	left:0;
+}
+
+
+
+/*main_sec03*/
+.main_sec03{
+	padding:40px 15px;
+	text-align:center;
+}
+.main_sec03 h3{
+	color:#001489;
+	font-size:22px;
+	margin-bottom:30px;
+}
+.main_sec03 .desc{
+	font-size:15px;
+	color:#444;
+	line-height:1.4;
+	margin-bottom:30px;
+}
+.main_sec03 .list_box{
+	padding:0 10px;
+}
+.main_sec03 ul{
+	list-style:none;
+	padding:0;
+}
+.main_sec03 ul li + li{
+	margin-top:10px;
+}
+.main_sec03 ul li .box{
+	display:flex;
+}
+.main_sec03 ul li .thumb{
+	width:40%;
+	flex-shrink: 0;
+}
+.main_sec03 ul li .thumb img{
+	width:100%;
+	vertical-align: top;
+}
+.main_sec03 ul li .text{
+	padding:15px 0;
+	background:#001489;
+	color:#fff;
+	font-size:13px;
+	display:flex;
+	justify-content: center;
+	flex-direction: column;
+	width:60%;
+	padding:15px 15px;
+	text-align:left;
+}
+
+
+/*main_sec04*/
+.main_sec04{
+	padding:40px 0;
+	text-align:center;
+	background:#001489;
+	color:#fff;
+}
+.main_sec04 h3{
+	font-size:22px;
+	margin-bottom:30px;
+}
+
+/*main_sec05*/
+.main_sec05{
+	padding:40px 0;
+	text-align:center;
+}
+.main_sec05 h3{
+	display:flex;
+	align-items: flex-start;
+	justify-content: center;
+	gap:0 10px;
+	font-size:22px;
+	margin-bottom:40px;
+	color:#001489;
+}
+.main_sec05 h3 p{
+	margin-top: -6px;
+	text-align: left;
+}	
+.main_sec05 h3 span{
+	display:inline-block;
+	background:#fdd001;
+	padding:1px 5px;
+	color:#e95526;
+	font-size:18px;
+	border-radius:5px;
+}
+
+/*main_sec06*/
+.main_sec06{
+	padding:40px 0;
+	text-align:center;
+	background:#001489;
+	color:#fff;
+}
+.main_sec06 h3{
+	font-size:22px;
+	margin-bottom:30px;
+}
+
+.main_sec04 img,
+.main_sec05 img,
+.main_sec06 img{
+	width:90%;
+	max-width:400px;
+}
+.main_sec04 img{
+	max-width:280px;
+}

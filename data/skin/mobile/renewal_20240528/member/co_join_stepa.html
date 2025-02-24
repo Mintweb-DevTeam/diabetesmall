@@ -1,0 +1,123 @@
+{*** 회원가입 > 애보트 본인인증 | main/html.php?htmid=member/join_is_abbott.html ***}
+{ # header }
+
+<style>
+.form-control{
+	display:inline-block;
+}
+.youcan{display:none;}
+</style>
+
+<div class="content_box pr20 pl20 pt20 mb60">
+	<div class="join_agreement_wrap">
+
+
+		<div class="adela_member_cont">
+
+			<div class="container">
+				
+				<div class="intro pb10 mb20 clearfix" style="border-bottom:2px solid #ffc600;">
+					<h1 class="fcBlue fs20 pull-left mt20">리브레케어 멤버십</h1>
+					<p class="pull-right"><img src="../img/qrcode/test-img_01.jpg" alt="test-img_01" width="60px"></p>
+				</div>
+				
+				<!-- <h2 class="fcOrange fs16 mb10">프리스타일 리브레 제품의 온라인 구매를 위한 리브레케어 멤버이십니까?</h2> -->
+
+				<h3 class="fcBlue fs16 fw600 mb10">아직 리브레케어 멤버가 아니신가요?</h3>
+				<div class="fs14 mb20">‘리브레케어’는 프리스타일 리브레 사용자께 제공되는 포괄적인 교육 및 지원 서비스로, 센서 사용 및 수치 이해에 관련한 교육 서비스를 비롯해 제품 교환을 포함한 품질 보증 서비스를 받으실 수 있습니다. </div>
+
+
+				<div class=" text-center">
+					<div style="position:relative;">
+					
+						{?adobe_member == 1}
+							<a href="javascript:fn_join();" style="position:absolute;width:80%;padding-top:16%; z-index:1; bottom:6.5%;left:10%;"></a>						
+						{:}
+							<a href="./co_join_stepb.php?device=mo" style="position:absolute;width:80%;padding-top:16%; z-index:1; bottom:6.5%;left:10%;"></a>
+						{/}
+						<img src="../img/join_stapa_app_mo_v2.jpg" style="width:100%;"alt="" />
+
+					</div>
+				</div>
+				
+
+				<h3 class="fcBlue fs16 fw600 mb10 mt30">리브레케어 멤버십에 이미 등록을 완료하셨다면 인증해주세요.</h3>
+
+				<div class="join_box_orange">
+					<div class="fs14 mb20"><span class="fcOrange">*</span> 표시는 반드시 입력하셔야 하는 항목입니다</div>
+					<div>
+						<iframe name="frm_" style="display: none"></iframe>
+						<form id="frm" action="./old_mem_agree_ps.php" method="post" target="frm_">
+							<div class="mb30">
+								<h5 class="fs15 fcGray6 ">휴대폰 번호 <span class="fcOrange">*</span></h5>	
+								<input name="cellPhone" class="form-control w160" type="tel">
+								<a href="#." type="button" onClick="getPassNum(this)" data-undi="injung" class="btn btn-orange btn-sm w120 fs14">인증번호요청</a>
+							</div>
+							<div>
+								<h5 class="fs15 fcGray6 ">인증번호 <span class="fcOrange">*</span></h5>	
+								<input name="passNum" class="form-control w160" type="text">
+								<button type="button" id="injung" onClick="checkPass()" disabled class="btn btn-orange btn-sm w120 fs14">인증</button>
+							</div>
+							<div class="mt30">
+								<input type="button" onClick="submit_this(this)" data-form="frm" value="완료" class="btn btn-orange btn-sm  w200  fw600 fs14" style="border:0;" />
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="mt20">ADC-21804 v2.0</div>
+
+				
+
+			</div>
+
+		</div>
+
+
+		<!-- //member_cont -->
+	</div>
+	<!-- //join_agreement_wrap -->
+</div>
+<!-- //content_box -->
+
+<script type="text/javascript">
+$(function(){
+	$('#member02').change(function() {
+		if( $(this).is(':checked') ){
+			window.location.href = './co_join_stepb.php?device={device}';
+		}
+	});
+})
+
+//2024.06.26웹앤모바일 회원가입 전송시작
+function fn_join(){
+	_satellite.track('formStart',{
+		'formName': 'registrationForm',
+		'formType':'signup'
+	});
+
+	document.location.href="./co_join_stepb.php?device=mo";
+}
+//2024.06.26웹앤모바일 회원가입 전송종료
+
+
+</script>
+
+<script language='JavaScript1.1' async src='//pixel.mathtag.com/event/js?mt_id=1480097&mt_adid=237044&mt_exem=&mt_excl=&v1=&v2=&v3=&s1=&s2=&s3='></script>
+<!--
+Start of Floodlight Tag: Please do not remove
+Activity name of this tag: Join MO
+URL of the webpage where the tag is expected to be placed: 
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 07/21/2021
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=joinm0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+</script>
+<noscript>
+<iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=invmedia;cat=joinm0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+</noscript>
+<!-- End of Floodlight Tag: Please do not remove -->
+
+{ # footer }

@@ -1,0 +1,79 @@
+{*** 회차추가 관리 | front/subscription/extension_uid.php ***}
+{=includeFile('subscription/outline/_popup_header.html')}
+<style>
+	.wok{
+		display: inline-block;
+		border: 1px solid #03a9f4;
+		padding: 3px 15px;
+		background: #03a9f4;
+		color: #fff;
+		cursor:pointer;
+	}
+	.wcancle{
+		display: inline-block;
+		border: 1px solid #9e9e9e;
+		padding: 3px 15px;
+		background: #9e9e9e;
+		color: #fff;
+		cursor:pointer;
+	}
+</style>
+<div class='subscription_popup2'>
+	
+	<div class='mtitle'>회차변경</div>
+	
+    
+    <div class='selection_area'>
+       <select name="schedule_add">
+
+	 
+	   		{@deliveryEaLoop}
+				<option value="{.value_}">{.value_}회로 변경</option>
+			{/}
+	  
+	   </select>
+    </div> <!-- selection_area -->
+
+	<div style="text-align:center;">
+		<span class="wok">확인</span>
+		<span class="wcancle">취소</span>
+	</div>
+</div>  <!-- subscription_popup2 -->
+
+<script>
+$(function() {
+    $('.wok').click(function() {
+        var checked = 0;
+        if ($(this).prop('checked'))
+            checked = 1;
+        var uid = '{uid}'
+		var schedule_num=$("select[name='schedule_add']").val();
+
+		var mode="ExtendAdd";
+
+		
+		mode="ExtendAddUser";
+		
+
+        $.ajax({
+            url : "../subscription/ajax.php",
+            type : "post", 
+            dataType : "text",
+            data : { mode : mode, schedule_num : schedule_num, uid : uid,period:"{=period}" },
+            async : false,
+            success: function (data) {
+				//console.log(data);
+                parent.location.reload();
+            },
+            error : function (res) {
+                //console.log(res);
+            }
+        });
+        
+    });
+	$(".wcancle").on("click",function(){
+		parent.wm.layer.close();
+	});
+});
+</script>
+{=includeFile('subscription/outline/_popup_footer.html')}

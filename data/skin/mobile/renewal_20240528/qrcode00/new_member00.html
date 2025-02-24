@@ -1,0 +1,95 @@
+{*** 신규회원 양식 | main/html.php?htmid=qrcode/new_member.html ***}
+{ # header }
+<style>
+.hide{display: none}
+</style>
+<section>
+    <div class="container clearfix">
+        <ul class="register-wrap">
+            <li><a href="./member.php" target="_self">register</a></li>
+            <li><a href="./new_member.php" target="_self">sign in</a></li>
+        </ul>
+    </div>
+</section>
+<section>
+    <div class="container form-wrap">
+        <form id="frm" action="./mem_agree.php" method="post">
+            <ul>
+                <li>
+                    <span>name</span><input name="memNm" type="text" >
+                </li>
+                <li>
+                    <span>email address</span><input name="memId" type="email">
+                </li>
+                <li>
+                    <span>mobile phone</span><input name="cellPhone" type="tel" >
+                </li>
+                <li>
+                    <span>메디컬샵 코드</span><input name="pharmacy_code" onChange="pharmacy(this.value)" type="text">
+                </li>
+                <li id="pharmacy-info" class="hide">
+                    <p>상호 : <span id="pharmacy-name"></span></p>
+                    <p>전화번호 : <span id="pharmacy-phone"></span></p>
+                </li>
+                <li>
+                    <button type="button" id="request" onClick="getPassNum()" disabled>인증번호 요청</button>
+                </li>
+            </ul>
+        </form>
+    </div>
+</section>
+<section>
+	<ul>
+		<li>
+			<span>인증번호</span><input name="passNum" type="text" >
+		</li>
+		<li>
+			<button type="button" onClick="checkPass()" id="submit" disabled>확인</button>
+		</li>
+	</ul>
+</section>
+<script>
+var pass_num = null;
+function getPassNum(){
+	if( !$('input[name="memNm"]').val() || !$('input[name="cellPhone"]').val() || !$('input[name="memId"]').val() ){
+		alert('이름, 전화번호, 이메일은 필수 입니다.');
+		return;
+	}
+	pass_num = get_pass_num( $('input[name="cellPhone"]').val() );
+	console.log(pass_num);
+	$('#submit').prop('disabled', false);
+}
+function checkPass(){
+	if(!pass_num){
+		alert('인증번호를 요청해 주세요');
+		return;
+	}
+	if( pass_num != $('input[name="passNum"]').val() ){
+		alert('인증번호가 다릅니다.');
+		return;
+	}
+	$('#frm').submit();
+}
+function pharmacy(code){
+	$('#pharmacy-name').text('');
+	$('#pharmacy-phone').text('');
+	$.ajax({
+		url:'./pharmacy_ajax.php',
+		type:'POST',
+		data:{'code':code},
+		dataType : "json",
+		success: function(x){
+			var name = x.name ? x.name : '등록된 메디컬샵이 없습니다.',
+				phone = x.phone ? x.phone : '등록된 메디컬샵이 없습니다.';
+			$('#pharmacy-info').removeClass('hide');
+			$('#pharmacy-name').text(name);
+			$('#pharmacy-phone').text(phone);
+			$('#request').prop('disabled', false);
+		},
+		error:function(request,status,error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
+</script>
+{ # footer }
