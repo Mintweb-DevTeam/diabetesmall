@@ -3,6 +3,8 @@ namespace Controller\Front;
 
 use Request;
 use Framework\Utility\StringUtils;
+use Session;
+use Validation;
 
 class CommonController
 {
@@ -112,7 +114,37 @@ class CommonController
 			//2024.04.16 웹앤모바일 추가종료
 			//$controller->setData("add_menu",1);
 		//}
-		
+
+
+        /* 웹앤모바일 카카오싱크 수정 25-03-11 - kakaosyncReturnUrl 세팅 */
+        $request = \App::getInstance('request');
+        $phpSelf = gd_php_self();
+        $urlDefaultCheck = true;
+
+        if ($request->request()->has('returnUrl')) {
+            // returnUrl 데이타 타입 체크
+            try {
+                Validation::setExitType('throw');
+                Validation::defaultCheck(gd_isset($request->request()->get('returnUrl')), 'url');
+            } catch (\Exception $e) {
+                $urlDefaultCheck = false;
+                $kakaosyncReturnUrl = $request->getReferer();
+            }
+
+            if ($urlDefaultCheck) {
+                $kakaosyncReturnUrl = $request->getReturnUrl();// url의 특이한 형태로 인해 치환코드 설정
+                // 웹앤모바일 수정 21-09-10 - 본 조건에서는 returnUrl이 원하는 형태로 생성되지않아서 형태를 맞춰줌
+                $kakaosyncReturnUrl = $request->getScheme() . "://" . $request->getServerName() . $kakaosyncReturnUrl;
+            }
+        } else {
+            $kakaosyncReturnUrl = $request->getReferer();
+            // 로그인, 회원가입 페이지나 PS컨트롤러가 아니면 카카오싱크 returnUrl 재정의
+            if (strpos($phpSelf, 'member/login.php') === false && strpos($phpSelf, 'member/join_method.php') === false && strpos($phpSelf, '_ps.php') === false) {
+                $kakaosyncReturnUrl = $request->getScheme() . "://" . $request->getServerName() . $request->getRequestUri();
+            }
+        }
+        $controller->setData('kakaosyncReturnUrl', urlencode($kakaosyncReturnUrl));
+        /* 웹앤모바일 수정 끝 */
 	}
 }
 ?>

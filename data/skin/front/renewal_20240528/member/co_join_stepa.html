@@ -11,7 +11,7 @@
 					리브레케어 멤버십
 					<p class="pull-right" style="margin-top:-50px;"><img src="../img/common/freestyle_libre_logo.jpg" alt="" /></p>
 				</h3>
-				
+
 				<!-- <h4 class="mem_stitle fcBlue fs30">프리스타일 리브레 제품의 온라인 구매를 위한 리브레케어 멤버이십니까?</h4> -->
 				<h4 class="fcBlue fs30 fw600 mb20">아직 리브레케어 멤버가 아니신가요?</h4>
 				<p class="fs20 mb30">‘리브레케어’는 프리스타일 리브레 사용자께 제공되는 포괄적인 교육 및 지원 서비스로, 센서 사용 및 수치 이해에 관련한 교육 서비스를 비롯해 제품 교환을 포함한 품질 보증 서비스를 받으실 수 있습니다. </p>
@@ -23,6 +23,14 @@
 						<img src="../img/join_stapa_app_v2.jpg" alt="" />
 					</div>
 				</div>
+
+				{ ? wmTest }
+				<div class="member_sns_login">
+					<a href="javascript:loginkakao();" class="btn_kakao_login" data-kakao-type="login" data-return-url="{=kakaoReturnUrl}">
+						<img src="../img/btn/sns-kakaolink.png" alt="" />{=__('카카오로 회원가입')}</a>
+					<a href="../member/co_join_stepb.php?device=pc" class="btn_login">{=__('휴대폰인증으로 가입하기')}</a>
+				</div>
+				{ / }
 
 				<h3 class="fcBlue fs30 fw600 mb20 mt60">리브레케어 멤버십에 이미 등록을 완료하셨다면 인증해주세요.</h3>
 
@@ -153,3 +161,36 @@ function fn_joinstepb() {
 </script>
 
 { # footer }
+
+{* 웹앤모바일 카카오싱크 튜닝 25-03-11 - 카카오싱크 *}
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+	/**
+	 * KAKAO JS SDK init
+	 */
+	function setKakaoSdkInit(clientSecret)
+	{
+		// Kakao 객체가 이미 초기화 되어있다면 cleanup해주고 다시 init 해준다
+		// Kakao 객체가 중복으로 init되면 함수 실행시 에러 발생하는 현상 방지
+		if (Kakao.isInitialized()) {
+			Kakao.cleanup();
+		}
+		Kakao.init(clientSecret);
+	}
+
+	function loginkakao(){
+		// 웹앤모바일 카카오싱크 수정 25-03-11 - JavaScript Key 직접 세팅
+		setKakaoSdkInit("482acd9f7a70c87838a6b6b8dc09228d");
+		// 웹앤모바일 카카오싱크 수정 25-03-11 - kakaosyncReturnUrl 지정
+		var url = "{= kakaosyncReturnUrl }";
+		var state = $('#saveAutoLogin:checked').val() ? $('#saveAutoLogin:checked').val() : 'n';
+		state = url + "^|^" + state;
+		Kakao.Auth.authorize({
+			redirectUri: 'https://www.diabetesmall.co.kr/member/kakao/kakao_login.php',
+			state: state,
+		});
+	}
+</script>
+{* 웹앤모바일 튜닝 끝 *}
+
+{* 웹앤모바일 카카오싱크링크 튜닝 25-03-11 *}
