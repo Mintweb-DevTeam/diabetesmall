@@ -1,0 +1,160 @@
+{*** 카카오싱크 이메일중복 | member/sns_member.php ***}
+{=includeFile('outline/_header.html')}
+
+<link type="text/css" rel="stylesheet" href="{=setBrowserCache('../css/wm/layer_wm.css')}">
+
+<style>
+    .member_cont{padding:70px 0px !important;}
+    .title_body{margin-bottom: 2vw;}
+    .title{font-size:18px;font-weight:bold;}
+    @media (max-width: 1050px) {
+    }
+    @media (min-width: 1050px) {
+        .nonmember_order_box .order_input_sec div{display:inline-block;width:58%;}
+        .nonmember_order_box .order_input_sec button{display:inline-block;/*margin:0px 0px 0px 5px !important;*/height:87px !important;}
+        .member_cont .nonmember_order_box .order_input_sec input{width:100% !important;}
+    }
+    .new_join{    border: 1px solid #b2b506;
+        background: #b2b506;
+        color: #fff;    margin-bottom: 0.3vw;}
+    .new_join2{    border: 1px solid #76afdf;
+        background: #76afdf;
+        color: #fff;}
+
+    /* 디자인 맞춰서 CSS 작성 */
+    .wm_login_body {width:401px; padding:0px;}
+    .wm_t1 {font-size:32px;}
+    .wm_margin_t1 {margin-bottom:56px;}
+    .title_body {margin-bottom:30px;}
+    .wm_t2 {font-size:18px;}
+    .wm_margin_t2 {margin-bottom:32px;}
+    .wm_login_body input {width:100%; height:50px; padding:0 8px 0 8px !important; border:1px solid #ceced2; color:#9e9e9e; font-size:14px;}
+    .new_join {margin-bottom: 3px; background:#fdcf41; border-radius:6px; color:#616161; font-size:15px; font-weight:500; border:none; padding:14px 0 14px 0 !important;}
+    .wm_confirm {border-radius:6px; padding:12px 0 12px 0;}
+
+    /*.member_tit {padding-top:66px;}*/
+    /*.btn_member, .btn_member_bar {cursor:default;}*/
+    /*.btn_member_find_id {width:150px; text-align:right; padding:15px 0 15px 15px; color:#9e9e9e; font-weight:500; font-size:12px; cursor:pointer;}*/
+    /*.btn_member_find_pw {width:150px; text-align:left; padding:15px 15px 15px 0; color:#9e9e9e; font-weight:500; font-size:12px; cursor:pointer;}*/
+    /* // 디자인 맞춰서 CSS 작성 */
+</style>
+<div class="wm_login_content">
+    <div class="wm_login_body wm_margin_auto wm_center">
+        <form id="formEmail" method="post" action="../member/kakao_connect.php" >
+            <input type="hidden" name="wm_access_token" value="{=wm_access_token}">
+            <input type="hidden" name="directKakao" value="{=directKakao}">
+            <input type="hidden" name="rncheck" value="{=rncheck}">
+            <input type="hidden" name="mode" value="{=mode}">
+            <input type="hidden" name="memId" value="{=memId}">
+            <input type="hidden" name="email" value="{=email}">
+            <input type="hidden" name="cellPhone" value="{=cellPhone}">
+            <input type="hidden" name="sexFl" value="{=sexFl}">
+            <input type="hidden" name="birthYear" value="{=birthYear}">
+            <input type="hidden" name="birthMonth" value="{=birthMonth}">
+            <input type="hidden" name="birthDay" value="{=birthDay}">
+            <input type="hidden" name="memNm" value="{=memNm}">
+            <input type="hidden" name="accessToken" value="{=accessToken}">
+            <input type="hidden" name="refresh_token" value="{=refresh_token}">
+            <input type="hidden" name="emailCheck" value="y">
+            <input type="hidden" name="returnTo" value="{= returnTo }">
+            <input type="hidden" name="memNo" value="{= memNo }">
+            <input type="hidden" name="kakaoType" value="connect">
+
+
+
+            <div class="title_body">
+                <span class="title">카카오 계정의 휴대폰번호와 동일한 리브레 멤버십 & 아델라 회원이 존재합니다. 해당 카카오 계정 정보로 연동 하시겠습니까?</span>
+            </div>
+
+            <div class="member_sns_login">
+                <button type="submit" class="btn_kakao_login" ><img src="../img/kakao/kakao_icon.png" alt="" style="margin-right: 10px;" />{=__('카카오로 연동하기')}</button>
+                <a href="../member/co_join_stepb.php?device=pc" class="btn_login">{=__('휴대폰인증으로 가입하기')}</a>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+{=includeFile('outline/_footer.html')}
+
+<script type="text/javascript">
+    // var $formLogin;
+
+    $(function(){
+        $(".new_join").click(function(){
+            $(".email_group").show();
+        });
+
+        $("#wemail").keydown(function(e){
+            if(e.keyCode == 13){
+                join_();
+            }
+        });
+
+        $('#btnFindId').click(function (e) {
+            e.preventDefault();
+            location.href = '../member/find_id.php';
+        });
+        $('#btnFindPwd').click(function (e) {
+            e.preventDefault();
+            location.href = '../member/find_password.php';
+        });
+    });
+
+
+    function join_(){
+        var email = $("#wemail").val();
+        var phoneNumber = $("#wephone").val();
+
+        if (EmailChk(email) == true && PhoneNumChk(phoneNumber) == true) {
+            $.ajax({
+                url:"../member/kakao_chk.php",
+                method:"post",
+                data:{email:email,phoneNumber: phoneNumber,mode:"email_chk"}
+            })
+                .done(function(data){
+                    var decode_data = jQuery.parseJSON( data );
+
+                    if(decode_data.result == "success"){
+                        $("input[name='email']").val(email);
+                        $("input[name='cellPhone']").val(phoneNumber);
+                        formEmail.submit();
+                    }else{
+                        alert("이미 등록된 이메일/휴대폰번호 입니다.");
+                        return false;
+                    }
+                });
+        } else if (EmailChk(email) == false){
+            alert("이메일 형식 오류입니다.");
+            return false;
+        } else if (PhoneNumChk(phoneNumber) == false){
+            alert("휴대폰 형식 오류입니다.");
+            return false;
+        }
+
+    }
+
+
+
+    function EmailChk(str)
+    {
+        var reg_str = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+
+        if(!reg_str.test(str)) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    function PhoneNumChk(str) {
+        var reg_str = /^\d{3}-\d{3,4}-\d{4}$/;
+
+        if (!reg_str.test(str)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>

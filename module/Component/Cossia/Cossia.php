@@ -630,4 +630,12 @@ privateOfferFl[26] 3자 민감정보제공  third_party_sensitive
 		return $cnt ? true : false;
 	}
 
+
+	public function isJoinData($sno,$memNo){
+        $sql = 'UPDATE `co_abbottMember` SET `isJoin` = \'y\', joinDt = now() WHERE `sno` = \''.$sno.'\'';
+        $this->db->query($sql);
+
+        $sql = 'UPDATE `es_member` SET `abbott_sno` = \''.$sno.'\' WHERE `memNo` = \''.$memNo.'\'';
+        $this->db->query($sql);
+    }
 }

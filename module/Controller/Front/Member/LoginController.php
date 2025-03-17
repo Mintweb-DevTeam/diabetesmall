@@ -8,7 +8,9 @@ class LoginController extends \Bundle\Controller\Front\Member\LoginController
 	{
 	
 		//if(\Request::getRemoteAddress()=="182.216.219.157"){
-			
+        if(\Request::getRemoteAddress()=="182.216.219.157"){
+            $this->setData('wmTest',1);
+        }
 				
 			//2024.11.25웹앤모바일 추가시작
 			
