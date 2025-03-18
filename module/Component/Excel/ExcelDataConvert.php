@@ -9,7 +9,7 @@ class ExcelDataConvert extends \Bundle\Component\Excel\ExcelDataConvert
         
 	}
 	public function abbotMember(){
-		$head = ['sno', '이름', '연락처', '이메일', '마케팅용 정보수집 동의', '마케팅/광고 수신', '3자 개인정보제공', '3자 민감정보제공', '약국코드', '접속경로', '가입일시','업데이트일시'];
+		$head = ['sno', '이름', '연락처', '이메일', '마케팅용 정보수집 동의', '마케팅/광고 수신', '3자 개인정보제공', '3자 민감정보제공', '약국코드', '접속경로', '가입일시','업데이트일시','카카오계정 여부'];
 		$this->excelHeader = '<table border="1"><tr>' . chr(10);
 		foreach ($head as $row) {
 			$this->excelHeader .= '<td class="title">' . $row . '</td>' . chr(10);
@@ -39,6 +39,7 @@ class ExcelDataConvert extends \Bundle\Component\Excel\ExcelDataConvert
 				$this->excelBody[] = '<td>'.strtoupper($row['device']).'</td>' . chr(10);
 				$this->excelBody[] = '<td>'.$row['regDt'].'</td>' . chr(10);
 				$this->excelBody[] = '<td>'.$row['modDt'].'</td>' . chr(10);//2024.02.08웹앤모바일추가
+                $this->excelBody[] = '<td>'.$row['kakaoFl'].'</td>' . chr(10);//2025.03.18웹앤모바일추가
 				$this->excelBody[] = '</tr>' . chr(10);
 			}
 		$this->excelFooter = '</table>' . chr(10);

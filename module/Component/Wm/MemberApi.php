@@ -68,4 +68,33 @@ class MemberApi
             :
             ['code'=>self::RESULT_CODE_SUCCESS, 'msg'=>'false'];
     }
+
+    public function campaignFl(){
+        $cellPhone = $this->formatPhone($this->data["cellPhone"]);
+
+        $sql = "SELECT campaignFl FROM ".$this->table." WHERE cellPhone = '{$cellPhone}'";
+        $campaignFl = $this->db->fetch($sql);
+
+        if($campaignFl['campaignFl'] == 'y'){
+            return ['code'=>self::RESULT_CODE_SUCCESS, 'msg'=>'true'];
+        } else {
+            return  ['code'=>self::RESULT_CODE_SUCCESS, 'msg'=>'false'];
+        }
+    }
+
+    public function campaignInfoUpdate(){
+        $cellPhone = $this->formatPhone($this->data["cellPhone"]);
+
+        $sql = "SELECT count(*) as cnt FROM ".$this->table." WHERE cellPhone = '{$cellPhone}'";
+        $cnt = $this->db->fetch($sql);
+
+        if(!$cnt['cnt']) {
+            return ['code'=>420, 'msg'=>'해당 회원이 없습니다'];
+        } else {
+            $sql = "UPDATE co_abbottMember SET campaignFl = 'y' WHERE cellPhone = '{$cellPhone}'";
+            $this->db->query($sql);
+
+            return ['code'=>self::RESULT_CODE_SUCCESS, 'msg'=>'성공'];
+        }
+    }
 }
