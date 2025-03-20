@@ -69,18 +69,18 @@ class MemberApi
             ['code'=>self::RESULT_CODE_SUCCESS, 'msg'=>'false'];
     }
 
-    public function campaignFl(){
-        $cellPhone = $this->formatPhone($this->data["cellPhone"]);
-
-        $sql = "SELECT campaignFl FROM ".$this->table." WHERE cellPhone = '{$cellPhone}'";
-        $campaignFl = $this->db->fetch($sql);
-
-        if($campaignFl['campaignFl'] == 'y'){
-            return ['code'=>self::RESULT_CODE_SUCCESS, 'msg'=>'true'];
-        } else {
-            return  ['code'=>self::RESULT_CODE_SUCCESS, 'msg'=>'false'];
-        }
-    }
+//    public function campaignFl(){
+//        $cellPhone = $this->formatPhone($this->data["cellPhone"]);
+//
+//        $sql = "SELECT campaignFl FROM ".$this->table." WHERE cellPhone = '{$cellPhone}'";
+//        $campaignFl = $this->db->fetch($sql);
+//
+//        if($campaignFl['campaignFl'] == 'y'){
+//            return ['code'=>self::RESULT_CODE_SUCCESS, 'msg'=>'true'];
+//        } else {
+//            return  ['code'=>self::RESULT_CODE_SUCCESS, 'msg'=>'false'];
+//        }
+//    }
 
     public function campaignInfoUpdate(){
         $cellPhone = $this->formatPhone($this->data["cellPhone"]);
@@ -88,10 +88,41 @@ class MemberApi
         $sql = "SELECT count(*) as cnt FROM ".$this->table." WHERE cellPhone = '{$cellPhone}'";
         $cnt = $this->db->fetch($sql);
 
-        if(!$cnt['cnt']) {
-            return ['code'=>420, 'msg'=>'해당 회원이 없습니다'];
+        if($cnt['cnt']) {
+            return ['code'=>420, 'msg'=>'해당 번호로 가입된 회원이 있습니다'];
         } else {
-            $sql = "UPDATE co_abbottMember SET campaignFl = 'y' WHERE cellPhone = '{$cellPhone}'";
+
+
+            //25-03-13 웹앤모바일 튜닝
+            $privateApprovalOptionFl = [
+                "19" => "y",
+                "21" => "y"
+            ];
+
+            $privateOfferFl = [
+                "5" => "y",
+                "22" => "y",
+                "25" => "n",
+                "26" => "n"
+            ];
+
+            $privateConsignFl = [
+                "20" => "n",
+                "23" => "n"
+            ];
+
+            $privateOfferFl['25'] = $this->data['user_select'];
+            $privateOfferFl['26'] = $this->data['private_select'];
+            $privateConsignFl['20'] = $this->data['marketing_opt'];
+            $privateConsignFl['23'] = $this->data['marketing_agreement'];
+
+            // JSON 변환
+            $param['privateApprovalOptionFl'] = $privateApprovalOptionFl;
+            $param['privateOfferFl'] = $privateOfferFl;
+            $param['privateConsignFl'] = $privateConsignFl;
+            $device = ($this->data['device']) ? ', `device` = \''.$this->data['device'].'\' ' : ', `device` = \'mo\' ';
+
+            $sql = 'INSERT INTO `co_abbottMember` SET `memNm` = \''.$this->data['memNm'].'\', `email` = \''.$this->data['memId'].'\', `cellPhone` = \''.$this->data['cellPhone'].'\', `privateApprovalOptionFl` = \''.json_encode($param['privateApprovalOptionFl']).'\', `privateOfferFl` = \''.json_encode($param['privateOfferFl']).'\', `privateConsignFl` = \''.json_encode($param['privateConsignFl']).'\''.$device;
             $this->db->query($sql);
 
             return ['code'=>self::RESULT_CODE_SUCCESS, 'msg'=>'성공'];

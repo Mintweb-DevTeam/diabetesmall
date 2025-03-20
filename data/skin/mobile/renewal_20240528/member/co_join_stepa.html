@@ -14,7 +14,7 @@
 
 		<div class="adela_member_cont">
 
-			<div class="container">
+			<ul class="container">
 				
 				<div class="intro pb10 mb20 clearfix" style="border-bottom:2px solid #ffc600;">
 					<h1 class="fcBlue fs20 pull-left mt20">리브레케어 멤버십</h1>
@@ -39,7 +39,14 @@
 
 					</div>
 				</div>
-				
+
+				{ ? wmTest }
+				<div class="member_sns_login">
+					<a href="javascript:loginkakao();" class="btn_kakao_login" data-kakao-type="login" data-return-url="{=kakaoReturnUrl}">
+						<img style="margin-right: 10px;" src="../img/kakao/kakao_icon.png" alt="" />{=__('카카오로 회원가입')}</a>
+					<a href="../member/co_join_stepb.php?device=pc" class="btn_login">{=__('휴대폰인증으로 가입하기')}</a>
+				</div>
+				{ / }
 
 				<h3 class="fcBlue fs16 fw600 mb10 mt30">리브레케어 멤버십에 이미 등록을 완료하셨다면 인증해주세요.</h3>
 

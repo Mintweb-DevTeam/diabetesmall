@@ -12,7 +12,7 @@ class LoginController extends \Bundle\Controller\Mobile\Member\LoginController
 				Session::del("direct_goodsView");
 				$return_url="/goods/goods_view.php?goodsNo=".$direct_goodsView;
 				$this->setData("return_url",$return_url);
-			}		
+			}
 			
 			
 			$direct_event_goodsView=\Session::get("direct_event_goodsView");
@@ -78,8 +78,10 @@ class LoginController extends \Bundle\Controller\Mobile\Member\LoginController
 	
 	public function index()
 	{
-		
-		
+	    
+        if(\Request::getRemoteAddress()=="182.216.219.157"){
+            $this->setData('wmTest',1);
+        }
 
 		parent::index();
 		
