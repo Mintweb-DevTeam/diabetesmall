@@ -118,6 +118,8 @@ class CommonController
             try {
                 Validation::setExitType('throw');
                 Validation::defaultCheck(gd_isset($request->request()->get('returnUrl')), 'url');
+            } catch (\Exception $e) {
+                $urlDefaultCheck = false;
                 $kakaosyncReturnUrl = $request->getReferer();
             }
 
