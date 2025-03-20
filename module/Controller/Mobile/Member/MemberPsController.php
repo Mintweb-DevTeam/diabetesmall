@@ -320,9 +320,9 @@ class MemberPsController extends \Bundle\Controller\Mobile\Member\MemberPsContro
 //                        $this->redirect("./kakao/kakao_login.php?memId=".$in['memId'], null, parent);
                             // 웹앤모바일 수정 21-10-22 - 이메일 중복으로 재설정한 경우와 아닌 경우 구분
                             if (\Request::request()->get('emailCheck') == 'y') {
-                                $this->redirect("./kakao/kakao_login.php?memId=" . $in['memId'] . "&returnUrl=" . \Request::post()->get('returnTo'), null, 'top');
+                                $this->redirect("./kakao/kakao_login.php?uuid=".$in['uuid']."&memId=".$in['memId']."&returnUrl=".\Request::post()->get('returnTo'), null, 'top');
                             } else {
-                                $this->redirect("./kakao/kakao_login.php?memId=" . $in['memId'] . "&returnUrl=" . urlencode(\Request::get()->get('returnTo')), null, 'top');
+                                $this->redirect("./kakao/kakao_login.php?uuid=".$in['uuid']."&memId=" . $in['memId'] . "&returnUrl=" . urlencode(\Request::get()->get('returnTo')), null, 'top');
                             }
 //                        $this->js("alert('회원가입이 완료되었습니다.');window.location.href = './login.php';");
 //                        echo 'join_ok';

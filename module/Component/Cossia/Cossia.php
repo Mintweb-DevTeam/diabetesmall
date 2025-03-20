@@ -583,6 +583,8 @@ privateOfferFl[26] 3자 민감정보제공  third_party_sensitive
 		
 		if( isset($param['cellPhone']) && $param['cellPhone'] )
 			$sql_ .= ' AND `cellPhone` = \''.$this->getCellPhone($param['cellPhone']).'\' ';
+        if( isset($param['kakaoFl']) && $param['kakaoFl'] )
+            $sql_ .= ' AND `kakaoFl` = \''.$param['kakaoFl'].'\' ';
 		
 		$sql = 'SELECT * FROM `co_abbottMember` WHERE 1 '.$sql_;
 		$data = $this->db->query_fetch($sql, true);
@@ -632,7 +634,7 @@ privateOfferFl[26] 3자 민감정보제공  third_party_sensitive
 
 
 	public function isJoinData($sno,$memNo){
-        $sql = 'UPDATE `co_abbottMember` SET `isJoin` = \'y\', joinDt = now() WHERE `sno` = \''.$sno.'\'';
+        $sql = 'UPDATE `co_abbottMember` SET `kakaoFl` = \'y\', `isJoin` = \'y\', joinDt = now() WHERE `sno` = \''.$sno.'\'';
         $this->db->query($sql);
 
         $sql = 'UPDATE `es_member` SET `abbott_sno` = \''.$sno.'\' WHERE `memNo` = \''.$memNo.'\'';

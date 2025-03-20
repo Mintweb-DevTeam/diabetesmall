@@ -1,10 +1,10 @@
 <?php
 
-namespace Controller\Front\Service;
+namespace Controller\Mobile\Service;
 
 use Request;
 
-class KakaoPrivateSelectController extends \Controller\Front\Controller
+class KakaoPrivateSelectController extends \Controller\Mobile\Controller
 {
     public function index()
     {

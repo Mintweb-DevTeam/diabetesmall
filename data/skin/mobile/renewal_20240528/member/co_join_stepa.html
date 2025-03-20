@@ -44,7 +44,13 @@
 				<div class="member_sns_login">
 					<a href="javascript:loginkakao();" class="btn_kakao_login" data-kakao-type="login" data-return-url="{=kakaoReturnUrl}">
 						<img style="margin-right: 10px;" src="../img/kakao/kakao_icon.png" alt="" />{=__('카카오로 회원가입')}</a>
-					<a href="../member/co_join_stepb.php?device=pc" class="btn_login">{=__('휴대폰인증으로 가입하기')}</a>
+
+					{?adobe_member == 1}
+					<a href="javascript:fn_join();" class="btn_login">{=__('휴대폰인증으로 가입하기')}</a>
+					{:}
+					<a href="../member/co_join_stepb.php?device=mo" class="btn_login">{=__('휴대폰인증으로 가입하기')}</a>
+					{/}
+
 				</div>
 				{ / }
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Controller\Front\Service;
+namespace Controller\Mobile\Service;
 
 use Request;
 
-class KakaoMarketingAgreementController extends \Controller\Front\Controller
+class KakaoMarketingAgreementController extends \Controller\Mobile\Controller
 {
     public function index()
     {

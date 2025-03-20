@@ -7,9 +7,9 @@ class MemberJoinFlController extends \Controller\Api\Controller
     public function index()
     {
        
-        $header = getallheaders();
-        gd_Debug($header);
-        exit;
+//        $header = getallheaders();
+//        gd_Debug($header);
+//        exit;
 
         try{
 

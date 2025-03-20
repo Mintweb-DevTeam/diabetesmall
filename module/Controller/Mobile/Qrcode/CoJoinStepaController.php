@@ -10,6 +10,10 @@ class CoJoinStepaController extends \Controller\Mobile\Controller {
     public function index()
 	{
 		$get = Request::get()->all();
+
+        if(\Request::getRemoteAddress()=="182.216.219.157"){
+            $this->setData('wmTest',1);
+        }
 		
 		if( $get['pharmacy_code'] == 'TRYNOWevent' ) Session::set('join_view', '1');
 		else Session::set('join_view', '2');

@@ -1,10 +1,10 @@
 <?php
 
-namespace Controller\Front\Service;
+namespace Controller\Mobile\Service;
 
 use Request;
 
-class KakaoUserInfoController extends \Controller\Front\Controller
+class KakaoUserInfoController extends \Controller\Mobile\Controller
 {
     public function index()
     {

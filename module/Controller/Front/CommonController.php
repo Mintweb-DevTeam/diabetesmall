@@ -114,7 +114,20 @@ class CommonController
 			//2024.04.16 웹앤모바일 추가종료
 			//$controller->setData("add_menu",1);
 		//}
+        if(\Request::getRemoteAddress()=="182.216.219.157"){
+            $this->db = \App::load('DB');
+            $sql = "SELECT * FROM es_member WHERE abbott_sno = 63455";
+            $dd = $this->db->query_fetch($sql);
+//            $sql ="DELETE FROM es_memberSns WHERE sno = 35";
+//            $this->db->query($sql);
+            $sql = "SELECT * FROM co_abbottMember WHERE cellPhone = '010-9954-1606'";
+            $dd2 = $this->db->query_fetch($sql);
 
+            $sql = "SELECT * FROM es_memberSns ";
+            $dd3 = $this->db->query_fetch($sql);
+//            gd_Debug($dd3);
+
+        }
 
         /* 웹앤모바일 카카오싱크 수정 25-03-11 - kakaosyncReturnUrl 세팅 */
         $request = \App::getInstance('request');
@@ -139,7 +152,8 @@ class CommonController
         } else {
             $kakaosyncReturnUrl = $request->getReferer();
             // 로그인, 회원가입 페이지나 PS컨트롤러가 아니면 카카오싱크 returnUrl 재정의
-            if (strpos($phpSelf, 'member/login.php') === false && strpos($phpSelf, 'member/join_method.php') === false && strpos($phpSelf, '_ps.php') === false) {
+            if (strpos($phpSelf, 'member/sns_member.php') === false && strpos($phpSelf, 'member/join_kakao.php') === false && strpos($phpSelf, 'member/co_join_stepa.php') === false && strpos($phpSelf, 'member/login.php') === false && strpos($phpSelf, 'member/join_method.php') === false && strpos($phpSelf, '_ps.php') === false) {
+
                 $kakaosyncReturnUrl = $request->getScheme() . "://" . $request->getServerName() . $request->getRequestUri();
             }
         }

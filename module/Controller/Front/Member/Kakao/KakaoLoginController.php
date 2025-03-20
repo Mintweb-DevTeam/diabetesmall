@@ -42,7 +42,7 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
         if($no && !$code && $autologin == 'y'){
             $snsno = \App::load("\\Component\\Wm\\Wm");
             $end = $snsno->getToken($no);
-            $memId = $end['uuid'];
+            $memId = $end;
         }
 
         if ((!$returnUrl1 && ($state1[sizeof($state1) - 1] == "n" || $state1[sizeof($state1) - 1] == "y")) && !$memId) { // 자동로그인 여부 검사
@@ -76,7 +76,7 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
             // 회원 정보
             $response = json_decode($response1, true);
         }
-        if ($memId) $response['id'] = $memId;
+        if ($memId) $response['id'] = $request->get()->get('uuid');
 
         $logger = \App::getInstance('logger');
         $logger->info(sprintf('start controller: %s', __METHOD__));
@@ -158,7 +158,11 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
             //탈퇴를 확인하기 위한 모듈 로드
             $hackOut = \App::load('\\Component\\Member\\HackOut\\HackOutServiceSec');
 
-            $result = $hackOut->checkRejoinByMemberId($response['id']);
+            if($memId){
+                $result = $hackOut->checkRejoinByMemberId($memId);
+            } else {
+                $result = $hackOut->checkRejoinByMemberId($response['kakao_account']['email']);
+            }
 
             if ($result['isFl'] == 'n') { //탈퇴한 경우
                 // 웹앤모바일 수정 21-10-06
@@ -198,7 +202,9 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
 
                 if ($response) {
 
+
                     $memberSns = $memberSnsService->getMemberSnsByUUID($response['id']);
+
 
 //                    $userInfo = $kakaoApi->getUserInfo($accessToken);
                     // 웹앤모바일 21-10-21
@@ -279,6 +285,7 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                          * 웹앤모바일 2021-10-21
                          */
 
+                        $uuid = $response['id'];
 
                             if(empty(\Request::get()->get("memId"))){
 
@@ -286,7 +293,6 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                                 \Session::set("accessToken",$accessToken);
                                 \Session::set("refresh_token",$refresh_token);
 
-                                $uuid = $response['id'];
 
 
                                 $email = $response['kakao_account']['email'];
@@ -312,8 +318,8 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                                     $strSQL = "select memId,email,cellPhone from " . DB_MEMBER . " where cellPhone = '$phone' OR cellPhone = '$cellPhone'";
                                     $member = $db->fetch($strSQL);
 
-                                    $memId = $response['id'];
-                                    $memNm = $response['kakao_account']['name'] ? $response['kakao_account']['name'] : 'user'.$memId;
+                                    $memId = $response['kakao_account']['email'];
+                                    $memNm = $response['kakao_account']['name'] ? $response['kakao_account']['name'] : 'user'.$uuid;
 
                                     // 카카오 계정이 없고 리브레 멤버쉽이 있는 경우
                                     if ( !empty($meberShip) && !$member['memId']) {
@@ -327,13 +333,14 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                                             <input type="hidden" name="directKakao" value="1">
                                             <input type="hidden" name="rncheck" value="none">
                                             <input type="hidden" name="mode" value="join">
-                                            <input type="hidden" name="memId" value="<?= $response['id'] ?>">
+                                            <input type="hidden" name="memId" value="<?= $response['kakao_account']['email'] ?>">
                                             <input type="hidden" name="email" value="<?= $email ?>">
                                             <input type="hidden" name="cellPhone" value="<?= $cellPhone ?>">
                                             <input type="hidden" name="sexFl" value="<?= $sexFl ?>">
                                             <input type="hidden" name="birthYear" value="<?= $birthYear ?>">
                                             <input type="hidden" name="birthMonth" value="<?= $birthMonth ?>">
                                             <input type="hidden" name="birthDay" value="<?= $birthDay ?>">
+                                            <input type="hidden" name="uuid" value="<?= $uuid ?>">
                                             <input type="hidden" name="memNm"
                                                    value="<?=$memNm?>">
                                             <input type="hidden" name="returnTo"
@@ -358,8 +365,8 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                                     }
 
 
-                                    $memId = $response['id'];
-                                    $memNm = $response['kakao_account']['name'] ? $response['kakao_account']['name'] : 'user'.$memId;
+                                    $memId = $response['kakao_account']['email'];
+                                    $memNm = $response['kakao_account']['name'] ? $response['kakao_account']['name'] : 'user'.$uuid;
 
                                     if ( !empty($mrow) && !empty($meberShip) ) {
 
@@ -372,13 +379,14 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                                             <input type="hidden" name="directKakao" value="1">
                                             <input type="hidden" name="rncheck" value="none">
                                             <input type="hidden" name="mode" value="join">
-                                            <input type="hidden" name="memId" value="<?= $response['id'] ?>">
+                                            <input type="hidden" name="memId" value="<?= $response['kakao_account']['email'] ?>">
                                             <input type="hidden" name="email" value="<?= $email ?>">
                                             <input type="hidden" name="cellPhone" value="<?= $cellPhone ?>">
                                             <input type="hidden" name="sexFl" value="<?= $sexFl ?>">
                                             <input type="hidden" name="birthYear" value="<?= $birthYear ?>">
                                             <input type="hidden" name="birthMonth" value="<?= $birthMonth ?>">
                                             <input type="hidden" name="birthDay" value="<?= $birthDay ?>">
+                                            <input type="hidden" name="uuid" value="<?= $uuid ?>">
                                             <input type="hidden" name="memNm"
                                                    value="<?=$memNm?>">
                                             <input type="hidden" name="memNo"
@@ -403,8 +411,9 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                         /*웹앤모바일 20200311 튜닝 카카오 로그인시 바로 회원가입으로 보내버리기*/
                         // 회원가입해야할 경우 member_ps 쪽으로 회원정보 전송
 
-                        $memId = $response['id'];
-                        $memNm = $response['kakao_account']['name'] ? $response['kakao_account']['name'] : 'user'.$memId;
+
+                        $memId = $response['kakao_account']['email'];
+                        $memNm = $response['kakao_account']['name'] ? $response['kakao_account']['name'] : 'user'.$uuid;
                         $directKakao = 1;
                         $rncheck = 'none';
                         $mode = 'join';
@@ -417,7 +426,8 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                         $birthMonth = substr($response['kakao_account']['birthday'], 0, 2);
                         $birthDay = substr($response['kakao_account']['birthday'], 2, 2);
                         // 웹앤모바일 21-10-21 - 회원 가입시 필요한 returnUrl 추가
-                        $this->redirect("../member_ps.php?wm_access_token=".$accessToken."&directKakao=".$directKakao."&rncheck=".$rncheck."&mode=".$mode."&memId=".$memId."&memNm=".$memNm."&email=".$email."&cellPhone=".$cellPhone."&sexFl=".$sexFl."&birthYear=".$birthYear."&birthMonth=".$birthMonth."&birthDay=".$birthDay."&returnTo=".$state1[0], null, parent);
+
+                        $this->redirect("../member_ps.php?wm_access_token=".$accessToken."&directKakao=".$directKakao."&rncheck=".$rncheck."&mode=".$mode."&memId=".$memId."&memNm=".$memNm."&email=".$email."&cellPhone=".$cellPhone."&sexFl=".$sexFl."&birthYear=".$birthYear."&birthMonth=".$birthMonth."&birthDay=".$birthDay."&returnTo=".$state1[0]."&uuid=".$uuid, null, parent);
                     }
                     exit;
                 }
