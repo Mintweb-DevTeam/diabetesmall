@@ -120,9 +120,9 @@ class MemberApi
             $param['privateApprovalOptionFl'] = $privateApprovalOptionFl;
             $param['privateOfferFl'] = $privateOfferFl;
             $param['privateConsignFl'] = $privateConsignFl;
-            $device = ($this->data['device']) ? ', `device` = \''.$this->data['device'].'\' ' : ', `device` = \'mo\' ';
+            $device = ', `device` = \'qr\' ';
 
-            $sql = 'INSERT INTO `co_abbottMember` SET `memNm` = \''.$this->data['memNm'].'\', `email` = \''.$this->data['email'].'\', `cellPhone` = \''.$this->data['cellPhone'].'\', `privateApprovalOptionFl` = \''.json_encode($param['privateApprovalOptionFl']).'\', `privateOfferFl` = \''.json_encode($param['privateOfferFl']).'\', `privateConsignFl` = \''.json_encode($param['privateConsignFl']).'\''.$device;
+            $sql = 'INSERT INTO `co_abbottMember` SET `pharmacy_code` = \'TRYNOWDWGH\', `memNm` = \''.$this->data['memNm'].'\', `email` = \''.$this->data['email'].'\', `cellPhone` = \''.$this->data['cellPhone'].'\', `privateApprovalOptionFl` = \''.json_encode($param['privateApprovalOptionFl']).'\', `privateOfferFl` = \''.json_encode($param['privateOfferFl']).'\', `privateConsignFl` = \''.json_encode($param['privateConsignFl']).'\''.$device;
             $this->db->query($sql);
 
             return ['code'=>self::RESULT_CODE_SUCCESS, 'msg'=>'성공'];

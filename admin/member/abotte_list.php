@@ -118,7 +118,7 @@ $(function(){
         <tbody>
 			<?php if( is_array($list) ) { 
 		foreach( $list as $row ) {
-	
+
 			/* if($row['isJoin'] == 'y'){
 				echo '<tr><td class="center">'.$row['No'].'</td><td class="center"><a href="#." onClick="view_info(this)" data-name="'.$row['memNm'].'" data-email="'.$row['email'].'" data-cellphone="'.$row['cellPhone'].'" data-isjoin="'.$row['isJoin'].'" data-regdt="'.$row['regDt'].'" data-pharmacyname="'.$row['pharmacy_name'].'" >'.$row['memNm'].'</a></td><td colspan="3">회원 전환일시 : '.$row['joinDt'].'</td><td class="center"><button type="button" class="btn btn-white btn-sm" onClick="agrred_change(this)" data-ismem="'.$row['isJoin'].'" data-sno="'.$row['sno'].'" data-memno="'.$row['memNo'].'" >수정</button></td></tr>';
 			}else{*/
@@ -127,7 +127,12 @@ $(function(){
                 <td class="center"><input type="checkbox" value="<?=$row['sno']?>" data-email="<?=$row['email']?>" data-cellphone="<?=$row['cellPhone']?>" class="sno"></td>
                 <td class="center"><a href="#." onClick="view_info(this)" data-name="<?=$row['memNm']?>" data-email="<?=$row['email']?>" data-cellphone="<?=$row['cellPhone']?>" data-isjoin="<?=$row['isJoin']?>" data-regdt="<?=$row['regDt']?>" data-pharmacyname="<?=$row['pharmacy_name']?>" ><?=$row['memNm']?></a></td>
 				<td class="center"><?=$row['cellPhone']?></td>
-				<td class="center"><?=$row['email']?></td>
+				<td class="center">
+                    <?=$row['email']?>
+                    <?php if($row['kakaoFl'] == 'y'){
+                       echo gd_get_third_party_icon_web_path('kakao');
+                    }?>
+                </td>
                 <td class="hide">
 					<div class="agree-div">
 						<label><input name="privateApprovalOptionFl<?=$row['sno']?>19" class="co_radio<?=$row['sno']?>" data-name="privateApprovalOptionFl" data-sno="19" type="radio" value="y" checked>동의함</label>

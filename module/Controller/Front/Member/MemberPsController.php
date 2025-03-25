@@ -184,33 +184,15 @@ class MemberPsController extends \Bundle\Controller\Front\Member\MemberPsControl
                         $param['privateConsignFl'] = $privateConsignFl;
                         \Session::set(Member::SESSION_JOIN_INFO, $param);
 
-                        if($in['memberShipFl'] != 'y') {
 
-                            $param['cellPhone'] = $in['cellPhone'];
-                            $param['memId'] = $in['email'];
-                            $param['memNm'] = $in['memNm'];
-                            if (!\Request::isMobileDevice()) {
-                                $param['device'] = 'pc';
-                            }
-
-                            $param['cellPhone'] = $cossia->getCellPhone($param['cellPhone']);
-                            if ($param['cellPhone'] === false) {
-                                echo '<script>parent.alert("전화번호가 이상합니다.");</script>';
-                                exit;
-                            }
-                            $sno = $cossia->insertCoAbbottMember($param);
-                            //25-03-13 웹앤모바일 튜닝 끝
-
-                        } else {
-
-                            $in['cellPhone'] = $cossia->getCellPhone($in['cellPhone']);
-                            if ($in['cellPhone'] === false) {
-                                echo '<script>parent.alert("전화번호가 이상합니다.");</script>';
-                                exit;
-                            }
-                            $result = $cossia->abbottCheck($in['cellPhone']);
-                            $sno = $result['sno'];
+                        $in['cellPhone'] = $cossia->getCellPhone($in['cellPhone']);
+                        if ($in['cellPhone'] === false) {
+                            echo '<script>parent.alert("전화번호가 이상합니다.");</script>';
+                            exit;
                         }
+                        $result = $cossia->abbottCheck($in['cellPhone']);
+                        $sno = $result['sno'];
+                        
                         
                         // 웹앤모바일 수정 21-09-23 - 배송지 정보를 받아서 회원정보의 주소로 입력
                         $shipping_url = 'https://kapi.kakao.com/v1/user/shipping_address';

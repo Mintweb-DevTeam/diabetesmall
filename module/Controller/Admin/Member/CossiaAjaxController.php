@@ -24,10 +24,17 @@ class CossiaAjaxController extends \Controller\Admin\Controller {
 			case 'del_abotte_mem' :
 				$out = new HackOutService;
 				foreach($post['snos'] as $row){
+
+				    $sql = "SELECT memNo FROM es_member WHERE abbott_sno = ".$row;
+				    $memNo = $this->db->fetch($sql);
+
 					$sql = 'DELETE FROM `co_abbottMember` WHERE `sno` = '.$row;
 					$data = $this->db->query($sql);
 					$sql = 'DELETE FROM `es_member` WHERE `abbott_sno` = '.$row;
 					$this->db->query($sql);
+                    $sql = 'DELETE FROM `es_memberSns` WHERE `memNo` = '.$memNo['memNo'];
+                    $this->db->query($sql);
+                    
 				}
 			break;
 			case 'send_to_member' :

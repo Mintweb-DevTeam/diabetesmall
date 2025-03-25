@@ -184,34 +184,15 @@ class MemberPsController extends \Bundle\Controller\Mobile\Member\MemberPsContro
                         $param['privateConsignFl'] = $privateConsignFl;
                         \Session::set(Member::SESSION_JOIN_INFO, $param);
 
-                        if($in['memberShipFl'] != 'y') {
 
-                            $param['cellPhone'] = $in['cellPhone'];
-                            $param['memId'] = $in['email'];
-                            $param['memNm'] = $in['memNm'];
-                            $param['pharmacy_code'] = $in['pharmacy_code'];
-                            if (!\Request::isMobileDevice()) {
-                                $param['device'] = 'pc';
-                            }
-
-                            $param['cellPhone'] = $cossia->getCellPhone($param['cellPhone']);
-                            if ($param['cellPhone'] === false) {
-                                echo '<script>parent.alert("전화번호가 이상합니다.");</script>';
-                                exit;
-                            }
-                            $sno = $cossia->insertCoAbbottMember($param);
-                            //25-03-13 웹앤모바일 튜닝 끝
-
-                        } else {
-
-                            $in['cellPhone'] = $cossia->getCellPhone($in['cellPhone']);
-                            if ($in['cellPhone'] === false) {
-                                echo '<script>parent.alert("전화번호가 이상합니다.");</script>';
-                                exit;
-                            }
-                            $result = $cossia->abbottCheck($in['cellPhone']);
-                            $sno = $result['sno'];
+                        $in['cellPhone'] = $cossia->getCellPhone($in['cellPhone']);
+                        if ($in['cellPhone'] === false) {
+                            echo '<script>parent.alert("전화번호가 이상합니다.");</script>';
+                            exit;
                         }
+                        $result = $cossia->abbottCheck($in['cellPhone']);
+                        $sno = $result['sno'];
+
                         
                         // 웹앤모바일 수정 21-09-23 - 배송지 정보를 받아서 회원정보의 주소로 입력
                         $shipping_url = 'https://kapi.kakao.com/v1/user/shipping_address';
@@ -309,26 +290,23 @@ class MemberPsController extends \Bundle\Controller\Mobile\Member\MemberPsContro
                         $member->sendEmailByJoin($memberVO);
                     }
 
-                    if($in['pharmacy_code']) {
-                        $this->redirect("../qrcode/co_join_stepe.php?sno=" . $sno . "&memNm=" .$in['memNm'] , null, 'top');
-                    } else {
 
-                        if ($in['directKakao']) {
-                            // 이 부분 수정 해야함
-                            // 회원 가입이 완료되면 자동 로그인을 위해 로그인쪽으로 데이터 전송
-                            // 웹앤모바일 수정 21-10-21 - 회원가입 후 returnUrl로 이동하도록 수정
+                    if ($in['directKakao']) {
+                        // 이 부분 수정 해야함
+                        // 회원 가입이 완료되면 자동 로그인을 위해 로그인쪽으로 데이터 전송
+                        // 웹앤모바일 수정 21-10-21 - 회원가입 후 returnUrl로 이동하도록 수정
 //                        $this->redirect("./kakao/kakao_login.php?memId=".$in['memId'], null, parent);
-                            // 웹앤모바일 수정 21-10-22 - 이메일 중복으로 재설정한 경우와 아닌 경우 구분
-                            if (\Request::request()->get('emailCheck') == 'y') {
-                                $this->redirect("./kakao/kakao_login.php?uuid=".$in['uuid']."&memId=".$in['memId']."&returnUrl=".\Request::post()->get('returnTo'), null, 'top');
-                            } else {
-                                $this->redirect("./kakao/kakao_login.php?uuid=".$in['uuid']."&memId=" . $in['memId'] . "&returnUrl=" . urlencode(\Request::get()->get('returnTo')), null, 'top');
-                            }
+                        // 웹앤모바일 수정 21-10-22 - 이메일 중복으로 재설정한 경우와 아닌 경우 구분
+                        if (\Request::request()->get('emailCheck') == 'y') {
+                            $this->redirect("./kakao/kakao_login.php?uuid=" . $in['uuid'] . "&memId=" . $in['memId'] . "&returnUrl=" . \Request::post()->get('returnTo'), null, 'top');
+                        } else {
+                            $this->redirect("./kakao/kakao_login.php?uuid=" . $in['uuid'] . "&memId=" . $in['memId'] . "&returnUrl=" . urlencode(\Request::get()->get('returnTo')), null, 'top');
+                        }
 //                        $this->js("alert('회원가입이 완료되었습니다.');window.location.href = './login.php';");
 //                        echo 'join_ok';
-                            exit;
-                        }
+                        exit;
                     }
+
                 }
 
                 $sitelink = new SiteLink();

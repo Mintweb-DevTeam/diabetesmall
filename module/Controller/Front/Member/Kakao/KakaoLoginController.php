@@ -411,13 +411,95 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                         /*웹앤모바일 20200311 튜닝 카카오 로그인시 바로 회원가입으로 보내버리기*/
                         // 회원가입해야할 경우 member_ps 쪽으로 회원정보 전송
 
+                        // 25-03-21 리브레 멤버쉽 회원가입
+                        $member_url = "https://kapi.kakao.com/v2/user/service_terms"; // 24-01-22 수신여부판단 v2 바뀌면서 수정
+                        $accessToken = $wm_access_token;
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, $member_url);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_POST, false);
+                        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $accessToken));
+                        $end = curl_exec($ch);
+                        curl_close($ch);
+                        $end = json_decode($end, true);
 
-                        $memId = $response['kakao_account']['email'];
+                        $cossia = new \Component\Cossia\Cossia;
+
+                        //25-03-13 웹앤모바일 튜닝
+                        $privateApprovalOptionFl = [
+                            "19" => "n",
+                            "21" => "n"
+                        ];
+
+                        $privateOfferFl = [
+                            "5" => "n",
+                            "22" => "n",
+                            "25" => "n",
+                            "26" => "n"
+                        ];
+
+                        $privateConsignFl = [
+                            "20" => "n",
+                            "23" => "n"
+                        ];
+
+                        $termMap = [
+                            'private_info' => ['category' => 'privateApprovalOptionFl', 'id' => '19'],
+                            'user_info' => ['category' => 'privateApprovalOptionFl', 'id' => '21'],
+                            'private_agreement' => ['category' => 'privateOfferFl', 'id' => '5'],
+                            'user_agreement' => ['category' => 'privateOfferFl', 'id' => '22'],
+                            'user_select' => ['category' => 'privateOfferFl', 'id' => '25'],
+                            'private_select' => ['category' => 'privateOfferFl', 'id' => '26'],
+                            'marketing_opt' => ['category' => 'privateConsignFl', 'id' => '20'],
+                            'marketing_agreement' => ['category' => 'privateConsignFl', 'id' => '23']
+                        ];
+
+                        foreach ($end['service_terms'] as $v) {
+                            $tag = $v['tag'];
+                            $agreed = isset($v['agreed']) && $v['agreed'] ? 'y' : 'n';
+
+                            if (isset($termMap[$tag])) {
+                                $category = $termMap[$tag]['category'];
+                                $id = $termMap[$tag]['id'];
+
+                                // 동적 변수에 저장
+                                if ($category === 'privateApprovalOptionFl') {
+                                    $privateApprovalOptionFl[$id] = $agreed;
+                                } elseif ($category === 'privateOfferFl') {
+                                    $privateOfferFl[$id] = $agreed;
+                                } elseif ($category === 'privateConsignFl') {
+                                    $privateConsignFl[$id] = $agreed;
+                                }
+                            }
+                        }
+
+
+                        // JSON 변환
+                        $param['privateApprovalOptionFl'] = $privateApprovalOptionFl;
+                        $param['privateOfferFl'] = $privateOfferFl;
+                        $param['privateConsignFl'] = $privateConsignFl;
+                        $param['cellPhone'] = $response['kakao_account']['phone_number'] ? str_replace("+82 ","0", $response['kakao_account']['phone_number']) : "010-0000-0000";
+                        $param['memId'] = $response['kakao_account']['email'] ? $response['kakao_account']['email'] : 'test'.$uuid."@kakao.com";
+                        $param['memNm'] = $response['kakao_account']['name'] ? $response['kakao_account']['name'] : 'user'.$uuid;
+                        if (!\Request::isMobileDevice()) {
+                            $param['device'] = 'pc';
+                        }
+
+                        $param['cellPhone'] = $cossia->getCellPhone($param['cellPhone']);
+                        if ($param['cellPhone'] === false) {
+                            echo '<script>parent.alert("전화번호가 이상합니다.");</script>';
+                            exit;
+                        }
+                        $sno = $cossia->insertCoAbbottMember($param);
+                        // 25-03-21 리브레 멤버쉽 회원가입 끝
+
+
+                        $memId = $response['kakao_account']['email'] ? $response['kakao_account']['email'] : 'test'.$uuid."@kakao.com";
                         $memNm = $response['kakao_account']['name'] ? $response['kakao_account']['name'] : 'user'.$uuid;
-                        $directKakao = 1;
-                        $rncheck = 'none';
-                        $mode = 'join';
-                        $email = $response['kakao_account']['email'] ? $response['kakao_account']['email'] : 'test'.$memId."@kakao.com";
+//                        $directKakao = 1;
+//                        $rncheck = 'none';
+//                        $mode = 'join';
+                        $email = $response['kakao_account']['email'] ? $response['kakao_account']['email'] : 'test'.$uuid."@kakao.com";
                         $cellPhone = $response['kakao_account']['phone_number'] ? str_replace("+82 ","0", $response['kakao_account']['phone_number']) : "010-0000-0000";
                         if ($response['kakao_account']['gender'] == 'male'){
                             $sexFl = 'm';
@@ -427,7 +509,40 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                         $birthDay = substr($response['kakao_account']['birthday'], 2, 2);
                         // 웹앤모바일 21-10-21 - 회원 가입시 필요한 returnUrl 추가
 
-                        $this->redirect("../member_ps.php?wm_access_token=".$accessToken."&directKakao=".$directKakao."&rncheck=".$rncheck."&mode=".$mode."&memId=".$memId."&memNm=".$memNm."&email=".$email."&cellPhone=".$cellPhone."&sexFl=".$sexFl."&birthYear=".$birthYear."&birthMonth=".$birthMonth."&birthDay=".$birthDay."&returnTo=".$state1[0]."&uuid=".$uuid, null, parent);
+
+                        ?>
+                        <form name="snsForm" method="post" action="../../member/join_membership.php">
+                            <input type="hidden" name="wm_access_token" value="<?= $accessToken ?>">
+                            <input type="hidden" name="accessToken" value="<?= $accessToken ?>">
+                            <input type="hidden" name="refresh_token"
+                                   value="<?= $loginToken['refresh_token'] ?>">
+                            <input type="hidden" name="directKakao" value="1">
+                            <input type="hidden" name="rncheck" value="none">
+                            <input type="hidden" name="mode" value="join">
+                            <input type="hidden" name="memId" value="<?= $response['kakao_account']['email'] ?>">
+                            <input type="hidden" name="email" value="<?= $email ?>">
+                            <input type="hidden" name="cellPhone" value="<?= $cellPhone ?>">
+                            <input type="hidden" name="sexFl" value="<?= $sexFl ?>">
+                            <input type="hidden" name="birthYear" value="<?= $birthYear ?>">
+                            <input type="hidden" name="birthMonth" value="<?= $birthMonth ?>">
+                            <input type="hidden" name="birthDay" value="<?= $birthDay ?>">
+                            <input type="hidden" name="uuid" value="<?= $uuid ?>">
+                            <input type="hidden" name="memNm"
+                                   value="<?=$memNm?>">
+                            <input type="hidden" name="sno"
+                                   value="<?=$sno?>">
+                            <input type="hidden" name="returnTo"
+                                   value="<?= !empty($returnUrl1) ? $returnUrl1 : urldecode($state1[0]) ?>">
+                        </form>
+                        <script>
+                            document.snsForm.submit();
+                        </script>
+
+
+                        <?php
+                        exit();
+
+//                        $this->redirect("../member_ps.php?wm_access_token=".$accessToken."&directKakao=".$directKakao."&rncheck=".$rncheck."&mode=".$mode."&memId=".$memId."&memNm=".$memNm."&email=".$email."&cellPhone=".$cellPhone."&sexFl=".$sexFl."&birthYear=".$birthYear."&birthMonth=".$birthMonth."&birthDay=".$birthDay."&returnTo=".$state1[0]."&uuid=".$uuid, null, parent);
                     }
                     exit;
                 }
