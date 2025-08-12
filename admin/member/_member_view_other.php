@@ -255,7 +255,7 @@ function agrred_change(){
         <tr>
             <th>개인정보<br/>수집&middot;이용</th>
             <td>
-				
+
                 <?php
                 if (isset($data['privateApprovalOptionFl']) && is_array($data['privateApprovalOptionFl']) && isset($privateApprovalOption)) {
                     foreach ($privateApprovalOption as $index2 => $item2) {
@@ -268,7 +268,7 @@ function agrred_change(){
                         } elseif ($data['privateApprovalOptionFl'][$item2['sno']] == 'n') {
                             echo '<div>- ' . $item2['informNm'] . ' : 동의안함</div>';
                         }
-						
+
                     }
                 } else {
                     echo '사용안함';
@@ -286,13 +286,13 @@ function agrred_change(){
 						$nchec = ($data['privateConsignFl'][$item2['sno']] == 'n') ? 'checked' : '';
 						echo '<div><label><input name="privateConsignFl['.$item2['sno'].']" type="radio" value="y" checked>동의함</label><label style="margin: 0 20px"><input name="privateConsignFl['.$item2['sno'].']" type="radio" value="n" '.$nchec.'>동의안함</label> '.$item2['informNm'].'</div>';
 						*/
-						
+
                         if($data['privateConsignFl'][$item2['sno']] == 'y'){
                             echo '<div>- ' . $item2['informNm'] . ' : 동의함</div>';
                         } elseif ($data['privateConsignFl'][$item2['sno']] == 'n') {
                             echo '<div>- ' . $item2['informNm'] . ' : 동의안함</div>';
                         }
-						
+
                     }
                 } else {
                     echo '사용안함';
@@ -315,7 +315,7 @@ function agrred_change(){
                         } elseif ($data['privateOfferFl'][$item2['sno']] == 'n') {
                             echo '<div>- ' . $item2['informNm'] . ' : 동의안함</div>';
                         }
-						
+
                     }
                 } else {
                     echo '사용안함';
@@ -323,5 +323,26 @@ function agrred_change(){
                 ?>
             </td>
         </tr>
+
+        <!-- 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START -->
+        <tr>
+            <th>개인정보<br/>제3자 제공<br>(세일즈포스)</th>
+            <td colspan="3">
+                <?php if(!empty($data['memNo'])) { ?>
+                    <label class="radio-inline">
+                        <input type="radio" name="agreementSp" value="1" <?php if($data['agreementSp'] == 1) echo 'checked="checked"'?>> 동의함
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="agreementSp" value="0" <?php if($data['agreementSp'] == 0) echo 'checked="checked"'?>> 동의안함
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="agreementSp" value="" <?php if(empty($data['agreementSp'])) echo 'checked="checked"'?>> 초기화
+                    </label>
+                <?php } else { ?>
+                    회원가입 후 적용 가능
+                <?php } ?>
+            </td>
+        </tr>
+        <!-- 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END -->
     </table>
 </div>
