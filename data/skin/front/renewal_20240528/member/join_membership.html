@@ -4,39 +4,203 @@
 <link type="text/css" rel="stylesheet" href="{=setBrowserCache('../css/wm/layer_wm.css')}">
 
 <style>
-    .title_body{margin-bottom: 2vw;}
-    .title{font-size:18px;font-weight:bold;}
+    .title_body {
+        margin-bottom: 2vw;
+    }
+
+    .title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
     @media (max-width: 1050px) {
     }
+
     @media (min-width: 1050px) {
-        .nonmember_order_box .order_input_sec div{display:inline-block;width:58%;}
-        .nonmember_order_box .order_input_sec button{display:inline-block;/*margin:0px 0px 0px 5px !important;*/height:87px !important;}
-        .member_cont .nonmember_order_box .order_input_sec input{width:100% !important;}
+        .nonmember_order_box .order_input_sec div {
+            display: inline-block;
+            width: 58%;
+        }
+
+        .nonmember_order_box .order_input_sec button {
+            display: inline-block; /*margin:0px 0px 0px 5px !important;*/
+            height: 87px !important;
+        }
+
+        .member_cont .nonmember_order_box .order_input_sec input {
+            width: 100% !important;
+        }
     }
-    .new_join{    border: 1px solid #b2b506;
+
+    .new_join {
+        border: 1px solid #b2b506;
         background: #b2b506;
-        color: #fff;    margin-bottom: 0.3vw;}
-    .wm_login_body {width:401px; padding:0px;}
-    .title_body {margin-bottom:30px;}
-    .wm_t2 {font-size:18px;}
-    .wm_margin_t2 {margin-bottom:32px;}
-    .wm_login_body input {width:100%; height:50px; padding:0 8px 0 8px !important; border:1px solid #ceced2; color:#9e9e9e; font-size:14px;}
-    .new_join {margin-bottom: 3px; background:#fdcf41; border-radius:6px; color:#616161; font-size:15px; font-weight:500; border:none; padding:14px 0 14px 0 !important;}
-    .wm_confirm {border-radius:6px; padding:12px 0 12px 0;}
-
-    .informNm {font-size: 16px; font-weight: bold}
-    .scroll-info-content{
-        border:1px solid #adadad;
-        padding:15px;
-        font-size:13px;
-        line-height:1.7;
-        height:150px;
-        overflow-y:auto;
-        width: 802px;
-        margin-left: -201px;
+        color: #fff;
+        margin-bottom: 0.3vw;
     }
-    .section {margin-top: 20px;}
 
+    .wm_login_body {
+        padding: 0px;
+    }
+
+    .title_body {
+        margin: 0 auto 30px;
+        width: 400px
+    }
+
+    .wm_t2 {
+        font-size: 18px;
+    }
+
+    .wm_margin_t2 {
+        margin-bottom: 32px;
+    }
+
+    .wm_login_body input {
+        width: 100%;
+        height: 50px;
+        padding: 0 8px 0 8px !important;
+        border: 1px solid #ceced2;
+        color: #9e9e9e;
+        font-size: 14px;
+    }
+
+    .new_join {
+        margin-bottom: 3px;
+        background: #fdcf41;
+        border-radius: 6px;
+        color: #616161;
+        font-size: 15px;
+        font-weight: 500;
+        border: none;
+        padding: 14px 0 14px 0 !important;
+    }
+
+    .wm_confirm {
+        border-radius: 6px;
+        padding: 12px 0 12px 0;
+    }
+
+    .informNm {
+        font-size: 16px;
+        font-weight: bold
+    }
+
+    .scroll-info-content {
+        border: 1px solid #adadad;
+        padding: 15px;
+        font-size: 13px;
+        line-height: 1.7;
+        height: 150px;
+        overflow-y: auto;
+        width: 802px;
+    }
+
+    .section {
+        margin-top: 20px;
+    }
+
+    .member_sns_login {
+        margin: 0 auto;
+        width: 400px
+    }
+
+    .form_element_section {
+        padding: 30px 0;
+        user-select: none
+    }
+
+    .form_element_wrap {
+        margin: 0 auto;
+        padding-bottom: 10px;
+        width: 700px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+
+    .form_element_wrap .text-red {
+        color: #eb0000
+    }
+
+    .form_element_wrap .text-blue {
+        color: #0271E3
+    }
+
+    .form_element_wrap > button {
+        background: #999;
+        color: #fff;
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+    }
+
+    .form_element_wrap .form_element label.check_s {
+        padding: 0 0 0 40px;
+        background-position: 0 center;
+        background-size: 30px 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 20px;
+        color: #666;
+        max-width: 525px;
+        cursor: pointer;
+    }
+
+    .form_element label.check_s p {
+        font-size: 13px;
+        line-height: 1.5
+    }
+
+    #layer_background {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, .6);
+        z-index: 11
+    }
+
+    .layer_wrapper {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+        background: #fff;
+        z-index: 12
+    }
+
+    .layer_wrapper_title {
+        display: block;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #555;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .layer_wrapper_contents {
+        width: 800px;
+        height: 600px;
+        overflow-y: scroll;
+    }
+
+    .layer_close_btn {
+        margin: 20px auto 0;
+        display: block;
+        background: #999;
+        color: #fff;
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+    }
 </style>
 <div class="wm_login_content">
     <div class="wm_login_body wm_margin_auto wm_center">
@@ -60,13 +224,55 @@
             <input type="hidden" name="sno" value="{= sno }">
             <input type="hidden" name="uuid" value="{= uuid }">
             <input type="hidden" name="memberShipFl" value="y">
-
-
-
+            
             <div class="title_body">
                 <span class="title">카카오 계정으로 리브레 멤버십에 가입되었습니다. 해당 카카오 계정 정보로 아델라 회원가입 하시겠습니까?</span>
             </div>
 
+            { ? wm_join_test }
+            <h4 class="informNm fs26 fcOrange fw600 mb20">{agreementInfo.informNm}</h4>
+
+            <div class="form_element_section">
+                <div class="form_element_wrap">
+                    <div class="form_element">
+                        <input type="checkbox" id="allCheck" value="y">
+                        <label for="allCheck" class="check_s">아래 모든 내용에 동의합니다.</label>
+                    </div>
+                </div>
+
+                <div class="form_element_wrap">
+                    <div class="form_element">
+                        <input type="checkbox" id="agreementCheck" name="privateApprovalFl" class="form_element_checkbox" value="y">
+                        <label for="agreementCheck" class="check_s">본인은 <span class="text-blue">이용약관</span>에 동의합니다. <span class="text-red">(필수)</span></label>
+                    </div>
+                    <button type="button" onclick="show_layer('agreement')">자세히보기</button>
+                </div>
+
+                <div class="form_element_wrap">
+                    <div class="form_element">
+                        <input type="checkbox" id="privateCheck" class="form_element_checkbox" value="y">
+                        <label for="privateCheck" class="check_s">본인은 <span class="text-blue">개인정보 처리방침</span>에 동의합니다. <span class="text-red">(필수)</span></label>
+                    </div>
+                    <button type="button" onclick="show_layer('private')">자세히보기</button>
+                </div>
+
+                <div class="form_element_wrap">
+                    <div class="form_element">
+                        <input type="checkbox" id="spCheck" class="form_element_checkbox" name="agreementSp" value="y">
+                        <label for="spCheck" class="check_s">
+                            본인은 <span class="text-blue">제 3자 정보 제공</span>에 동의하고, 다른 국가에 전송하는데 동의합니다. <span class="text-red">(선택)</span>
+                            <p>* 멤버쉽, 쿠폰 제공 및 리브레 케어 서비스 포함 마케팅 활동을 위해 요청되며, 동의하지 않을 경우 일부 서비스 이용에 제한이 있을 수 있습니다.</p>
+                        </label>
+                    </div>
+                    <button type="button" onclick="show_layer('sp')">자세히보기</button>
+                </div>
+            </div>
+
+            <div class="member_sns_login">
+                <button type="button" class="btn_kakao_login wm_kakao_submit"><img src="../img/kakao/kakao_icon.png" alt=""/>{=__('카카오로 회원가입')}</button>
+                <a href="../member/co_join_stepe.php?sno={=sno}&name={=name}" class="btn_login">{=__('일반 회원가입하기')}</a>
+            </div>
+            { : }
             <section>
                 <h4 class="informNm fs26 fcOrange fw600 mb20">{agreementInfo.informNm}</h4>
                 <div class="scroll-info-content mb20">{=nl2br(agreementInfo.content)}</div>
@@ -80,6 +286,7 @@
                 <button type="submit" class="btn_kakao_login" ><img src="../img/kakao/kakao_icon.png" alt="" />{=__('카카오로 회원가입')}</button>
                 <a href="../member/co_join_stepe.php?sno={=sno}&name={=name}" class="btn_login">{=__('일반 회원가입하기')}</a>
             </div>
+            { / }
         </form>
 
     </div>
@@ -87,6 +294,84 @@
 </div>
 {=includeFile('outline/_footer.html')}
 
+<!--{ ? wm_join_test }-->
+<div id="layer_background" class="layer_close"></div>
+<div id="layer_agreement" class="layer_wrapper">
+    <div class="layer_wrapper_title">이용약관</div>
+    <div class="layer_wrapper_contents">{=nl2br(agreementInfo.content)}</div>
+    <button type="button" class="layer_close_btn layer_close">닫기</button>
+</div>
+<div id="layer_private" class="layer_wrapper">
+    <div class="layer_wrapper_title">개인정보 처리방침</div>
+    <div class="layer_wrapper_contents">{=nl2br(privateInfo.content)}</div>
+    <button type="button" class="layer_close_btn layer_close">닫기</button>
+</div>
+<div id="layer_sp" class="layer_wrapper">
+    <div class="layer_wrapper_title">제3자 정보 제공</div>
+    <div class="layer_wrapper_contents">{=nl2br(spInfo)}</div>
+    <button type="button" class="layer_close_btn layer_close">닫기</button>
+</div>
+
+<script>
+    $(document).ready(function (){
+        $('.layer_close').click(function () {
+            hide_layer();
+        });
+
+        $('#allCheck').change(function () {
+            if ($(this).prop('checked')) {
+                $('.form_element_checkbox').prop('checked', true);
+                $('.form_element_checkbox').next('label').addClass('on');
+            } else {
+                $('.form_element_checkbox').prop('checked', false);
+                $('.form_element_checkbox').next('label').removeClass('on');
+            }
+        });
+
+        $('.form_element_checkbox').change(function () {
+            var total = $('.form_element_checkbox').length;
+            var checked = $('.form_element_checkbox:checked').length;
+            if (total == checked) {
+                $('#allCheck').prop('checked', true);
+                $('#allCheck').next('label').addClass('on');
+            } else {
+                $('#allCheck').prop('checked', false);
+                $('#allCheck').next('label').removeClass('on');
+            }
+        });
+
+        $('.wm_kakao_submit').click(function () {
+            if($('#agreementCheck').prop('checked') == false) {
+                alert('이용약관 동의에 체크해주십시오.');
+                return false;
+            }
+            if($('#privateCheck').prop('checked') == false) {
+                alert('개인정보 처리방침 동의에 체크해주십시오.');
+                return false;
+            }
+
+            alert('test');
+            //$('#formEmail').submit();
+        });
+    });
+
+    function show_layer(id) {
+        if(id == null) {
+            return false;
+        }
+
+        $('body').css('overflow', 'hidden').css('padding-right', '15px');
+        $('#layer_background').show();
+        $('#layer_'+id).show();
+    }
+
+    function hide_layer() {
+        $('body').css('overflow', 'unset').css('padding-right', 'unset');;
+        $('#layer_background').hide();
+        $('.layer_wrapper').hide();
+    }
+</script>
+<!--{ : }-->
 <script>
     document.getElementById('formEmail').addEventListener('submit', function(e) {
         var checkbox = document.getElementById('privateApprovalFl');
@@ -97,3 +382,4 @@
         }
     });
 </script>
+<!--{ / }-->

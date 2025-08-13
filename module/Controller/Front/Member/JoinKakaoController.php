@@ -24,8 +24,15 @@ class JoinKakaoController extends \Controller\Front\Controller
         //$this->setData('gPageName', '카카오 회원가입');
 
         $buyerInformService = new \Component\Agreement\BuyerInform();
-        $agreementInfo = $buyerInformService->getAgreementWithReplaceCode(\Component\Agreement\BuyerInformCode::AGREEMENT);
 
+        $agreementInfo = $buyerInformService->getAgreementWithReplaceCode(\Component\Agreement\BuyerInformCode::AGREEMENT);
         $this->setData('agreementInfo', $agreementInfo);
+
+        $privateInfo = $buyerInformService->getAgreementWithReplaceCode(\Component\Agreement\BuyerInformCode::BASE_PRIVATE);
+        $this->setData('privateInfo', $privateInfo);
+
+        $db = \App::load('DB');
+        $row = $db->fetch("select * from wm_agreement where sno=1");
+        $this->setData('spInfo', stripslashes($row['contents']));
     }
 }
