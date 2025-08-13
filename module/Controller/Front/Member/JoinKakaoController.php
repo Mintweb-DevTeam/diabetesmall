@@ -5,6 +5,8 @@ use Exception;
 use Framework\Debug\Exception\AlertOnlyException;
 use Framework\Debug\Exception\AlertBackException;
 use Framework\Debug\Exception\AlertRedirectException;
+use Request;
+use Encryptor;
 
 class JoinKakaoController extends \Controller\Front\Controller
 {
@@ -20,5 +22,10 @@ class JoinKakaoController extends \Controller\Front\Controller
         $this->setData($in);
 
         //$this->setData('gPageName', '카카오 회원가입');
+
+        $buyerInformService = new \Component\Agreement\BuyerInform();
+        $agreementInfo = $buyerInformService->getAgreementWithReplaceCode(\Component\Agreement\BuyerInformCode::AGREEMENT);
+
+        $this->setData('agreementInfo', $agreementInfo);
     }
 }

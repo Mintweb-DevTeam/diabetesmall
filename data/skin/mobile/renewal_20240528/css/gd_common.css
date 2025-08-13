@@ -967,3 +967,25 @@
 .popup_link_box a.link2{
 	left: 50%;
 }
+
+.member_sns_login .btn_kakao_login {
+	background: #FFEB00;
+	color: #191919;
+}
+.member_sns_login .btn_login {
+	background: #D1D1D1;
+	color: #ffffff;
+}
+.member_sns_login > * {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 64px;
+	border-radius: 4px;
+	font-size: 19px;
+	font-weight: 500;
+	overflow: hidden;
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 20px;
+}

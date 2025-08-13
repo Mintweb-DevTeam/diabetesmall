@@ -19,8 +19,11 @@ class CoJoinStepeController extends \Controller\Mobile\Controller
 		//if(\Request::getRemoteAddress()=="182.216.219.157" || \Request::getRemoteAddress()=="211.49.123.117"){
 			$get['name'] = Encryptor::decrypt($get['name']);
 		//}
-		
+
 		$data = $cossia->getAbbottMember($get);
+
+
+
 		if($data['isJoin'] == 'y'){
 			$this->alert('이미 회원가입을 하셨습니다.', null, '/');
 			exit;

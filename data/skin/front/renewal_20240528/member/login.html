@@ -42,12 +42,12 @@
 					<div><button type="submit" class="btn btn-blue wp100 fw600">{=__('로그인')}</button></div>
 					<p class="text-center  fs13 pt15 mb50"><a href="#." class="fcGray6" id="btnFindPwd">비밀번호를 잊으셨나요? </a></p>
 					<!-- <p><button id="btnFindId" class="btn_member_white">{=__('아이디 찾기')}</button></p> -->
-					{ ? wmTest }
+
 					<div class="member_sns_login" style="margin-bottom: 20px;">
 						<a href="javascript:loginkakao();" class="btn_kakao_login" style="height: 40px; width: 100%;" data-kakao-type="login" data-return-url="{=kakaoReturnUrl}">
 							<img style="margin-right: 10px;" src="../img/kakao/kakao_icon.png" alt="" />{=__('카카오로 로그인')}</a>
 					</div>
-					{ / }
+				
 
 					<div class="text-center">
 						<p class="fs13 text-center fcGray4 dp-inblock clearfix">
@@ -71,7 +71,7 @@
 					<a href="#" class="btn_naver_login js_btn_naver_login" href="#" data-naver-url="{=naverUrl}"><img src="../img/etc/pc_naver.png" alt="{=__('네이버')} {=__('아이디 로그인')}"></a>
 					<!--{/}-->
 					<!--{? useKakaoLogin}-->
-					<a href="#" class="btn_kakao_login js_btn_kakao_login" data-kakao-type="login" data-return-url="{=kakaoReturnUrl}"> <img src="../img/etc/pc_kakao.png" alt="{=__('카카오')} {=__('아이디 로그인')}"></a>
+<!--					<a href="#" class="btn_kakao_login js_btn_kakao_login" data-kakao-type="login" data-return-url="{=kakaoReturnUrl}"> <img src="../img/etc/pc_kakao.png" alt="{=__('카카오')} {=__('아이디 로그인')}"></a>-->
 					<!--{/}-->
 					<!--{? useWonderLogin}-->
 					<a href="#" class="btn_wonder_login js_btn_wonder_login" data-wonder-type="login" data-wonder-url="{=wonderReturnUrl}"> <img src="../img/etc/pc_wonder.png" alt="{=__('위메프')} {=__('아이디로 로그인')}"></a>

@@ -263,6 +263,9 @@ class KakaoLoginController extends \Bundle\Controller\Mobile\Member\Kakao\KakaoL
                             // 웹앤모바일 수정 21-10-21 - 회원가입시 returnUrl 추가 21-07-19
                             $url = ($returnUrl1) ? $returnUrl1 : urldecode($state1[0]);
 
+                            if (strpos($url, 'member/kakao_connect.php')) {
+                                $url = "../../main/index.php";
+                            }
 
                             if(strpos($url, '../') === 0){
                                 $url = "../" . $url;
@@ -322,6 +325,10 @@ class KakaoLoginController extends \Bundle\Controller\Mobile\Member\Kakao\KakaoL
                                     // 카카오 계정이 없고 리브레 멤버쉽이 있는 경우
                                     if ( !empty($meberShip) && !$member['memId']) {
 
+                                        if($state1[2] && $state1[2] != 'undefined'){
+                                            $this->redirect("../../qrcode/co_join_stepe.php?sno=" . $meberShip['sno'] . "&memNm=" .$memNm , null, 'top');
+                                        }
+
                                         ?>
                                         <form name="snsForm" method="post" action="../../member/join_kakao.php">
                                             <input type="hidden" name="wm_access_token" value="<?= $accessToken ?>">
@@ -331,7 +338,7 @@ class KakaoLoginController extends \Bundle\Controller\Mobile\Member\Kakao\KakaoL
                                             <input type="hidden" name="directKakao" value="1">
                                             <input type="hidden" name="rncheck" value="none">
                                             <input type="hidden" name="mode" value="join">
-                                            <input type="hidden" name="memId" value="<?= $response['id'] ?>">
+                                            <input type="hidden" name="memId" value="<?= $memId ?>">
                                             <input type="hidden" name="email" value="<?= $email ?>">
                                             <input type="hidden" name="cellPhone" value="<?= $cellPhone ?>">
                                             <input type="hidden" name="sexFl" value="<?= $sexFl ?>">
@@ -366,7 +373,12 @@ class KakaoLoginController extends \Bundle\Controller\Mobile\Member\Kakao\KakaoL
                                     $memId = $response['kakao_account']['email'];
                                     $memNm = $response['kakao_account']['name'] ? $response['kakao_account']['name'] : 'user'.$uuid;
 
+
                                     if ( !empty($mrow) && !empty($meberShip) ) {
+
+                                        if($state1[2] && $state1[2] != 'undefined'){
+                                            $this->redirect("../../qrcode/co_join_stepe.php?sno=" . $meberShip['sno'] . "&memNm=" .$memNm , null, 'top');
+                                        }
 
                                         ?>
                                         <form name="snsForm" method="post" action="../../member/sns_member.php">
@@ -377,7 +389,7 @@ class KakaoLoginController extends \Bundle\Controller\Mobile\Member\Kakao\KakaoL
                                             <input type="hidden" name="directKakao" value="1">
                                             <input type="hidden" name="rncheck" value="none">
                                             <input type="hidden" name="mode" value="join">
-                                            <input type="hidden" name="memId" value="<?= $response['id'] ?>">
+                                            <input type="hidden" name="memId" value="<?= $memId ?>">
                                             <input type="hidden" name="email" value="<?= $email ?>">
                                             <input type="hidden" name="cellPhone" value="<?= $cellPhone ?>">
                                             <input type="hidden" name="sexFl" value="<?= $sexFl ?>">
@@ -420,6 +432,30 @@ class KakaoLoginController extends \Bundle\Controller\Mobile\Member\Kakao\KakaoL
                         $end = curl_exec($ch);
                         curl_close($ch);
                         $end = json_decode($end, true);
+
+
+                        if($state1[2]=='MSCOMMON'){
+
+
+                            ?>
+                            <form name="formKakao" method="post" action="../../member/kakao_qr.php">
+                                <input type="hidden" name="wm_access_token" value="<?= $accessToken ?>">
+                                <input type="hidden" name="accessToken" value="<?= $accessToken ?>">
+                                <input type="hidden" name="refresh_token"
+                                       value="<?= $loginToken['refresh_token'] ?>">
+                                <input type="hidden" name="memNm"
+                                       value="<?= $response['kakao_account']['name']?>">
+                                <input type="hidden" name="email" value="<?= $response['kakao_account']['email'] ?>">
+                                <input type="hidden" name="cellPhone" value="<?= str_replace("+82 ","0", $response['kakao_account']['phone_number']) ?>">
+                            </form>
+                            <script>
+                                document.formKakao.submit();
+                            </script>
+
+                            <?php
+                            exit();
+                        }
+
 
                         $cossia = new \Component\Cossia\Cossia;
 
@@ -483,14 +519,18 @@ class KakaoLoginController extends \Bundle\Controller\Mobile\Member\Kakao\KakaoL
                             $param['device'] = 'pc';
                         }
 
+                        if($state1[2] && $state1[2] != 'undefined') {
+                            $param['pharmacy_code'] = $state1[2];
+                            $param['device'] = 'qr';
+                        }
+
                         $param['cellPhone'] = $cossia->getCellPhone($param['cellPhone']);
                         if ($param['cellPhone'] === false) {
                             echo '<script>parent.alert("전화번호가 이상합니다.");</script>';
                             exit;
                         }
-                        $sno = $cossia->insertCoAbbottMember($param);
+                        $sno = $cossia->insertCoAbbottMemberKakao($param);
                         // 25-03-21 리브레 멤버쉽 회원가입 끝
-
 
                         $memId = $response['kakao_account']['email'] ? $response['kakao_account']['email'] : 'test'.$uuid."@kakao.com";
                         $memNm = $response['kakao_account']['name'] ? $response['kakao_account']['name'] : 'user'.$uuid;
@@ -508,7 +548,9 @@ class KakaoLoginController extends \Bundle\Controller\Mobile\Member\Kakao\KakaoL
                         // 웹앤모바일 21-10-21 - 회원 가입시 필요한 returnUrl 추가
 
                         if($state1[2] && $state1[2] != 'undefined'){
+
                             $this->redirect("../../qrcode/co_join_stepe.php?sno=" . $sno . "&memNm=" .$memNm , null, 'top');
+
                         } else {
 
                         ?>
@@ -532,6 +574,8 @@ class KakaoLoginController extends \Bundle\Controller\Mobile\Member\Kakao\KakaoL
                                    value="<?=$memNm?>">
                             <input type="hidden" name="sno"
                                    value="<?=$sno?>">
+                            <input type="hidden" name="name"
+                                   value="<?=urlencode(\Encryptor::encrypt($memNm))?>">
                             <input type="hidden" name="returnTo"
                                    value="<?= !empty($returnUrl1) ? $returnUrl1 : urldecode($state1[0]) ?>">
                         </form>
@@ -541,7 +585,6 @@ class KakaoLoginController extends \Bundle\Controller\Mobile\Member\Kakao\KakaoL
 
 
                         <?php
-
                         }
                         exit();
 

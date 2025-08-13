@@ -5537,6 +5537,12 @@ if ($data['mode'] == 'modify') {
                     $imageInput .= '<input type="hidden" name="imageDB[imageKind][]" value="' . $iVal['imageKind'] . '" /> ';
                     $imageInput .= '<input type="hidden" name="imageDB[imageName][]" value="' . $iVal['imageName'] . '" /> ';
                     $imageInput .= '<input type="hidden" name="imageDB[imageRealSize][]" value="' . $iVal['imageRealSize'] . '" /> ';
+                    $imageInput .= '<input type="hidden" name="imageDB[goodsImageStorage][]" value="' . $iVal['goodsImageStorage'] . '" /> ';
+                    $imageInput .= '<input type="hidden" name="imageDB[obsConvertFl][]" value="' . $iVal['obsConvertFl'] . '" /> ';
+                    $imageInput .= '<input type="hidden" name="imageDB[imageFolder][]" value="' . $iVal['imageFolder'] . '" /> ';
+                    $imageInput .= '<input type="hidden" name="imageDB[thumbImageFolder][]" value="' . $iVal['thumbImageFolder'] . '" /> ';
+                    $imageInput .= '<input type="hidden" name="imageDB[imageUrl][]" value="' . $iVal['imageUrl'] . '" /> ';
+                    $imageInput .= '<input type="hidden" name="imageDB[thumbImageUrl][]" value="' . $iVal['thumbImageUrl'] . '" /> ';
                     $imageInput .= '<input type="hidden" name="imageDB[imageCode][' . $iVal['imageKind'] . $iVal['imageNo'] . ']" value="' . $iVal['sno'] . '" /> ';
                     if (strtolower(substr($iVal['imageName'],0,4)) =='http' ) {
                         $imageInput .= '<input type="hidden" name="imageDB[imageUrlFl][' . $iVal['imageKind'] . $iVal['imageNo'] . ']" value="' . $iVal['sno'] . '" /> ';

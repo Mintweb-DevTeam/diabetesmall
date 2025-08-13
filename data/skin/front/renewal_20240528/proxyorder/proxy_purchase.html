@@ -84,6 +84,7 @@
 								<li>국민건강보험 급여 지원 안내</li>
 							</ul>
 							<p class="info">* 교육 수강 후 무료 체험 신청 링크가 발송됩니다.</p>
+							<p class="info">* 무료 체험 이벤트는 당뇨병 유형의 신규 고객 대상으로1인 1회 참여 가능합니다</p>
 						</div>
 						<div class="group group02">
 							<div class="top">
@@ -105,13 +106,17 @@
 							<dl>
 								<dt><label for="">* 교육신청경로</label></dt>
 								<dd class="raido-section">
-									<p><input type="radio" id="signUpPath1" name="signUpPath" value="009001" /> <label for="signUpPath1">마미톡</label></p>
+									<p><input type="radio" id="signUpPath1" name="signUpPath" value="009006" /> <label for="signUpPath1">병원</label></p>
 									<p><input type="radio" id="signUpPath2" name="signUpPath" value="009002" /> <label for="signUpPath2">맘스 다이어리</label></p>
 									<p><input type="radio" id="signUpPath3" name="signUpPath" value="009003"  /> <label for="signUpPath3">베이비 빌리</label></p>
 									<p><input type="radio" id="signUpPath4" name="signUpPath" value="009004" /> <label for="signUpPath4">아델라 팝업</label></p>
 									<p><input type="radio" id="signUpPath5" name="signUpPath" value="009005"/> <label for="signUpPath5">기타</label></p>
 								</dd>
 							</dl>
+                            <dl id="etc" style="display:none">
+                                <dt><label for="">* 기타</label></dt>
+								<dd><input type="text" id="signUpPathEtc" name="signUpPathEtc" maxlength="200" placeholder="기타 경로 기입" /></dd>
+                            </dl>
 						</div>
 						<div class="group group03">
 							<h3>교육 스케줄</h3>
@@ -407,7 +412,9 @@ function f_Application() {
 			"email" : $("#userEmail").val().trim(),
 			"educationDate" : educationDate,
 			"educationTime" : educationTime,
-			"signUpPath" : $('input:radio[name="signUpPath"]:checked').val()
+			"signUpPath" : $('input:radio[name="signUpPath"]:checked').val(),
+            "signUpPathEtc" : $("#signUpPathEtc").val().trim()
+            
         }),
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("apiKey", "Q20fVMza4MncMgHA9Wjm");
@@ -457,6 +464,10 @@ function f_ApplicationValid() {
 		alert("교육 신청경로를 선택하세요.");
 		return false;
 	}
+    if( $('input:radio[name="signUpPath"]:checked').val() == '009005' && $('#signUpPathEtc').val().trim() == "") {
+        alert("교육신청경로를 입력해주세요");
+		return false;
+    }
 	if( $('input:radio[name="reqDateTime"]:checked').val() == undefined ) {
 		alert("교육 스케줄을 선택하세요.");
 		return false;
@@ -480,4 +491,14 @@ function f_ApplicationValid() {
             $(this).val(replace_text);
         });
     });
+
+
+    $(document).on("change",".raido-section input[type=radio]",function(){
+        let values = $(this).val();
+        if(values == "009005") {
+            $("#etc").show();
+        } else {
+            $("#etc").hide();
+        }
+    })
 </script>

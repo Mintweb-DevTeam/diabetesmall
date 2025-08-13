@@ -6,6 +6,8 @@
 <!-- //content -->
 { # footer }
 
+<script async src="https://cdnet.nasmob.com/adpacker/js/ap_pv_v4.0.min.js"></script>
+
 <script>
 var param = new URLSearchParams(location.search);
 var bdId = param.get('bdId');
@@ -29,5 +31,13 @@ if(bdId == 'notice' && sno == '13') {
 	img1.setAttribute('frameborder',0);
 	img1.setAttribute('style','display:none');
 	document.body.appendChild(img1);
+} else if(bdId == 'notice' && sno == '29') {
+	document.addEventListener("DOMContentLoaded", function(){
+  
+    ADPACKER.SCRIPT.conv();
+    
+    // 전환 측정과 리다이렉트가 필요한 경우에는 아래와 같이 호출
+    //ADPACKER.SCRIPT.conv({redirect_url:"리다이렉트할 URL 주소"});
+  });
 }
 </script>

@@ -785,7 +785,7 @@
 	position:fixed;
 	left:50%;
 	margin-left:570px;
-	bottom:242px;
+	top:100px;
 	max-width:130px;
 	width:100%;
 }
@@ -1637,4 +1637,27 @@
 }
 .popup_link_box a.link2{
 	left: 50%;
+}
+
+
+#wrap .member_sns_login .btn_kakao_login {
+	background: #FFEB00;
+	color: #191919;
+}
+#wrap .member_sns_login .btn_login {
+	background: #D1D1D1;
+	color: #ffffff;
+}
+#wrap .member_sns_login > * {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 64px;
+	border-radius: 4px;
+	font-size: 19px;
+	font-weight: 500;
+	overflow: hidden;
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 20px;
 }

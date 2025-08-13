@@ -83,10 +83,10 @@
                 </div>
                 <!--{ / }-->
 
-                <div class="order_end_more">
+                <!-- <div class="order_end_more">
                     <a href="https://www.diabetesmall.co.kr/board/view.php?&bdId=notice&sno=26"></a>
                     <img src="../img/order/order_end_more.jpg" alt="" />
-                </div>
+                </div> -->
 
                 <!--{ ? empty(orderInfo.orderStatus) === false }-->
                 <div class="order_zone_tit">
@@ -651,11 +651,35 @@ gtag('event', 'purchase', {
 </script>
 <!-- End Enhanced eCommerce Code for purchase event -->
 
+<script async src="https://cdnet.nasmob.com/adpacker/js/ap_pv_v4.0.min.js"></script>
 
-
-
-
-
+<script>
+  <!--{ @ orderInfo.goods }-->
+  // DOM 이 다 그려지고 나서 메소드 호출
+  document.addEventListener("DOMContentLoaded", function(){
+  
+//매출/매출취소한 상품정보(string 형)
+    var oProduct = {
+        prod_id : "{=.goodsNo}" // 필수입력
+        , pur_price :"{=.goodsPrice}" //필수입력
+        , pur_cur :"KRW" //필수입력x, default = KRW
+        , pur_quantity :"{=.goodsCnt}" //필수입력x,default = 1
+    }
+  
+    // 매출 측정 이벤트 발생시 아래 메소드 호출
+    ADPACKER.SCRIPT.purchase(oProduct);
+    
+    // 매출 측정과 리다이렉트가 필요한 경우 아래와 같이 호출
+    //ADPACKER.SCRIPT.conv(oProduct, {redirect_url:"리다이렉트할 URL 주소"});
+    
+    // 매출취소 이벤트 발생시 아래 메소드 호출
+    //ADPACKER.SCRIPT.cancel(oProduct);
+    
+    // 매출취소 후 리다이렉트가 필요한 경우 아래와 같이 호출
+    //ADPACKER.SCRIPT.cancel(oProduct, {redirect_url:"리다이렉트할 URL 주소"});
+  }
+	<!--{ / }-->
+</script>
 
 
 <!--
@@ -666,6 +690,26 @@ This tag must be placed between the <body> and </body> tags, as close as possibl
 Creation Date: 07/27/2021
 -->
 <iframe src="https://11155771.fls.doubleclick.net/activityi;src=11155771;type=sales;cat=order0;qty={orderInfo.orderGoodsCnt};cost={=gd_global_currency_display(gd_isset(orderInfo.settlePrice))};u1={orderInfo.orderNo};u2={=.goodsNo};u3={orderInfo.orderGoodsCnt};u4={=gd_global_currency_display(gd_isset(orderInfo.settlePrice))};dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord={orderInfo.orderNo}?" width="1" height="1" frameborder="0" style="display:none"></iframe>
-<!-- End of Floodlight Tag: Please do not remove -->
+
+<!--
+Event snippet for Order Complete_250728 on https://www.diabetesmall.co.kr/order/order_end.php?orderNo=: Please do not remove.
+Place this snippet on pages with events you’re tracking. 
+Creation date: 07/29/2025
+-->
+<script>
+  gtag('event', 'purchase', {
+    'allow_custom_scripts': true,
+    'value': '{orderInfo.settlePrice}',
+    'transaction_id': '{orderInfo.orderNo}',
+    'u1': '{orderInfo.orderNo}',
+    'u3': '{orderInfo.orderGoodsCnt}',
+    'u4': '{orderInfo.settlePrice}',
+    'send_to': 'DC-13055091/retar0/order000+transactions'
+  });
+</script>
+<noscript>
+<img src=""https://ad.doubleclick.net/ddm/activity/src=13055091;type=retar0;cat=order000;qty=1;cost={orderInfo.settlePrice};u1={orderInfo.orderNo};u3={orderInfo.orderGoodsCnt};u4={orderInfo.settlePrice};dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord={orderInfo.orderNo}?"" width=""1"" height=""1"" alt=""""/>
+</noscript>
+<!-- End of event snippet: Please do not remove -->
 
 { # footer }

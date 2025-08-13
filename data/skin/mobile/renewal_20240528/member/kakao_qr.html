@@ -1,0 +1,108 @@
+{=includeFile('outline/_header.html')}
+
+<link type="text/css" rel="stylesheet" href="{=setBrowserCache('../css/wm/layer_wm.css')}">
+
+<style>
+    .title_body{margin-bottom: 2vw;}
+    .title{font-size:18px;font-weight:bold;}
+    @media (max-width: 1050px) {
+    }
+    @media (min-width: 1050px) {
+        .nonmember_order_box .order_input_sec div{display:inline-block;width:58%;}
+        .nonmember_order_box .order_input_sec button{display:inline-block;/*margin:0px 0px 0px 5px !important;*/height:87px !important;}
+        .member_cont .nonmember_order_box .order_input_sec input{width:100% !important;}
+    }
+    .title_body {margin-bottom:30px;}
+    .wm_login_body input {width:100%; height:50px; padding:0 8px 0 8px !important; border:1px solid #ceced2; color:#9e9e9e; font-size:14px;}
+
+    .wtable{display:table;}
+    .wtable .wrow{display:table-row;}
+    .wtable .wrow .wcell{display:table-cell;}
+    .wtable .wrow .wbtn_cell{background:#cf4520;color:#fff;cursor:pointer;}
+    .wtable .wrow .first{width:110px;}
+    .wtable .wrow  .second{padding-left:3px;}
+    .wtable .wrow .wbtn_cell span{font-size:14px;font-weight:600;cursor:pointer;text-align:center;display:inline-block;width:100%;}
+</style>
+<div class="wm_login_content">
+    <div class="wm_login_body wm_margin_auto wm_center">
+        <form id="formKakao" method="post" action="../member/kakao_qr_join.php" >
+            <input type="hidden" name="wm_access_token" value="{=wm_access_token}">
+            <input type="hidden" name="accessToken" value="{=accessToken}">
+            <input type="hidden" name="refresh_token" value="{=refresh_token}">
+            <input type="hidden" name="email" value="{=email}">
+            <input type="hidden" name="cellPhone" value="{=cellPhone}">
+            <input type="hidden" name="memNm" value="{=memNm}">
+
+            <div class="member-form" style="margin-top:30px;">
+                <div class="wtable" style="margin: 0 auto;">
+                    <h2 style="text-align: left;">추천인ID <span class="fcOrange">&#42;</span></h2>
+                    <div class="wrow">
+                        <div class="wcell wbtn_cell first">
+                            <span class="wSsearch">검색하기</span>
+                        </div>
+                        <div class="wcell second">
+                            <!--input name="pharmacy_code" onChange="pharmacy(this.value)" type="text" value="" class="form-control w160 co-check" required -->
+                            <input type="text" name="pharmacy_code" class="form-control w160 co-check" required placeholder="코드직접입력" style="text-align:center;"/>
+                        </div>
+
+                    </div>
+
+                </div>
+                <p style="font-size:16px;font-weight:600;">추천 메디컬샵을 검색하여 입력해주세요.</p>
+            </div>
+
+            <div class="member_sns_login" style="margin-bottom: 30px;">
+                <button type="submit" class="btn_kakao_login" ><img src="../img/kakao/kakao_icon.png" alt="" />{=__('카카오로 가입하기')}</button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+{=includeFile('outline/_footer.html')}
+
+<script>
+    $(function(){
+        // $.cookie('memNm', '{=memNm}', {expires:20*365});
+        // $.cookie('memId', '{=email}', {expires:20*365});
+        // $.cookie('cellPhone', '{=cellPhone}', {expires:20*365});
+        $('.co-check').on('change', function(){
+            if( $('input[name="memNm"]').val() && $('input[name="cellPhone"]').val() && $('input[name="memId"]').val() ){
+                $.ajax({
+                    url:'../qrcode/co_ajax.php',
+                    type:'POST',
+                    data:{
+                        'type':'doubleCheck',
+                        'memNm' : $('input[name="memNm"]').val(),
+                        'cellPhone' : $('input[name="cellPhone"]').val(),
+                        'email' : $('input[name="memId"]').val()
+                    },
+                    dataType : "json",
+                    success: function(x){
+                        if(x.isJoin === 'n'){
+                            alert("이미 가입된 회원입니다. 해당 이벤트 참여 대상이 아닙니다.");
+                            window.location.replace('./co_join_stepe.php?sno='+x.sno+'&name='+x.memNm+'&type=uze');
+                        }else if(x.isJoin === 'y'){
+                            alert('아델라 회원으로 가입하셨습니다.\n로그인이 필요합니다.');
+                            window.location.replace('/member/login.php?returnUrl=');
+                        }else{
+                            $('#request').prop('disabled', false);
+                        }
+                    },
+                    error:function(request,status,error){
+                        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                    }
+                });
+            }
+        });
+
+        $(".wbtn_cell").click(function(){
+
+            let x = window.innerWidth;
+            let y = window.innerHeight-200;
+
+            window.open("../qrcode/medical_select.php","medical_select","width="+x+",height="+y);
+
+        });
+    })
+</script>

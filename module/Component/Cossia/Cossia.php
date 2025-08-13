@@ -611,6 +611,7 @@ privateOfferFl[26] 3자 민감정보제공  third_party_sensitive
 					'sensFl' => strtoupper($offer[26]),
 					'pharmacy' => $row['pharmacy_code'],
 					'connect' => strtoupper($row['device']),
+                    'kakaoFl' => strtoupper($row['kakaoFl']),
 					'regDt' => $row['regDt'],
 					'modDt'=>$row['modDt'],
 				];
@@ -638,6 +639,19 @@ privateOfferFl[26] 3자 민감정보제공  third_party_sensitive
         $this->db->query($sql);
 
         $sql = 'UPDATE `es_member` SET `abbott_sno` = \''.$sno.'\' WHERE `memNo` = \''.$memNo.'\'';
+        $this->db->query($sql);
+    }
+
+    public function insertCoAbbottMemberKakao($param){
+        $pharmacy_code = isset($param['pharmacy_code']) ? ', `pharmacy_code` = \''.$param['pharmacy_code'].'\' ' : '';
+        $device = ($param['device']) ? ', `device` = \''.$param['device'].'\' ' : ', `device` = \'mo\' ';
+        $sql = 'INSERT INTO `co_abbottMember` SET `kakaoFl` = \'y\',`memNm` = \''.$param['memNm'].'\', `email` = \''.$param['memId'].'\', `cellPhone` = \''.$param['cellPhone'].'\', `privateApprovalOptionFl` = \''.json_encode($param['privateApprovalOptionFl']).'\', `privateOfferFl` = \''.json_encode($param['privateOfferFl']).'\', `privateConsignFl` = \''.json_encode($param['privateConsignFl']).'\''.$pharmacy_code.$device;
+        $this->db->query($sql);
+        return $this->last_insert_id();
+    }
+
+    public function updateCoAbbottMemberKakao($param){
+        $sql = 'UPDATE `co_abbottMember` SET `kakaoFl` = \'y\', `privateApprovalOptionFl` = \''.json_encode($param['privateApprovalOptionFl']).'\', `privateOfferFl` = \''.json_encode($param['privateOfferFl']).'\', `privateConsignFl` = \''.json_encode($param['privateConsignFl']).'\' WHERE `cellPhone` = \''.$param['cellPhone'].'\'';
         $this->db->query($sql);
     }
 }

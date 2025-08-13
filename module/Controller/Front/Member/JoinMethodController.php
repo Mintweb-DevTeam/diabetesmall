@@ -33,7 +33,7 @@ class JoinMethodController extends \Bundle\Controller\Front\Member\JoinMethodCon
 		$useFacebook = $snsLoginPolicy->useFacebook();
 		$usekakaoLogin = $kakaoLoginPolicy->useKakaoLogin();
 		$useWonderLogin = $wonderLoginPolicy->useWonderLogin();
-		if ($usePaycoLogin === false && $useNaverLogin === false && $useFacebook === false && $usekakaoLogin === false && $useWonderLogin === false) {
+		if ($usePaycoLogin === false && $useNaverLogin === false && $useFacebook === false  && $useWonderLogin === false) {
 			$this->redirect('../member/co_join_stepa.php');
 		}
 		parent::index();

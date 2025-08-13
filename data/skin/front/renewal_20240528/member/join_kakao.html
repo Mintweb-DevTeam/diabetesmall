@@ -24,6 +24,18 @@
     .new_join {margin-bottom: 3px; background:#fdcf41; border-radius:6px; color:#616161; font-size:15px; font-weight:500; border:none; padding:14px 0 14px 0 !important;}
     .wm_confirm {border-radius:6px; padding:12px 0 12px 0;}
 
+    .informNm {font-size: 16px; font-weight: bold}
+    .scroll-info-content{
+        border:1px solid #adadad;
+        padding:15px;
+        font-size:13px;
+        line-height:1.7;
+        height:150px;
+        overflow-y:auto;
+        width: 802px;
+        margin-left: -201px;
+    }
+    .section {margin-top: 20px;}
 </style>
 <div class="wm_login_content">
     <div class="wm_login_body wm_margin_auto wm_center">
@@ -53,6 +65,16 @@
                 <span class="title">카카오 계정의 휴대폰번호와 동일한 리브레 멤버십이 존재합니다. 해당 카카오 계정 정보로 아델라 회원가입 하시겠습니까?</span>
             </div>
 
+            <section>
+                <h4 class="informNm fs26 fcOrange fw600 mb20">{agreementInfo.informNm}</h4>
+                <div class="scroll-info-content mb20">{=nl2br(agreementInfo.content)}</div>
+                <p class="check_style01">
+                    <input name="privateApprovalFl" type="checkbox" value="y" class="check-box" data-must="y" data-name="{agreementInfo.informNm}" id="privateApprovalFl">
+                    <label for="privateApprovalFl">동의 <span class="fcRed">(필수)</span></label>
+                </p>
+            </section>
+
+
             <div class="member_sns_login">
                 <button type="submit" class="btn_kakao_login" ><img src="../img/kakao/kakao_icon.png" alt="" />{=__('카카오로 회원가입')}</button>
                 <a href="../member/co_join_stepa.php" class="btn_login">{=__('휴대폰인증으로 가입하기')}</a>
@@ -63,3 +85,14 @@
 
 </div>
 {=includeFile('outline/_footer.html')}
+
+<script>
+    document.getElementById('formEmail').addEventListener('submit', function(e) {
+        var checkbox = document.getElementById('privateApprovalFl');
+        if (!checkbox.checked) {
+            e.preventDefault(); // 제출 막기
+            alert('개인정보 수집, 이용 동의는 필수입니다.');
+            checkbox.focus();
+        }
+    });
+</script>

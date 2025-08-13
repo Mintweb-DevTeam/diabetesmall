@@ -7,8 +7,8 @@ class CoJoinStepaController extends \Controller\Mobile\Controller {
     public function index(){
 		if (!is_object($this->db)) $this->db = \App::load('DB');
 
-        if(\Request::getRemoteAddress()=="182.216.219.157"){
-            $this->setData('wmTest',1);
-        }
+//        if(\Request::getRemoteAddress()=="182.216.219.157" || \Request::getRemoteAddress()=="118.176.136.91" || \Request::getRemoteAddress()=="211.49.123.117"){
+//            $this->setData('wmTest',1);
+//        }
 	}
 }

@@ -11,9 +11,9 @@ class CoJoinStepaController extends \Controller\Mobile\Controller {
 	{
 		$get = Request::get()->all();
 
-        if(\Request::getRemoteAddress()=="182.216.219.157"){
-            $this->setData('wmTest',1);
-        }
+//        if(\Request::getRemoteAddress()=="182.216.219.157" || \Request::getRemoteAddress()=="118.176.136.91" || \Request::getRemoteAddress()=="211.49.123.117"){
+//            $this->setData('wmTest',1);
+//        }
 		
 		if( $get['pharmacy_code'] == 'TRYNOWevent' ) Session::set('join_view', '1');
 		else Session::set('join_view', '2');

@@ -71,7 +71,7 @@
     .wm_login_body .loginPwd_bg{border:0px solid #000;background-image : url('../../img/wm/login/pw_input_bg.png');    width: 100%;background-repeat: no-repeat;background-size: 100%;height: 41px;background-position: bottom;}
 
     .wm_login_body .email_group{display:none;}
-    .wm_login_body label{font-size: 12px;color: red;text-align:left;display:none;}
+    /*.wm_login_body label{font-size: 12px;color: red;text-align:left;display:none;}*/
 
 
     /*이메일 찾기*/
@@ -567,7 +567,7 @@
     .wm_confirm {/*width:399px;height:59px;*/background:#00000059;border-radius:5px;/*border:1px solid #000;*/color:#fff;padding: 15px 0px;width:100%;}
     .wm_confirm span{width:100%;}
 
-    .wm_login_content{width:100%;}
+    .wm_login_content{width:100%; margin-bottom: 30px;}
 
     /*onoff 스위치 시작*/
     #switch1{display:none !important;}
@@ -583,7 +583,6 @@
     /*onoff 스위치 종료*/
 
     /*로그인*/
-    .wm_login_body{width:401px;}
     .wm_login_body ul li{padding: 5.5px 0px;}
     .wm_login_body ul li img{width:100%;}
 
@@ -604,7 +603,7 @@
     .wm_login_body .loginPwd_bg{border:0px solid #000;background-image : url('../../img/wm/login/pw_input_bg.png');    width: 100%;background-repeat: no-repeat;background-size: 100%;height: 41px;background-position: bottom;}
 
     .wm_login_body .email_group{display:none;}
-    .wm_login_body label{font-size: 12px;color: red;text-align:left;display:none;}
+    /*.wm_login_body label{font-size: 12px;color: red;text-align:left;display:none;}*/
 
 
     /*이메일 찾기*/

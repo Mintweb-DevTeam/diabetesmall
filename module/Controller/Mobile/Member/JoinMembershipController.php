@@ -20,5 +20,10 @@ class JoinMembershipController extends \Controller\Mobile\Controller
         $this->setData($in);
 
         //$this->setData('gPageName', '카카오 회원가입');
+
+        $buyerInformService = new \Component\Agreement\BuyerInform();
+        $agreementInfo = $buyerInformService->getAgreementWithReplaceCode(\Component\Agreement\BuyerInformCode::AGREEMENT);
+
+        $this->setData('agreementInfo', $agreementInfo);
     }
 }

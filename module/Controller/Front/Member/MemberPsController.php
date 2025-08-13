@@ -187,7 +187,7 @@ class MemberPsController extends \Bundle\Controller\Front\Member\MemberPsControl
 
                         $in['cellPhone'] = $cossia->getCellPhone($in['cellPhone']);
                         if ($in['cellPhone'] === false) {
-                            echo '<script>parent.alert("전화번호가 이상합니다.");</script>';
+                            echo '<script>parent.alert("전화번호를 다시 확인해주세요.");</script>';
                             exit;
                         }
                         $result = $cossia->abbottCheck($in['cellPhone']);

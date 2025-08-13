@@ -131,7 +131,7 @@ class CommonController
         } else {
             $kakaosyncReturnUrl = $request->getReferer();
             // 로그인, 회원가입 페이지나 PS컨트롤러가 아니면 카카오싱크 returnUrl 재정의
-            if (strpos($phpSelf, 'member/sns_member.php') === false && strpos($phpSelf, 'member/join_kakao.php') === false && strpos($phpSelf, 'member/co_join_stepa.php') === false && strpos($phpSelf, 'member/login.php') === false && strpos($phpSelf, 'member/join_method.php') === false && strpos($phpSelf, '_ps.php') === false) {
+            if ( strpos($phpSelf, 'member/kakao_connect.php') === false && strpos($phpSelf, 'member/kakao_qr.php') === false && strpos($phpSelf, 'member/join_membership.php') === false && strpos($phpSelf, 'member/sns_member.php') === false && strpos($phpSelf, 'member/join_kakao.php') === false && strpos($phpSelf, 'member/co_join_stepa.php') === false && strpos($phpSelf, 'member/login.php') === false && strpos($phpSelf, 'member/join_method.php') === false && strpos($phpSelf, '_ps.php') === false) {
 
                 $kakaosyncReturnUrl = $request->getScheme() . "://" . $request->getServerName() . $request->getRequestUri();
             }
