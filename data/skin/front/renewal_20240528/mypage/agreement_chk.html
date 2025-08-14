@@ -1,0 +1,161 @@
+{*** 마이페이지 > 내정보수정 | mypage/my_page.php ***}
+{ # header }
+
+<div class="content">
+    <div class="mypage_cont">
+
+        <div class="my_page">
+
+            <div class="mypage_zone_tit">
+                <h2>이용약관, 개인정보 처리 방침, 제3자 정보 제공 동의</h2>
+            </div>
+
+            <div class="form_element_section align_center">
+                <div class="form_element_wrap fs20 mb20">2025년 0월 0일부로 개정된 이용약관, 개인정보처리방침, 제3자 정보 제공 동의에 대한 아래 동의 여부를 체크해주시기 바랍니다.</div>
+
+                <div class="form_element_wrap">
+                    <div class="form_element">
+                        <input type="checkbox" id="allCheck" value="y">
+                        <label for="allCheck" class="check_s">아래 모든 내용에 동의합니다.</label>
+                    </div>
+                </div>
+
+                <div class="form_element_wrap">
+                    <div class="form_element">
+                        <input type="checkbox" id="agreementCheck" name="privateApprovalFl" class="form_element_checkbox" value="y">
+                        <label for="agreementCheck" class="check_s">본인은 <span class="text-blue">이용약관</span>에 동의합니다. <span class="text-red">(필수)</span></label>
+                    </div>
+                    <button type="button" onclick="show_join_layer('agreement')">자세히보기</button>
+                </div>
+
+                <div class="form_element_wrap">
+                    <div class="form_element">
+                        <input type="checkbox" id="privateCheck" class="form_element_checkbox" value="y">
+                        <label for="privateCheck" class="check_s">본인은 <span class="text-blue">개인정보 처리방침</span>에 동의합니다. <span class="text-red">(필수)</span></label>
+                    </div>
+                    <button type="button" onclick="show_join_layer('private')">자세히보기</button>
+                </div>
+
+                <div class="form_element_wrap">
+                    <div class="form_element">
+                        <input type="checkbox" id="spCheck" class="form_element_checkbox" name="agreementSp" value="y">
+                        <label for="spCheck" class="check_s">
+                            본인은 <span class="text-blue">제 3자 정보 제공</span>에 동의하고, 다른 국가에 전송하는데 동의합니다. <span class="text-red">(선택)</span>
+                            <p>* 멤버쉽, 쿠폰 제공 및 리브레 케어 서비스 포함 마케팅 활동을 위해 요청되며, 동의하지 않을 경우 일부 서비스 이용에 제한이 있을 수 있습니다.</p>
+                        </label>
+                    </div>
+                    <button type="button" onclick="show_join_layer('sp')">자세히보기</button>
+                </div>
+
+                <button type="button" class="wm_kakao_submit btn btn-orange w300 btn-lg mt40">저장하기</button>
+            </div>
+
+
+        </div>
+        <!-- //my_page -->
+
+    </div>
+    <!-- //mypage_cont -->
+
+</div>
+<!-- //content -->
+
+<div id="join_layer_background" class="join_layer_close"></div>
+<div id="join_layer_agreement" class="join_layer_wrapper">
+    <div class="join_layer_wrapper_title">이용약관</div>
+    <div class="join_layer_wrapper_contents">{=nl2br(agreementInfo.content)}</div>
+    <button type="button" class="join_layer_close_btn join_layer_close">닫기</button>
+</div>
+<div id="join_layer_private" class="join_layer_wrapper">
+    <div class="join_layer_wrapper_title">개인정보 처리방침</div>
+    <div class="join_layer_wrapper_contents">{=nl2br(privateInfo.content)}</div>
+    <button type="button" class="join_layer_close_btn join_layer_close">닫기</button>
+</div>
+<div id="join_layer_sp" class="join_layer_wrapper">
+    <div class="join_layer_wrapper_title">제3자 정보 제공</div>
+    <div class="join_layer_wrapper_contents">{=nl2br(spInfo)}</div>
+    <button type="button" class="join_layer_close_btn join_layer_close">닫기</button>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.join_layer_close').click(function () {
+            hide_join_layer();
+        });
+
+        $('#allCheck').change(function () {
+            if ($(this).prop('checked')) {
+                $('.form_element_checkbox').prop('checked', true);
+                $('.form_element_checkbox').next('label').addClass('on');
+            } else {
+                $('.form_element_checkbox').prop('checked', false);
+                $('.form_element_checkbox').next('label').removeClass('on');
+            }
+        });
+
+        $('.form_element_checkbox').change(function () {
+            var total = $('.form_element_checkbox').length;
+            var checked = $('.form_element_checkbox:checked').length;
+            if (total == checked) {
+                $('#allCheck').prop('checked', true);
+                $('#allCheck').next('label').addClass('on');
+            } else {
+                $('#allCheck').prop('checked', false);
+                $('#allCheck').next('label').removeClass('on');
+            }
+        });
+
+        $('.wm_kakao_submit').click(function () {
+            if ($('#agreementCheck').prop('checked') == false) {
+                alert('이용약관 동의에 체크해주세요.');
+                return false;
+            }
+            if ($('#privateCheck').prop('checked') == false) {
+                alert('개인정보 처리방침 동의에 체크해주세요.');
+                return false;
+            }
+            // 제3자 정보 제공 동의는 선택사항이므로 생략.
+
+            var agreementSp = $('input[name="agreementSp"]:checked').val();
+
+            $.ajax({
+                method: "POST",
+                data: {agreementSp: agreementSp},
+                cache: false,
+                url: "./agreement_chk_ps.php",
+                success: function (data) {
+                    if (data.result == 'success') {
+                        alert('저장이 완료되었습니다. 메인으로 이동합니다.');
+                        location.href = "/";
+                    } else {
+                        alert('잠시 후 다시 시도해주십시오.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("XHR:", xhr);
+                    console.log("Status:", status);
+                    console.log("Error:", error);
+                }
+            });
+
+        });
+    });
+
+    function show_join_layer(id) {
+        if (id == null) {
+            return false;
+        }
+
+        $('body').css('overflow', 'hidden').css('padding-right', '15px');
+        $('#join_layer_background').show();
+        $('#join_layer_' + id).show();
+    }
+
+    function hide_join_layer() {
+        $('body').css('overflow', 'unset').css('padding-right', 'unset');
+        $('#join_layer_background').hide();
+        $('.join_layer_wrapper').hide();
+    }
+</script>
+
+{ # footer }

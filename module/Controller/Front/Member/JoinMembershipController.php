@@ -26,11 +26,14 @@ class JoinMembershipController extends \Controller\Front\Controller
         $agreementInfo = $buyerInformService->getAgreementWithReplaceCode(\Component\Agreement\BuyerInformCode::AGREEMENT);
         $this->setData('agreementInfo', $agreementInfo);
 
-        $privateInfo = $buyerInformService->getAgreementWithReplaceCode(\Component\Agreement\BuyerInformCode::BASE_PRIVATE);
-        $this->setData('privateInfo', $privateInfo);
-
-        $db = \App::load('DB');
-        $row = $db->fetch("select * from wm_agreement where sno=1");
-        $this->setData('spInfo', stripslashes($row['contents']));
+        // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
+        $wm = new \Component\Wm\Wm();
+        if ($wm->agreementFl) {
+            $privateInfo = $buyerInformService->getAgreementWithReplaceCode(\Component\Agreement\BuyerInformCode::BASE_PRIVATE);
+            $this->setData('privateInfo', $privateInfo);
+            $this->setData('wmAgreement', true);
+            $this->setData('spInfo', $wm->getAgreementInfo());
+        }
+        // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END
     }
 }

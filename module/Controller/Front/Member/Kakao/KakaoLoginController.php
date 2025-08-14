@@ -512,7 +512,16 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                         $birthDay = substr($response['kakao_account']['birthday'], 2, 2);
                         // 웹앤모바일 21-10-21 - 회원 가입시 필요한 returnUrl 추가
 
-
+                        // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
+                        $wm = new \Component\Wm\Wm();
+                        $agreementSp = '';
+                        if ($wm->agreementFl) {
+                            $agreementSp = $request->get()->get('agreementSp');
+                            if (empty($agreementSp)) {
+                                $agreementSp = 'n'; // 회원가입 시 기본값 n
+                            }
+                        }
+                        // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END
                         ?>
                         <form name="snsForm" method="post" action="../../member/join_membership.php">
                             <input type="hidden" name="wm_access_token" value="<?= $accessToken ?>">
@@ -538,6 +547,7 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                                    value="<?=urlencode(\Encryptor::encrypt($memNm))?>">
                             <input type="hidden" name="returnTo"
                                    value="<?= !empty($returnUrl1) ? $returnUrl1 : urldecode($state1[0]) ?>">
+                            <input type="hidden" name="agreementSp" value="<?= $agreementSp ?>">
                         </form>
                         <script>
                             document.snsForm.submit();

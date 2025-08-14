@@ -87,6 +87,7 @@
     }
 
     .scroll-info-content {
+        margin: 0 auto;
         border: 1px solid #adadad;
         padding: 15px;
         font-size: 13px;
@@ -103,103 +104,6 @@
     .member_sns_login {
         margin: 0 auto;
         width: 400px
-    }
-
-    .form_element_section {
-        padding: 30px 0;
-        user-select: none
-    }
-
-    .form_element_wrap {
-        margin: 0 auto;
-        padding-bottom: 10px;
-        width: 700px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        text-align: left;
-    }
-
-    .form_element_wrap .text-red {
-        color: #eb0000
-    }
-
-    .form_element_wrap .text-blue {
-        color: #0271E3
-    }
-
-    .form_element_wrap > button {
-        background: #999;
-        color: #fff;
-        width: 80px;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-    }
-
-    .form_element_wrap .form_element label.check_s {
-        padding: 0 0 0 40px;
-        background-position: 0 center;
-        background-size: 30px 30px;
-        height: 30px;
-        line-height: 30px;
-        font-size: 20px;
-        color: #666;
-        max-width: 525px;
-        cursor: pointer;
-    }
-
-    .form_element label.check_s p {
-        font-size: 13px;
-        line-height: 1.5
-    }
-
-    #layer_background {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, .6);
-        z-index: 11
-    }
-
-    .layer_wrapper {
-        display: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 10px;
-        background: #fff;
-        z-index: 12
-    }
-
-    .layer_wrapper_title {
-        display: block;
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-        border-bottom: 2px solid #555;
-        text-align: center;
-        font-size: 20px;
-    }
-
-    .layer_wrapper_contents {
-        width: 800px;
-        height: 600px;
-        overflow-y: scroll;
-    }
-
-    .layer_close_btn {
-        margin: 20px auto 0;
-        display: block;
-        background: #999;
-        color: #fff;
-        width: 80px;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
     }
 </style>
 <div class="wm_login_content">
@@ -229,10 +133,10 @@
                 <span class="title">카카오 계정의 휴대폰번호와 동일한 리브레 멤버십이 존재합니다. 해당 카카오 계정 정보로 아델라 회원가입 하시겠습니까?</span>
             </div>
 
-            { ? wm_join_test }
+            <!--{ ? wmAgreement }-->
             <h4 class="informNm fs26 fcOrange fw600 mb20">{agreementInfo.informNm}</h4>
 
-            <div class="form_element_section">
+            <div class="form_element_section align_center">
                 <div class="form_element_wrap">
                     <div class="form_element">
                         <input type="checkbox" id="allCheck" value="y">
@@ -245,7 +149,7 @@
                         <input type="checkbox" id="agreementCheck" name="privateApprovalFl" class="form_element_checkbox" value="y">
                         <label for="agreementCheck" class="check_s">본인은 <span class="text-blue">이용약관</span>에 동의합니다. <span class="text-red">(필수)</span></label>
                     </div>
-                    <button type="button" onclick="show_layer('agreement')">자세히보기</button>
+                    <button type="button" onclick="show_join_layer('agreement')">자세히보기</button>
                 </div>
 
                 <div class="form_element_wrap">
@@ -253,7 +157,7 @@
                         <input type="checkbox" id="privateCheck" class="form_element_checkbox" value="y">
                         <label for="privateCheck" class="check_s">본인은 <span class="text-blue">개인정보 처리방침</span>에 동의합니다. <span class="text-red">(필수)</span></label>
                     </div>
-                    <button type="button" onclick="show_layer('private')">자세히보기</button>
+                    <button type="button" onclick="show_join_layer('private')">자세히보기</button>
                 </div>
 
                 <div class="form_element_wrap">
@@ -264,7 +168,7 @@
                             <p>* 멤버쉽, 쿠폰 제공 및 리브레 케어 서비스 포함 마케팅 활동을 위해 요청되며, 동의하지 않을 경우 일부 서비스 이용에 제한이 있을 수 있습니다.</p>
                         </label>
                     </div>
-                    <button type="button" onclick="show_layer('sp')">자세히보기</button>
+                    <button type="button" onclick="show_join_layer('sp')">자세히보기</button>
                 </div>
             </div>
 
@@ -272,7 +176,7 @@
                 <button type="button" class="btn_kakao_login wm_kakao_submit"><img src="../img/kakao/kakao_icon.png" alt=""/>{=__('카카오로 회원가입')}</button>
                 <a href="../member/co_join_stepa.php" class="btn_login">{=__('휴대폰인증으로 가입하기')}</a>
             </div>
-            { : }
+            <!--{ : }-->
             <section>
                 <h4 class="informNm fs26 fcOrange fw600 mb20">{agreementInfo.informNm}</h4>
                 <div class="scroll-info-content mb20">{=nl2br(agreementInfo.content)}</div>
@@ -286,36 +190,34 @@
                 <button type="submit" class="btn_kakao_login"><img src="../img/kakao/kakao_icon.png" alt=""/>{=__('카카오로 회원가입')}</button>
                 <a href="../member/co_join_stepa.php" class="btn_login">{=__('휴대폰인증으로 가입하기')}</a>
             </div>
-            { / }
+            <!--{ / }-->
         </form>
-
     </div>
-
 </div>
 {=includeFile('outline/_footer.html')}
 
-<!--{ ? wm_join_test }-->
-<div id="layer_background" class="layer_close"></div>
-<div id="layer_agreement" class="layer_wrapper">
-    <div class="layer_wrapper_title">이용약관</div>
-    <div class="layer_wrapper_contents">{=nl2br(agreementInfo.content)}</div>
-    <button type="button" class="layer_close_btn layer_close">닫기</button>
+<!--{ ? wmAgreement }-->
+<div id="join_layer_background" class="join_layer_close"></div>
+<div id="join_layer_agreement" class="join_layer_wrapper">
+    <div class="join_layer_wrapper_title">이용약관</div>
+    <div class="join_layer_wrapper_contents">{=nl2br(agreementInfo.content)}</div>
+    <button type="button" class="join_layer_close_btn join_layer_close">닫기</button>
 </div>
-<div id="layer_private" class="layer_wrapper">
-    <div class="layer_wrapper_title">개인정보 처리방침</div>
-    <div class="layer_wrapper_contents">{=nl2br(privateInfo.content)}</div>
-    <button type="button" class="layer_close_btn layer_close">닫기</button>
+<div id="join_layer_private" class="join_layer_wrapper">
+    <div class="join_layer_wrapper_title">개인정보 처리방침</div>
+    <div class="join_layer_wrapper_contents">{=nl2br(privateInfo.content)}</div>
+    <button type="button" class="join_layer_close_btn join_layer_close">닫기</button>
 </div>
-<div id="layer_sp" class="layer_wrapper">
-    <div class="layer_wrapper_title">제3자 정보 제공</div>
-    <div class="layer_wrapper_contents">{=nl2br(spInfo)}</div>
-    <button type="button" class="layer_close_btn layer_close">닫기</button>
+<div id="join_layer_sp" class="join_layer_wrapper">
+    <div class="join_layer_wrapper_title">제3자 정보 제공</div>
+    <div class="join_layer_wrapper_contents">{=nl2br(spInfo)}</div>
+    <button type="button" class="join_layer_close_btn join_layer_close">닫기</button>
 </div>
 
 <script>
-    $(document).ready(function (){
-        $('.layer_close').click(function () {
-            hide_layer();
+    $(document).ready(function () {
+        $('.join_layer_close').click(function () {
+            hide_join_layer();
         });
 
         $('#allCheck').change(function () {
@@ -341,34 +243,33 @@
         });
 
         $('.wm_kakao_submit').click(function () {
-            if($('#agreementCheck').prop('checked') == false) {
-                alert('이용약관 동의에 체크해주십시오.');
+            if ($('#agreementCheck').prop('checked') == false) {
+                alert('이용약관 동의에 체크해주세요.');
                 return false;
             }
-            if($('#privateCheck').prop('checked') == false) {
-                alert('개인정보 처리방침 동의에 체크해주십시오.');
+            if ($('#privateCheck').prop('checked') == false) {
+                alert('개인정보 처리방침 동의에 체크해주세요.');
                 return false;
             }
-
-            alert('test');
-            //$('#formEmail').submit();
+            // 제3자 정보 제공 동의는 선택사항이므로 생략.
+            $('#formEmail').submit();
         });
     });
 
-    function show_layer(id) {
-        if(id == null) {
+    function show_join_layer(id) {
+        if (id == null) {
             return false;
         }
 
         $('body').css('overflow', 'hidden').css('padding-right', '15px');
-        $('#layer_background').show();
-        $('#layer_'+id).show();
+        $('#join_layer_background').show();
+        $('#join_layer_' + id).show();
     }
 
-    function hide_layer() {
-        $('body').css('overflow', 'unset').css('padding-right', 'unset');;
-        $('#layer_background').hide();
-        $('.layer_wrapper').hide();
+    function hide_join_layer() {
+        $('body').css('overflow', 'unset').css('padding-right', 'unset');
+        $('#join_layer_background').hide();
+        $('.join_layer_wrapper').hide();
     }
 </script>
 <!--{ : }-->

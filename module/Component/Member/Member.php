@@ -112,7 +112,6 @@ class Member extends \Bundle\Component\Member\Member
         $v->add('rncheck', '', false, '{' . __('본인확인방법') . '}'); // 본인확인방법
         $v->add('under14ConsentFl', 'yn', true, '{' . __('만 14세 이상 동의') . '}'); // 만 14세 이상 동의
 
-
         $joinSession = new SimpleStorage($session->get(\Bundle\Component\Member\Member::SESSION_JOIN_INFO));
         $session->del(Member::SESSION_JOIN_INFO);
         $vo->setPrivateApprovalFl($joinSession->get('privateApprovalFl'));
@@ -204,7 +203,15 @@ class Member extends \Bundle\Component\Member\Member
             $member['approvalDt'] = date('Y-m-d H:i:s');
         }
 
-
+        // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
+        $wm = new \Component\Wm\Wm();
+        if($wm->agreementFl) {
+            $member['agreementSp'] = $params['agreementSp'];
+            if(empty($member['agreementSp'])) {
+                $member['agreementSp'] = 'n'; // 회원가입 시 기본값 n
+            }
+        }
+        // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END
 
         $hasSessionGlobalMall = $session->has(SESSION_GLOBAL_MALL);
         $isUseGlobal = $globals->get('gGlobal.isUse', false);
