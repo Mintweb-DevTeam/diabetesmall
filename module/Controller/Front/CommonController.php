@@ -147,8 +147,13 @@ class CommonController
         $controller->setData('kakaosyncReturnUrl', urlencode($kakaosyncReturnUrl));
         /* 웹앤모바일 수정 끝 */
 
-        if (\Request::getRemoteAddress() == "182.216.219.157") {
-            $controller->setData("wm_join_test", true);
+        // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
+        $wm = new \Component\Wm\Wm();
+        if ($wm->agreementFl) {
+            if(in_array(\Request::getPhpSelf(), ['/member/co_join_stepe.php', '/member/join_kakao.php', '/member/join_membership.php', '/mypage/wm_agreement.php'])){
+                $controller->setData('wmAgreement', true);
+            }
         }
+        // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END
 	}
 }

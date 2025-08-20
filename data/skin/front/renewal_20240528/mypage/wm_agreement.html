@@ -1,0 +1,71 @@
+{*** 마이페이지 약관 동의 | mypage/wm_agreement.php ***}
+{ # header }
+
+<div class="content">
+    <div class="mypage_cont">
+
+        <div class="my_page">
+
+            <div class="mypage_zone_tit">
+                <h2>이용약관, 개인정보 처리 방침, 제3자 정보 제공 동의</h2>
+            </div>
+
+            <div class="form_element_section align_center">
+                <div class="form_element_wrap fs20">2025년 0월 0일부로 개정된 이용약관, 개인정보처리방침, 제3자 정보 제공 동의에 대한 아래 동의 여부를 체크해주시기 바랍니다.</div>
+            </div>
+
+            {=includeWidget('wm/_agreement_check.html')}
+
+            <div class="form_element_section align_center">
+                <button type="button" class="wm_agreement_submit btn btn-orange w300 btn-lg">저장하기</button>
+            </div>
+        </div>
+        <!-- //my_page -->
+
+    </div>
+    <!-- //mypage_cont -->
+
+</div>
+<!-- //content -->
+
+{=includeWidget('wm/_agreement_popup.html')}
+
+<script>
+    $(document).ready(function () {
+        $('.wm_agreement_submit').click(function () {
+            if ($('#agreementCheck').prop('checked') == false) {
+                alert('이용약관 동의에 체크해주세요.');
+                return false;
+            }
+            if ($('#privateCheck').prop('checked') == false) {
+                alert('개인정보 처리방침 동의에 체크해주세요.');
+                return false;
+            }
+            // 제3자 정보 제공 동의는 선택사항이므로 생략.
+
+            var agreementSp = $('input[name="agreementSp"]:checked').val();
+
+            $.ajax({
+                method: "POST",
+                data: {agreementSp: agreementSp},
+                cache: false,
+                url: "./wm_agreement_ps.php",
+                success: function (data) {
+                    if (data.result == 'success') {
+                        alert('저장이 완료되었습니다. 메인으로 이동합니다.');
+                        location.href = "/";
+                    } else {
+                        alert('잠시 후 다시 시도해주십시오.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("XHR:", xhr);
+                    console.log("Status:", status);
+                    console.log("Error:", error);
+                }
+            });
+        });
+    });
+</script>
+
+{ # footer }

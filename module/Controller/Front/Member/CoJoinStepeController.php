@@ -41,15 +41,5 @@ class CoJoinStepeController extends \Controller\Front\Controller
 		$this->setData('privateApprovalOption', $privateApprovalOption);
 		$this->setData('privateOffer', $privateOffer);
 		$this->setData('privateConsign', $privateConsign);
-
-        // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
-        $wm = new \Component\Wm\Wm();
-        if ($wm->agreementFl) {
-            $privateInfo = $buyerInformService->getAgreementWithReplaceCode(\Component\Agreement\BuyerInformCode::BASE_PRIVATE);
-            $this->setData('privateInfo', $privateInfo);
-            $this->setData('wmAgreement', true);
-            $this->setData('spInfo', $wm->getAgreementInfo());
-        }
-        // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END
     }
 }

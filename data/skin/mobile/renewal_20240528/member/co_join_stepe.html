@@ -91,7 +91,11 @@
 				<p class="mt10"><input name="addressSub" type="text" class="form-control wp90"/></p>
 			</div>
 
-
+			<!--{ ? wmAgreement }-->
+			<!-- 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START -->
+			{=includeWidget('wm/_agreement_check.html')}
+			<!-- 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END -->
+			<!--{ : }-->
 			<section>
 				<h4 class="informNm fs26 fcOrange fw600 mb20">{agreementInfo.informNm}</h4>
 				<div class="scroll-info-content mb20">{=nl2br(agreementInfo.content)}</div>
@@ -100,6 +104,7 @@
 					<label for="privateApprovalFl"" class="fs14">동의 <span class="fcRed">(필수)</span></label>
 				</p>
 			</section>
+			<!--{ / }-->
 			<section>
 				<!--{?privateApproval.displayShopFl == 'y'}-->
 				<h4 class="informNm fs16 fcOrange fw600 mb20">{privateApproval.informNm}</h4>
@@ -110,7 +115,7 @@
 				</p>
 				<!--{/}-->
 			</section>
-			
+
 			<section>
 				<!--{@privateApprovalOption}-->
 				<!--{?.sno != 19 && .sno != 21 && .displayShopFl == 'y'}-->
@@ -256,8 +261,31 @@ function submit_check(){
 			"formType":"signup"			
 		}
 		errMsgArr.push(errMsg);
-	}	
-	
+	}
+
+	<!--{ ? wmAgreement }-->
+	// 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
+	if ($('#agreementCheck').prop('checked') == false) {
+		errMsg = {
+			"errorType": "form",
+			"errorMessage": "이용약관 동의에 체크해주세요.",
+			"formName": "registrationForm",
+			"formType": "signup"
+		}
+		errMsgArr.push(errMsg);
+	}
+	if ($('#privateCheck').prop('checked') == false) {
+		errMsg = {
+			"errorType": "form",
+			"errorMessage": "개인정보 처리방침 동의에 체크해주세요.",
+			"formName": "registrationForm",
+			"formType": "signup"
+		}
+		errMsgArr.push(errMsg);
+	}
+	// 제3자 정보 제공 동의는 선택사항이므로 생략.
+	// 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END
+	<!--{ : }-->
 	if(!$("input:checkbox[name='privateApprovalFl']").is(":checked")){
 		errMsg={
 			"errorType":"form",
@@ -266,8 +294,8 @@ function submit_check(){
 			"formType":"signup"			
 		}
 		errMsgArr.push(errMsg);
-	}	
-	
+	}
+	<!--{ / }-->
 	
 	if(errMsgArr.length>0){
 	
@@ -304,9 +332,29 @@ function submit_(){
 		alert( msg.join( "\n" ) + ' 은(는) 필수 항목 입니다.' );
 		return;
 	}
+
+	<!--{ ? wmAgreement }-->
+	// 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
+	if ($('#agreementCheck').prop('checked') == false) {
+		alert('이용약관 동의에 체크해주세요.');
+		return false;
+	}
+	if ($('#privateCheck').prop('checked') == false) {
+		alert('개인정보 처리방침 동의에 체크해주세요.');
+		return false;
+	}
+	// 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END
+	<!--{ / }-->
+
 	$('#frm').submit();
 	$('.submit_btn').attr('onClick' , '');
 	alert('가입 완료');
 }
 </script>
+
+<!--{ ? wmAgreement }-->
+<!-- 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START -->
+{=includeWidget('wm/_agreement_popup.html')}
+<!-- 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END -->
+<!--{ / }-->
 { # footer }

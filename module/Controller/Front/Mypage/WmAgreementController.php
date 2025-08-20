@@ -7,7 +7,7 @@ use Session;
 use App;
 use Framework\Debug\Exception\AlertBackException;
 
-class AgreementChkController extends \Controller\Front\Controller
+class WmAgreementController extends \Controller\Front\Controller
 {
     public function index()
     {

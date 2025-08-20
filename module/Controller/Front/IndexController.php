@@ -19,14 +19,16 @@ class IndexController extends \Bundle\Controller\Front\IndexController
                 exit;
             }
 
+            // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
             $wm = new \Component\Wm\Wm();
             if ($wm->agreementFl) {
                 $agreementSp = $wm->getAgreementSp(Session::get('member.memNo'));
                 if (empty($agreementSp)) {
-                    echo '<script>alert("제3자 정보 제공 동의 여부 확인이 필요합니다. 마이페이지로 이동합니다.");window.location.replace("/mypage/agreement_chk.php");</script>';
+                    echo '<script>alert("제3자 정보 제공 동의 여부 확인이 필요합니다. 마이페이지로 이동합니다.");window.location.replace("/mypage/wm_agreement.php");</script>';
                     exit;
                 }
             }
+            // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END
 
         }
     }

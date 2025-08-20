@@ -48,9 +48,15 @@ class Wm
 
     public function setAgreementSp($postValue, $memNo)
     {
+        if (empty($memNo)) {
+            return false;
+        }
+        
         $agreementSp = $postValue['agreementSp'];
-        if (empty($agreementSp)) {
-            $agreementSp = 'n';
+        if(empty($agreementSp)) {
+            if($postValue['mode'] != 'modify') { // 관리자만 null 허용
+                $agreementSp = 'n';
+            }
         }
 
         return $this->db->query("update es_member set agreementSp='{$agreementSp}' where memNo='{$memNo}'");
@@ -66,7 +72,7 @@ class Wm
     {
         $managerNo = Session::get('manager.sno');
         $contents = $postValue['contents'];
-        if(!empty($contents)) {
+        if (!empty($contents)) {
             $contents = addslashes($postValue['contents']);
         }
 

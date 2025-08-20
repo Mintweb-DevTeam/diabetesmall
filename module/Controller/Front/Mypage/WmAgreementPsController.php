@@ -6,7 +6,7 @@ use Request;
 use Session;
 use App;
 
-class AgreementChkPsController extends \Controller\Front\Controller
+class WmAgreementPsController extends \Controller\Front\Controller
 {
     public function index()
     {
