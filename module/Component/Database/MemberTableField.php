@@ -11,7 +11,7 @@ class MemberTableField extends \Bundle\Component\Database\MemberTableField
         $arrField[] = ['val' => 'coKakaoChannel', 'typ' => 'i', 'def' => 0]; // 카카오 채널 입력
 
         // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
-        $arrField[] = ['val' => 'agreementSp', 'typ' => 's', 'def' => '']; // 제3자 정보 제공 동의
+        $arrField[] = ['val' => 'agreementSf', 'typ' => 's', 'def' => '']; // 제3자 정보 제공 동의
         // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END
 
         return $arrField;

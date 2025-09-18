@@ -497,6 +497,18 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                         // 25-03-21 리브레 멤버쉽 회원가입 끝
 
 
+                        // 웹앤모바일 세일즈포스 데이타 연동 ================================================== START
+                        if (!empty($sno)) {
+//                            $wmSalesforce = new \Component\Wm\WmSalesforce();
+//                            if ($wmSalesforce->applyFl) {
+//                            $postValue = $param;
+//                            $postValue['sno'] = $sno;
+//                                $wmSalesforce->insertLibreAfter($postValue);
+//                            }
+                        }
+                        // 웹앤모바일 세일즈포스 데이타 연동 ================================================== END
+
+
                         $memId = $response['kakao_account']['email'] ? $response['kakao_account']['email'] : 'test'.$uuid."@kakao.com";
                         $memNm = $response['kakao_account']['name'] ? $response['kakao_account']['name'] : 'user'.$uuid;
 //                        $directKakao = 1;
@@ -514,11 +526,11 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
 
                         // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
                         $wm = new \Component\Wm\Wm();
-                        $agreementSp = '';
+                        $agreementSf = '';
                         if ($wm->agreementFl) {
-                            $agreementSp = $request->get()->get('agreementSp');
-                            if (empty($agreementSp)) {
-                                $agreementSp = 'n'; // 회원가입 시 기본값 n
+                            $agreementSf = $request->get()->get('agreementSf');
+                            if (empty($agreementSf)) {
+                                $agreementSf = 'n'; // 회원가입 시 기본값 n
                             }
                         }
                         // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END
@@ -547,7 +559,7 @@ class KakaoLoginController extends \Bundle\Controller\Front\Member\Kakao\KakaoLo
                                    value="<?=urlencode(\Encryptor::encrypt($memNm))?>">
                             <input type="hidden" name="returnTo"
                                    value="<?= !empty($returnUrl1) ? $returnUrl1 : urldecode($state1[0]) ?>">
-                            <input type="hidden" name="agreementSp" value="<?= $agreementSp ?>">
+                            <input type="hidden" name="agreementSf" value="<?= $agreementSf ?>">
                         </form>
                         <script>
                             document.snsForm.submit();

@@ -17,7 +17,7 @@ class WmAgreementPsController extends \Controller\Front\Controller
 
         $wm = new \Component\Wm\Wm();
         if ($wm->agreementFl) {
-            $result = $wm->setAgreementSp(Request::post()->toArray(), $memNo);
+            $result = $wm->setAgreementSf(Request::post()->toArray(), $memNo);
             if ($result) {
                 $this->json(['result' => 'success']);
             } else {

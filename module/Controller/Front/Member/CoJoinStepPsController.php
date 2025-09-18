@@ -1,4 +1,5 @@
 <?php
+
 namespace Controller\Front\Member;
 
 use Request;
@@ -19,8 +20,8 @@ class CoJoinStepPsController extends \Controller\Front\Controller
         // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
         $wm = new \Component\Wm\Wm();
         if ($wm->agreementFl) {
-            if (empty($post['agreementSp'])) {
-                $post['agreementSp'] = 'n';
+            if (empty($post['agreementSf'])) {
+                $post['agreementSf'] = 'n';
             }
         }
         // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END
@@ -31,7 +32,6 @@ class CoJoinStepPsController extends \Controller\Front\Controller
 			//if(\Request::getRemoteAddress()=="182.216.219.157" || \Request::getRemoteAddress()=="211.49.123.117"){
 				$post['memId'] = urlencode(Encryptor::encrypt($post['memId']));
 			//}
-
 			echo '<script>parent.window.location.replace("./co_join_step_end.php?memId='.$post['memId'].'&abbott_sno='.$post['abbott_sno'].'");</script>';
 		}else{	// 실패
 			echo '<script>parent.alert("일시적인 오류 입니다.\n다시 시도해 주세요");</script>';

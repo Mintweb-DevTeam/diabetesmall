@@ -18,8 +18,8 @@ class WmAgreementController extends \Controller\Front\Controller
 
         $wm = new \Component\Wm\Wm();
         if ($wm->agreementFl) {
-            $agreementSp = $wm->getAgreementSp($memNo);
-            if (!empty($agreementSp)) {
+            $agreementSf = $wm->getagreementSf($memNo);
+            if (!empty($agreementSf)) {
                 throw new AlertBackException(__('잘못된 접근입니다.'));
             }
 

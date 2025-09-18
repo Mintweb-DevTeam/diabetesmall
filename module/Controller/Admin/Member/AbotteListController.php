@@ -22,5 +22,12 @@ class AbotteListController extends \Controller\Admin\Controller {
 		$this->setData('privateApprovalOption', $privateApprovalOption);
 		$this->setData('privateOffer', $privateOffer);
 		$this->setData('privateConsign', $privateConsign);
+
+        // 웹앤모바일 세일즈포스 데이터 연동 ================================================== START
+        $wmSalesforce = new \Component\Wm\WmSalesforce();
+        if ($wmSalesforce->applyFl) {
+            $this->setData('wmSalesforce', true);
+        }
+        // 웹앤모바일 세일즈포스 데이터 연동 ================================================== END
     }
 }

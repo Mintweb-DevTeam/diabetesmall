@@ -36,30 +36,30 @@ class Wm
     }
 
     // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
-    public function getAgreementSp($memNo)
+    public function getAgreementSf($memNo)
     {
         if (empty($memNo)) {
             return null;
         }
 
         $row = $this->db->fetch("select * from es_member where memNo='{$memNo}'");
-        return $row['agreementSp'];
+        return $row['agreementSf'];
     }
 
-    public function setAgreementSp($postValue, $memNo)
+    public function setAgreementSf($postValue, $memNo)
     {
         if (empty($memNo)) {
             return false;
         }
         
-        $agreementSp = $postValue['agreementSp'];
-        if(empty($agreementSp)) {
+        $agreementSf = $postValue['agreementSf'];
+        if(empty($agreementSf)) {
             if($postValue['mode'] != 'modify') { // 관리자만 null 허용
-                $agreementSp = 'n';
+                $agreementSf = 'n';
             }
         }
 
-        return $this->db->query("update es_member set agreementSp='{$agreementSp}' where memNo='{$memNo}'");
+        return $this->db->query("update es_member set agreementSf='{$agreementSf}' where memNo='{$memNo}'");
     }
 
     public function getAgreementInfo()

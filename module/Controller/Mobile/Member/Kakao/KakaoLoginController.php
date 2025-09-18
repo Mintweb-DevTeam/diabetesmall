@@ -553,6 +553,20 @@ class KakaoLoginController extends \Bundle\Controller\Mobile\Member\Kakao\KakaoL
 
                         } else {
 
+
+
+                            // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
+                            $wm = new \Component\Wm\Wm();
+                            $agreementSf = '';
+                            if ($wm->agreementFl) {
+                                $agreementSf = $request->get()->get('agreementSf');
+                                if (empty($agreementSf)) {
+                                    $agreementSf = 'n'; // 회원가입 시 기본값 n
+                                }
+                            }
+                            // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END
+
+                            
                         ?>
                         <form name="snsForm" method="post" action="../../member/join_membership.php">
                             <input type="hidden" name="wm_access_token" value="<?= $accessToken ?>">
@@ -578,6 +592,7 @@ class KakaoLoginController extends \Bundle\Controller\Mobile\Member\Kakao\KakaoL
                                    value="<?=urlencode(\Encryptor::encrypt($memNm))?>">
                             <input type="hidden" name="returnTo"
                                    value="<?= !empty($returnUrl1) ? $returnUrl1 : urldecode($state1[0]) ?>">
+                            <input type="hidden" name="agreementSf" value="<?= $agreementSf ?>">
                         </form>
                         <script>
                             document.snsForm.submit();

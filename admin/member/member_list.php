@@ -134,14 +134,23 @@
                         </td>
                     <?php } ?>
                     <td>
-                        <span class="font-eng js-layer-crm hand"><?= $memberMasking->masking('member','id',$val['memId']); ?>
+                        <span class="font-eng js-layer-crm hand">
+                            <?= $memberMasking->masking('member','id',$val['memId']); ?>
                             <?= gd_get_third_party_icon_web_path($val['snsTypeFl']); ?>
                             <?php if ($val['nickNm']) { ?>
-                                <div class="notice-ref notice-sm"><?= $val['nickNm']; ?></div><?php } ?>
+                                <div class="notice-ref notice-sm"><?= $val['nickNm']; ?></div>
+                            <?php } ?>
                         </span>
                     </td>
                     <td>
-                        <span class="js-layer-crm hand"><?= $memberMasking->masking('member','name',$val['memNm']); ?></span>
+                        <span class="js-layer-crm hand">
+                            <?php if($wmSalesforce && $val['linkFl']=='y') { ?>
+                                <!-- 웹앤모바일 세일즈포스 데이터 연동 ================================================== START -->
+                                <div class="text-red bold font-eng">SF연동완료</div>
+                            <!-- 웹앤모바일 세일즈포스 데이터 연동 ================================================== END -->
+                            <?php } ?>
+                            <?= $memberMasking->masking('member','name',$val['memNm']); ?>
+                        </span>
                     </td>
                     <td>
                         <span class="js-layer-crm hand"><?= gd_isset($groups[$val['groupSno']]); ?></span>

@@ -206,9 +206,9 @@ class Member extends \Bundle\Component\Member\Member
         // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== START
         $wm = new \Component\Wm\Wm();
         if($wm->agreementFl) {
-            $member['agreementSp'] = $params['agreementSp'];
-            if(empty($member['agreementSp'])) {
-                $member['agreementSp'] = 'n'; // 회원가입 시 기본값 n
+            $member['agreementSf'] = $params['agreementSf'];
+            if(empty($member['agreementSf'])) {
+                $member['agreementSf'] = 'n'; // 회원가입 시 기본값 n
             }
         }
         // 웹앤모바일 회원 가입 관련 제 3자 정보 제공 동의 추가 ================================================== END

@@ -38,8 +38,21 @@ class MemberDAO extends \Bundle\Component\Member\MemberDAO
 			$arrQuery['where'].=$sql;//" and (select count(ss.memNo) from wm_subscription_apply ss where ss.memNo=m.memNo)>='1'";
 		}
 
-		$strSQL = 'SELECT  ' . array_shift($arrQuery) . ' FROM ' . DB_MEMBER . ' AS m ' . implode(' ', $arrQuery);
+        // 웹앤모바일 세일즈포스 데이터 연동 ================================================== START
+        if(!empty($params['linkFl'])) {
+            $wmSalesforce = new \Component\Wm\WmSalesforce();
+            if ($wmSalesforce->applyFl) {
+                $searchData = $wmSalesforce->getSearchData($params, 'member');
+                if(!empty($searchData)) {
+                    $arrQuery['field'] .= $searchData['field'];
+                    $arrQuery['left'] .= $searchData['left'];
+                    $arrQuery['where'] .= ' and ' . $searchData['where'];
+                }
+            }
+        }
+        // 웹앤모바일 세일즈포스 데이터 연동 ================================================== END
 
+		$strSQL = 'SELECT  ' . array_shift($arrQuery) . ' FROM ' . DB_MEMBER . ' AS m ' . implode(' ', $arrQuery);
 		$data =  $this->db->query_fetch($strSQL, $arrBind);
 		return $data;
 		

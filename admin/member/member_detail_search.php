@@ -108,6 +108,20 @@
                 <?php if ($isPeriodBtn) echo gd_search_date('', 'entryDt', true); ?>
             </td>
         </tr>
+        <?php if($wmSalesforce) { ?>
+        <!-- 웹앤모바일 세일즈포스 데이터 연동 ================================================== START -->
+        <tr>
+            <th>세일즈포스</th>
+            <td colspan="3">
+                <label class="radio-inline"><input type="radio" name="linkFl" value="" <?php if($search['linkFl'] == '') echo 'checked="checked"'?> />전체</label>
+                <label class="radio-inline"><input type="radio" name="linkFl" value="success" <?php if($search['linkFl'] == 'success') echo 'checked="checked"'?> />완료</label>
+                <label class="radio-inline"><input type="radio" name="linkFl" value="fail" <?php if($search['linkFl'] == 'fail') echo 'checked="checked"'?> />실패</label>
+                <label class="radio-inline"><input type="radio" name="linkFl" value="null" <?php if($search['linkFl'] == 'null') echo 'checked="checked"'?> />미완료</label>
+                <span class="mgl20 notice-info">전체 : 조건 없음 / 완료 : 연동 성공 / 실패 : 연동 실패(스케줄러에 의해 처리 예정) / 미완료 : 연동 이력 없음</span>
+            </td>
+        </tr>
+        <!-- 웹앤모바일 세일즈포스 데이터 연동 ================================================== END -->
+        <?php } ?>
         </tbody>
         <tbody class="js-search-detail">
         <tr>

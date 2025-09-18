@@ -330,13 +330,13 @@ function agrred_change(){
             <td colspan="3">
                 <?php if(!empty($data['memNo'])) { ?>
                     <label class="radio-inline">
-                        <input type="radio" name="agreementSp" value="1" <?php if($data['agreementSp'] == 1) echo 'checked="checked"'?>> 동의함
+                        <input type="radio" name="agreementSf" value="y" <?php if($data['agreementSf'] == 'y') echo 'checked="checked"'?>> 동의함
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="agreementSp" value="0" <?php if($data['agreementSp'] == 0) echo 'checked="checked"'?>> 동의안함
+                        <input type="radio" name="agreementSf" value="n" <?php if($data['agreementSf'] == 'n') echo 'checked="checked"'?>> 동의안함
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="agreementSp" value="" <?php if(empty($data['agreementSp'])) echo 'checked="checked"'?>> 초기화
+                        <input type="radio" name="agreementSf" value="" <?php if(empty($data['agreementSf'])) echo 'checked="checked"'?>> 초기화
                     </label>
                 <?php } else { ?>
                     회원가입 후 적용 가능

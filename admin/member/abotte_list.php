@@ -40,13 +40,26 @@ $(function(){
             <td>
 				<label><input name="agree" type="radio" value="all" onChange="agree_ch(this)" checked>전체</label>
 				<label style="margin: 0 10px 0 20px"><input name="agree" type="radio" value="cho" onChange="agree_ch(this)" <?=($get['agree'] == 'cho') ? 'checked' : '' ?> >선택</label>
-				
                 <label><input name="privateConsignFl[20]" type="checkbox" class="agree-check" value="y" <?=($get['privateConsignFl']['20'] == 'y') ? 'checked' : '' ?> <?=($get['agree'] == 'cho') ? '' : 'disabled checked' ?>>마케팅용 정보수집 동의</label>
                 <label style="margin: 0 10px"><input name="privateConsignFl[23]" type="checkbox" class="agree-check" value="y" <?=($get['privateConsignFl']['23'] == 'y') ? 'checked' : '' ?> <?=($get['agree'] == 'cho') ? '' : 'disabled checked' ?>>마케팅/광고 수신</label>
                 <label ><input name="privateOfferFl[25]" type="checkbox" class="agree-check" value="y" <?=($get['privateOfferFl']['25'] == 'y') ? 'checked' : '' ?> <?=($get['agree'] == 'cho') ? '' : 'disabled checked' ?>>3자 개인정보제공</label>
                 <label style="margin: 0 10px"><input name="privateOfferFl[26]" type="checkbox" class="agree-check" value="y" <?=($get['privateOfferFl']['26'] == 'y') ? 'checked' : '' ?> <?=($get['agree'] == 'cho') ? '' : 'disabled checked' ?>>3자 민감정보제공</label>
             </td>
         </tr>
+        <?php if($wmSalesforce) { ?>
+        <!-- 웹앤모바일 세일즈포스 데이터 연동 ================================================== START -->
+        <tr>
+            <th>세일즈포스</th>
+            <td colspan="3">
+                <label class="radio-inline"><input type="radio" name="linkFl" value="" <?php if($get['linkFl'] == '') echo 'checked="checked"'?> />전체</label>
+                <label class="radio-inline"><input type="radio" name="linkFl" value="success" <?php if($get['linkFl'] == 'success') echo 'checked="checked"'?> />완료</label>
+                <label class="radio-inline"><input type="radio" name="linkFl" value="fail" <?php if($get['linkFl'] == 'fail') echo 'checked="checked"'?> />실패</label>
+                <label class="radio-inline"><input type="radio" name="linkFl" value="null" <?php if($get['linkFl'] == 'null') echo 'checked="checked"'?> />미완료</label>
+                <span class="mgl20 notice-info">전체 : 조건 없음 / 완료 : 연동 성공 / 실패 : 연동 실패(스케줄러에 의해 처리 예정) / 미완료 : 연동 이력 없음</span>
+            </td>
+        </tr>
+        <!-- 웹앤모바일 세일즈포스 데이터 연동 ================================================== END -->
+        <?php } ?>
     </table>
         <div class="table-btn">
             <input type="submit" value="검색" class="btn btn-lg btn-black js-search-button">
@@ -125,7 +138,16 @@ $(function(){
 			?>
             <tr>
                 <td class="center"><input type="checkbox" value="<?=$row['sno']?>" data-email="<?=$row['email']?>" data-cellphone="<?=$row['cellPhone']?>" class="sno"></td>
-                <td class="center"><a href="#." onClick="view_info(this)" data-name="<?=$row['memNm']?>" data-email="<?=$row['email']?>" data-cellphone="<?=$row['cellPhone']?>" data-isjoin="<?=$row['isJoin']?>" data-regdt="<?=$row['regDt']?>" data-pharmacyname="<?=$row['pharmacy_name']?>" ><?=$row['memNm']?></a></td>
+                <td class="center">
+                    <a href="#." onClick="view_info(this)" data-name="<?=$row['memNm']?>" data-email="<?=$row['email']?>" data-cellphone="<?=$row['cellPhone']?>" data-isjoin="<?=$row['isJoin']?>" data-regdt="<?=$row['regDt']?>" data-pharmacyname="<?=$row['pharmacy_name']?>" >
+                    <?php if($wmSalesforce && $row['linkFl']=='y') { ?>
+                    <!-- 웹앤모바일 세일즈포스 데이터 연동 ================================================== START -->
+                    <div class="text-red bold font-eng">SF연동완료</div>
+                    <!-- 웹앤모바일 세일즈포스 데이터 연동 ================================================== END -->
+                    <?php } ?>
+                    <?=$row['memNm']?>
+                    </a>
+                </td>
 				<td class="center"><?=$row['cellPhone']?></td>
 				<td class="center">
                     <?=$row['email']?>

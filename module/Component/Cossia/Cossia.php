@@ -411,17 +411,33 @@ privateOfferFl[26] 3자 민감정보제공  third_party_sensitive
 				}
 			}
 		}
-		
+
 		$wheres[] = ' `device` != \'dr\' ';
 		
 		$sql_ = 'FROM `co_abbottMember` AS `a` LEFT JOIN `es_member` AS `m` ON `m`.`abbott_sno` = `a`.`sno` ';
-		
-		$sql_ .= ( count($wheres) !== 0 ) ? ' WHERE '.implode(' AND ', $wheres).' ORDER BY `a`.`regDt` DESC ' : ' ORDER BY `a`.`regDt` DESC ';
+
+
+        // 웹앤모바일 세일즈포스 데이터 연동 ================================================== START
+        $addField = null;
+        if (!empty($param['linkFl'])) {
+            $wmSalesforce = new \Component\Wm\WmSalesforce();
+            if ($wmSalesforce->applyFl) {
+                $searchData = $wmSalesforce->getSearchData($param, 'libre');
+                if(!empty($searchData)) {
+                    $addField = $searchData['field'];
+                    $sql_ .= $searchData['left'];
+                    $wheres[] = $searchData['where'];
+                }
+            }
+        }
+        // 웹앤모바일 세일즈포스 데이터 연동 ================================================== END
+
+
+        $sql_ .= ( count($wheres) !== 0 ) ? ' WHERE '.implode(' AND ', $wheres).' ORDER BY `a`.`regDt` DESC ' : ' ORDER BY `a`.`regDt` DESC ';
 		
 		$page = $this->beforPageing($param, $sql_);
-		$sql = 'SELECT `a`.*, `m`.`memNo` AS `memNo` '.$sql_.' LIMIT '.$this->LimtNo.', '.$this->showRow;
+		$sql = 'SELECT `a`.*, `m`.`memNo` AS `memNo` '. $addField . $sql_.' LIMIT '.$this->LimtNo.', '.$this->showRow; // 웹앤모바일 세일즈포스 데이터 연동 필드 w.linkFl 추가
 		$data = $this->db->query_fetch($sql, true);
-		
 		$max_ = count($data);
 		if($max_ == 0) $data = null;
 		else{
